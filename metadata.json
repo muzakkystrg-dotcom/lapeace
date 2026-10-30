@@ -1,0 +1,6 @@
+{
+  "name": "SITAPAK Sidoarjo - Portal Layanan & Transparansi Pemkab",
+  "description": "Portal Terpadu & Keterbukaan Publik Kabupaten Sidoarjo. Akses cepat layanan kependudukan Plavon Dukcapil, izin SIPRAJA, transparansi real-time APBD, dan pengaduan warga 112 / SP4N.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
