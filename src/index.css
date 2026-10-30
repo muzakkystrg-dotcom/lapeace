@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+:root {
+  --color-sovereign-dark: #083C2E;
+  --color-sovereign-deeper: #05241B;
+  --color-emerald-accent: #038D66;
+  --color-emerald-hover: #026E4F;
+  --color-surface-mint: #EFFDF4;
+  --color-gold-accent: #E2B714;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: #15211C;
+  background-color: #F8FAF9;
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Custom scrollbars and animations */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f3;
+}
+::-webkit-scrollbar-thumb {
+  background: #96D1C5;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #038D66;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: 200%;
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}

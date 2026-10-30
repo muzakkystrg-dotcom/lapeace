@@ -1,69 +1,20 @@
-# lapeace
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
+</div>
 
-Backend service — **NestJS 12** (TypeScript, ESM) + Express.
+# Run and deploy your AI Studio app
 
-## Requirements
+This contains everything you need to run your app locally.
 
-| Tool | Version |
-|---|---|
-| Node.js | >= 20 (dev dites pakai v26) |
-| npm | >= 10 |
+View your app in AI Studio: https://ai.studio/apps/01629835-ac1f-491b-b05c-8d21f2aabf84
 
-## Quick start
+## Run Locally
 
-```bash
-git clone git@github.com:muzakkystrg-dotcom/lapeace.git
-cd lapeace
-npm install
-npm run start:dev
-```
+**Prerequisites:**  Node.js
 
-Server jalan di `http://localhost:3000`.
 
-```bash
-curl http://localhost:3000
-# Hello World!
-```
-
-## Scripts
-
-| Command | Fungsi |
-|---|---|
-| `npm run start` | jalanin sekali (no watch) |
-| `npm run start:dev` | watch mode — pakai ini buat ngoding |
-| `npm run start:debug` | watch + debugger di `:9229` |
-| `npm run build` | compile ke `dist/` |
-| `npm run start:prod` | jalanin hasil build (`node dist/main`) |
-| `npm run test` | unit test (Vitest) |
-| `npm run test:watch` | unit test watch |
-| `npm run test:cov` | unit test + coverage |
-| `npm run test:e2e` | e2e test (Vitest) |
-| `npm run lint` | oxlint (type-aware) |
-| `npm run format` | prettier |
-
-## Struktur
-
-```
-src/
-  main.ts               # bootstrap, listen port
-  app.module.ts         # root module
-  app.controller.ts     # contoh controller
-  app.service.ts        # contoh service
-test/
-  app.e2e-spec.ts       # contoh e2e test
-nest-cli.json           # config CLI Nest
-vitest.config.ts        # config unit test
-vitest.config.e2e.ts    # config e2e test
-```
-
-Nambah fitur baru: `npx nest g resource <nama>` (generate module + controller + service + DTO sekaligus).
-
-## Konvensi branch
-
-- `main` — stabil
-- `development` — branch kerja bareng
-- fitur baru: `feat/<nama-fitur>` → PR ke `development`
-
-## Catatan
-
-`AGENTS.md` isinya info opsional soal NestJS Observe (telemetry). Belum di-setup, jadi belum ada data yang dikirim ke mana-mana.
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
