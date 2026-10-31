@@ -1,0 +1,50 @@
+import { TicketDetails } from '../types/ticket';
+
+export const defaultMockTicket: TicketDetails = {
+  ticketId: 'GOV-2026-00128',
+  priority: 'Prioritas Reguler',
+  status: 'Menunggu Verifikasi',
+  title: 'Jalan Rusak di Jalan Melati',
+  category: 'Infrastruktur & Bina Marga',
+  submittedAt: '29 Oktober 2026, 14:32 WIB',
+  location: 'Jalan Melati, Surabaya, Jawa Timur',
+  coordinates: '-7.2575° S, 112.7521° E',
+  subdistrict: 'Wilayah Kec. Tegalsari',
+  investigationRadiusText: 'Radius Investigasi Terpetakan: Jl. Melati & Sekitarnya',
+  attachment: {
+    fileName: 'jalan_berlubang_melati.jpg',
+    fileSize: '2.4 MB',
+    format: 'Format JPG',
+    verificationText: 'Terverifikasi EXIF Geotag',
+    previewUrl: '/src/assets/images/sidoarjo_civic_center_1793361616866.jpg',
+  },
+  steps: [
+    {
+      stepNumber: 1,
+      phaseLabel: 'TAHAP 1 • AKTIF SAAT INI',
+      slaBadge: 'SLA: 1×24 Jam',
+      title: 'Menunggu Verifikasi Petugas',
+      description: 'Laporan sedang dalam antrean pemeriksaan berkas kelengkapan bukti dan validasi keabsahan oleh petugas piket Command Center SITAPAK.',
+      status: 'active',
+      deadlineNotice: 'Ditinjau sebelum: 30 Okt 2026, 14:32 WIB',
+    },
+    {
+      stepNumber: 2,
+      phaseLabel: 'TAHAP 2 • MENDATANG',
+      slaBadge: 'Estimasi 2-4 Hari',
+      title: 'Sedang Diproses Lapangan',
+      description: 'Setelah terverifikasi, laporan diteruskan ke Dinas Bina Marga & SDA untuk survei lokasi dan pengerjaan penambalan jalan.',
+      status: 'upcoming',
+    },
+    {
+      stepNumber: 3,
+      phaseLabel: 'TAHAP 3 • SELESAI',
+      slaBadge: 'Hasil Akhir',
+      title: 'Selesai & Publikasi Hasil',
+      description: 'Pekerjaan fisik selesai, foto perbaikan diunggah, dan Berita Acara Penyelesaian diterbitkan untuk evaluasi kepuasan Anda.',
+      status: 'upcoming',
+    },
+  ],
+  averageResponseTime: '4.2 Jam',
+  resolutionRate: '98.4%',
+};

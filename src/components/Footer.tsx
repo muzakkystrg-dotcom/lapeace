@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Landmark, PhoneCall, ShieldAlert, Send, ShieldCheck, CheckCircle2, FileCheck } from 'lucide-react';
 
 interface FooterProps {
-  onNavigateSection: (sectionId: string) => void;
+  onNavigateSection: (sectionId: string, page?: 'beranda' | 'laporan') => void;
   onOpenServiceCategory?: (category: string) => void;
 }
 
@@ -98,7 +98,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigateSection('layanan')}
+                  onClick={() => onNavigateSection('laporan', 'laporan')}
                   className="hover:text-emerald-800 transition-colors cursor-pointer text-left"
                 >
                   Kanal Pengaduan SP4N
