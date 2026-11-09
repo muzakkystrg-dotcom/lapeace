@@ -8,27 +8,35 @@ import { SingleAccountBanner } from './components/SingleAccountBanner';
 import { Footer } from './components/Footer';
 import { TrackDocModal } from './components/TrackDocModal';
 import { ServiceDetailModal } from './components/ServiceDetailModal';
+import { ServiceApplicationModal } from './components/ServiceApplicationModal';
 import { RegisterAccountModal } from './components/RegisterAccountModal';
 import { BudgetBreakdownModal } from './components/BudgetBreakdownModal';
 import { ServiceGuideModal } from './components/ServiceGuideModal';
-import { ServiceItem, ServiceCategory, CitizenAccount } from './types/portal';
-import { CheckCircle2, User, LogOut } from 'lucide-react';
+import { AboutModal } from './components/AboutModal';
+import { ServiceItem, ServiceCategory, CitizenAccount, TrackRecord } from './types/portal';
+import { CheckCircle2, LogOut } from 'lucide-react';
 
 export default function App() {
   const [activeNav, setActiveNav] = useState('beranda');
   const [isTrackModalOpen, setIsTrackModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
   const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
+  const [isApplicationModalOpen, setIsApplicationModalOpen] = useState(false);
   const [isAccountModalOpen, setIsAccountModalOpen] = useState(false);
   const [accountMode, setAccountMode] = useState<'register' | 'login'>('register');
   const [isBudgetModalOpen, setIsBudgetModalOpen] = useState(false);
   const [isGuideModalOpen, setIsGuideModalOpen] = useState(false);
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
 
   // Search state
   const [searchQuery, setSearchQuery] = useState('');
   const [searchCategory, setSearchCategory] = useState<ServiceCategory>('semua');
   const [filteredServices, setFilteredServices] = useState<ServiceItem[] | undefined>(undefined);
   const [searchActive, setSearchActive] = useState(false);
+
+  // Tracking dynamic state
+  const [customTrackRecords, setCustomTrackRecords] = useState<Record<string, TrackRecord>>({});
+  const [activeTrackingCode, setActiveTrackingCode] = useState<string>('');
 
   // Logged-in citizen simulation
   const [currentUser, setCurrentUser] = useState<CitizenAccount | null>(null);
@@ -91,20 +99,46 @@ export default function App() {
         setIsServiceModalOpen(true);
       }
     } else if (sectionId === 'tentang') {
-      const el = document.getElementById('transparansi');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      setIsAboutModalOpen(true);
     }
   };
 
   const handleStartApplication = (service: ServiceItem) => {
-    if (!currentUser) {
-      setAccountMode('register');
-      setIsAccountModalOpen(true);
-      showToast(`Silakan mendaftar Satu Akun Warga untuk melanjutkan ke ${service.title}.`);
-    } else {
-      setIsTrackModalOpen(true);
-      showToast(`Membuka sistem pengajuan digital ${service.title} untuk ${currentUser.fullName}.`);
-    }
+    setSelectedService(service);
+    setIsApplicationModalOpen(true);
+  };
+
+  const handleApplicationSuccess = (application: { trackingId: string; serviceName: string; applicantName: string }) => {
+    const formattedDate = new Date().toLocaleDateString('id-ID', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
+
+    const newRecord: TrackRecord = {
+      trackingNumber: application.trackingId,
+      serviceName: application.serviceName,
+      applicantName: application.applicantName,
+      nikMasked: currentUser ? `${currentUser.nik.slice(0, 6)}******${currentUser.nik.slice(-4)}` : '351508******1234',
+      submitDate: `${formattedDate}, ${new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })} WIB`,
+      status: 'Diterima',
+      currentOpd: selectedService?.opd || 'Pemerintah Kabupaten Sidoarjo',
+      lastUpdated: 'Baru saja',
+      steps: [
+        { title: 'Pengajuan Permohonan Berkas Online Berhasil', date: 'Hari ini', completed: true, notes: 'Dokumen dan rincian formulir berhasil dicatat di portal SITAPAK.' },
+        { title: 'Verifikasi Dokumen oleh Petugas Kelurahan / OPD', completed: false, current: true, notes: 'Menunggu telaah kelengkapan administrasi dan berkas pendukung.' },
+        { title: 'Pemeriksaan Lapangan / Validasi Teknis OPD', completed: false },
+        { title: 'Penerbitan Dokumen / Tanda Tangan Elektronik', completed: false },
+        { title: 'Dokumen Selesai & Siap Diambil / Diunduh', completed: false },
+      ],
+    };
+
+    setCustomTrackRecords((prev) => ({
+      ...prev,
+      [application.trackingId]: newRecord,
+    }));
+    setActiveTrackingCode(application.trackingId);
+    showToast(`Pengajuan ${application.serviceName} berhasil dikirim! No: ${application.trackingId}`);
   };
 
   return (
@@ -203,6 +237,8 @@ export default function App() {
       <TrackDocModal
         isOpen={isTrackModalOpen}
         onClose={() => setIsTrackModalOpen(false)}
+        initialTrackingCode={activeTrackingCode}
+        customRecords={customTrackRecords}
       />
 
       <ServiceDetailModal
@@ -210,6 +246,14 @@ export default function App() {
         isOpen={isServiceModalOpen}
         onClose={() => setIsServiceModalOpen(false)}
         onStartApplication={handleStartApplication}
+      />
+
+      <ServiceApplicationModal
+        isOpen={isApplicationModalOpen}
+        onClose={() => setIsApplicationModalOpen(false)}
+        service={selectedService}
+        currentUser={currentUser}
+        onSubmitSuccess={handleApplicationSuccess}
       />
 
       <RegisterAccountModal
@@ -234,6 +278,11 @@ export default function App() {
           setAccountMode('register');
           setIsAccountModalOpen(true);
         }}
+      />
+
+      <AboutModal
+        isOpen={isAboutModalOpen}
+        onClose={() => setIsAboutModalOpen(false)}
       />
 
     </div>

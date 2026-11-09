@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { X, Search, CheckCircle2, Clock, AlertCircle, FileText, ArrowRight, Printer } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, Search, CheckCircle2, Clock, AlertCircle, ArrowRight, Printer } from 'lucide-react';
 import { TrackRecord } from '../types/portal';
 
 interface TrackDocModalProps {
   isOpen: boolean;
   onClose: () => void;
+  initialTrackingCode?: string;
+  customRecords?: Record<string, TrackRecord>;
 }
 
 const mockTrackDatabase: Record<string, TrackRecord> = {
@@ -21,7 +23,7 @@ const mockTrackDatabase: Record<string, TrackRecord> = {
       { title: 'Pengajuan Berkas Online via Plavon', date: '28 Okt 2025, 09:14 WIB', completed: true, notes: 'Dokumen KK & scan formulir F-1.02 lengkap diunggah.' },
       { title: 'Verifikasi Petugas Kelurahan Sidokare', date: '28 Okt 2025, 14:22 WIB', completed: true, notes: 'Data pemohon dinyatakan valid & bebas tunggakan adm.' },
       { title: 'Pencetakan Blanko KTP-el di Dispendukcapil', date: '29 Okt 2025, 11:05 WIB', completed: true, current: true, notes: 'Sedang dalam antrean cetak mesin ADM Dispendukcapil Sidoarjo.' },
-      { title: 'Sertifikasi Tanda Tangan Elektronik (TTE)', completed: false, notes: 'Menunggu otorisasi digital Kepala Dispendukcapil via BSrE BSSN.' },
+      { title: 'Sertifikasi Tanda Tangan Elektronik (TTE)', completed: false, notes: 'Menunggu otorisasi sertifikasi digital Dinas Komunikasi dan Informatika.' },
       { title: 'Dokumen Siap Diambil / Dikirim via Kurir', completed: false, notes: 'Pilihan pengantaran: Pos Kilat Khusus ke alamat domisili.' },
     ],
   },
@@ -44,11 +46,30 @@ const mockTrackDatabase: Record<string, TrackRecord> = {
   },
 };
 
-export const TrackDocModal: React.FC<TrackDocModalProps> = ({ isOpen, onClose }) => {
-  const [inputCode, setInputCode] = useState('');
-  const [result, setResult] = useState<TrackRecord | null>(mockTrackDatabase['REG-SDA-2025-08912']);
+export const TrackDocModal: React.FC<TrackDocModalProps> = ({
+  isOpen,
+  onClose,
+  initialTrackingCode,
+  customRecords = {},
+}) => {
+  const [inputCode, setInputCode] = useState(initialTrackingCode || '');
+  const [result, setResult] = useState<TrackRecord | null>(null);
   const [searched, setSearched] = useState(false);
   const [notFound, setNotFound] = useState(false);
+
+  const allRecords = { ...mockTrackDatabase, ...customRecords };
+
+  useEffect(() => {
+    if (initialTrackingCode && allRecords[initialTrackingCode]) {
+      setInputCode(initialTrackingCode);
+      setResult(allRecords[initialTrackingCode]);
+      setSearched(true);
+      setNotFound(false);
+    } else if (isOpen && !result && !searched) {
+      // Show sample by default for initial presentation
+      setResult(mockTrackDatabase['REG-SDA-2025-08912']);
+    }
+  }, [isOpen, initialTrackingCode]);
 
   if (!isOpen) return null;
 
@@ -58,8 +79,8 @@ export const TrackDocModal: React.FC<TrackDocModalProps> = ({ isOpen, onClose })
     if (!clean) return;
 
     setSearched(true);
-    if (mockTrackDatabase[clean]) {
-      setResult(mockTrackDatabase[clean]);
+    if (allRecords[clean]) {
+      setResult(allRecords[clean]);
       setNotFound(false);
     } else {
       setResult(null);
@@ -69,9 +90,35 @@ export const TrackDocModal: React.FC<TrackDocModalProps> = ({ isOpen, onClose })
 
   const loadSample = (code: string) => {
     setInputCode(code);
-    setResult(mockTrackDatabase[code]);
-    setNotFound(false);
+    setResult(allRecords[code] || null);
+    setNotFound(!allRecords[code]);
     setSearched(true);
+  };
+
+  const handlePrintReceipt = (rec: TrackRecord) => {
+    const receiptText = `TANDA TERIMA PENGAJUAN BERKAS LAYANAN PUBLIK
+PEMERINTAH KABUPATEN SIDOARJO - SITAPAK
+
+Nomor Registrasi : ${rec.trackingNumber}
+Jenis Layanan    : ${rec.serviceName}
+Nama Pemohon     : ${rec.applicantName}
+NIK              : ${rec.nikMasked}
+Waktu Pengajuan  : ${rec.submitDate}
+Status Terkini   : ${rec.status}
+OPD Terkait      : ${rec.currentOpd}
+Pembaruan        : ${rec.lastUpdated}
+
+Dokumen ini merupakan bukti resmi pendaftaran berkas pada sistem SITAPAK Pemkab Sidoarjo.
+`;
+    const blob = new Blob([receiptText], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `Tanda_Terima_${rec.trackingNumber}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -95,7 +142,7 @@ export const TrackDocModal: React.FC<TrackDocModalProps> = ({ isOpen, onClose })
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-emerald-300/80 hover:text-white hover:bg-emerald-900/60 transition-colors"
+            className="p-1.5 rounded-lg text-emerald-300/80 hover:text-white hover:bg-emerald-900/60 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -132,7 +179,7 @@ export const TrackDocModal: React.FC<TrackDocModalProps> = ({ isOpen, onClose })
               <button
                 type="button"
                 onClick={() => loadSample('REG-SDA-2025-08912')}
-                className="text-emerald-700 font-semibold underline hover:text-emerald-900"
+                className="text-emerald-700 font-semibold underline hover:text-emerald-900 cursor-pointer"
               >
                 REG-SDA-2025-08912 (KTP)
               </button>
@@ -140,7 +187,7 @@ export const TrackDocModal: React.FC<TrackDocModalProps> = ({ isOpen, onClose })
               <button
                 type="button"
                 onClick={() => loadSample('SIP-2025-44109')}
-                className="text-emerald-700 font-semibold underline hover:text-emerald-900"
+                className="text-emerald-700 font-semibold underline hover:text-emerald-900 cursor-pointer"
               >
                 SIP-2025-44109 (SIPRAJA)
               </button>
@@ -154,7 +201,7 @@ export const TrackDocModal: React.FC<TrackDocModalProps> = ({ isOpen, onClose })
               <div>
                 <div className="font-bold">Nomor Berkas Tidak Ditemukan</div>
                 <div className="text-xs text-amber-800 mt-1">
-                  Pastikan kode pendaftaran yang dimasukkan sesuai dengan tanda terima pengajuan berkas di Plavon Dukcapil atau SIPRAJA.
+                  Pastikan kode pendaftaran yang dimasukkan sesuai dengan tanda terima pengajuan berkas di Plavon Dukcapil, SIPRAJA, atau SITAPAK.
                 </div>
               </div>
             </div>
@@ -197,7 +244,7 @@ export const TrackDocModal: React.FC<TrackDocModalProps> = ({ isOpen, onClose })
                           step.completed
                             ? 'bg-emerald-600 ring-4 ring-emerald-50'
                             : step.current
-                            ? 'bg-amber-500 ring-4 ring-amber-50 animate-pulse'
+                            ? 'bg-amber-500 ring-4 ring-amber-50'
                             : 'bg-slate-300'
                         }`}
                       >
@@ -240,7 +287,7 @@ export const TrackDocModal: React.FC<TrackDocModalProps> = ({ isOpen, onClose })
                 </div>
 
                 <button
-                  onClick={() => alert(`Bukti Tanda Terima Digital untuk berkas ${result.trackingNumber} berhasil dicetak/diunduh!`)}
+                  onClick={() => handlePrintReceipt(result)}
                   className="px-3.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <Printer className="w-3.5 h-3.5" />

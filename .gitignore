@@ -1,5 +1,7 @@
 # Dependencies
 /node_modules
+node_modules/
+public/node_modules/
 
 # Build output
 /dist
@@ -29,11 +31,23 @@ Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 
-# Temp
+# Temp & Backups
 .tmp
 .temp
 *.tsbuildinfo
+*.backup
+*.bak
+package.json.backup
+server.js
+bun.lock
+bun.lockb
 
-# Dependencies
-node_modules/
-public/node_modules/
+# AI Studio & Temporary Audit Artifacts
+metadata.json
+anti-slop/
+AUDIT_REPORT.md
+*AUDIT*.md
+01_REFACTOR_STRUCTURE_AND_BUILD.md
+02_SLOP_CLEANUP_AND_UI_LOGIC.md
+0*_*.md
+public/assets/aistudio/

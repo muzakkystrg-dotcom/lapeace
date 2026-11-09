@@ -139,7 +139,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
             <div className="flex items-center justify-center gap-1.5 text-xs text-emerald-300/70 pt-1">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Tersertifikasi Keamanan Siber Diskominfo Sidoarjo</span>
+              <span>Portal Resmi Pemerintah Kabupaten Sidoarjo</span>
             </div>
           </div>
         </div>

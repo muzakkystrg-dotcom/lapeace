@@ -45,7 +45,7 @@ export const servicesData: ServiceItem[] = [
       'Surat Pernyataan Pemohon bermaterai Rp 10.000',
     ],
     features: [
-      'Tanda Tangan Elektronik (TTE) Tersertifikasi Balai Sertifikasi Elektronik BSSN',
+      'Tanda Tangan Elektronik (TTE) Resmi Pejabat Berwenang',
       '24 Jam Pengajuan dari rumah atau smartphone',
       'Barcode verifikasi keaslian dokumen instan',
     ],

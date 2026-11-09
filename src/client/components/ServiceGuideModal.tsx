@@ -30,7 +30,7 @@ export const ServiceGuideModal: React.FC<ServiceGuideModalProps> = ({
     {
       step: '03',
       title: 'Pantau Real-Time & Unduh Dokumen Ber-TTE',
-      description: 'Dapatkan nomor registrasi berkas (misal: REG-SDA-2025-08912). Saat disetujui Camat/Kadis, dokumen PDF ber-barcode BSrE BSSN siap diunduh atau dikirim kurir.',
+      description: 'Dapatkan nomor registrasi berkas (misal: REG-SDA-2025-08912). Saat disetujui Camat/Kadis, dokumen digital resmi siap diunduh atau dikirim via kurir.',
       icon: DownloadCloud,
     },
   ];

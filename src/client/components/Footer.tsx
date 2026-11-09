@@ -52,7 +52,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
                   href="tel:112"
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-red-200 text-red-700 text-xs font-semibold hover:bg-red-50 transition-colors shadow-2xs"
                 >
-                  <PhoneCall className="w-3.5 h-3.5 text-red-600 animate-pulse" />
+                  <PhoneCall className="w-3.5 h-3.5 text-red-600" />
                   <span>112 Sidoarjo Siaga</span>
                 </a>
                 <a
@@ -98,18 +98,18 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigateSection('layanan')}
+                  onClick={() => onNavigateSection('laporan')}
                   className="hover:text-emerald-800 transition-colors cursor-pointer text-left"
                 >
-                  Kanal Pengaduan SP4N
+                  Kanal Pengaduan 112
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => onNavigateSection('beranda')}
+                  onClick={() => onNavigateSection('tentang')}
                   className="hover:text-emerald-800 transition-colors cursor-pointer text-left"
                 >
-                  Tentang & Kebijakan
+                  Tentang Portal
                 </button>
               </li>
             </ul>
@@ -181,15 +181,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 sm:gap-6">
             <div className="flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-emerald-700" />
-              <span>Sertifikasi ISO 27001:2022</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-emerald-700" />
-              <span>Kepatuhan BSSN & PDP</span>
+              <span>Portal Resmi Pemkab Sidoarjo</span>
             </div>
             <div className="flex items-center gap-1.5">
               <FileCheck className="w-4 h-4 text-emerald-700" />
-              <span>Undang-Undang KIP No. 14/2008</span>
+              <span>Keterbukaan Informasi Publik (UU No. 14/2008)</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Landmark className="w-4 h-4 text-emerald-700" />
+              <span>Mal Pelayanan Publik (MPP) Lingkar Timur</span>
             </div>
           </div>
 

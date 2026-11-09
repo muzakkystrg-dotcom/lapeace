@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, PieChart, TrendingUp, Download, CheckCircle2, ShieldCheck, ArrowUpRight } from 'lucide-react';
+import { X, PieChart, TrendingUp, Download, ShieldCheck } from 'lucide-react';
 
 interface BudgetBreakdownModalProps {
   isOpen: boolean;
@@ -14,8 +14,42 @@ export const BudgetBreakdownModal: React.FC<BudgetBreakdownModalProps> = ({ isOp
     { name: 'Pendidikan & Peningkatan Mutu Sekolah', amount: 'Rp 1,18 Triliun', percentage: 22.4, color: 'bg-teal-600', note: 'Beasiswa pendidikan tinggi, BOSDA SD/SMP, dan sarana digitalisasi kelas' },
     { name: 'Perlindungan Sosial & Pemberdayaan Ekonomi', amount: 'Rp 1,08 Triliun', percentage: 20.3, color: 'bg-amber-600', note: 'Program KURDA Sayang, bantuan pangan lansia, dan stimulus UMKM Desa' },
     { name: 'Kesehatan & Universal Health Coverage (UHC)', amount: 'Rp 960 Miliar', percentage: 18.2, color: 'bg-cyan-600', note: 'Jaminan BPJS PBI Pemda 100%, penguatan 32 Puskesmas & RSUD Sidoarjo' },
-    { name: 'Pelayanan Publik & Transformasi Digital', amount: 'Rp 790 Miliar', percentage: 15.0, color: 'bg-emerald-800', note: 'Pengembangan SITAPAK, CCTV Smart City, & sistem keamanan siber BSSN' },
+    { name: 'Pelayanan Publik & Transformasi Digital', amount: 'Rp 790 Miliar', percentage: 15.0, color: 'bg-emerald-800', note: 'Pengembangan SITAPAK, CCTV Smart City, & operasional MPP Lingkar Timur' },
   ];
+
+  const handleDownloadReport = () => {
+    const content = `RINGKASAN ALOKASI ANGGARAN PENDAPATAN DAN BELANJA DAERAH (APBD)
+KABUPATEN SIDOARJO TAHUN ANGGARAN 2025
+Dipublikasikan oleh: Badan Pengelolaan Keuangan dan Aset Daerah (BPKAD) Sidoarjo
+
+Total Anggaran Belanja: Rp 5,28 Triliun
+Status Realisasi Serapan Berjalan: 84,6%
+Opini BPK RI: WTP (Wajar Tanpa Pengecualian)
+
+RINCIAN PER SEKTOR PRIORITAS:
+1. Infrastruktur Jalan & PU Bina Marga SDA: Rp 1,27 Triliun (24,1%)
+   - Fokus: Betonisasi jalan ruas Tarik-Prambon, normalisasi avour sungai, & PJU jalan
+2. Pendidikan & Peningkatan Mutu Sekolah: Rp 1,18 Triliun (22,4%)
+   - Fokus: Beasiswa pendidikan tinggi, BOSDA SD/SMP, dan sarana digitalisasi kelas
+3. Perlindungan Sosial & Pemberdayaan Ekonomi: Rp 1,08 Triliun (20,3%)
+   - Fokus: Program KURDA Sayang, bantuan pangan lansia, dan stimulus UMKM Desa
+4. Kesehatan & Universal Health Coverage (UHC): Rp 960 Miliar (18,2%)
+   - Fokus: Jaminan BPJS PBI Pemda 100%, penguatan 32 Puskesmas & RSUD Sidoarjo
+5. Pelayanan Publik & Transformasi Digital: Rp 790 Miliar (15,0%)
+   - Fokus: Pengembangan SITAPAK, CCTV Smart City, & operasional MPP Lingkar Timur
+
+Sumber Resmi: Sistem Informasi Pemerintahan Daerah (SIPD-RI) & BPKAD Kabupaten Sidoarjo.
+`;
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'Ringkasan_Alokasi_APBD_Sidoarjo_TA2025.txt';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-xs overflow-y-auto">
@@ -38,7 +72,7 @@ export const BudgetBreakdownModal: React.FC<BudgetBreakdownModalProps> = ({ isOp
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-emerald-300/80 hover:text-white hover:bg-emerald-900/60 transition-colors"
+            className="p-1.5 rounded-lg text-emerald-300/80 hover:text-white hover:bg-emerald-900/60 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -111,7 +145,7 @@ export const BudgetBreakdownModal: React.FC<BudgetBreakdownModalProps> = ({ isOp
           <div className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-100 text-xs text-slate-600">
             <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
             <span>
-              Data sinkron otomatis dengan Sistem Informasi Pemerintahan Daerah (SIPD-RI) Kemendagri & BPKAD Kabupaten Sidoarjo.
+              Data bersumber dari publikasi resmi Sistem Informasi Pemerintahan Daerah (SIPD-RI) & BPKAD Kabupaten Sidoarjo.
             </span>
           </div>
 
@@ -121,17 +155,17 @@ export const BudgetBreakdownModal: React.FC<BudgetBreakdownModalProps> = ({ isOp
         <div className="px-6 py-4 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-800"
+            className="px-4 py-2 text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-800 cursor-pointer"
           >
             Tutup
           </button>
 
           <button
-            onClick={() => alert('Mengunduh Buku Laporan Ringkasan APBD Kabupaten Sidoarjo 2025 (PDF)...')}
+            onClick={handleDownloadReport}
             className="px-4 py-2.5 bg-[#038D66] hover:bg-[#026E4F] text-white font-semibold text-xs sm:text-sm rounded-xl transition-colors flex items-center gap-2 cursor-pointer shadow-sm"
           >
             <Download className="w-4 h-4" />
-            <span>Unduh Buku Ringkasan APBD (PDF)</span>
+            <span>Unduh Ringkasan APBD (TXT)</span>
           </button>
         </div>
 

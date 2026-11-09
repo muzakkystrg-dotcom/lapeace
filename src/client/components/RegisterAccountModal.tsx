@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, UserPlus, LogIn, ShieldCheck, CheckCircle2, User, Phone, Mail, MapPin } from 'lucide-react';
+import { X, UserPlus, LogIn, ShieldCheck, CheckCircle2, User, Phone, Mail } from 'lucide-react';
 import { CitizenAccount } from '../types/portal';
 
 interface RegisterAccountModalProps {
@@ -50,13 +50,30 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (nik.length !== 16) {
+      alert('NIK harus terdiri dari 16 digit angka sesuai KTP Anda.');
+      return;
+    }
+
+    if (mode === 'register') {
+      if (!fullName.trim()) {
+        alert('Nama lengkap wajib diisi sesuai KTP.');
+        return;
+      }
+      if (!kelurahan.trim()) {
+        alert('Nama kelurahan/desa wajib diisi.');
+        return;
+      }
+    }
+
     const account: CitizenAccount = {
-      nik: nik || '3515082104920003',
-      fullName: fullName || 'Warga Sidoarjo',
-      phone: phone || '081234567890',
-      email: email || 'warga@sidoarjo.go.id',
+      nik: nik,
+      fullName: fullName.trim() || (mode === 'login' ? 'Warga Sidoarjo' : 'Pemohon Layanan'),
+      phone: phone || '-',
+      email: email || '-',
       kecamatan: kecamatan,
-      kelurahan: kelurahan || 'Sidokare',
+      kelurahan: kelurahan.trim() || 'Sidoarjo',
     };
 
     setIsSuccess(true);
@@ -64,7 +81,7 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
       setIsSuccess(false);
       onSuccess(account);
       onClose();
-    }, 1500);
+    }, 1200);
   };
 
   return (
@@ -92,7 +109,7 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-emerald-300/80 hover:text-white hover:bg-emerald-900/60 transition-colors"
+            className="p-1.5 rounded-lg text-emerald-300/80 hover:text-white hover:bg-emerald-900/60 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -103,7 +120,7 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
           <button
             type="button"
             onClick={() => setMode('register')}
-            className={`flex-1 py-3 text-xs sm:text-sm font-semibold transition-colors ${
+            className={`flex-1 py-3 text-xs sm:text-sm font-semibold transition-colors cursor-pointer ${
               mode === 'register'
                 ? 'bg-white text-emerald-800 border-b-2 border-emerald-600'
                 : 'text-slate-500 hover:text-slate-800'
@@ -114,7 +131,7 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
           <button
             type="button"
             onClick={() => setMode('login')}
-            className={`flex-1 py-3 text-xs sm:text-sm font-semibold transition-colors ${
+            className={`flex-1 py-3 text-xs sm:text-sm font-semibold transition-colors cursor-pointer ${
               mode === 'login'
                 ? 'bg-white text-emerald-800 border-b-2 border-emerald-600'
                 : 'text-slate-500 hover:text-slate-800'
@@ -128,14 +145,14 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
         <div className="p-6">
           {isSuccess ? (
             <div className="py-8 text-center space-y-3">
-              <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center animate-bounce">
+              <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
               <h4 className="font-display font-bold text-xl text-slate-900">
                 {mode === 'register' ? 'Pendaftaran Berhasil!' : 'Berhasil Masuk!'}
               </h4>
               <p className="text-xs text-slate-500 max-w-sm mx-auto">
-                Identitas NIK Anda telah terverifikasi dengan database Dispendukcapil Kabupaten Sidoarjo.
+                Identitas Anda telah terdaftar dalam sistem portal layanan terpadu Kabupaten Sidoarjo.
               </p>
             </div>
           ) : (
@@ -271,7 +288,7 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
               {/* Security Tag */}
               <div className="flex items-center gap-2 p-3 rounded-lg bg-emerald-50 text-[11px] text-emerald-900 border border-emerald-100">
                 <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
-                <span>Data kependudukan dilindungi UU PDP No. 27/2022 & terenkripsi BSSN.</span>
+                <span>Data digunakan untuk pencocokan administrasi permohonan layanan publik Pemkab Sidoarjo.</span>
               </div>
 
               {/* Submit */}
