@@ -10,14 +10,15 @@ console.log('--- SINKRONISASI DATABASE SITAPAK SIDOARJO ---');
 const adminUser = db.prepare('SELECT id FROM citizens WHERE nik = ?').get('3515000000000001');
 if (!adminUser) {
   console.log('Menambahkan akun Admin Pemkab (3515000000000001)...');
-  db.prepare(`
-    INSERT INTO citizens (id, nik_hash, nik_masked, nik, full_name, email, phone, kecamatan, kelurahan, address, is_verified, role)
-    VALUES (7, 'f7c3bc1d808e04732adf679965ccc34ca7ae3441', '351500000000****', '3515000000000001', 'Bambang Haryo Pratama, S.STP', 'admin.pemkab@sidoarjokab.go.id', '081122334455', 'Sidoarjo (Kota)', 'Sidokumpul', 'Gedung Setda Pemkab Sidoarjo, Jl. Gubernur Suryo No. 1', 1, 'admin_pemkab')
+  const resAdmin = db.prepare(`
+    INSERT INTO citizens (nik_hash, nik_masked, nik, full_name, email, phone, kecamatan, kelurahan, address, is_verified, role)
+    VALUES ('f7c3bc1d808e04732adf679965ccc34ca7ae3441', '351500000000****', '3515000000000001', 'Bambang Haryo Pratama, S.STP', 'admin.pemkab@sidoarjokab.go.id', '081122334455', 'Sidoarjo (Kota)', 'Sidokumpul', 'Gedung Setda Pemkab Sidoarjo, Jl. Gubernur Suryo No. 1', 1, 'admin_pemkab')
   `).run();
+  const adminId = Number(resAdmin.lastInsertRowid);
   db.prepare(`
-    INSERT INTO citizen_credentials (id, citizen_id, password_hash, salt, last_login_at, failed_login_count, is_locked)
-    VALUES (7, 7, '407992a855b17d2a86570df87982a48d087342f3287401df911ab8de4ec0fbac', '330af7c1d0f5', '2026-11-11 18:00:00', 0, 0)
-  `).run();
+    INSERT INTO citizen_credentials (citizen_id, password_hash, salt, last_login_at, failed_login_count, is_locked)
+    VALUES (?, '407992a855b17d2a86570df87982a48d087342f3287401df911ab8de4ec0fbac', '330af7c1d0f5', '2026-11-11 18:00:00', 0, 0)
+  `).run(adminId);
 } else {
   console.log('Akun Admin Pemkab sudah ada.');
 }
@@ -25,14 +26,15 @@ if (!adminUser) {
 const operatorUser = db.prepare('SELECT id FROM citizens WHERE nik = ?').get('3515000000000002');
 if (!operatorUser) {
   console.log('Menambahkan akun Operator OPD (3515000000000002)...');
-  db.prepare(`
-    INSERT INTO citizens (id, nik_hash, nik_masked, nik, full_name, email, phone, kecamatan, kelurahan, address, is_verified, role)
-    VALUES (8, 'b6589fc6ab0dc82cf12099d1c2d40ab994e8410c', '351500000000****', '3515000000000002', 'Dewi Lestari, S.Kom', 'operator.dispendukcapil@sidoarjokab.go.id', '081133445566', 'Sidoarjo (Kota)', 'Sidokare', 'Kantor Disdukcapil Sidoarjo, Jl. Sultan Agung No. 34', 1, 'operator_opd')
+  const resOp = db.prepare(`
+    INSERT INTO citizens (nik_hash, nik_masked, nik, full_name, email, phone, kecamatan, kelurahan, address, is_verified, role)
+    VALUES ('b6589fc6ab0dc82cf12099d1c2d40ab994e8410c', '351500000000****', '3515000000000002', 'Dewi Lestari, S.Kom', 'operator.dispendukcapil@sidoarjokab.go.id', '081133445566', 'Sidoarjo (Kota)', 'Sidokare', 'Kantor Disdukcapil Sidoarjo, Jl. Sultan Agung No. 34', 1, 'operator_opd')
   `).run();
+  const opId = Number(resOp.lastInsertRowid);
   db.prepare(`
-    INSERT INTO citizen_credentials (id, citizen_id, password_hash, salt, last_login_at, failed_login_count, is_locked)
-    VALUES (8, 8, '407992a855b17d2a86570df87982a48d087342f3287401df911ab8de4ec0fbac', '330af7c1d0f5', '2026-11-11 18:00:00', 0, 0)
-  `).run();
+    INSERT INTO citizen_credentials (citizen_id, password_hash, salt, last_login_at, failed_login_count, is_locked)
+    VALUES (?, '407992a855b17d2a86570df87982a48d087342f3287401df911ab8de4ec0fbac', '330af7c1d0f5', '2026-11-11 18:00:00', 0, 0)
+  `).run(opId);
 } else {
   console.log('Akun Operator OPD sudah ada.');
 }
