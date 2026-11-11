@@ -809,7 +809,9 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
     window.scrollTo({ top: 120, behavior: 'smooth' });
 
     // Sinkronisasi data permohonan ke database backend SITAPAK
-    const authToken = sessionStorage.getItem('sitapak_auth_token');
+    const authToken =
+      sessionStorage.getItem('sitapak_auth_token') ||
+      localStorage.getItem('sitapak_auth_token');
     const authHeaders: Record<string, string> = {
       'Content-Type': 'application/json',
     };

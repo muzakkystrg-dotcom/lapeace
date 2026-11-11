@@ -71,6 +71,7 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
 
       if (data.token) {
         sessionStorage.setItem('sitapak_auth_token', data.token);
+        localStorage.setItem('sitapak_auth_token', data.token);
       }
 
       setIsSuccess(true);
@@ -187,6 +188,7 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
 
       if (data.token) {
         sessionStorage.setItem('sitapak_auth_token', data.token);
+        localStorage.setItem('sitapak_auth_token', data.token);
       }
 
       setIsSuccess(true);

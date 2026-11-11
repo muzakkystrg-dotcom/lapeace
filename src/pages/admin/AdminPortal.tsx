@@ -100,6 +100,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
       const data = await res.json();
       if (res.ok && data.token) {
         sessionStorage.setItem('sitapak_auth_token', data.token);
+        localStorage.setItem('sitapak_auth_token', data.token);
         localStorage.setItem('sitapak_citizen_session', JSON.stringify(data.citizen));
         if (onAdminLoginSuccess) {
           onAdminLoginSuccess(data.citizen);

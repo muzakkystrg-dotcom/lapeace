@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { CitizenAccount } from '../../types/portal';
 import {
   Landmark,
@@ -84,6 +85,18 @@ export const Navbar: React.FC<NavbarProps> = ({
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [showLogoutConfirm, userDropdownOpen, notificationOpen, mobileMenuOpen]);
+
+  // Lock body scroll when logout modal is open
+  useEffect(() => {
+    if (showLogoutConfirm) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [showLogoutConfirm]);
 
   const navItems = [
     { id: 'beranda', path: 'beranda', label: 'Beranda' },
@@ -492,59 +505,62 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       )}
 
-      {/* Modal Konfirmasi Logout */}
-      {showLogoutConfirm && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="logout-confirm-title"
-          aria-describedby="logout-confirm-desc"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
-        >
-          <div className="bg-[#083c2e] border border-[#6edaae]/40 rounded-2xl shadow-2xl max-w-md w-full p-6 text-white animate-in zoom-in-95 duration-150">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/30 flex items-center justify-center shrink-0">
-                <LogOut className="w-6 h-6 text-red-400" />
+      {/* Modal Konfirmasi Logout (Teleported via createPortal ke document.body) */}
+      {showLogoutConfirm &&
+        typeof document !== 'undefined' &&
+        createPortal(
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="logout-confirm-title"
+            aria-describedby="logout-confirm-desc"
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
+          >
+            <div className="bg-[#083c2e] border border-[#6edaae]/40 rounded-2xl shadow-2xl max-w-md w-full p-6 text-white animate-in zoom-in-95 duration-150 relative">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/30 flex items-center justify-center shrink-0">
+                  <LogOut className="w-6 h-6 text-red-400" />
+                </div>
+                <div className="flex-1">
+                  <h3
+                    id="logout-confirm-title"
+                    className="text-lg font-bold font-display text-white"
+                  >
+                    Konfirmasi Keluar Akun
+                  </h3>
+                  <p
+                    id="logout-confirm-desc"
+                    className="text-sm text-[#bbedd9] mt-2 leading-relaxed"
+                  >
+                    Apakah Anda yakin ingin keluar dari akun warga SITAPAK? Draf pengajuan atau laporan yang belum dikirim mungkin akan hilang.
+                  </p>
+                </div>
               </div>
-              <div className="flex-1">
-                <h3
-                  id="logout-confirm-title"
-                  className="text-lg font-bold font-display text-white"
-                >
-                  Konfirmasi Keluar Akun
-                </h3>
-                <p
-                  id="logout-confirm-desc"
-                  className="text-sm text-[#bbedd9] mt-2 leading-relaxed"
-                >
-                  Apakah Anda yakin ingin keluar dari akun warga SITAPAK? Draf pengajuan atau laporan yang belum dikirim mungkin akan hilang.
-                </p>
-              </div>
-            </div>
 
-            <div className="mt-6 flex items-center justify-end gap-3 pt-4 border-t border-emerald-800/60">
-              <button
-                type="button"
-                onClick={() => setShowLogoutConfirm(false)}
-                className="px-4 py-2.5 rounded-xl text-sm font-semibold text-white hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 cursor-pointer"
-              >
-                Batal
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setShowLogoutConfirm(false);
-                  if (onLogout) onLogout();
-                }}
-                className="px-4 py-2.5 rounded-xl text-sm font-bold text-white bg-red-600 hover:bg-red-700 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400 flex items-center gap-2 cursor-pointer"
-              >
-                <LogOut className="w-4 h-4" />
-                <span>Ya, Keluar Akun</span>
-              </button>
+              <div className="mt-6 flex items-center justify-end gap-3 pt-4 border-t border-emerald-800/60">
+                <button
+                  type="button"
+                  onClick={() => setShowLogoutConfirm(false)}
+                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-white hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 cursor-pointer"
+                >
+                  Batal
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowLogoutConfirm(false);
+                    if (onLogout) onLogout();
+                  }}
+                  className="px-4 py-2.5 rounded-xl text-sm font-bold text-white bg-red-600 hover:bg-red-700 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400 flex items-center gap-2 cursor-pointer"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>Ya, Keluar Akun</span>
+                </button>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body,
+        )}
     </header>
   );
 };

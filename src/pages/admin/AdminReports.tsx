@@ -93,7 +93,9 @@ export const AdminReports: React.FC = () => {
 
   const fetchReports = async () => {
     setIsLoading(true);
-    const token = sessionStorage.getItem('sitapak_auth_token');
+    const token =
+      sessionStorage.getItem('sitapak_auth_token') ||
+      localStorage.getItem('sitapak_auth_token');
     try {
       const url = new URL('/api/admin/reports', window.location.origin);
       if (statusFilter !== 'semua') url.searchParams.set('status', statusFilter);
@@ -156,7 +158,9 @@ export const AdminReports: React.FC = () => {
     setIsSubmitting(true);
     setActionSuccess(null);
 
-    const token = sessionStorage.getItem('sitapak_auth_token');
+    const token =
+      sessionStorage.getItem('sitapak_auth_token') ||
+      localStorage.getItem('sitapak_auth_token');
     try {
       const res = await fetch(`/api/admin/reports/${selectedReport.id}/status`, {
         method: 'PATCH',
@@ -174,7 +178,8 @@ export const AdminReports: React.FC = () => {
       });
 
       if (!res.ok) {
-        throw new Error('Gagal memperbarui status laporan.');
+        const errJson = await res.json().catch(() => null);
+        throw new Error(errJson?.message || 'Gagal memperbarui status laporan.');
       }
 
       setActionSuccess(`Status tiket ${selectedReport.ticket_number} berhasil diperbarui menjadi '${newStatus}'.`);

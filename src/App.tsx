@@ -112,7 +112,9 @@ export default function App() {
 
   // Verifikasi keabsahan sesi token ke server backend SITAPAK
   useEffect(() => {
-    const token = sessionStorage.getItem('sitapak_auth_token');
+    const token =
+      sessionStorage.getItem('sitapak_auth_token') ||
+      localStorage.getItem('sitapak_auth_token');
     if (token) {
       fetch('/api/auth/me', {
         headers: { Authorization: `Bearer ${token}` },
@@ -135,6 +137,7 @@ export default function App() {
           if (err && err.message === 'UNAUTHORIZED') {
             // Token secara definitif tidak sah/kedaluwarsa (401)
             sessionStorage.removeItem('sitapak_auth_token');
+            localStorage.removeItem('sitapak_auth_token');
             localStorage.removeItem('sitapak_citizen_session');
             setCurrentUser(null);
           } else {
@@ -165,7 +168,9 @@ export default function App() {
   };
 
   const handleLogout = () => {
-    const token = sessionStorage.getItem('sitapak_auth_token');
+    const token =
+      sessionStorage.getItem('sitapak_auth_token') ||
+      localStorage.getItem('sitapak_auth_token');
     if (token) {
       fetch('/api/auth/logout', {
         method: 'POST',
@@ -175,6 +180,7 @@ export default function App() {
     setCurrentUser(null);
     try {
       sessionStorage.removeItem('sitapak_auth_token');
+      localStorage.removeItem('sitapak_auth_token');
       localStorage.removeItem('sitapak_citizen_session');
     } catch (e) {
       console.warn('Gagal menghapus sesi warga dari storage:', e);

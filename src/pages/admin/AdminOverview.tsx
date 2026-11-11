@@ -30,7 +30,9 @@ export const AdminOverview: React.FC<AdminOverviewProps> = ({ onNavigateTab, use
 
   const fetchAnalytics = async () => {
     setIsLoading(true);
-    const token = sessionStorage.getItem('sitapak_auth_token');
+    const token =
+      sessionStorage.getItem('sitapak_auth_token') ||
+      localStorage.getItem('sitapak_auth_token');
     try {
       const res = await fetch('/api/admin/analytics', {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
