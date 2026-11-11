@@ -511,11 +511,17 @@ export default function App() {
 
                 {/* 6. Single Account Citizen Banner */}
                 <SingleAccountBanner
+                  currentUser={currentUser}
                   onOpenRegister={() => {
                     setAccountMode('register');
                     setIsAccountModalOpen(true);
                   }}
                   onOpenGuide={() => setIsGuideModalOpen(true)}
+                  onOpenTrack={() => setIsTrackModalOpen(true)}
+                  onNavigateReports={() => {
+                    window.location.hash = '#laporan-warga';
+                    setActiveSection('laporan');
+                  }}
                 />
               </>
             );

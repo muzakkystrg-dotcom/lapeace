@@ -1,14 +1,29 @@
 import React from 'react';
-import { Zap, ArrowRight, HelpCircle } from 'lucide-react';
+import {
+  Zap,
+  ArrowRight,
+  HelpCircle,
+  FileSearch,
+  MessageSquarePlus,
+  ShieldCheck,
+  ExternalLink,
+} from 'lucide-react';
+import { CitizenAccount } from '../types/portal';
 
 interface SingleAccountBannerProps {
+  currentUser?: CitizenAccount | null;
   onOpenRegister: () => void;
   onOpenGuide: () => void;
+  onOpenTrack?: () => void;
+  onNavigateReports?: () => void;
 }
 
 export const SingleAccountBanner: React.FC<SingleAccountBannerProps> = ({
+  currentUser,
   onOpenRegister,
   onOpenGuide,
+  onOpenTrack,
+  onNavigateReports,
 }) => {
   return (
     <section className="py-12 sm:py-16 bg-[#F8FAF9]">
@@ -35,40 +50,104 @@ export const SingleAccountBanner: React.FC<SingleAccountBannerProps> = ({
           </div>
 
           <div className="relative z-10 max-w-2xl">
-            {/* Pill */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-800/80 border border-emerald-600/50 text-emerald-200 text-xs font-semibold tracking-wider mb-4">
-              <Zap className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-              <span>SATU AKUN WARGA</span>
-            </div>
+            {currentUser ? (
+              /* ========================================================= */
+              /* STATE 1: WARGA SUDAH LOGIN (DASHBOARD HUB CEPAT)          */
+              /* ========================================================= */
+              <>
+                {/* Pill */}
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-800/80 border border-emerald-500/50 text-emerald-200 text-xs font-semibold tracking-wider mb-4">
+                  <ShieldCheck className="w-4 h-4 text-emerald-300" />
+                  <span>AKUN WARGA AKTIF • TERVERIFIKASI</span>
+                </div>
 
-            {/* Headline */}
-            <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-snug">
-              Akses Layanan Sidoarjo dalam Satu Akun
-            </h3>
+                {/* Headline */}
+                <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-snug">
+                  Selamat Datang Kembali, {currentUser.fullName}
+                </h3>
 
-            {/* Description */}
-            <p className="mt-3 text-sm sm:text-base text-emerald-100/80 leading-relaxed max-w-xl">
-              Nikmati kemudahan urus dokumen, pantau anggaran, dan sampaikan aspirasi kapan saja tanpa perlu mendaftar ulang di tiap aplikasi dinas.
-            </p>
+                {/* Description */}
+                <p className="mt-3 text-sm sm:text-base text-emerald-100/90 leading-relaxed max-w-xl">
+                  Satu Akun Warga Anda aktif dan terhubung dengan Dispendukcapil serta Pusat Kendali SP4N/112 (Kecamatan {currentUser.kecamatan || 'Sidoarjo'}). Pantau permohonan dokumen Anda atau laporkan keluhan lapangan secara instan.
+                </p>
 
-            {/* CTA Buttons */}
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <button
-                onClick={onOpenRegister}
-                className="px-6 py-3.5 bg-[#E2B714] hover:bg-[#d0a70e] text-[#15211C] font-bold text-sm sm:text-base rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer active:scale-98"
-              >
-                <span>Daftar Akun Warga</span>
-                <ArrowRight className="w-4 h-4 text-[#15211C]" />
-              </button>
+                {/* CTA Buttons for Logged In User */}
+                <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
+                  <button
+                    type="button"
+                    onClick={onOpenTrack}
+                    className="px-6 py-3.5 bg-[#E2B714] hover:bg-[#d0a70e] text-[#15211C] font-bold text-sm sm:text-base rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer active:scale-98"
+                  >
+                    <FileSearch className="w-4 h-4 text-[#15211C]" />
+                    <span>Lacak Status Berkas</span>
+                  </button>
 
-              <button
-                onClick={onOpenGuide}
-                className="px-5 py-3.5 bg-emerald-900/60 hover:bg-emerald-900/90 text-white font-medium text-sm sm:text-base rounded-xl border border-emerald-700/60 transition-all flex items-center gap-2 cursor-pointer active:scale-98"
-              >
-                <span>Panduan Layanan</span>
-                <HelpCircle className="w-4 h-4 text-emerald-300" />
-              </button>
-            </div>
+                  <button
+                    type="button"
+                    onClick={onNavigateReports}
+                    className="px-5 py-3.5 bg-emerald-900/60 hover:bg-emerald-900/90 text-white font-medium text-sm sm:text-base rounded-xl border border-emerald-700/60 transition-all flex items-center gap-2 cursor-pointer active:scale-98"
+                  >
+                    <MessageSquarePlus className="w-4 h-4 text-emerald-300" />
+                    <span>Laporan &amp; Aspirasi Warga</span>
+                  </button>
+
+                  {(currentUser.role === 'admin_pemkab' || currentUser.role === 'operator_opd') && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        window.location.hash = '#admin';
+                      }}
+                      className="px-4 py-3 sm:py-3.5 bg-emerald-700/50 hover:bg-emerald-600/60 text-emerald-100 font-semibold text-xs sm:text-sm rounded-xl border border-emerald-500/50 transition-all flex items-center gap-2 cursor-pointer active:scale-98"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5 text-emerald-300" />
+                      <span>Portal Administrator</span>
+                    </button>
+                  )}
+                </div>
+              </>
+            ) : (
+              /* ========================================================= */
+              /* STATE 2: TAMU / BELUM LOGIN (AJAKAN PENDAFTARAN RESMI)    */
+              /* ========================================================= */
+              <>
+                {/* Pill */}
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-800/80 border border-emerald-600/50 text-emerald-200 text-xs font-semibold tracking-wider mb-4">
+                  <Zap className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                  <span>SATU AKUN WARGA</span>
+                </div>
+
+                {/* Headline */}
+                <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-snug">
+                  Akses Layanan Sidoarjo dalam Satu Akun
+                </h3>
+
+                {/* Description */}
+                <p className="mt-3 text-sm sm:text-base text-emerald-100/80 leading-relaxed max-w-xl">
+                  Nikmati kemudahan urus dokumen, pantau anggaran, dan sampaikan aspirasi kapan saja tanpa perlu mendaftar ulang di tiap aplikasi dinas.
+                </p>
+
+                {/* CTA Buttons for Guest */}
+                <div className="mt-8 flex flex-wrap items-center gap-4">
+                  <button
+                    type="button"
+                    onClick={onOpenRegister}
+                    className="px-6 py-3.5 bg-[#E2B714] hover:bg-[#d0a70e] text-[#15211C] font-bold text-sm sm:text-base rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer active:scale-98"
+                  >
+                    <span>Daftar Akun Warga</span>
+                    <ArrowRight className="w-4 h-4 text-[#15211C]" />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={onOpenGuide}
+                    className="px-5 py-3.5 bg-emerald-900/60 hover:bg-emerald-900/90 text-white font-medium text-sm sm:text-base rounded-xl border border-emerald-700/60 transition-all flex items-center gap-2 cursor-pointer active:scale-98"
+                  >
+                    <span>Panduan Layanan</span>
+                    <HelpCircle className="w-4 h-4 text-emerald-300" />
+                  </button>
+                </div>
+              </>
+            )}
           </div>
           
         </div>
