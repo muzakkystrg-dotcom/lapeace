@@ -1,5 +1,5 @@
 import { Icon } from '../components/common/Icon';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { CitizenAccount } from '../types/portal';
 
 // Type definitions for citizen reports and tracking
@@ -430,6 +430,174 @@ const INITIAL_REPORTS: CitizenReportItem[] = [
   },
 ];
 
+const CATEGORY_META: Record<ReportCategory, { label: string; icon: string; opd: string }> = {
+  infrastruktur: {
+    label: 'Infrastruktur & Bina Marga',
+    icon: 'construction',
+    opd: 'Dinas PU Bina Marga & SDA Sidoarjo',
+  },
+  kesehatan: {
+    label: 'Kesehatan & Layanan Faskes',
+    icon: 'local_hospital',
+    opd: 'Dinas Kesehatan Kabupaten Sidoarjo',
+  },
+  kependudukan: {
+    label: 'Kependudukan & Catatan Sipil',
+    icon: 'badge',
+    opd: 'Dinas Kependudukan & Pencatatan Sipil',
+  },
+  darurat: {
+    label: 'Kedaruratan & Bencana 112',
+    icon: 'emergency',
+    opd: 'Badan Penanggulangan Bencana Daerah (BPBD) / 112',
+  },
+  sampah: {
+    label: 'Kebersihan & Persampahan',
+    icon: 'delete_sweep',
+    opd: 'Dinas Lingkungan Hidup & Kebersihan (DLHK)',
+  },
+  'lampu-jalan': {
+    label: 'Lampu Penerangan Jalan Umum (PJU)',
+    icon: 'lightbulb',
+    opd: 'Dinas Perhubungan Kabupaten Sidoarjo',
+  },
+  'fasilitas-umum': {
+    label: 'Fasilitas & Ketertiban Umum',
+    icon: 'corporate_fare',
+    opd: 'Satuan Polisi Pamong Praja (Satpol PP)',
+  },
+};
+
+function formatReportDate(dateString?: string): { date: string; time: string } {
+  if (!dateString) {
+    const now = new Date();
+    return {
+      date: now.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
+      time: `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')} WIB`,
+    };
+  }
+  const d = new Date(dateString.replace(' ', 'T'));
+  if (isNaN(d.getTime())) {
+    return { date: dateString, time: '' };
+  }
+  return {
+    date: d.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
+    time: `${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')} WIB`,
+  };
+}
+
+function mapDbReportToCitizenReportItem(db: any): CitizenReportItem {
+  const cat = (db.category in CATEGORY_META ? db.category : 'infrastruktur') as ReportCategory;
+  const meta = CATEGORY_META[cat];
+  const { date, time } = formatReportDate(db.created_at);
+  const status: ReportStatus = db.status || 'Menunggu Verifikasi';
+  const progressPercent = db.progress_percent ?? db.progressPercent ?? 25;
+
+  let currentStage = 'Tahap 1 dari 4: Menunggu Verifikasi Administrasi';
+  if (status === 'Verifikasi Diskominfo') currentStage = 'Tahap 2 dari 4: Verifikasi Bukti & Lokasi';
+  else if (status === 'Disposisi OPD') currentStage = `Tahap 3 dari 4: Disposisi Penanganan ke ${db.assigned_opd || meta.opd}`;
+  else if (status === 'Penanganan Lapangan') currentStage = 'Tahap 3 dari 4: Tim Reaksi Cepat Melakukan Tindak Lanjut Lapangan';
+  else if (status === 'Selesai') currentStage = 'Tahap 4 dari 4: Pengaduan Selesai Ditangani & Tuntas';
+
+  let timeline: TimelineStep[] = [];
+  if (Array.isArray(db.timeline) && db.timeline.length > 0) {
+    timeline = db.timeline.map((t: any) => ({
+      stepNumber: t.step_number || t.stepNumber || 1,
+      title: t.stage_name || t.title || `Tahap ${t.step_number || 1}`,
+      stageName: t.stage_name || t.stageName || 'Tahap Proses',
+      statusText: t.status_text || t.statusText || 'Proses',
+      timestamp: t.timestamp ? formatReportDate(t.timestamp).date : date,
+      description: t.description || '',
+      officerOrSystem: t.officer_or_system || t.officerOrSystem || 'SITAPAK Sidoarjo',
+      completed: Boolean(t.is_completed ?? t.completed),
+      active: (t.step_number === 1 && !t.is_completed) || t.status_text === status,
+    }));
+  } else {
+    timeline = [
+      {
+        stepNumber: 1,
+        title: 'Tahap 1: Laporan Diterima Sistem',
+        stageName: 'Diterima',
+        statusText: 'Tercatat',
+        timestamp: `${date}, ${time}`,
+        description: 'Laporan pengaduan Anda telah terdaftar dalam sistem pangkalan data SP4N-LAPOR! & Call 112 Kabupaten Sidoarjo.',
+        officerOrSystem: 'Gateway Digital SITAPAK V2.4 (Otomatis)',
+        completed: true,
+        active: true,
+      },
+      {
+        stepNumber: 2,
+        title: 'Tahap 2: Verifikasi Petugas Diskominfo',
+        stageName: 'Verifikasi Diskominfo',
+        statusText: status === 'Menunggu Verifikasi' ? 'Menunggu Antrean' : 'Terverifikasi',
+        timestamp: 'Estimasi: 1x24 Jam Kerja',
+        description: 'Petugas verifikator memeriksa keabsahan materi keluhan, koordinat lokasi, dan foto pendukung.',
+        officerOrSystem: 'Helpdesk SP4N-LAPOR Diskominfo Sidoarjo',
+        completed: status !== 'Menunggu Verifikasi',
+      },
+      {
+        stepNumber: 3,
+        title: 'Tahap 3: Disposisi ke OPD & Tindak Lanjut',
+        stageName: 'Disposisi OPD',
+        statusText: (status === 'Penanganan Lapangan' || status === 'Disposisi OPD') ? 'Sedang Ditangani' : (status === 'Selesai' ? 'Selesai' : 'Mendatang'),
+        timestamp: 'Estimasi: 2x24 Jam Kerja',
+        description: `Disposisi penanganan teknis ke ${db.assigned_opd || meta.opd} untuk pengecekan dan tindak lanjut lapangan.`,
+        officerOrSystem: db.assigned_opd || meta.opd,
+        completed: status === 'Penanganan Lapangan' || status === 'Selesai',
+      },
+      {
+        stepNumber: 4,
+        title: 'Tahap 4: Selesai & Penerbitan BAP Hasil',
+        stageName: 'Selesai',
+        statusText: status === 'Selesai' ? 'Selesai Tuntas' : 'Mendatang',
+        timestamp: 'Estimasi: 3x24 Jam Kerja',
+        description: 'Pekerjaan selesai, foto hasil diunggah, dan warga diundang memberikan evaluasi kepuasan.',
+        officerOrSystem: 'Sistem Terpadu Pelayanan Publik Sidoarjo',
+        completed: status === 'Selesai',
+      },
+    ];
+  }
+
+  const isAnon = Boolean(db.is_anonymous ?? db.isAnonymous);
+
+  return {
+    ticketNumber: db.ticket_number || db.ticketNumber,
+    title: db.title,
+    category: cat,
+    categoryLabel: db.category_label || db.categoryLabel || meta.label,
+    categoryIcon: meta.icon,
+    description: db.description,
+    kecamatan: db.kecamatan || 'Sidoarjo (Kota)',
+    kelurahan: db.kelurahan || 'Sidokumpul',
+    locationAddress: db.location_address || db.locationAddress || 'Wilayah Kabupaten Sidoarjo',
+    coordinates: db.coordinates || '',
+    submitDate: date,
+    submitTime: time,
+    urgency: db.urgency || (cat === 'darurat' ? 'Darurat Medis / Bencana' : 'Prioritas Reguler'),
+    status,
+    progressPercent,
+    currentStageText: currentStage,
+    slaTarget: db.sla_target || db.slaTarget || (cat === 'darurat' ? '< 15 Menit' : '3x24 Jam Kerja'),
+    estimatedCompletion: '3 Hari Kerja Mendatang',
+    assignedOpd: db.assigned_opd || db.assignedOpd || meta.opd,
+    isAnonymous: isAnon,
+    reporterName: isAnon ? 'Warga Sidoarjo (Anonim)' : (db.reporter_name || db.reporterName || 'Warga Sidoarjo'),
+    photoUrl: db.photo_url || db.photoUrl || 'https://images.unsplash.com/photo-1541888946425-d0fbb1861593?auto=format&fit=crop&w=800&q=80',
+    photoFileName: db.photo_file_name || 'lampiran_laporan.jpg',
+    photoSize: '1.2 MB',
+    afterPhotoUrl: db.after_photo_url,
+    officialResponse: db.official_response ? {
+      officerName: db.responder_name || 'Petugas Penanganan',
+      officerRole: 'Koordinator Lapangan',
+      officerOpd: db.responder_opd || db.assigned_opd || meta.opd,
+      officerInitials: 'OPD',
+      responseTime: date,
+      message: db.official_response,
+    } : undefined,
+    timeline,
+  };
+}
+
 export const LaporanPage: React.FC<LaporanPageProps> = ({
   onNavigateHome,
   initialTicket,
@@ -441,6 +609,40 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
 
   const [reportsList, setReportsList] = useState<CitizenReportItem[]>(INITIAL_REPORTS);
   const [selectedReport, setSelectedReport] = useState<CitizenReportItem>(INITIAL_REPORTS[0]);
+
+  // Muat data laporan pengaduan dari pangkalan data backend SITAPAK
+  useEffect(() => {
+    let isMounted = true;
+    fetch('/api/reports?limit=50')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((json) => {
+        if (!isMounted || !json) return;
+        const rawList = Array.isArray(json) ? json : (json.data || []);
+        if (rawList.length > 0) {
+          const mappedDbReports = rawList.map(mapDbReportToCitizenReportItem);
+          const seenTickets = new Set(mappedDbReports.map((r: CitizenReportItem) => r.ticketNumber.toUpperCase()));
+          const combined = [
+            ...mappedDbReports,
+            ...INITIAL_REPORTS.filter((r) => !seenTickets.has(r.ticketNumber.toUpperCase())),
+          ];
+          setReportsList(combined);
+          if (initialTicket) {
+            const found = combined.find((r) => r.ticketNumber.toUpperCase() === initialTicket.toUpperCase());
+            if (found) {
+              setSelectedReport(found);
+              setActiveTab('lacak-laporan');
+            }
+          }
+        }
+      })
+      .catch((err) => {
+        console.warn('Gagal memuat daftar laporan dari database backend:', err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [initialTicket]);
 
   // Tracking tab filter: 'semua' | 'Menunggu Verifikasi' | 'Penanganan Lapangan' | 'Selesai'
   const [trackingFilter, setTrackingFilter] = useState<string>('semua');
@@ -519,45 +721,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
     });
     const timeFormatted = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')} WIB`;
 
-    const categoryMap: Record<ReportCategory, { label: string; icon: string; opd: string }> = {
-      infrastruktur: {
-        label: 'Infrastruktur & Bina Marga',
-        icon: 'construction',
-        opd: 'Dinas PU Bina Marga & SDA Sidoarjo',
-      },
-      kesehatan: {
-        label: 'Kesehatan & Layanan Faskes',
-        icon: 'local_hospital',
-        opd: 'Dinas Kesehatan Kabupaten Sidoarjo',
-      },
-      kependudukan: {
-        label: 'Kependudukan & Catatan Sipil',
-        icon: 'badge',
-        opd: 'Dinas Kependudukan & Pencatatan Sipil',
-      },
-      darurat: {
-        label: 'Kedaruratan & Bencana 112',
-        icon: 'emergency',
-        opd: 'Badan Penanggulangan Bencana Daerah (BPBD) / 112',
-      },
-      sampah: {
-        label: 'Kebersihan & Persampahan',
-        icon: 'delete_sweep',
-        opd: 'Dinas Lingkungan Hidup & Kebersihan (DLHK)',
-      },
-      'lampu-jalan': {
-        label: 'Lampu Penerangan Jalan Umum (PJU)',
-        icon: 'lightbulb',
-        opd: 'Dinas Perhubungan Kabupaten Sidoarjo',
-      },
-      'fasilitas-umum': {
-        label: 'Fasilitas & Ketertiban Umum',
-        icon: 'corporate_fare',
-        opd: 'Satuan Polisi Pamong Praja (Satpol PP)',
-      },
-    };
-
-    const catMeta = categoryMap[formCategory];
+    const catMeta = CATEGORY_META[formCategory];
 
     const newReport: CitizenReportItem = {
       ticketNumber: newTicketNumber,
@@ -645,26 +809,47 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
     window.scrollTo({ top: 120, behavior: 'smooth' });
 
     // Sinkronisasi data permohonan ke database backend SITAPAK
+    const authToken = sessionStorage.getItem('sitapak_auth_token');
+    const authHeaders: Record<string, string> = {
+      'Content-Type': 'application/json',
+    };
+    if (authToken) {
+      authHeaders['Authorization'] = `Bearer ${authToken}`;
+    }
+
     fetch('/api/reports', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: authHeaders,
       body: JSON.stringify({
+        ticketNumber: newTicketNumber,
         title: formTitle.trim(),
         category: formCategory,
         categoryLabel: catMeta.label,
         description: formDescription.trim(),
         kecamatan: formKecamatan,
-        kelurahan: 'Sidokumpul',
+        kelurahan: `Kel. ${formKecamatan.replace(' (Kota)', '')}`,
         locationAddress: formAddress || 'Wilayah Kabupaten Sidoarjo',
         coordinates: formCoordinates || undefined,
         reporterName: formAnonymous ? 'Warga Sidoarjo (Anonim)' : (currentUser?.fullName || 'Budi Santoso'),
+        citizenId: currentUser?.id,
         isAnonymous: formAnonymous,
         assignedOpd: catMeta.opd,
         photoUrl: formPhoto ? formPhoto.url : undefined,
       }),
-    }).catch((err) => {
-      console.warn('Gagal sinkron laporan ke database backend:', err);
-    });
+    })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((savedReport) => {
+        if (savedReport && savedReport.ticketNumber) {
+          setReportsList((prev) =>
+            prev.map((item) =>
+              item.ticketNumber === newTicketNumber ? { ...item, ticketNumber: savedReport.ticketNumber } : item
+            )
+          );
+        }
+      })
+      .catch((err) => {
+        console.warn('Gagal sinkron laporan ke database backend:', err);
+      });
   };
 
   // Search or select a ticket
@@ -683,7 +868,22 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
       setSelectedReport(found);
       setActiveTab('lacak-laporan');
     } else {
-      alert(`Nomor tiket "${query}" tidak ditemukan dalam simulasi sistem.`);
+      // Coba cari langsung ke database backend jika belum termuat di memori
+      fetch(`/api/reports/${encodeURIComponent(query)}`)
+        .then((res) => (res.ok ? res.json() : null))
+        .then((dbRep) => {
+          if (dbRep) {
+            const mapped = mapDbReportToCitizenReportItem(dbRep);
+            setReportsList((prev) => [mapped, ...prev.filter((p) => p.ticketNumber !== mapped.ticketNumber)]);
+            setSelectedReport(mapped);
+            setActiveTab('lacak-laporan');
+          } else {
+            alert(`Nomor tiket "${query}" tidak ditemukan dalam sistem SITAPAK.`);
+          }
+        })
+        .catch(() => {
+          alert(`Nomor tiket "${query}" tidak ditemukan dalam sistem SITAPAK.`);
+        });
     }
   };
 

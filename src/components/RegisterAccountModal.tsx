@@ -51,9 +51,9 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
 
   if (!isOpen) return null;
 
-  const handleDemoLogin = async (demoNik: string) => {
+  const handleDemoLogin = async (demoNik: string, demoPassword = 'WargaSidoarjo2026!') => {
     setNik(demoNik);
-    setPassword('WargaSidoarjo2026!');
+    setPassword(demoPassword);
     setErrorMessage(null);
     setIsLoading(true);
 
@@ -61,7 +61,7 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nik: demoNik, password: 'WargaSidoarjo2026!' }),
+        body: JSON.stringify({ nik: demoNik, password: demoPassword }),
       });
 
       const data = await res.json();
@@ -82,24 +82,56 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
       }, 800);
     } catch {
       // Fallback offline mock jika backend belum menyala
-      const fallbackAccount: CitizenAccount =
-        demoNik === '3515014508920001'
-          ? {
-              nik: '3515014508920001',
-              fullName: 'Siti Rahmawati',
-              phone: '082198765432',
-              email: 'siti.rahmawati@warga.sidoarjokab.go.id',
-              kecamatan: 'Waru',
-              kelurahan: 'Kureksari',
-            }
-          : {
-              nik: '3515082104900002',
-              fullName: 'Budi Santoso',
-              phone: '081234567890',
-              email: 'budi.santoso@warga.sidoarjokab.go.id',
-              kecamatan: 'Sidoarjo (Kota)',
-              kelurahan: 'Sidokumpul',
-            };
+      let fallbackAccount: CitizenAccount;
+      if (demoNik === '3515000000000001') {
+        fallbackAccount = {
+          id: 7,
+          nik: '3515000000000001',
+          fullName: 'Bambang Haryo Pratama, S.STP',
+          phone: '081122334455',
+          email: 'admin.pemkab@sidoarjokab.go.id',
+          kecamatan: 'Sidoarjo (Kota)',
+          kelurahan: 'Sidokumpul',
+          role: 'admin_pemkab',
+          isVerified: true,
+        };
+      } else if (demoNik === '3515000000000002') {
+        fallbackAccount = {
+          id: 8,
+          nik: '3515000000000002',
+          fullName: 'Dewi Lestari, S.Kom',
+          phone: '081133445566',
+          email: 'operator.dispendukcapil@sidoarjokab.go.id',
+          kecamatan: 'Sidoarjo (Kota)',
+          kelurahan: 'Sidokare',
+          role: 'operator_opd',
+          isVerified: true,
+        };
+      } else if (demoNik === '3515014508920001') {
+        fallbackAccount = {
+          id: 4,
+          nik: '3515014508920001',
+          fullName: 'Siti Rahmawati',
+          phone: '082198765432',
+          email: 'siti.rahmawati@warga.sidoarjokab.go.id',
+          kecamatan: 'Waru',
+          kelurahan: 'Kureksari',
+          role: 'warga',
+          isVerified: true,
+        };
+      } else {
+        fallbackAccount = {
+          id: 1,
+          nik: '3515082104900002',
+          fullName: 'Budi Santoso',
+          phone: '081234567890',
+          email: 'budi.santoso@warga.sidoarjokab.go.id',
+          kecamatan: 'Sidoarjo (Kota)',
+          kelurahan: 'Sidokumpul',
+          role: 'warga',
+          isVerified: true,
+        };
+      }
 
       setIsSuccess(true);
       setTimeout(() => {
@@ -245,33 +277,79 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Quick Demo Login Preset Buttons */}
               {mode === 'login' && (
-                <div className="p-3.5 rounded-xl bg-[#e9f7ee] border border-[#88f4c6] flex flex-col gap-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#00251b] flex items-center gap-1.5">
-                      <Icon className="material-symbols-outlined text-[16px] text-[#006c4d]">badge</Icon>
-                      Pilihan Akun Demo (1-Klik):
-                    </span>
-                    <span className="text-[10px] bg-[#88f4c6]/60 text-[#00251b] px-2 py-0.5 rounded font-bold">Terverifikasi</span>
+                <div className="space-y-2.5">
+                  {/* Admin Demo Buttons */}
+                  <div className="p-3 rounded-xl bg-slate-900 text-white border border-slate-700 flex flex-col gap-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
+                        <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                        Akses Administrator SPBE (1-Klik):
+                      </span>
+                      <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded font-bold">
+                        Akses Khusus Admin
+                      </span>
+                    </div>
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <button
+                        type="button"
+                        disabled={isLoading}
+                        onClick={() => handleDemoLogin('3515000000000001', 'AdminSidoarjo2026!')}
+                        className="flex-1 text-xs px-2.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 border border-emerald-500/50 text-white font-medium transition-all text-left flex items-center justify-between cursor-pointer disabled:opacity-50"
+                      >
+                        <div>
+                          <div className="font-bold text-emerald-300">Admin Pemkab</div>
+                          <div className="text-[10px] text-slate-400">Super Admin SPBE</div>
+                        </div>
+                        <span className="text-[10px] bg-emerald-950 text-emerald-300 px-1.5 py-0.5 rounded font-mono border border-emerald-800">
+                          3515...0001
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        disabled={isLoading}
+                        onClick={() => handleDemoLogin('3515000000000002', 'AdminSidoarjo2026!')}
+                        className="flex-1 text-xs px-2.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 border border-sky-500/50 text-white font-medium transition-all text-left flex items-center justify-between cursor-pointer disabled:opacity-50"
+                      >
+                        <div>
+                          <div className="font-bold text-sky-300">Operator OPD</div>
+                          <div className="text-[10px] text-slate-400">Dispendukcapil</div>
+                        </div>
+                        <span className="text-[10px] bg-sky-950 text-sky-300 px-1.5 py-0.5 rounded font-mono border border-sky-800">
+                          3515...0002
+                        </span>
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    <button
-                      type="button"
-                      disabled={isLoading}
-                      onClick={() => handleDemoLogin('3515082104900002')}
-                      className="flex-1 text-xs px-2.5 py-1.5 rounded-lg bg-white border border-[#8af7c9] hover:bg-[#8af7c9]/30 text-[#00251b] font-medium transition-colors text-left flex items-center justify-between cursor-pointer disabled:opacity-50"
-                    >
-                      <span>Budi Santoso</span>
-                      <span className="text-[10px] text-[#717974] font-mono">351508...0002</span>
-                    </button>
-                    <button
-                      type="button"
-                      disabled={isLoading}
-                      onClick={() => handleDemoLogin('3515014508920001')}
-                      className="flex-1 text-xs px-2.5 py-1.5 rounded-lg bg-white border border-[#8af7c9] hover:bg-[#8af7c9]/30 text-[#00251b] font-medium transition-colors text-left flex items-center justify-between cursor-pointer disabled:opacity-50"
-                    >
-                      <span>Siti Rahmawati</span>
-                      <span className="text-[10px] text-[#717974] font-mono">351501...0001</span>
-                    </button>
+
+                  {/* Warga Demo Buttons */}
+                  <div className="p-3 rounded-xl bg-[#e9f7ee] border border-[#88f4c6] flex flex-col gap-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-[#00251b] flex items-center gap-1.5">
+                        <Icon className="material-symbols-outlined text-[16px] text-[#006c4d]">badge</Icon>
+                        Akun Warga Terverifikasi (1-Klik):
+                      </span>
+                      <span className="text-[10px] bg-[#88f4c6]/60 text-[#00251b] px-2 py-0.5 rounded font-bold">Warga</span>
+                    </div>
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <button
+                        type="button"
+                        disabled={isLoading}
+                        onClick={() => handleDemoLogin('3515082104900002', 'WargaSidoarjo2026!')}
+                        className="flex-1 text-xs px-2.5 py-1.5 rounded-lg bg-white border border-[#8af7c9] hover:bg-[#8af7c9]/30 text-[#00251b] font-medium transition-colors text-left flex items-center justify-between cursor-pointer disabled:opacity-50"
+                      >
+                        <span>Budi Santoso</span>
+                        <span className="text-[10px] text-[#717974] font-mono">351508...0002</span>
+                      </button>
+                      <button
+                        type="button"
+                        disabled={isLoading}
+                        onClick={() => handleDemoLogin('3515014508920001', 'WargaSidoarjo2026!')}
+                        className="flex-1 text-xs px-2.5 py-1.5 rounded-lg bg-white border border-[#8af7c9] hover:bg-[#8af7c9]/30 text-[#00251b] font-medium transition-colors text-left flex items-center justify-between cursor-pointer disabled:opacity-50"
+                      >
+                        <span>Siti Rahmawati</span>
+                        <span className="text-[10px] text-[#717974] font-mono">351501...0001</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}

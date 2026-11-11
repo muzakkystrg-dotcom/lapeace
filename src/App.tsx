@@ -21,6 +21,9 @@ const SkuServicePage = lazy(() => import('./pages/services/SkuServicePage').then
 const FaskesServicePage = lazy(() => import('./pages/services/FaskesServicePage').then(m => ({ default: m.FaskesServicePage })));
 const DtksServicePage = lazy(() => import('./pages/services/DtksServicePage').then(m => ({ default: m.DtksServicePage })));
 
+// Lazy loaded full-screen Admin Portal (terisolasi dari portal publik)
+const AdminPortal = lazy(() => import('./pages/admin/AdminPortal').then(m => ({ default: m.AdminPortal })));
+
 // Lazy loaded interactive modals (diunduh hanya saat pemicu diklik)
 const TrackDocModal = lazy(() => import('./components/TrackDocModal').then(m => ({ default: m.TrackDocModal })));
 const ServiceDetailModal = lazy(() => import('./components/ServiceDetailModal').then(m => ({ default: m.ServiceDetailModal })));
@@ -116,7 +119,11 @@ export default function App() {
       })
         .then((res) => {
           if (res.ok) return res.json();
-          throw new Error('Sesi kedaluwarsa');
+          if (res.status === 401) {
+            throw new Error('UNAUTHORIZED');
+          }
+          // Jika respons error lain (500 atau gateway error), pertahankan sesi lokal warga
+          return null;
         })
         .then((data) => {
           if (data && data.citizen) {
@@ -124,11 +131,15 @@ export default function App() {
             localStorage.setItem('sitapak_citizen_session', JSON.stringify(data.citizen));
           }
         })
-        .catch(() => {
-          // Token tidak valid atau kedaluwarsa, bersihkan sesi
-          sessionStorage.removeItem('sitapak_auth_token');
-          localStorage.removeItem('sitapak_citizen_session');
-          setCurrentUser(null);
+        .catch((err) => {
+          if (err && err.message === 'UNAUTHORIZED') {
+            // Token secara definitif tidak sah/kedaluwarsa (401)
+            sessionStorage.removeItem('sitapak_auth_token');
+            localStorage.removeItem('sitapak_citizen_session');
+            setCurrentUser(null);
+          } else {
+            console.warn('Verifikasi token latar belakang gagal terhubung ke server:', err);
+          }
         });
     }
   }, []);
@@ -148,6 +159,9 @@ export default function App() {
       console.warn('Gagal menyimpan sesi warga ke localStorage:', e);
     }
     showToast(`Selamat datang di SITAPAK Sidoarjo, ${account.fullName}!`);
+    if (account.role === 'admin_pemkab' || account.role === 'operator_opd') {
+      window.location.hash = '#admin';
+    }
   };
 
   const handleLogout = () => {
@@ -246,6 +260,36 @@ export default function App() {
       showToast(`Membuka sistem pengajuan digital ${service.title} untuk ${currentUser.fullName}.`);
     }
   };
+
+  // Full-screen isolated Admin Portal (terisolasi penuh dari layout portal publik)
+  if (currentHash.startsWith('#admin')) {
+    return (
+      <div className="min-h-screen bg-slate-950 text-slate-900">
+        {toastMessage && (
+          <div className="fixed top-6 right-6 z-50 max-w-md bg-[#05241B] text-white p-4 rounded-xl shadow-2xl border border-emerald-500/50 flex items-start gap-3 animate-in fade-in slide-in-from-top-4 duration-200">
+            <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+            <div className="text-xs sm:text-sm font-medium leading-relaxed">
+              {toastMessage}
+            </div>
+          </div>
+        )}
+        <Suspense fallback={<RouteSkeleton />}>
+          <AdminPortal
+            currentUser={currentUser}
+            onLogout={handleLogout}
+            onNavigateHome={() => {
+              window.location.hash = '#beranda';
+            }}
+            onOpenLoginModal={() => {
+              setAccountMode('login');
+              setIsAccountModalOpen(true);
+            }}
+            onAdminLoginSuccess={handleLoginSuccess}
+          />
+        </Suspense>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F8FAF9] text-[#15211C]">

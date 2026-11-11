@@ -1,6 +1,5 @@
 import { Icon } from '../components/common/Icon';
 import React, { useState, useMemo } from 'react';
-import { ExternalLink } from 'lucide-react';
 
 export interface DirectoryService {
   id: string;
@@ -296,15 +295,26 @@ export const LayananPage: React.FC<LayananPageProps> = ({
     setTimeout(() => setToastMessage(null), 3500);
   };
 
-  const categories = [
-    { key: 'all', label: 'Semua Layanan (48)', icon: 'apps' },
-    { key: 'kependudukan', label: 'Kependudukan & Sipil (8)', icon: 'badge' },
-    { key: 'perizinan', label: 'Perizinan & Investasi (12)', icon: 'business_center' },
-    { key: 'kesehatan', label: 'Kesehatan & Jaminan Medis (9)', icon: 'vital_signs' },
-    { key: 'pajak', label: 'Pajak & Retribusi Daerah (7)', icon: 'receipt_long' },
-    { key: 'sosial', label: 'Sosial & Kesejahteraan (6)', icon: 'volunteer_activism' },
-    { key: 'usaha', label: 'Ketenagakerjaan & Usaha (6)', icon: 'engineering' },
-  ];
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: directoryServicesData.length };
+    directoryServicesData.forEach((s) => {
+      counts[s.category] = (counts[s.category] || 0) + 1;
+    });
+    return counts;
+  }, []);
+
+  const categories = useMemo(
+    () => [
+      { key: 'all', label: `Semua Layanan (${categoryCounts.all || 0})`, icon: 'apps' },
+      { key: 'kependudukan', label: `Kependudukan & Sipil (${categoryCounts.kependudukan || 0})`, icon: 'badge' },
+      { key: 'perizinan', label: `Perizinan & Investasi (${categoryCounts.perizinan || 0})`, icon: 'business_center' },
+      { key: 'kesehatan', label: `Kesehatan & Jaminan Medis (${categoryCounts.kesehatan || 0})`, icon: 'vital_signs' },
+      { key: 'pajak', label: `Pajak & Retribusi Daerah (${categoryCounts.pajak || 0})`, icon: 'receipt_long' },
+      { key: 'sosial', label: `Sosial & Kesejahteraan (${categoryCounts.sosial || 0})`, icon: 'volunteer_activism' },
+      { key: 'usaha', label: `Ketenagakerjaan & Usaha (${categoryCounts.usaha || 0})`, icon: 'engineering' },
+    ],
+    [categoryCounts],
+  );
 
   const handleResetFilters = () => {
     setSearchQuery('');
@@ -317,8 +327,6 @@ export const LayananPage: React.FC<LayananPageProps> = ({
 
   const handleServiceClick = (service: DirectoryService) => {
     if (!service.detailRoute) {
-      const statusLabel = ['pbb', 'pbg', 'halal'].includes(service.id) ? 'Portal Eksternal' : 'Tahap Integrasi';
-      showToast(`Layanan "${service.title}" dialihkan via ${statusLabel}.`);
       return;
     }
     if (onSelectService) {
@@ -331,8 +339,6 @@ export const LayananPage: React.FC<LayananPageProps> = ({
   const handleApplyClick = (e: React.MouseEvent, service: DirectoryService) => {
     e.stopPropagation();
     if (!service.detailRoute) {
-      const statusLabel = ['pbb', 'pbg', 'halal'].includes(service.id) ? 'Portal Eksternal' : 'Tahap Integrasi';
-      showToast(`Layanan "${service.title}" dialihkan via ${statusLabel}.`);
       return;
     }
     if (onStartApplication) {
@@ -373,6 +379,10 @@ export const LayananPage: React.FC<LayananPageProps> = ({
       });
   }, [searchQuery, selectedCategory, selectedOpd, selectedChannel, sortBy]);
 
+  const itemsPerPage = 12;
+  const totalPages = Math.max(1, Math.ceil(filteredServices.length / itemsPerPage));
+  const pages = useMemo(() => Array.from({ length: totalPages }, (_, i) => i + 1), [totalPages]);
+
   return (
     <div className="w-full bg-[#F8FAF9] min-h-[calc(100vh-5rem)] text-on-surface">
       {/* Toast Notification */}
@@ -410,7 +420,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
             </nav>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100/80 border border-emerald-200/70 text-emerald-900 text-xs font-semibold">
               <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
-              <span>Sistem Terintegrasi SPBE • 48 Layanan Terdaftar Aktif</span>
+              <span>Sistem Terintegrasi SPBE • {directoryServicesData.length} Layanan Terdaftar Aktif</span>
             </div>
           </div>
 
@@ -615,100 +625,110 @@ export const LayananPage: React.FC<LayananPageProps> = ({
           </div>
         ) : viewMode === 'grid' ? (
           <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredServices.map((service) => (
-              <article
-                key={service.id}
-                onClick={() => handleServiceClick(service)}
-                className="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden border border-slate-200/90 hover:border-emerald-500/80 cursor-pointer"
-              >
-                <div className="absolute top-0 left-0 w-1.5 h-full bg-[#038D66]"></div>
-                <div>
-                  {/* Tags Header */}
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-slate-100 text-slate-700 text-[11px] font-semibold border border-slate-200/60">
-                      <Icon className="text-[14px]">account_balance</Icon>
-                      {service.opd}
-                    </span>
-                    <div className="flex items-center gap-1.5 flex-wrap justify-end">
-                      {!service.detailRoute && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80 shadow-xs">
-                          <ExternalLink className="w-3 h-3 text-amber-600" />
-                          {['pbb', 'pbg', 'halal'].includes(service.id) ? 'Portal Eksternal' : 'Tahap Integrasi'}
+            {filteredServices.map((service) => {
+              const isAvailable = Boolean(service.detailRoute);
+              return (
+                <article
+                  key={service.id}
+                  onClick={isAvailable ? () => handleServiceClick(service) : undefined}
+                  className={`group bg-white rounded-2xl p-6 shadow-sm flex flex-col justify-between relative overflow-hidden border border-slate-200/90 transition-all duration-300 ${
+                    isAvailable
+                      ? 'hover:shadow-xl hover:border-emerald-500/80 cursor-pointer'
+                      : 'cursor-default opacity-90'
+                  }`}
+                >
+                  <div className={`absolute top-0 left-0 w-1.5 h-full ${isAvailable ? 'bg-[#038D66]' : 'bg-slate-300'}`}></div>
+                  <div>
+                    {/* Tags Header */}
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-slate-100 text-slate-700 text-[11px] font-semibold border border-slate-200/60">
+                        <Icon className="text-[14px]">account_balance</Icon>
+                        {service.opd}
+                      </span>
+                      <div className="flex items-center gap-1.5 flex-wrap justify-end">
+                        {!isAvailable && (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-500 border border-slate-200/80 shadow-xs">
+                            Belum Tersedia
+                          </span>
+                        )}
+                        <span
+                          className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold ${
+                            service.badgeType === 'error'
+                              ? 'bg-red-50 text-red-700 border border-red-200'
+                              : service.badgeType === 'warning'
+                              ? 'bg-amber-50 text-amber-800 border border-amber-200'
+                              : service.badgeType === 'primary'
+                              ? 'bg-slate-100 text-slate-700 border border-slate-200'
+                              : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                          }`}
+                        >
+                          <Icon className="text-[13px]">{service.badgeIcon}</Icon>
+                          {service.badge}
                         </span>
-                      )}
-                      <span
-                        className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold ${
-                          service.badgeType === 'error'
-                            ? 'bg-red-50 text-red-700 border border-red-200'
-                            : service.badgeType === 'warning'
-                            ? 'bg-amber-50 text-amber-800 border border-amber-200'
-                            : service.badgeType === 'primary'
-                            ? 'bg-slate-100 text-slate-700 border border-slate-200'
-                            : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-                        }`}
+                      </div>
+                    </div>
+
+                    <h3 className={`font-display text-lg font-bold mb-2 leading-snug transition-colors ${
+                      isAvailable ? 'text-[#15211C] group-hover:text-[#038D66]' : 'text-slate-700'
+                    }`}>
+                      {service.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#5A6862] leading-relaxed mb-4 line-clamp-3">
+                      {service.description}
+                    </p>
+
+                    {/* Metrics Band */}
+                    <div className="grid grid-cols-2 gap-2 p-3 rounded-xl bg-slate-50 mb-4 border border-slate-100">
+                      <div>
+                        <span className="text-[11px] text-slate-500 block">
+                          {service.metricLabel1}
+                        </span>
+                        <span className="text-xs sm:text-sm font-bold text-[#15211C]">
+                          {service.metricValue1}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-[11px] text-slate-500 block">
+                          {service.metricLabel2}
+                        </span>
+                        <span className={`text-xs sm:text-sm font-bold ${isAvailable ? 'text-[#038D66]' : 'text-slate-600'}`}>
+                          {service.metricValue2}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-3 border-t border-slate-100">
+                    <span className={`text-xs sm:text-sm flex items-center gap-1 transition-colors ${
+                      isAvailable ? 'font-semibold text-[#038D66] group-hover:text-[#026E4F]' : 'font-medium text-slate-400'
+                    }`}>
+                      <span>{service.secondaryActionLabel}</span>
+                      <Icon className="text-[16px]">
+                        {service.secondaryActionIcon}
+                      </Icon>
+                    </span>
+                    {isAvailable ? (
+                      <button
+                        onClick={(e) => handleApplyClick(e, service)}
+                        className="px-3.5 py-2 rounded-xl bg-[#038D66] hover:bg-[#026E4F] text-white text-xs sm:text-sm transition-all font-semibold flex items-center gap-1 shadow-sm active:scale-95 cursor-pointer"
                       >
-                        <Icon className="text-[13px]">{service.badgeIcon}</Icon>
-                        {service.badge}
-                      </span>
-                    </div>
+                        <span>{service.primaryActionLabel}</span>
+                        <Icon className="text-[16px]">arrow_forward</Icon>
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        disabled
+                        aria-disabled="true"
+                        className="px-3.5 py-2 rounded-xl bg-slate-100 text-slate-400 text-xs sm:text-sm border border-slate-200 font-semibold flex items-center gap-1.5 cursor-not-allowed select-none"
+                      >
+                        <span>Belum Tersedia</span>
+                      </button>
+                    )}
                   </div>
-
-                  <h3 className="font-display text-lg font-bold text-[#15211C] group-hover:text-[#038D66] transition-colors mb-2 leading-snug">
-                    {service.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#5A6862] leading-relaxed mb-4 line-clamp-3">
-                    {service.description}
-                  </p>
-
-                  {/* Metrics Band */}
-                  <div className="grid grid-cols-2 gap-2 p-3 rounded-xl bg-slate-50 mb-4 border border-slate-100">
-                    <div>
-                      <span className="text-[11px] text-slate-500 block">
-                        {service.metricLabel1}
-                      </span>
-                      <span className="text-xs sm:text-sm font-bold text-[#15211C]">
-                        {service.metricValue1}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="text-[11px] text-slate-500 block">
-                        {service.metricLabel2}
-                      </span>
-                      <span className="text-xs sm:text-sm font-bold text-[#038D66]">
-                        {service.metricValue2}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between pt-3 border-t border-slate-100">
-                  <span className="text-xs sm:text-sm font-semibold text-[#038D66] group-hover:text-[#026E4F] flex items-center gap-1 transition-colors">
-                    <span>{service.secondaryActionLabel}</span>
-                    <Icon className="text-[16px]">
-                      {service.secondaryActionIcon}
-                    </Icon>
-                  </span>
-                  {service.detailRoute ? (
-                    <button
-                      onClick={(e) => handleApplyClick(e, service)}
-                      className="px-3.5 py-2 rounded-xl bg-[#038D66] hover:bg-[#026E4F] text-white text-xs sm:text-sm transition-all font-semibold flex items-center gap-1 shadow-sm active:scale-95 cursor-pointer"
-                    >
-                      <span>{service.primaryActionLabel}</span>
-                      <Icon className="text-[16px]">arrow_forward</Icon>
-                    </button>
-                  ) : (
-                    <button
-                      onClick={(e) => handleApplyClick(e, service)}
-                      className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm border border-slate-200 transition-all font-semibold flex items-center gap-1.5 cursor-pointer"
-                      title={['pbb', 'pbg', 'halal'].includes(service.id) ? 'Layanan dialihkan ke Portal Eksternal resmi' : 'Layanan sedang dalam tahap integrasi'}
-                    >
-                      <span>{['pbb', 'pbg', 'halal'].includes(service.id) ? 'Portal Eksternal' : 'Tahap Integrasi'}</span>
-                      <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
-                    </button>
-                  )}
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </section>
         ) : (
           <div className="w-full bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
@@ -725,64 +745,76 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                  {filteredServices.map((service) => (
-                    <tr
-                      key={service.id}
-                      onClick={() => handleServiceClick(service)}
-                      className="hover:bg-slate-50/80 transition-colors cursor-pointer"
-                    >
-                      <td className="py-3.5 px-4">
-                        <div className="font-semibold text-[#15211C] hover:text-[#038D66] transition-colors flex items-center gap-2">
-                          <span>{service.title}</span>
-                          {!service.detailRoute && (
-                            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
-                              <ExternalLink className="w-2.5 h-2.5 text-amber-600" />
-                              {['pbb', 'pbg', 'halal'].includes(service.id) ? 'Portal Eksternal' : 'Tahap Integrasi'}
-                            </span>
+                  {filteredServices.map((service) => {
+                    const isAvailable = Boolean(service.detailRoute);
+                    return (
+                      <tr
+                        key={service.id}
+                        onClick={isAvailable ? () => handleServiceClick(service) : undefined}
+                        className={`transition-colors ${
+                          isAvailable
+                            ? 'hover:bg-slate-50/80 cursor-pointer'
+                            : 'cursor-default opacity-90'
+                        }`}
+                      >
+                        <td className="py-3.5 px-4">
+                          <div className={`font-semibold transition-colors flex items-center gap-2 ${
+                            isAvailable ? 'text-[#15211C] hover:text-[#038D66]' : 'text-slate-700'
+                          }`}>
+                            <span>{service.title}</span>
+                            {!isAvailable && (
+                              <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-500 border border-slate-200">
+                                Belum Tersedia
+                              </span>
+                            )}
+                          </div>
+                          <div className="text-xs text-[#5A6862] line-clamp-1">
+                            {service.description}
+                          </div>
+                        </td>
+                        <td className="py-3.5 px-4 whitespace-nowrap">
+                          <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 text-xs font-semibold">
+                            {service.opd}
+                          </span>
+                        </td>
+                        <td className="py-3.5 px-4 whitespace-nowrap">
+                          <span className={`text-xs font-medium flex items-center gap-1 ${
+                            isAvailable ? 'text-[#038D66]' : 'text-slate-600'
+                          }`}>
+                            <Icon className="text-[14px]">{service.badgeIcon}</Icon>
+                            {service.badge}
+                          </span>
+                        </td>
+                        <td className="py-3.5 px-4 whitespace-nowrap text-xs font-semibold text-[#15211C]">
+                          {service.metricValue1}
+                        </td>
+                        <td className={`py-3.5 px-4 whitespace-nowrap text-xs font-bold ${
+                          isAvailable ? 'text-[#038D66]' : 'text-slate-600'
+                        }`}>
+                          {service.metricValue2}
+                        </td>
+                        <td className="py-3.5 px-4 text-right whitespace-nowrap">
+                          {isAvailable ? (
+                            <button
+                              onClick={(e) => handleApplyClick(e, service)}
+                              className="px-3 py-1.5 rounded-lg bg-[#038D66] hover:bg-[#026E4F] text-white text-xs font-semibold transition-colors shadow-xs cursor-pointer"
+                            >
+                              {service.primaryActionLabel}
+                            </button>
+                          ) : (
+                            <button
+                              type="button"
+                              disabled
+                              aria-disabled="true"
+                              className="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 text-slate-400 border border-slate-200 text-xs font-semibold cursor-not-allowed select-none"
+                            >
+                              <span>Belum Tersedia</span>
+                            </button>
                           )}
-                        </div>
-                        <div className="text-xs text-[#5A6862] line-clamp-1">
-                          {service.description}
-                        </div>
-                      </td>
-                      <td className="py-3.5 px-4 whitespace-nowrap">
-                        <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 text-xs font-semibold">
-                          {service.opd}
-                        </span>
-                      </td>
-                      <td className="py-3.5 px-4 whitespace-nowrap">
-                        <span className="text-xs text-[#038D66] font-medium flex items-center gap-1">
-                          <Icon className="text-[14px]">{service.badgeIcon}</Icon>
-                          {service.badge}
-                        </span>
-                      </td>
-                      <td className="py-3.5 px-4 whitespace-nowrap text-xs font-semibold text-[#15211C]">
-                        {service.metricValue1}
-                      </td>
-                      <td className="py-3.5 px-4 whitespace-nowrap text-xs font-bold text-[#038D66]">
-                        {service.metricValue2}
-                      </td>
-                      <td className="py-3.5 px-4 text-right whitespace-nowrap">
-                        {service.detailRoute ? (
-                          <button
-                            onClick={(e) => handleApplyClick(e, service)}
-                            className="px-3 py-1.5 rounded-lg bg-[#038D66] hover:bg-[#026E4F] text-white text-xs font-semibold transition-colors shadow-xs cursor-pointer"
-                          >
-                            {service.primaryActionLabel}
-                          </button>
-                        ) : (
-                          <button
-                            onClick={(e) => handleApplyClick(e, service)}
-                            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 border border-slate-200 text-xs font-semibold cursor-pointer hover:bg-slate-200"
-                            title={['pbb', 'pbg', 'halal'].includes(service.id) ? 'Layanan dialihkan ke Portal Eksternal resmi' : 'Layanan sedang dalam tahap integrasi'}
-                          >
-                            <span>{['pbb', 'pbg', 'halal'].includes(service.id) ? 'Portal Eksternal' : 'Tahap Integrasi'}</span>
-                            <ExternalLink className="w-3 h-3 text-slate-500" />
-                          </button>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
@@ -792,22 +824,22 @@ export const LayananPage: React.FC<LayananPageProps> = ({
         {/* Pagination & Bottom Record Summary */}
         <div className="w-full bg-surface-container-lowest rounded-2xl p-4 sm:p-5 shadow-sm border border-surface-container-high flex flex-col md:flex-row items-center justify-between gap-4">
           <span className="font-body-sm text-xs sm:text-sm text-on-surface-variant font-medium">
-            Menampilkan <strong className="text-on-surface">1 - {filteredServices.length}</strong> dari total{' '}
-            <strong className="text-on-surface">48</strong> layanan terdaftar aktif
+            Menampilkan <strong className="text-on-surface">{filteredServices.length > 0 ? `1 - ${filteredServices.length}` : '0'}</strong> dari total{' '}
+            <strong className="text-on-surface">{directoryServicesData.length}</strong> layanan terdaftar aktif
           </span>
           <nav aria-label="Pagination Katalog Layanan" className="flex items-center gap-1.5">
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              disabled={currentPage === 1}
+              disabled={currentPage <= 1}
               className={`w-9 h-9 rounded-xl flex items-center justify-center font-label-md text-xs transition-colors ${
-                currentPage === 1
+                currentPage <= 1
                   ? 'bg-surface-container text-outline cursor-not-allowed opacity-60'
                   : 'bg-surface-container hover:bg-secondary-container/50 text-on-surface'
               }`}
             >
               <Icon className="material-symbols-outlined text-[18px]">chevron_left</Icon>
             </button>
-            {[1, 2, 3, 4].map((page) => (
+            {pages.map((page) => (
               <button
                 key={page}
                 onClick={() => setCurrentPage(page)}
@@ -821,10 +853,10 @@ export const LayananPage: React.FC<LayananPageProps> = ({
               </button>
             ))}
             <button
-              onClick={() => setCurrentPage((p) => Math.min(4, p + 1))}
-              disabled={currentPage === 4}
+              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+              disabled={currentPage >= totalPages}
               className={`w-9 h-9 rounded-xl flex items-center justify-center font-label-md text-xs transition-colors ${
-                currentPage === 4
+                currentPage >= totalPages
                   ? 'bg-surface-container text-outline cursor-not-allowed opacity-60'
                   : 'bg-surface-container hover:bg-secondary-container/50 text-on-surface'
               }`}

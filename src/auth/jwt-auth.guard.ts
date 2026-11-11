@@ -14,14 +14,16 @@ export const IS_PUBLIC_KEY = 'isPublic';
 export class JwtAuthGuard implements CanActivate {
   constructor(
     @Inject(CryptoService) private readonly cryptoService: CryptoService,
-    private readonly reflector: Reflector,
+    @Inject(Reflector) private readonly reflector?: Reflector,
   ) {}
 
   canActivate(context: ExecutionContext): boolean {
-    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
-      context.getHandler(),
-      context.getClass(),
-    ]);
+    const isPublic = this.reflector
+      ? this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
+          context.getHandler(),
+          context.getClass(),
+        ])
+      : false;
 
     const request = context.switchToHttp().getRequest();
     const authHeader = request.headers.authorization;

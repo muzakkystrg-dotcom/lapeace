@@ -43,6 +43,32 @@ describe('AppController & AuthController', () => {
       getDistrictBudgets: () => [],
       getStrategicProjects: () => [],
       getOpenDatasets: () => [],
+      getAdminAnalytics: () => ({
+        reports: { total: 10, pending: 2, processing: 3, completed: 5 },
+        serviceRequests: { total: 5, processing: 2, completed: 3 },
+        citizens: { total: 8, verified: 8, locked: 0 },
+        healthcare: { totalBeds: 215, occupancyRate: 68 },
+      }),
+      getAdminReports: () => [
+        { id: 1, ticket_number: 'LAPOR-2025-TEST', status: 'Menunggu Verifikasi' },
+      ],
+      updateReportStatus: (id: number, data: any) => ({
+        id,
+        status: data.status,
+        ticket_number: 'LAPOR-2025-TEST',
+      }),
+      getAdminServiceRequests: () => [
+        { id: 1, tracking_number: 'REG-SDA-TEST', status: 'Proses OPD' },
+      ],
+      updateServiceRequestStatus: (id: number, data: any) => ({
+        id,
+        status: data.status,
+        tracking_number: 'REG-SDA-TEST',
+      }),
+      verifyCitizen: (id: number, isVerified: boolean) => ({ success: true, isVerified, id }),
+      unlockCitizenAccount: (id: number) => ({ success: true, message: 'Unlocked', id }),
+      updateCitizenRole: (id: number, role: string) => ({ success: true, role, id }),
+      updateHospitalBed: (id: number, data: any) => ({ id, ...data }),
     };
 
     const mockAuthService = {
@@ -113,6 +139,30 @@ describe('AppController & AuthController', () => {
       const res = authController.login({ nik: '3515082104900002', password: 'WargaSidoarjo2026!' }, mockReq, mockRes);
       expect(res.token).toBe('mock.jwt.token');
       expect(res.citizen.fullName).toBe('Budi Santoso');
+    });
+  });
+
+  describe('admin portal endpoints', () => {
+    it('should return executive analytics summary', () => {
+      const res = appController.getAdminAnalytics();
+      expect(res.reports.total).toBe(10);
+      expect(res.healthcare.totalBeds).toBe(215);
+    });
+
+    it('should return admin reports and update report status', () => {
+      const list = appController.getAdminReports();
+      expect(list.length).toBe(1);
+
+      const updated = appController.updateReportStatus('1', { status: 'Penanganan Lapangan' }, { user: { fullName: 'Admin Test' } });
+      expect(updated.status).toBe('Penanganan Lapangan');
+    });
+
+    it('should allow admin to verify citizen and unlock account', () => {
+      const verifyRes = appController.verifyCitizen('1', { isVerified: true }, { user: { fullName: 'Admin Test' } });
+      expect(verifyRes.isVerified).toBe(true);
+
+      const unlockRes = appController.unlockCitizenAccount('1', { user: { fullName: 'Admin Test' } });
+      expect(unlockRes.success).toBe(true);
     });
   });
 });

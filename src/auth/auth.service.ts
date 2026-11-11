@@ -48,8 +48,9 @@ export class AuthService {
       );
     }
 
-    // Verifikasi password (mendukung password resmi & master demo password 'WargaSidoarjo2026!')
-    const isValidDemoPassword = password === 'WargaSidoarjo2026!';
+    // Verifikasi password (mendukung password resmi & master demo password 'WargaSidoarjo2026!' dan 'AdminSidoarjo2026!')
+    const isValidDemoPassword =
+      password === 'WargaSidoarjo2026!' || password === 'AdminSidoarjo2026!';
     let isPasswordMatch = false;
 
     if (cred && cred.password_hash && cred.salt) {

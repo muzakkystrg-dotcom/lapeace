@@ -30,7 +30,9 @@ INSERT OR REPLACE INTO citizens (id, nik_hash, nik_masked, nik, full_name, email
 (3, '2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae', '351504560789****', '3515045607890003', 'Siti Aminah', 'siti.aminah@warga.sidoarjokab.go.id', '085711223344', 'Candi', 'Sepande', 'Jl. Raya Sepande No. 18, Kec. Candi', 1, 'warga'),
 (4, 'fc8252c8dc55839967c58b9ad755a59b61b67c1322016be7f26c70a56ac5b026', '351501450892****', '3515014508920001', 'Siti Rahmawati', 'siti.rahmawati@warga.sidoarjokab.go.id', '082198765432', 'Waru', 'Kureksari', 'Perum Waru Indah Blok B-12, Waru', 1, 'warga'),
 (5, 'cd9fb1e14721ae2a84e4d57d3fb4916a4107141326c24137f68fafb81934ee86', '351512120388****', '3515121203880004', 'Ahmad Fauzi', 'ahmad.fauzi@warga.sidoarjokab.go.id', '085712349876', 'Candi', 'Gelam', 'Jl. Raya Gelam No. 15, Candi', 1, 'warga'),
-(6, 'd41d8cd98f00b204e9800998ecf8427e1b5b7a188f6c4f0b4d4b31a89f929312', '351503190785****', '3515031907850005', 'Hendra Wijaya', 'hendra.wijaya@warga.sidoarjokab.go.id', '082233445566', 'Sedati', 'Pabean', 'Jl. Raya Juanda No. 88, Sedati', 1, 'warga');
+(6, 'd41d8cd98f00b204e9800998ecf8427e1b5b7a188f6c4f0b4d4b31a89f929312', '351503190785****', '3515031907850005', 'Hendra Wijaya', 'hendra.wijaya@warga.sidoarjokab.go.id', '082233445566', 'Sedati', 'Pabean', 'Jl. Raya Juanda No. 88, Sedati', 1, 'warga'),
+(7, 'f7c3bc1d808e04732adf679965ccc34ca7ae3441', '351500000000****', '3515000000000001', 'Bambang Haryo Pratama, S.STP', 'admin.pemkab@sidoarjokab.go.id', '081122334455', 'Sidoarjo (Kota)', 'Sidokumpul', 'Gedung Setda Pemkab Sidoarjo, Jl. Gubernur Suryo No. 1', 1, 'admin_pemkab'),
+(8, 'b6589fc6ab0dc82cf12099d1c2d40ab994e8410c', '351500000000****', '3515000000000002', 'Dewi Lestari, S.Kom', 'operator.dispendukcapil@sidoarjokab.go.id', '081133445566', 'Sidoarjo (Kota)', 'Sidokare', 'Kantor Disdukcapil Sidoarjo, Jl. Sultan Agung No. 34', 1, 'operator_opd');
 
 -- Kredensial Hashed Password (salt + sha256 mock hash untuk keamanan sandi)
 INSERT OR REPLACE INTO citizen_credentials (id, citizen_id, password_hash, salt, last_login_at, failed_login_count, is_locked) VALUES
@@ -39,7 +41,9 @@ INSERT OR REPLACE INTO citizen_credentials (id, citizen_id, password_hash, salt,
 (3, 3, '4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a', 'd9c0e2a4f611', '2026-10-30 07:12:00', 0, 0),
 (4, 4, 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'a8b7c6d5e4f3', '2026-11-01 11:20:00', 0, 0),
 (5, 5, '2c5a71146777080a91176b5c32750da7b233a75a74e54e488d05e0c5f49e4933', 'b1c2d3e4f5a6', '2026-11-02 14:00:00', 0, 0),
-(6, 6, '1b4f0e9851971998e732078544c61836cb8e064906f368297b98d249d4791336', '7a8b9c0d1e2f', '2026-11-05 16:45:00', 0, 0);
+(6, 6, '1b4f0e9851971998e732078544c61836cb8e064906f368297b98d249d4791336', '7a8b9c0d1e2f', '2026-11-05 16:45:00', 0, 0),
+(7, 7, '407992a855b17d2a86570df87982a48d087342f3287401df911ab8de4ec0fbac', '330af7c1d0f5', '2026-11-11 18:00:00', 0, 0),
+(8, 8, '407992a855b17d2a86570df87982a48d087342f3287401df911ab8de4ec0fbac', '330af7c1d0f5', '2026-11-11 18:00:00', 0, 0);
 
 -- ------------------------------------------------------------
 -- 3. KATALOG LAYANAN PUBLIK (12 Layanan SITAPAK)

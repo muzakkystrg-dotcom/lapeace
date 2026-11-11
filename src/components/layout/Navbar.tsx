@@ -13,6 +13,8 @@ import {
   Menu,
   X,
   ChevronRight,
+  Shield,
+  LayoutDashboard,
 } from 'lucide-react';
 
 export interface NavbarProps {
@@ -106,7 +108,12 @@ export const Navbar: React.FC<NavbarProps> = ({
     .map((n) => n[0].toUpperCase())
     .join('') || 'BS';
 
-  const userRole = currentUser ? 'Warga Terverifikasi' : 'Warga Terverifikasi';
+  const userRole =
+    currentUser?.role === 'admin_pemkab'
+      ? 'Admin Pemkab Sidoarjo'
+      : currentUser?.role === 'operator_opd'
+      ? 'Operator OPD Sidoarjo'
+      : 'Warga Terverifikasi';
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-[#083c2e]/95 backdrop-blur-md shadow-md border-b border-[#00251b]">
@@ -238,6 +245,21 @@ export const Navbar: React.FC<NavbarProps> = ({
                 )}
               </div>
 
+              {/* Admin Portal Direct Button if authorized */}
+              {(currentUser?.role === 'admin_pemkab' || currentUser?.role === 'operator_opd') && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    window.location.hash = '#admin';
+                  }}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-extrabold text-xs shadow-md transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#8af7c9]"
+                >
+                  <Shield className="w-3.5 h-3.5 text-slate-950" />
+                  <span className="hidden sm:inline">Portal Admin</span>
+                  <span className="sm:hidden">Admin</span>
+                </button>
+              )}
+
               {/* User Pill Button (Google Stitch Exact) */}
               <div className="relative" ref={userDropdownRef}>
                 <button
@@ -287,6 +309,20 @@ export const Navbar: React.FC<NavbarProps> = ({
                     </div>
 
                     <div className="py-1 space-y-1 text-xs">
+                      {(currentUser?.role === 'admin_pemkab' || currentUser?.role === 'operator_opd') && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setUserDropdownOpen(false);
+                            window.location.hash = '#admin';
+                          }}
+                          className="w-full text-left px-3 py-2 rounded-xl bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 flex items-center gap-2.5 transition-colors cursor-pointer border border-emerald-500/40 font-bold focus:outline-none focus:ring-2 focus:ring-[#8af7c9]"
+                        >
+                          <LayoutDashboard className="w-4 h-4 text-emerald-400" />
+                          <span>Buka Admin Dashboard</span>
+                        </button>
+                      )}
+
                       {onOpenTrackModal && (
                         <button
                           type="button"
@@ -393,6 +429,19 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="pt-3 border-t border-emerald-900/80 flex flex-col gap-2">
             {currentUser !== null ? (
               <div className="space-y-2">
+                {(currentUser?.role === 'admin_pemkab' || currentUser?.role === 'operator_opd') && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      window.location.hash = '#admin';
+                    }}
+                    className="w-full py-2.5 px-3 rounded-xl bg-emerald-400 text-slate-950 font-extrabold text-xs flex items-center justify-center gap-2 shadow-sm"
+                  >
+                    <Shield className="w-4 h-4 text-slate-950" />
+                    <span>Buka Admin Dashboard</span>
+                  </button>
+                )}
                 <div className="px-3 py-2 bg-white/5 rounded-xl flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="w-8 h-8 rounded-full bg-[#8af7c9] text-[#002115] font-bold flex items-center justify-center text-xs">

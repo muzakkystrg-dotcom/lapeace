@@ -2,6 +2,7 @@ import {
   Controller,
   Get,
   Post,
+  Patch,
   Body,
   Param,
   Req,
@@ -24,6 +25,7 @@ export class AppController {
   constructor(
     @Inject(DatabaseService) private readonly db: DatabaseService,
     @Inject(CacheService) private readonly cache: CacheService,
+    @Inject(CryptoService) private readonly cryptoService: CryptoService,
   ) {}
 
   @Get('health')
@@ -146,19 +148,171 @@ export class AppController {
   }
 
   @Post('reports')
-  async createReport(@Body() body: any) {
-    const result = this.db.createReport(body);
+  async createReport(@Body() body: any, @Req() req: any) {
+    let citizenId = body.citizenId ? Number(body.citizenId) : undefined;
+    if (!citizenId && req?.headers?.authorization?.startsWith('Bearer ')) {
+      const token = req.headers.authorization.substring(7);
+      const payload = this.cryptoService.verifyJwt(token);
+      if (payload && payload.sub) {
+        citizenId = Number(payload.sub);
+      }
+    }
+    const result = this.db.createReport({ ...body, citizenId });
     // Invalidate cached report lists upon creation
     this.cache.delPattern(/^reports:/);
     return result;
   }
 
-  // Immutable audit trail logs (admin only)
+  // Immutable audit trail logs (admin & operator)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin_pemkab', 'operator_opd')
+  @Get('audit-logs')
+  getAuditLogs(@Query('limit') limit?: string) {
+    const l = limit ? parseInt(limit, 10) : 50;
+    return this.db.getAuditLogs(l);
+  }
+
+  // ==========================================
+  // ADMIN PORTAL API ENDPOINTS
+  // ==========================================
+
+  // 1. Executive Analytics & KPI Summary
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin_pemkab', 'operator_opd')
+  @Get('admin/analytics')
+  getAdminAnalytics() {
+    return this.db.getAdminAnalytics();
+  }
+
+  // 2. Citizen Reports Management
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin_pemkab', 'operator_opd')
+  @Get('admin/reports')
+  getAdminReports(
+    @Query('status') status?: string,
+    @Query('category') category?: string,
+    @Query('search') search?: string,
+  ) {
+    return this.db.getAdminReports({ status, category, search });
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin_pemkab', 'operator_opd')
+  @Patch('admin/reports/:id/status')
+  updateReportStatus(
+    @Param('id') id: string,
+    @Body() body: any,
+    @Req() req: any,
+  ) {
+    const user = req.user;
+    const result = this.db.updateReportStatus(Number(id), {
+      ...body,
+      officerName: user?.fullName || 'Petugas Diskominfo',
+      responderOpd: user?.role === 'admin_pemkab' ? 'Pemerintah Kabupaten Sidoarjo' : 'OPD Terkait Sidoarjo',
+    });
+    if (!result) {
+      throw new NotFoundException(`Laporan ID ${id} tidak ditemukan.`);
+    }
+    this.cache.delPattern(/^reports:/);
+    return result;
+  }
+
+  // 3. Service Requests Management
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin_pemkab', 'operator_opd')
+  @Get('admin/service-requests')
+  getAdminServiceRequests(
+    @Query('status') status?: string,
+    @Query('serviceId') serviceId?: string,
+    @Query('search') search?: string,
+  ) {
+    return this.db.getAdminServiceRequests({ status, serviceId, search });
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin_pemkab', 'operator_opd')
+  @Patch('admin/service-requests/:id/status')
+  updateServiceRequestStatus(
+    @Param('id') id: string,
+    @Body() body: any,
+    @Req() req: any,
+  ) {
+    const user = req.user;
+    const result = this.db.updateServiceRequestStatus(Number(id), {
+      ...body,
+      officerName: user?.fullName || 'Petugas Pelayanan',
+    });
+    if (!result) {
+      throw new NotFoundException(`Permohonan ID ${id} tidak ditemukan.`);
+    }
+    this.cache.delPattern(/^services:/);
+    return result;
+  }
+
+  // 4. Citizens & Single Account Management
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin_pemkab', 'operator_opd')
+  @Patch('admin/citizens/:id/verify')
+  verifyCitizen(
+    @Param('id') id: string,
+    @Body() body: { isVerified: boolean },
+    @Req() req: any,
+  ) {
+    const user = req.user;
+    const result = this.db.verifyCitizen(Number(id), body.isVerified, user?.fullName);
+    if (!result) {
+      throw new NotFoundException(`Warga ID ${id} tidak ditemukan.`);
+    }
+    return result;
+  }
+
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin_pemkab')
-  @Get('audit-logs')
-  getAuditLogs() {
-    return this.db.getAuditLogs();
+  @Patch('admin/citizens/:id/unlock')
+  unlockCitizenAccount(
+    @Param('id') id: string,
+    @Req() req: any,
+  ) {
+    const user = req.user;
+    const result = this.db.unlockCitizenAccount(Number(id), user?.fullName);
+    if (!result) {
+      throw new NotFoundException(`Warga ID ${id} tidak ditemukan.`);
+    }
+    return result;
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin_pemkab')
+  @Patch('admin/citizens/:id/role')
+  updateCitizenRole(
+    @Param('id') id: string,
+    @Body() body: { role: string },
+    @Req() req: any,
+  ) {
+    const user = req.user;
+    const result = this.db.updateCitizenRole(Number(id), body.role, user?.fullName);
+    if (!result) {
+      throw new NotFoundException(`Warga ID ${id} tidak ditemukan.`);
+    }
+    return result;
+  }
+
+  // 5. Healthcare & Bed Inventory Management
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin_pemkab', 'operator_opd')
+  @Patch('admin/faskes/beds/:id')
+  updateHospitalBed(
+    @Param('id') id: string,
+    @Body() body: { availableBeds: number; occupiedBeds: number },
+    @Req() req: any,
+  ) {
+    const user = req.user;
+    const result = this.db.updateHospitalBed(Number(id), body, user?.fullName);
+    if (!result) {
+      throw new NotFoundException(`Data bed ID ${id} tidak ditemukan.`);
+    }
+    this.cache.delPattern(/^faskes:/);
+    return result;
   }
 
   // Budget transparency data (cached 5 minutes)

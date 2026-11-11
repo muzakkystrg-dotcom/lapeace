@@ -52,10 +52,14 @@ export interface TrackRecord {
 }
 
 export interface CitizenAccount {
+  id?: number;
   nik: string;
   fullName: string;
   email: string;
   phone: string;
   kecamatan: string;
   kelurahan: string;
+  address?: string;
+  role?: string;
+  isVerified?: boolean;
 }
