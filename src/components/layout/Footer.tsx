@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Landmark, PhoneCall, Shield, Send, ShieldCheck, CheckCircle2, Scale } from 'lucide-react';
 
 export interface FooterProps {
   onNavigateSection?: (sectionId: string) => void;
@@ -33,9 +34,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
           {/* Col 1 & 2: Brand, Address & Emergency Services (lg:col-span-2) */}
           <div className="lg:col-span-2 flex flex-col gap-3">
             <div className="flex items-center gap-3">
-              <span className="material-symbols-outlined text-[28px] text-[#006c4d]">
-                account_balance
-              </span>
+              <div className="w-9 h-9 rounded-xl bg-[#006c4d]/10 flex items-center justify-center text-[#006c4d]">
+                <Landmark className="w-5 h-5 text-[#006c4d]" />
+              </div>
               <span className="font-display font-bold text-lg text-[#00251b]">
                 Pemerintah Kabupaten Sidoarjo - SITAPAK
               </span>
@@ -54,9 +55,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
                   href="tel:112"
                   className="flex items-center gap-2 bg-[#ffffff] px-3 py-1.5 rounded-lg shadow-xs border border-red-200/60 hover:bg-red-50/50 transition-colors"
                 >
-                  <span className="material-symbols-outlined text-[#ba1a1a] text-[18px]">
-                    emergency
-                  </span>
+                  <PhoneCall className="w-4 h-4 text-[#ba1a1a]" />
                   <span className="text-xs font-semibold text-[#121e19]">
                     112 Sidoarjo Siaga
                   </span>
@@ -65,9 +64,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
                   href="tel:110"
                   className="flex items-center gap-2 bg-[#ffffff] px-3 py-1.5 rounded-lg shadow-xs border border-emerald-200/60 hover:bg-emerald-50/50 transition-colors"
                 >
-                  <span className="material-symbols-outlined text-[#006c4d] text-[18px]">
-                    local_police
-                  </span>
+                  <Shield className="w-4 h-4 text-[#006c4d]" />
                   <span className="text-xs font-semibold text-[#121e19]">
                     110 Polresta Sidoarjo
                   </span>
@@ -191,7 +188,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
                 type="submit"
               >
                 <span>{subscribed ? 'Terima Kasih!' : 'Berlangganan Data'}</span>
-                <span className="material-symbols-outlined text-[16px]">send</span>
+                <Send className="w-3.5 h-3.5 text-white" />
               </button>
             </form>
           </div>
@@ -201,15 +198,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
         <div className="pt-6 border-t border-[#c0c8c3]/40 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-3">
             <div className="flex items-center gap-1.5 text-[#404945] text-xs bg-[#ffffff] px-2.5 py-1 rounded-md shadow-2xs border border-[#c0c8c3]/30">
-              <span className="material-symbols-outlined text-[#006c4d] text-[16px]">security</span>
+              <ShieldCheck className="w-3.5 h-3.5 text-[#006c4d]" />
               <span>Sertifikasi ISO 27001:2022</span>
             </div>
             <div className="flex items-center gap-1.5 text-[#404945] text-xs bg-[#ffffff] px-2.5 py-1 rounded-md shadow-2xs border border-[#c0c8c3]/30">
-              <span className="material-symbols-outlined text-[#006c4d] text-[16px]">verified_user</span>
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#006c4d]" />
               <span>Kepatuhan BSSN &amp; PDP</span>
             </div>
             <div className="flex items-center gap-1.5 text-[#404945] text-xs bg-[#ffffff] px-2.5 py-1 rounded-md shadow-2xs border border-[#c0c8c3]/30">
-              <span className="material-symbols-outlined text-[#735c00] text-[16px]">gavel</span>
+              <Scale className="w-3.5 h-3.5 text-[#735c00]" />
               <span>Undang-Undang KIP No. 14/2008</span>
             </div>
           </div>

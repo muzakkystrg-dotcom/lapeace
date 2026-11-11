@@ -1,5 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { CitizenAccount } from '../../types/portal';
+import {
+  Landmark,
+  Bell,
+  Check,
+  ChevronDown,
+  BadgeCheck,
+  FileText,
+  Megaphone,
+  LogOut,
+  UserPlus,
+  Menu,
+  X,
+  ChevronRight,
+} from 'lucide-react';
 
 export interface NavbarProps {
   currentUser?: CitizenAccount | null;
@@ -90,7 +104,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center gap-3 group select-none"
           >
             <div className="w-10 h-10 rounded-xl bg-[#8af7c9] flex items-center justify-center text-[#002115] shadow-sm group-hover:scale-105 transition-transform">
-              <span className="material-symbols-outlined text-[24px]">account_balance</span>
+              <Landmark className="w-5 h-5 text-[#002115]" />
             </div>
             <div className="flex flex-col">
               <span className="font-display font-bold text-lg text-white leading-tight tracking-tight">
@@ -146,7 +160,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onClick={() => setNotificationOpen(!notificationOpen)}
                   className="relative p-2 rounded-xl text-[#77a794] hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                 >
-                  <span className="material-symbols-outlined text-[24px]">notifications</span>
+                  <Bell className="w-5 h-5 text-white" />
                   {notificationsCount > 0 && (
                     <span className="absolute top-1.5 right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#ba1a1a] text-white text-[10px] font-bold">
                       {notificationsCount}
@@ -159,7 +173,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <div className="absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-[#083c2e] border border-[#6edaae]/30 shadow-2xl p-4 text-white z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                     <div className="flex items-center justify-between pb-3 border-b border-emerald-800/60 mb-3">
                       <div className="flex items-center gap-2">
-                        <span className="material-symbols-outlined text-[18px] text-[#8af7c9]">notifications</span>
+                        <Bell className="w-4 h-4 text-[#8af7c9]" />
                         <span className="font-bold text-sm">Notifikasi Warga</span>
                       </div>
                       <span className="text-[11px] bg-[#ba1a1a] text-white px-2 py-0.5 rounded-full font-bold">
@@ -213,7 +227,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <div className="w-9 h-9 rounded-full bg-[#8af7c9] text-[#002115] font-bold font-display flex items-center justify-center text-[14px] shadow-sm relative shrink-0">
                     <span>{userInitials}</span>
                     <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-[#006c4d] text-white flex items-center justify-center text-[10px] ring-1 ring-[#083c2e]">
-                      <span className="material-symbols-outlined text-[10px] font-bold">check</span>
+                      <Check className="w-2.5 h-2.5 text-white" />
                     </span>
                   </div>
                   <div className="hidden sm:flex flex-col text-left">
@@ -224,13 +238,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                       {userRole}
                     </span>
                   </div>
-                  <span
-                    className={`material-symbols-outlined text-[#77a794] text-[18px] transition-transform duration-200 ${
+                  <ChevronDown
+                    className={`w-4 h-4 text-[#77a794] transition-transform duration-200 ${
                       userDropdownOpen ? 'rotate-180' : ''
                     }`}
-                  >
-                    expand_more
-                  </span>
+                  />
                 </div>
 
                 {/* User Dropdown Menu */}
@@ -239,7 +251,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <div className="p-3 border-b border-emerald-800/60 mb-1">
                       <div className="text-xs font-bold text-white font-display">{userName}</div>
                       <div className="text-[11px] text-[#8af7c9] flex items-center gap-1 mt-0.5">
-                        <span className="material-symbols-outlined text-[14px]">verified</span>
+                        <BadgeCheck className="w-3.5 h-3.5 text-[#8af7c9]" />
                         <span>NIK: {currentUser?.nik || '351508******0002'}</span>
                       </div>
                       <div className="text-[11px] text-[#77a794] mt-0.5">
@@ -256,7 +268,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                           }}
                           className="w-full text-left px-3 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 flex items-center gap-2.5 transition-colors cursor-pointer"
                         >
-                          <span className="material-symbols-outlined text-[18px] text-[#8af7c9]">description</span>
+                          <FileText className="w-4 h-4 text-[#8af7c9]" />
                           <span>Lacak Dokumen Saya</span>
                         </button>
                       )}
@@ -268,7 +280,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         }}
                         className="w-full text-left px-3 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 flex items-center gap-2.5 transition-colors cursor-pointer"
                       >
-                        <span className="material-symbols-outlined text-[18px] text-[#8af7c9]">campaign</span>
+                        <Megaphone className="w-4 h-4 text-[#8af7c9]" />
                         <span>Riwayat Laporan 112</span>
                       </button>
                     </div>
@@ -281,7 +293,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         }}
                         className="w-full text-left px-3 py-2 rounded-xl text-red-300 hover:text-white hover:bg-red-900/40 flex items-center gap-2.5 transition-colors cursor-pointer text-xs font-semibold"
                       >
-                        <span className="material-symbols-outlined text-[18px] text-red-400">logout</span>
+                        <LogOut className="w-4 h-4 text-red-400" />
                         <span>Keluar dari Akun</span>
                       </button>
                     </div>
@@ -306,7 +318,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={onOpenRegister}
                 className="text-sm px-5 py-2.5 rounded-xl bg-[#8af7c9] text-[#002115] hover:bg-[#6edaae] font-bold transition-all shadow-sm flex items-center gap-2 cursor-pointer active:scale-95"
               >
-                <span className="material-symbols-outlined text-[18px]">person_add</span>
+                <UserPlus className="w-4 h-4 text-[#002115]" />
                 <span>Daftar Akun Warga</span>
               </button>
             </div>
@@ -319,9 +331,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="lg:hidden p-2 rounded-xl text-[#77a794] hover:text-white hover:bg-white/10 focus:outline-none cursor-pointer"
             aria-label="Toggle navigation menu"
           >
-            <span className="material-symbols-outlined text-[26px]">
-              {mobileMenuOpen ? 'close' : 'menu'}
-            </span>
+            {mobileMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-[#77a794]" />}
           </button>
         </div>
       </div>
@@ -343,7 +353,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   }`}
                 >
                   <span>{item.label}</span>
-                  <span className="material-symbols-outlined text-[16px]">chevron_right</span>
+                  <ChevronRight className="w-4 h-4 text-[#77a794]" />
                 </button>
               );
             })}
