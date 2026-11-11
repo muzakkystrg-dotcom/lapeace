@@ -1,3 +1,4 @@
+import { Icon } from '../../components/common/Icon';
 import React from 'react';
 
 export interface NibServicePageProps {
@@ -28,14 +29,14 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
               onClick={onBack}
               className="hover:text-secondary transition-colors flex items-center gap-1 font-semibold text-secondary"
             >
-              <span className="material-symbols-outlined text-[18px]">arrow_back</span>
+              <Icon className="material-symbols-outlined text-[18px]">arrow_back</Icon>
               <span>Kembali ke Direktori Layanan</span>
             </button>
-            <span className="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+            <Icon className="material-symbols-outlined text-[14px] text-outline">chevron_right</Icon>
             <a href="#beranda" className="hover:text-primary transition-colors">Beranda</a>
-            <span className="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+            <Icon className="material-symbols-outlined text-[14px] text-outline">chevron_right</Icon>
             <button onClick={onBack} className="hover:text-primary transition-colors">Direktori Layanan</button>
-            <span className="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+            <Icon className="material-symbols-outlined text-[14px] text-outline">chevron_right</Icon>
             <span className="text-primary font-semibold">Penerbitan NIB &amp; Izin Usaha (OSS-RBA)</span>
           </div>
           <div className="flex items-center gap-2 text-secondary font-medium">
@@ -72,17 +73,17 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
             </div>
             <div className="flex flex-wrap items-center gap-3 pt-2 text-xs sm:text-sm text-on-surface-variant">
               <div className="flex items-center gap-1.5 font-medium">
-                <span className="material-symbols-outlined text-[18px] text-secondary">verified_user</span>
+                <Icon className="material-symbols-outlined text-[18px] text-secondary">verified_user</Icon>
                 <span>Dasar Hukum: PP No. 5 Tahun 2021</span>
               </div>
               <span className="text-outline-variant">•</span>
               <div className="flex items-center gap-1.5 font-medium">
-                <span className="material-symbols-outlined text-[18px] text-secondary">domain</span>
+                <Icon className="material-symbols-outlined text-[18px] text-secondary">domain</Icon>
                 <span>Kewenangan: Sektor Perizinan Tunggal Sidoarjo</span>
               </div>
               <span className="text-outline-variant">•</span>
               <div className="flex items-center gap-1.5 font-bold text-tertiary">
-                <span className="material-symbols-outlined text-[18px]">workspace_premium</span>
+                <Icon className="material-symbols-outlined text-[18px]">workspace_premium</Icon>
                 <span>Layanan Prioritas UMKM Juara</span>
               </div>
             </div>
@@ -93,7 +94,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
             <div className="absolute -right-6 -bottom-6 w-32 h-32 bg-secondary/15 rounded-full blur-2xl pointer-events-none"></div>
             <div className="flex flex-col gap-3 relative z-10">
               <div className="w-12 h-12 rounded-xl bg-surface-container-lowest/10 flex items-center justify-center text-secondary-fixed">
-                <span className="material-symbols-outlined text-[28px]">verified</span>
+                <Icon className="material-symbols-outlined text-[28px]">verified</Icon>
               </div>
               <div className="flex flex-col">
                 <span className="font-label-md text-[11px] uppercase tracking-wider text-secondary-fixed font-bold">
@@ -109,11 +110,11 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
             </div>
             <div className="pt-4 border-t border-primary-fixed-dim/20 flex items-center justify-between font-label-md text-[11px] text-secondary-fixed relative z-10">
               <span className="flex items-center gap-1 font-medium">
-                <span className="material-symbols-outlined text-[14px]">lock</span>
+                <Icon className="material-symbols-outlined text-[14px]">lock</Icon>
                 <span>Enkripsi TLS 1.3</span>
               </span>
               <span className="flex items-center gap-1 font-semibold text-tertiary-fixed">
-                <span className="material-symbols-outlined text-[14px]">history_edu</span>
+                <Icon className="material-symbols-outlined text-[14px]">history_edu</Icon>
                 <span>BSrE Terverifikasi</span>
               </span>
             </div>
@@ -126,7 +127,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
             <div className="flex items-center justify-between mb-3">
               <span className="font-label-md text-xs font-semibold text-on-surface-variant">Tarif Retribusi / Biaya</span>
               <div className="w-9 h-9 rounded-lg bg-secondary-fixed/40 text-secondary flex items-center justify-center">
-                <span className="material-symbols-outlined text-[20px]">payments</span>
+                <Icon className="material-symbols-outlined text-[20px]">payments</Icon>
               </div>
             </div>
             <div className="flex flex-col">
@@ -139,7 +140,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
             <div className="flex items-center justify-between mb-3">
               <span className="font-label-md text-xs font-semibold text-on-surface-variant">Standar SLA Waktu</span>
               <div className="w-9 h-9 rounded-lg bg-tertiary-fixed/40 text-tertiary flex items-center justify-center">
-                <span className="material-symbols-outlined text-[20px]">bolt</span>
+                <Icon className="material-symbols-outlined text-[20px]">bolt</Icon>
               </div>
             </div>
             <div className="flex flex-col">
@@ -152,7 +153,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
             <div className="flex items-center justify-between mb-3">
               <span className="font-label-md text-xs font-semibold text-on-surface-variant">Kanal Pengurusan</span>
               <div className="w-9 h-9 rounded-lg bg-surface-container-highest text-primary flex items-center justify-center">
-                <span className="material-symbols-outlined text-[20px]">language</span>
+                <Icon className="material-symbols-outlined text-[20px]">language</Icon>
               </div>
             </div>
             <div className="flex flex-col">
@@ -165,7 +166,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
             <div className="flex items-center justify-between mb-3">
               <span className="font-label-md text-xs font-semibold text-on-surface-variant">Instansi Pembina</span>
               <div className="w-9 h-9 rounded-lg bg-secondary-container text-on-secondary-container flex items-center justify-center">
-                <span className="material-symbols-outlined text-[20px]">assured_workload</span>
+                <Icon className="material-symbols-outlined text-[20px]">assured_workload</Icon>
               </div>
             </div>
             <div className="flex flex-col">
@@ -183,7 +184,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
             <section className="flex flex-col gap-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-[24px] text-secondary">checklist</span>
+                  <Icon className="material-symbols-outlined text-[24px] text-secondary">checklist</Icon>
                   <h2 className="font-headline-md text-xl font-bold text-primary-container">
                     Kelengkapan Berkas &amp; Persyaratan Pelaku Usaha
                   </h2>
@@ -206,7 +207,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                       Tervalidasi langsung dengan Ditjen Dukcapil &amp; database kependudukan SIPD Sidoarjo untuk kepemilikan WNI.
                     </p>
                     <div className="flex items-center gap-1 mt-2 text-secondary font-label-md text-[11px] font-semibold">
-                      <span className="material-symbols-outlined text-[15px]">check_circle</span>
+                      <Icon className="material-symbols-outlined text-[15px]">check_circle</Icon>
                       <span>Verifikasi KTP-el Otomatis</span>
                     </div>
                   </div>
@@ -225,7 +226,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                       Terhubung integrasi Konfirmasi Status Wajib Pajak (KSWP) Ditjen Pajak secara real-time tanpa berkas fisik.
                     </p>
                     <div className="flex items-center gap-1 mt-2 text-secondary font-label-md text-[11px] font-semibold">
-                      <span className="material-symbols-outlined text-[15px]">sync_saved_locally</span>
+                      <Icon className="material-symbols-outlined text-[15px]">sync_saved_locally</Icon>
                       <span>Validasi KSWP Ditjen Pajak</span>
                     </div>
                   </div>
@@ -244,7 +245,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                       Terverifikasi kesesuaian tata ruang daerah (KKPR Daring &amp; RTRW Sidoarjo) melalui penarikan poligon koordinat.
                     </p>
                     <div className="flex items-center gap-1 mt-2 text-secondary font-label-md text-[11px] font-semibold">
-                      <span className="material-symbols-outlined text-[15px]">pin_drop</span>
+                      <Icon className="material-symbols-outlined text-[15px]">pin_drop</Icon>
                       <span>Integrasi RTRW Sidoarjo</span>
                     </div>
                   </div>
@@ -263,7 +264,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                       Pilihan kode 5 digit Klasifikasi Baku Lapangan Usaha Indonesia sesuai profil kegiatan komersial Anda.
                     </p>
                     <div className="flex items-center gap-1 mt-2 text-secondary font-label-md text-[11px] font-semibold">
-                      <span className="material-symbols-outlined text-[15px]">category</span>
+                      <Icon className="material-symbols-outlined text-[15px]">category</Icon>
                       <span>Katalog KBLI Terupdate</span>
                     </div>
                   </div>
@@ -275,7 +276,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
             <section className="flex flex-col gap-4">
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-[24px] text-secondary">alt_route</span>
+                  <Icon className="material-symbols-outlined text-[24px] text-secondary">alt_route</Icon>
                   <h2 className="font-headline-md text-xl font-bold text-primary-container">
                     Tahapan Pengurusan Mandiri NIB &amp; Izin Usaha
                   </h2>
@@ -290,7 +291,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                     <div className="flex items-center justify-between">
                       <span className="font-label-md text-xs font-bold text-secondary">LANGKAH 01</span>
                       <div className="w-7 h-7 rounded bg-surface-container-high text-primary flex items-center justify-center">
-                        <span className="material-symbols-outlined text-[16px]">person_add</span>
+                        <Icon className="material-symbols-outlined text-[16px]">person_add</Icon>
                       </div>
                     </div>
                     <h3 className="font-title-md text-sm font-bold text-on-surface leading-snug">
@@ -301,7 +302,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                     </p>
                   </div>
                   <div className="mt-3 pt-2 border-t border-surface-container-highest text-secondary font-label-md text-[11px] flex items-center gap-1 font-semibold">
-                    <span className="material-symbols-outlined text-[14px]">timer</span>
+                    <Icon className="material-symbols-outlined text-[14px]">timer</Icon>
                     <span>Durasi: 3 Menit</span>
                   </div>
                 </div>
@@ -311,7 +312,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                     <div className="flex items-center justify-between">
                       <span className="font-label-md text-xs font-bold text-secondary">LANGKAH 02</span>
                       <div className="w-7 h-7 rounded bg-surface-container-high text-primary flex items-center justify-center">
-                        <span className="material-symbols-outlined text-[16px]">storefront</span>
+                        <Icon className="material-symbols-outlined text-[16px]">storefront</Icon>
                       </div>
                     </div>
                     <h3 className="font-title-md text-sm font-bold text-on-surface leading-snug">
@@ -322,7 +323,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                     </p>
                   </div>
                   <div className="mt-3 pt-2 border-t border-surface-container-highest text-secondary font-label-md text-[11px] flex items-center gap-1 font-semibold">
-                    <span className="material-symbols-outlined text-[14px]">touch_app</span>
+                    <Icon className="material-symbols-outlined text-[14px]">touch_app</Icon>
                     <span>Pencarian Otomatis</span>
                   </div>
                 </div>
@@ -332,7 +333,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                     <div className="flex items-center justify-between">
                       <span className="font-label-md text-xs font-bold text-secondary">LANGKAH 03</span>
                       <div className="w-7 h-7 rounded bg-surface-container-high text-primary flex items-center justify-center">
-                        <span className="material-symbols-outlined text-[16px]">fact_check</span>
+                        <Icon className="material-symbols-outlined text-[16px]">fact_check</Icon>
                       </div>
                     </div>
                     <h3 className="font-title-md text-sm font-bold text-on-surface leading-snug">
@@ -343,7 +344,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                     </p>
                   </div>
                   <div className="mt-3 pt-2 border-t border-surface-container-highest text-secondary font-label-md text-[11px] flex items-center gap-1 font-semibold">
-                    <span className="material-symbols-outlined text-[14px]">speed</span>
+                    <Icon className="material-symbols-outlined text-[14px]">speed</Icon>
                     <span>Otomasi Zonasi</span>
                   </div>
                 </div>
@@ -353,7 +354,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                     <div className="flex items-center justify-between">
                       <span className="font-label-md text-xs font-bold text-secondary">LANGKAH 04</span>
                       <div className="w-7 h-7 rounded bg-surface-container-high text-primary flex items-center justify-center">
-                        <span className="material-symbols-outlined text-[16px]">verified</span>
+                        <Icon className="material-symbols-outlined text-[16px]">verified</Icon>
                       </div>
                     </div>
                     <h3 className="font-title-md text-sm font-bold text-on-surface leading-snug">
@@ -364,7 +365,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                     </p>
                   </div>
                   <div className="mt-3 pt-2 border-t border-surface-container-highest text-secondary font-label-md text-[11px] flex items-center gap-1 font-semibold">
-                    <span className="material-symbols-outlined text-[14px]">download_for_offline</span>
+                    <Icon className="material-symbols-outlined text-[14px]">download_for_offline</Icon>
                     <span>Format PDF Sah</span>
                   </div>
                 </div>
@@ -375,7 +376,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
             <div className="rounded-2xl bg-gradient-to-r from-primary-container via-primary to-primary-container text-on-primary p-6 shadow-md flex flex-col md:flex-row items-center justify-between gap-4 relative overflow-hidden">
               <div className="flex items-center gap-4 relative z-10">
                 <div className="w-14 h-14 rounded-2xl bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center shrink-0 shadow">
-                  <span className="material-symbols-outlined text-[32px]">support_agent</span>
+                  <Icon className="material-symbols-outlined text-[32px]">support_agent</Icon>
                 </div>
                 <div className="flex flex-col">
                   <div className="flex items-center gap-2">
@@ -396,7 +397,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                   className="w-full sm:w-auto px-4 py-2.5 rounded-lg bg-surface-container-lowest text-primary hover:bg-surface-container-low transition-colors font-label-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-sm"
                   href="tel:081134569900"
                 >
-                  <span className="material-symbols-outlined text-[18px] text-secondary">call</span>
+                  <Icon className="material-symbols-outlined text-[18px] text-secondary">call</Icon>
                   <span>Hotline: 0811-3456-9900</span>
                 </a>
               </div>
@@ -411,7 +412,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                       TATA RUANG PRESISI
                     </span>
                     <div className="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center">
-                      <span className="material-symbols-outlined text-[20px]">map</span>
+                      <Icon className="material-symbols-outlined text-[20px]">map</Icon>
                     </div>
                   </div>
                   <h3 className="font-headline-sm text-base font-bold text-on-surface">
@@ -421,7 +422,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                     Cek peruntukan lahan kegiatan berusaha mandiri di 18 kecamatan sebelum menyewa atau membeli tempat usaha secara mandiri.
                   </p>
                   <div className="p-2.5 rounded-lg bg-surface-container-low flex items-center gap-2 text-on-surface-variant font-label-md text-xs">
-                    <span className="material-symbols-outlined text-[18px] text-secondary">layers</span>
+                    <Icon className="material-symbols-outlined text-[18px] text-secondary">layers</Icon>
                     <span className="font-semibold text-primary">Indeks Kesesuaian RTRW 99.4% • 18 Kecamatan</span>
                   </div>
                 </div>
@@ -430,7 +431,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                   href="#zonasi"
                 >
                   <span>Cek Zonasi Peta RTRW</span>
-                  <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                  <Icon className="material-symbols-outlined text-[18px]">arrow_forward</Icon>
                 </a>
               </div>
 
@@ -441,7 +442,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                       HILIRISASI UMKM
                     </span>
                     <div className="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center">
-                      <span className="material-symbols-outlined text-[20px]">verified</span>
+                      <Icon className="material-symbols-outlined text-[20px]">verified</Icon>
                     </div>
                   </div>
                   <h3 className="font-headline-sm text-base font-bold text-on-surface">
@@ -451,7 +452,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                     Integrasi pendampingan P-IRT Dinkes, Sertifikat Halal BPJPH gratis untuk pemegang NIB resmi Sidoarjo kategori mikro.
                   </p>
                   <div className="p-2.5 rounded-lg bg-surface-container-low flex items-center gap-2 text-on-surface-variant font-label-md text-xs">
-                    <span className="material-symbols-outlined text-[18px] text-tertiary">workspace_premium</span>
+                    <Icon className="material-symbols-outlined text-[18px] text-tertiary">workspace_premium</Icon>
                     <span className="font-semibold text-primary">Fasilitasi Aktif: 12.450 UMKM Terdaftar</span>
                   </div>
                 </div>
@@ -460,7 +461,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                   href="#halal"
                 >
                   <span>Ajukan Pendampingan Halal</span>
-                  <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                  <Icon className="material-symbols-outlined text-[18px]">arrow_forward</Icon>
                 </a>
               </div>
             </div>
@@ -468,7 +469,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
             {/* Section: Tanya Jawab Pokok (FAQ Layanan NIB) */}
             <section className="flex flex-col gap-3">
               <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[24px] text-secondary">help</span>
+                <Icon className="material-symbols-outlined text-[24px] text-secondary">help</Icon>
                 <h2 className="font-headline-md text-xl font-bold text-primary-container">
                   Tanya Jawab Pokok (FAQ Layanan NIB)
                 </h2>
@@ -510,7 +511,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
             <div className="bg-surface-container-lowest rounded-2xl p-6 border border-surface-container-high/80 shadow-md flex flex-col gap-4">
               <div className="flex items-center gap-2">
                 <div className="w-9 h-9 rounded-lg bg-secondary-fixed/50 text-secondary flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[20px]">play_circle</span>
+                  <Icon className="material-symbols-outlined text-[20px]">play_circle</Icon>
                 </div>
                 <div className="flex flex-col">
                   <h3 className="font-title-md text-base font-bold text-primary-container leading-tight">
@@ -528,13 +529,13 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                   onClick={handleApplyClick}
                 >
                   <span>Mulai Pengajuan Online</span>
-                  <span className="material-symbols-outlined text-[18px]">open_in_new</span>
+                  <Icon className="material-symbols-outlined text-[18px]">open_in_new</Icon>
                 </a>
                 <button
                   onClick={onBack}
                   className="w-full py-2.5 px-4 rounded-xl bg-surface-container hover:bg-surface-container-high text-primary transition-colors font-label-lg text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 text-center"
                 >
-                  <span className="material-symbols-outlined text-[16px]">arrow_back</span>
+                  <Icon className="material-symbols-outlined text-[16px]">arrow_back</Icon>
                   <span>Kembali ke Direktori Layanan</span>
                 </button>
                 <a
@@ -543,12 +544,12 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className="material-symbols-outlined text-[16px]">search</span>
+                  <Icon className="material-symbols-outlined text-[16px]">search</Icon>
                   <span>Cek Status Permohonan NIB</span>
                 </a>
               </div>
               <div className="flex items-center gap-2 pt-1 text-on-surface-variant font-label-md text-[11px]">
-                <span className="material-symbols-outlined text-[15px] text-secondary">cloud_done</span>
+                <Icon className="material-symbols-outlined text-[15px] text-secondary">cloud_done</Icon>
                 <span>Terhubung Sistem OSS-RBA Nasional &amp; BKPM RI</span>
               </div>
             </div>
@@ -557,7 +558,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
             <div className="bg-surface-container-lowest rounded-2xl p-6 border border-surface-container-high/80 shadow-sm flex flex-col gap-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-[20px] text-secondary">query_stats</span>
+                  <Icon className="material-symbols-outlined text-[20px] text-secondary">query_stats</Icon>
                   <h3 className="font-title-md text-base font-bold text-primary-container">
                     Statistik Realisasi NIB
                   </h3>
@@ -572,7 +573,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                   <div className="flex items-center justify-between">
                     <span className="font-stat-numeral text-2xl font-bold text-primary">28.640</span>
                     <span className="flex items-center text-secondary font-label-md text-xs font-bold">
-                      <span className="material-symbols-outlined text-[16px]">trending_up</span> +14.2%
+                      <Icon className="material-symbols-outlined text-[16px]">trending_up</Icon> +14.2%
                     </span>
                   </div>
                   <div className="w-full bg-surface-container-high h-2 rounded-full overflow-hidden mt-1">
@@ -600,14 +601,14 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
             {/* Sidebar Card 3: Pusat Bantuan & Konsultasi Perizinan DPMPTSP */}
             <div className="bg-surface-container-lowest rounded-2xl p-6 border border-surface-container-high/80 shadow-sm flex flex-col gap-3">
               <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[20px] text-secondary">contact_support</span>
+                <Icon className="material-symbols-outlined text-[20px] text-secondary">contact_support</Icon>
                 <h3 className="font-title-md text-base font-bold text-primary-container">
                   Pusat Bantuan DPMPTSP
                 </h3>
               </div>
               <div className="flex flex-col gap-2.5 text-xs">
                 <div className="flex items-start gap-3 p-3 rounded-xl bg-surface-container-low border border-surface-container-high/40">
-                  <span className="material-symbols-outlined text-[20px] text-secondary mt-0.5 shrink-0">chat</span>
+                  <Icon className="material-symbols-outlined text-[20px] text-secondary mt-0.5 shrink-0">chat</Icon>
                   <div className="flex flex-col">
                     <span className="font-label-md text-xs font-bold text-on-surface">WhatsApp Helpdesk Resmi</span>
                     <a className="text-secondary hover:underline font-semibold text-xs" href="https://wa.me/6281133445566" target="_blank" rel="noopener noreferrer">
@@ -617,14 +618,14 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
                   </div>
                 </div>
                 <div className="flex items-start gap-2.5 p-2">
-                  <span className="material-symbols-outlined text-[18px] text-primary mt-0.5 shrink-0">location_on</span>
+                  <Icon className="material-symbols-outlined text-[18px] text-primary mt-0.5 shrink-0">location_on</Icon>
                   <div className="flex flex-col">
                     <span className="font-label-md text-xs font-bold text-on-surface">Kantor Induk DPMPTSP</span>
                     <span className="text-on-surface-variant text-[11px]">Jl. Ksatrian No. 4, Sidokumpul, Sidoarjo</span>
                   </div>
                 </div>
                 <div className="flex items-start gap-2.5 p-2">
-                  <span className="material-symbols-outlined text-[18px] text-primary mt-0.5 shrink-0">store</span>
+                  <Icon className="material-symbols-outlined text-[18px] text-primary mt-0.5 shrink-0">store</Icon>
                   <div className="flex flex-col">
                     <span className="font-label-md text-xs font-bold text-on-surface">Mall Pelayanan Publik (MPP)</span>
                     <span className="text-on-surface-variant text-[11px]">Loket 01 - 08 DPMPTSP, Jl. Lingkar Timur</span>

@@ -1,3 +1,4 @@
+import { Icon } from '../components/common/Icon';
 import React, { useState, useMemo } from 'react';
 
 export interface DirectoryService {
@@ -374,7 +375,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed top-24 right-4 sm:right-8 z-50 max-w-md bg-[#05241B] text-white p-3.5 rounded-xl shadow-2xl border border-emerald-500/50 flex items-center gap-2.5 animate-in fade-in slide-in-from-top-4 duration-200">
-          <span className="material-symbols-outlined text-[#8af7c9] text-[20px]">info</span>
+          <Icon className="material-symbols-outlined text-[#8af7c9] text-[20px]">info</Icon>
           <div className="text-xs sm:text-sm font-medium">
             {toastMessage}
           </div>
@@ -392,12 +393,12 @@ export const LayananPage: React.FC<LayananPageProps> = ({
           <div className="flex flex-wrap items-center justify-between gap-3">
             <nav aria-label="Breadcrumb" className="flex items-center gap-2 font-label-md text-xs sm:text-sm text-on-primary-container">
               <a className="hover:text-secondary-fixed transition-colors flex items-center gap-1" href="#beranda">
-                <span className="material-symbols-outlined text-[16px]">home</span>
+                <Icon className="material-symbols-outlined text-[16px]">home</Icon>
                 <span>Beranda</span>
               </a>
-              <span className="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+              <Icon className="material-symbols-outlined text-[14px] text-outline">chevron_right</Icon>
               <span className="text-on-primary-container">Direktori Layanan Publik</span>
-              <span className="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+              <Icon className="material-symbols-outlined text-[14px] text-outline">chevron_right</Icon>
               <span className="text-secondary-fixed font-semibold">Semua Layanan</span>
             </nav>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-lowest/10 backdrop-blur-sm text-secondary-fixed text-xs font-semibold">
@@ -430,7 +431,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
           {/* Search Field with Integrated Quick Action */}
           <div className="flex flex-col lg:flex-row items-stretch gap-3">
             <div className="relative flex-1 flex items-center bg-surface-container-low rounded-xl px-4 py-3 shadow-inner border border-surface-container-high/40">
-              <span className="material-symbols-outlined text-secondary text-[24px] mr-3 shrink-0">search</span>
+              <Icon className="material-symbols-outlined text-secondary text-[24px] mr-3 shrink-0">search</Icon>
               <input
                 aria-label="Cari layanan publik"
                 className="w-full bg-transparent text-on-surface placeholder:text-outline font-body-md text-sm sm:text-base outline-none"
@@ -445,7 +446,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                   onClick={() => setSearchQuery('')}
                   className="mr-2 text-outline hover:text-on-surface text-xs font-semibold"
                 >
-                  <span className="material-symbols-outlined text-[18px]">close</span>
+                  <Icon className="material-symbols-outlined text-[18px]">close</Icon>
                 </button>
               )}
               <button
@@ -453,7 +454,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                 className="shrink-0 px-3 py-1.5 rounded-lg bg-surface-container-highest text-on-surface-variant font-label-md text-xs hover:bg-surface-variant transition-colors flex items-center gap-1 font-semibold"
                 type="button"
               >
-                <span className="material-symbols-outlined text-[16px]">tune</span>
+                <Icon className="material-symbols-outlined text-[16px]">tune</Icon>
                 <span className="hidden sm:inline">Reset</span>
               </button>
             </div>
@@ -477,9 +478,9 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                 <option value="dinkop">Dinas Koperasi &amp; UMKM</option>
                 <option value="diskominfo">Diskominfo (Pengaduan 112)</option>
               </select>
-              <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[20px]">
+              <Icon className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[20px]">
                 expand_more
-              </span>
+              </Icon>
             </div>
 
             {/* Kanal Akses Filter */}
@@ -495,9 +496,9 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                 <option value="adm">Mesin ADM Mandiri</option>
                 <option value="mobile">Aplikasi Mobile / Host-to-Host</option>
               </select>
-              <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[20px]">
+              <Icon className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[20px]">
                 expand_more
-              </span>
+              </Icon>
             </div>
 
             {/* Urutkan Filter */}
@@ -512,9 +513,9 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                 <option value="az">Nama Layanan (A - Z)</option>
                 <option value="time">Estimasi Tercepat</option>
               </select>
-              <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[20px]">
+              <Icon className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[20px]">
                 sort
-              </span>
+              </Icon>
             </div>
           </div>
 
@@ -532,13 +533,12 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                       : 'bg-surface-container text-on-surface hover:bg-secondary-container/40'
                   }`}
                 >
-                  <span
-                    className={`material-symbols-outlined text-[18px] ${
+                  <Icon className={`material-symbols-outlined text-[18px] ${
                       isActive ? 'text-white' : 'text-secondary'
                     }`}
                   >
                     {cat.icon}
-                  </span>
+                  </Icon>
                   <span>{cat.label}</span>
                 </button>
               );
@@ -554,7 +554,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
               <span className="text-primary">{directoryServicesData.length}</span> Layanan Publik Resmi Pemkab Sidoarjo
             </p>
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary-container/30 text-on-secondary-container font-label-md text-xs font-bold">
-              <span className="material-symbols-outlined text-[14px] text-secondary">verified_user</span>
+              <Icon className="material-symbols-outlined text-[14px] text-secondary">verified_user</Icon>
               <span>Semua Layanan Bebas Pungli • 100% Transparan</span>
             </div>
           </div>
@@ -572,7 +572,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                 }`}
                 title="Tampilan Kartu / Grid"
               >
-                <span className="material-symbols-outlined text-[18px]">grid_view</span>
+                <Icon className="material-symbols-outlined text-[18px]">grid_view</Icon>
                 <span className="hidden md:inline">Grid</span>
               </button>
               <button
@@ -584,7 +584,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                 }`}
                 title="Tampilan Baris / Tabel"
               >
-                <span className="material-symbols-outlined text-[18px]">table_rows</span>
+                <Icon className="material-symbols-outlined text-[18px]">table_rows</Icon>
                 <span className="hidden md:inline">Daftar</span>
               </button>
             </div>
@@ -594,7 +594,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
         {/* Services Directory: Grid or Table View */}
         {filteredServices.length === 0 ? (
           <div className="bg-surface-container-lowest rounded-2xl p-12 text-center flex flex-col items-center justify-center gap-3 border border-surface-container-high">
-            <span className="material-symbols-outlined text-outline text-[48px]">search_off</span>
+            <Icon className="material-symbols-outlined text-outline text-[48px]">search_off</Icon>
             <h3 className="font-title-md text-lg font-bold text-primary">Layanan Tidak Ditemukan</h3>
             <p className="font-body-sm text-sm text-on-surface-variant max-w-md">
               Tidak ada layanan yang sesuai dengan kata kunci atau filter yang Anda pilih. Silakan gunakan kata kunci lain atau reset filter.
@@ -620,7 +620,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                   {/* Tags Header */}
                   <div className="flex items-center justify-between gap-2 mb-3">
                     <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded bg-surface-container-high text-primary font-label-md text-[11px] font-semibold">
-                      <span className="material-symbols-outlined text-[14px]">account_balance</span>
+                      <Icon className="material-symbols-outlined text-[14px]">account_balance</Icon>
                       {service.opd}
                     </span>
                     <span
@@ -634,7 +634,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                           : 'bg-secondary-container/40 text-on-secondary-container'
                       }`}
                     >
-                      <span className="material-symbols-outlined text-[13px]">{service.badgeIcon}</span>
+                      <Icon className="material-symbols-outlined text-[13px]">{service.badgeIcon}</Icon>
                       {service.badge}
                     </span>
                   </div>
@@ -670,9 +670,9 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                 <div className="flex items-center justify-between pt-2 border-t border-surface-container">
                   <span className="font-label-md text-xs sm:text-sm font-semibold text-secondary hover:underline flex items-center gap-1">
                     <span>{service.secondaryActionLabel}</span>
-                    <span className="material-symbols-outlined text-[16px]">
+                    <Icon className="material-symbols-outlined text-[16px]">
                       {service.secondaryActionIcon}
-                    </span>
+                    </Icon>
                   </span>
                   {service.detailRoute ? (
                     <button
@@ -680,7 +680,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                       className="px-3.5 py-2 rounded-xl bg-secondary text-white font-label-lg text-xs sm:text-sm hover:bg-secondary/90 transition-all font-semibold flex items-center gap-1 shadow-sm active:scale-95 cursor-pointer"
                     >
                       <span>{service.primaryActionLabel}</span>
-                      <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+                      <Icon className="material-symbols-outlined text-[16px]">arrow_forward</Icon>
                     </button>
                   ) : (
                     <button
@@ -689,7 +689,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                       title="Halaman layanan ini belum tersedia di Google Stitch"
                     >
                       <span>Belum Tersedia</span>
-                      <span className="material-symbols-outlined text-[16px]">schedule</span>
+                      <Icon className="material-symbols-outlined text-[16px]">schedule</Icon>
                     </button>
                   )}
                 </div>
@@ -733,7 +733,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                       </td>
                       <td className="py-3.5 px-4 whitespace-nowrap">
                         <span className="text-xs text-secondary font-medium flex items-center gap-1">
-                          <span className="material-symbols-outlined text-[14px]">{service.badgeIcon}</span>
+                          <Icon className="material-symbols-outlined text-[14px]">{service.badgeIcon}</Icon>
                           {service.badge}
                         </span>
                       </td>
@@ -785,7 +785,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                   : 'bg-surface-container hover:bg-secondary-container/50 text-on-surface'
               }`}
             >
-              <span className="material-symbols-outlined text-[18px]">chevron_left</span>
+              <Icon className="material-symbols-outlined text-[18px]">chevron_left</Icon>
             </button>
             {[1, 2, 3, 4].map((page) => (
               <button
@@ -809,7 +809,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                   : 'bg-surface-container hover:bg-secondary-container/50 text-on-surface'
               }`}
             >
-              <span className="material-symbols-outlined text-[18px]">chevron_right</span>
+              <Icon className="material-symbols-outlined text-[18px]">chevron_right</Icon>
             </button>
           </nav>
         </div>
@@ -820,7 +820,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
           <div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-surface-container-high/60 flex flex-col justify-between gap-4">
             <div className="flex items-start gap-3">
               <div className="w-12 h-12 rounded-xl bg-secondary-container/50 text-secondary flex items-center justify-center shrink-0">
-                <span className="material-symbols-outlined text-[28px]">support_agent</span>
+                <Icon className="material-symbols-outlined text-[28px]">support_agent</Icon>
               </div>
               <div>
                 <h4 className="font-title-md text-base font-bold text-on-surface leading-tight mb-1">
@@ -836,7 +836,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
               href="#helpdesk"
             >
               <span>Tanya Asisten SITAPAK</span>
-              <span className="material-symbols-outlined text-[18px]">arrow_outward</span>
+              <Icon className="material-symbols-outlined text-[18px]">arrow_outward</Icon>
             </a>
           </div>
 
@@ -844,7 +844,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
           <div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-surface-container-high/60 flex flex-col justify-between gap-4">
             <div className="flex items-start gap-3">
               <div className="w-12 h-12 rounded-xl bg-primary-container text-secondary-fixed flex items-center justify-center shrink-0">
-                <span className="material-symbols-outlined text-[28px]">accessible_forward</span>
+                <Icon className="material-symbols-outlined text-[28px]">accessible_forward</Icon>
               </div>
               <div>
                 <h4 className="font-title-md text-base font-bold text-on-surface leading-tight mb-1">
@@ -860,7 +860,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
               href="#prioritas"
             >
               <span>Permohonan Jemput Bola</span>
-              <span className="material-symbols-outlined text-[18px]">arrow_outward</span>
+              <Icon className="material-symbols-outlined text-[18px]">arrow_outward</Icon>
             </a>
           </div>
 
@@ -868,7 +868,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
           <div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-surface-container-high/60 flex flex-col justify-between gap-4">
             <div className="flex items-start gap-3">
               <div className="w-12 h-12 rounded-xl bg-tertiary-container/20 text-tertiary flex items-center justify-center shrink-0">
-                <span className="material-symbols-outlined text-[28px]">shield</span>
+                <Icon className="material-symbols-outlined text-[28px]">shield</Icon>
               </div>
               <div>
                 <h4 className="font-title-md text-base font-bold text-on-surface leading-tight mb-1">
@@ -884,7 +884,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
               href="#wbs"
             >
               <span>Lapor Whistleblowing Pemkab</span>
-              <span className="material-symbols-outlined text-[18px]">arrow_outward</span>
+              <Icon className="material-symbols-outlined text-[18px]">arrow_outward</Icon>
             </a>
           </div>
         </section>

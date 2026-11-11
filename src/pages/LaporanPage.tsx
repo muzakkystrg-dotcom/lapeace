@@ -1,3 +1,4 @@
+import { Icon } from '../components/common/Icon';
 import React, { useState, useRef } from 'react';
 import { CitizenAccount } from '../types/portal';
 
@@ -707,7 +708,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
       {copyFeedback && (
         <div className="fixed bottom-6 right-6 z-50 transform transition-all duration-300">
           <div className="px-5 py-3 rounded-xl bg-[#083c2e] text-white shadow-2xl flex items-center gap-3 border border-[#8af7c9]/40 text-sm font-semibold">
-            <span className="material-symbols-outlined text-[#8af7c9] text-[20px]">check_circle</span>
+            <Icon className="material-symbols-outlined text-[#8af7c9] text-[20px]">check_circle</Icon>
             <span>Nomor Tiket <strong>{copyFeedback}</strong> berhasil disalin ke papan klip!</span>
           </div>
         </div>
@@ -717,7 +718,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
       {draftSavedFeedback && (
         <div className="fixed bottom-6 left-6 z-50 transform transition-all duration-300">
           <div className="px-5 py-3 rounded-xl bg-[#006c4d] text-white shadow-2xl flex items-center gap-3 border border-white/20 text-sm font-semibold">
-            <span className="material-symbols-outlined text-white text-[20px]">drafts</span>
+            <Icon className="material-symbols-outlined text-white text-[20px]">drafts</Icon>
             <span>Draf formulir laporan Anda telah berhasil tersimpan di peramban.</span>
           </div>
         </div>
@@ -732,7 +733,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
           <div className="relative max-w-3xl w-full bg-[#083c2e] rounded-2xl overflow-hidden shadow-2xl border border-white/10" onClick={(e) => e.stopPropagation()}>
             <div className="p-4 bg-[#05241b] flex items-center justify-between text-white border-b border-white/10">
               <span className="font-semibold text-sm flex items-center gap-2">
-                <span className="material-symbols-outlined text-[#8af7c9] text-[18px]">image</span>
+                <Icon className="material-symbols-outlined text-[#8af7c9] text-[18px]">image</Icon>
                 Pratinjau Foto Lampiran Aduan
               </span>
               <button
@@ -740,7 +741,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                 className="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
                 onClick={() => setIsPhotoPreviewOpen(false)}
               >
-                <span className="material-symbols-outlined text-[18px]">close</span>
+                <Icon className="material-symbols-outlined text-[18px]">close</Icon>
               </button>
             </div>
             <div className="p-4 flex items-center justify-center bg-black/40">
@@ -753,7 +754,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
             <div className="p-4 bg-[#083c2e] text-xs text-white/80 flex items-center justify-between">
               <span>{selectedReport.photoFileName} ({selectedReport.photoSize})</span>
               <span className="text-[#8af7c9] flex items-center gap-1">
-                <span className="material-symbols-outlined text-[14px]">verified</span> Terverifikasi EXIF GPS
+                <Icon className="material-symbols-outlined text-[14px]">verified</Icon> Terverifikasi EXIF GPS
               </span>
             </div>
           </div>
@@ -775,12 +776,12 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
               onClick={onNavigateHome}
               className="hover:text-white transition-colors flex items-center gap-1 font-medium"
             >
-              <span className="material-symbols-outlined text-[16px]">home</span>
+              <Icon className="material-symbols-outlined text-[16px]">home</Icon>
               Beranda
             </button>
-            <span className="material-symbols-outlined text-[14px] text-white/50">chevron_right</span>
+            <Icon className="material-symbols-outlined text-[14px] text-white/50">chevron_right</Icon>
             <span className="text-white/80">Layanan Publik</span>
-            <span className="material-symbols-outlined text-[14px] text-white/50">chevron_right</span>
+            <Icon className="material-symbols-outlined text-[14px] text-white/50">chevron_right</Icon>
             <span className="text-[#8af7c9] font-semibold">Kanal Pengaduan 112 &amp; SP4N-LAPOR!</span>
           </nav>
 
@@ -790,7 +791,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
             <div className="lg:col-span-8 flex flex-col gap-4">
               <div className="flex flex-wrap items-center gap-2">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#006c4d]/50 text-[#8af7c9] font-semibold text-xs border border-[#88f4c6]/30 shadow-xs">
-                  <span className="material-symbols-outlined text-[16px]">verified</span>
+                  <Icon className="material-symbols-outlined text-[16px]">verified</Icon>
                   Kanal Resmi Pengaduan SITAPAK Sidoarjo
                 </div>
                 <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/10 text-emerald-200 text-xs font-medium border border-white/10">
@@ -810,19 +811,19 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
               {/* Quick Reassurance Badges */}
               <div className="flex flex-wrap items-center gap-2.5 pt-2">
                 <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white/10 backdrop-blur-sm text-white text-xs sm:text-sm font-medium border border-white/15 shadow-xs">
-                  <span className="material-symbols-outlined text-[#88f4c6] text-[18px]">domain_verification</span>
+                  <Icon className="material-symbols-outlined text-[#88f4c6] text-[18px]">domain_verification</Icon>
                   Langsung ke 32 OPD
                 </div>
                 <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white/10 backdrop-blur-sm text-white text-xs sm:text-sm font-medium border border-white/15 shadow-xs">
-                  <span className="material-symbols-outlined text-[#ffe087] text-[18px]">timer</span>
+                  <Icon className="material-symbols-outlined text-[#ffe087] text-[18px]">timer</Icon>
                   Respon 2×24 Jam
                 </div>
                 <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white/10 backdrop-blur-sm text-white text-xs sm:text-sm font-medium border border-white/15 shadow-xs">
-                  <span className="material-symbols-outlined text-[#88f4c6] text-[18px]">lock</span>
+                  <Icon className="material-symbols-outlined text-[#88f4c6] text-[18px]">lock</Icon>
                   Bisa Anonim &amp; Terproteksi UU PDP
                 </div>
                 <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white/10 backdrop-blur-sm text-white text-xs sm:text-sm font-medium border border-white/15 shadow-xs">
-                  <span className="material-symbols-outlined text-[#ffe087] text-[18px]">payments</span>
+                  <Icon className="material-symbols-outlined text-[#ffe087] text-[18px]">payments</Icon>
                   Bebas Biaya (Rp 0)
                 </div>
               </div>
@@ -832,9 +833,9 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
             <div className="lg:col-span-4 flex justify-center lg:justify-end">
               <div className="w-full max-w-xs bg-white/10 p-6 rounded-2xl backdrop-blur-md border border-white/15 shadow-xl flex flex-col items-center text-center">
                 <div className="w-16 h-16 rounded-full bg-[#88f4c6] flex items-center justify-center text-[#083c2e] mb-3 shadow-md">
-                  <span className="material-symbols-outlined text-[36px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+                  <Icon className="material-symbols-outlined text-[36px]" style={{ fontVariationSettings: "'FILL' 1" }}>
                     how_to_reg
-                  </span>
+                  </Icon>
                 </div>
                 <span className="text-base font-bold text-white font-display">Partisipasi Warga Sidoarjo</span>
                 <p className="text-xs text-[#bbedd9] mt-1">
@@ -858,7 +859,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
         <div className="bg-[#00251b] rounded-2xl p-4 sm:p-6 shadow-xl border border-red-500/30 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-xl bg-[#ba1a1a] flex items-center justify-center text-white shrink-0 shadow-lg ring-4 ring-red-500/20">
-              <span className="material-symbols-outlined text-[26px]">emergency</span>
+              <Icon className="material-symbols-outlined text-[26px]">emergency</Icon>
             </div>
             <div>
               <div className="flex items-center gap-2">
@@ -878,7 +879,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
             href="tel:112"
             className="w-full md:w-auto px-6 py-3 rounded-xl bg-[#ba1a1a] hover:bg-red-700 text-white font-bold text-sm transition-all shadow-md flex items-center justify-center gap-2 shrink-0 group hover:scale-[1.02]"
           >
-            <span className="material-symbols-outlined text-[20px] group-hover:animate-bounce">phone_in_talk</span>
+            <Icon className="material-symbols-outlined text-[20px] group-hover:animate-bounce">phone_in_talk</Icon>
             <span>Panggil Call Center 112 Bebas Pulsa</span>
           </a>
         </div>
@@ -899,7 +900,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                   : 'text-[#404945] hover:text-[#00251b] hover:bg-white/60'
               }`}
             >
-              <span className="material-symbols-outlined text-[18px]">rate_review</span>
+              <Icon className="material-symbols-outlined text-[18px]">rate_review</Icon>
               <span>Buat Laporan Baru</span>
             </button>
 
@@ -912,7 +913,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                   : 'text-[#404945] hover:text-[#00251b] hover:bg-white/60'
               }`}
             >
-              <span className="material-symbols-outlined text-[18px]">track_changes</span>
+              <Icon className="material-symbols-outlined text-[18px]">track_changes</Icon>
               <span>Pantau &amp; Lacak Laporan</span>
               <span className="ml-1 px-1.5 py-0.2 rounded-full text-[10px] bg-[#88f4c6] text-[#00251b] font-bold">
                 {reportsList.length}
@@ -925,7 +926,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                 onClick={() => setActiveTab('sukses')}
                 className="px-5 py-2.5 rounded-lg font-semibold text-xs sm:text-sm flex items-center gap-2 bg-[#006c4d] text-white shadow-sm"
               >
-                <span className="material-symbols-outlined text-[18px]">verified</span>
+                <Icon className="material-symbols-outlined text-[18px]">verified</Icon>
                 <span>Konfirmasi Sukses</span>
               </button>
             )}
@@ -934,7 +935,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
           {/* Quick Search Ticket Input in header */}
           <form onSubmit={handleSearchTicket} className="flex items-center gap-2">
             <div className="relative flex-1 sm:w-64">
-              <span className="material-symbols-outlined absolute left-3 top-2.5 text-[18px] text-[#717974]">search</span>
+              <Icon className="material-symbols-outlined absolute left-3 top-2.5 text-[18px] text-[#717974]">search</Icon>
               <input
                 type="text"
                 placeholder="Cari No. Tiket (LAPOR-...)"
@@ -947,7 +948,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
               type="submit"
               className="h-10 px-4 rounded-lg bg-[#083c2e] hover:bg-[#00251b] text-white text-xs font-semibold flex items-center gap-1 transition-colors shadow-xs"
             >
-              <span className="material-symbols-outlined text-[16px]">travel_explore</span>
+              <Icon className="material-symbols-outlined text-[16px]">travel_explore</Icon>
               <span className="hidden sm:inline">Lacak</span>
             </button>
           </form>
@@ -972,7 +973,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                 <div className="flex items-start justify-between pb-4 mb-6 border-b border-[#e3f1e9]">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="material-symbols-outlined text-[#006c4d] text-[24px]">rate_review</span>
+                      <Icon className="material-symbols-outlined text-[#006c4d] text-[24px]">rate_review</Icon>
                       <h2 className="text-xl sm:text-2xl font-bold text-[#00251b] font-display">
                         Formulir Pengaduan SP4N-LAPOR! Mandiri
                       </h2>
@@ -991,7 +992,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                   <div className="mb-6 p-4 sm:p-5 rounded-2xl bg-[#effdf4] border-2 border-[#006c4d]/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs">
                     <div className="flex items-start gap-3">
                       <div className="w-10 h-10 rounded-xl bg-[#006c4d] text-white flex items-center justify-center shrink-0 shadow-xs mt-0.5">
-                        <span className="material-symbols-outlined text-[22px]">lock</span>
+                        <Icon className="material-symbols-outlined text-[22px]">lock</Icon>
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
@@ -1013,7 +1014,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                         onClick={onOpenLogin}
                         className="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-[#006c4d] hover:bg-[#005139] text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer active:scale-98"
                       >
-                        <span className="material-symbols-outlined text-[16px]">login</span>
+                        <Icon className="material-symbols-outlined text-[16px]">login</Icon>
                         <span>Masuk</span>
                       </button>
                       <button
@@ -1021,7 +1022,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                         onClick={onOpenRegister}
                         className="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-[#8af7c9] hover:bg-[#6edaae] text-[#002115] text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer active:scale-98"
                       >
-                        <span className="material-symbols-outlined text-[16px]">person_add</span>
+                        <Icon className="material-symbols-outlined text-[16px]">person_add</Icon>
                         <span>Daftar</span>
                       </button>
                     </div>
@@ -1035,7 +1036,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                       <div>
                         <div className="text-xs font-bold text-[#00251b] flex items-center gap-1.5">
                           <span>Pelapor Terverifikasi: {currentUser.fullName}</span>
-                          <span className="material-symbols-outlined text-[#006c4d] text-[16px]">verified</span>
+                          <Icon className="material-symbols-outlined text-[#006c4d] text-[16px]">verified</Icon>
                           <span className="text-[10px] text-[#006c4d] font-semibold bg-[#88f4c6]/40 px-2 py-0.5 rounded-full">NIK Terverifikasi</span>
                         </div>
                         <div className="text-[11px] text-[#404945]">
@@ -1044,7 +1045,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                       </div>
                     </div>
                     <span className="text-[11px] text-[#006c4d] font-semibold hidden md:inline-flex items-center gap-1">
-                      <span className="material-symbols-outlined text-[14px]">shield</span>
+                      <Icon className="material-symbols-outlined text-[14px]">shield</Icon>
                       <span>Tersambung ke SP4N &amp; 112</span>
                     </span>
                   </div>
@@ -1074,7 +1075,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                         <option value="fasilitas-umum">🏢 Fasilitas &amp; Ketertiban Umum (Satpol PP)</option>
                       </select>
                       <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-[#717974]">
-                        <span className="material-symbols-outlined text-[20px]">expand_more</span>
+                        <Icon className="material-symbols-outlined text-[20px]">expand_more</Icon>
                       </div>
                     </div>
 
@@ -1167,7 +1168,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                         </select>
                       </div>
                       <div className="sm:col-span-2 relative">
-                        <span className="material-symbols-outlined absolute left-3 top-3 text-[18px] text-[#006c4d]">location_on</span>
+                        <Icon className="material-symbols-outlined absolute left-3 top-3 text-[18px] text-[#006c4d]">location_on</Icon>
                         <input
                           type="text"
                           required
@@ -1193,7 +1194,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                         onClick={handleDetectGPS}
                         className="px-3 py-1 rounded-lg bg-white border border-[#ddece3] hover:bg-[#88f4c6]/30 text-[#006c4d] font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
                       >
-                        <span className="material-symbols-outlined text-[16px]">gps_fixed</span>
+                        <Icon className="material-symbols-outlined text-[16px]">gps_fixed</Icon>
                         Deteksi GPS Otomatis
                       </button>
                     </div>
@@ -1238,7 +1239,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                       className="rounded-2xl bg-[#e9f7ee]/60 border-2 border-dashed border-[#c0c8c3] hover:border-[#006c4d] p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[#e9f7ee] transition-colors group"
                     >
                       <div className="w-12 h-12 rounded-full bg-[#88f4c6]/50 text-[#006c4d] flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
-                        <span className="material-symbols-outlined text-[28px]">add_a_photo</span>
+                        <Icon className="material-symbols-outlined text-[28px]">add_a_photo</Icon>
                       </div>
                       <p className="font-semibold text-sm text-[#00251b] mb-0.5">Tarik &amp; lepas foto bukti di sini</p>
                       <p className="text-xs text-[#404945] mb-3">Maksimal 3 foto (Format JPG, PNG, WEBP hingga 5MB)</p>
@@ -1246,7 +1247,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                         type="button"
                         className="h-9 px-4 rounded-lg bg-white text-[#006c4d] border border-[#88f4c6] text-xs font-semibold shadow-xs hover:bg-[#e9f7ee] transition-colors flex items-center gap-1.5"
                       >
-                        <span className="material-symbols-outlined text-[16px]">upload_file</span>
+                        <Icon className="material-symbols-outlined text-[16px]">upload_file</Icon>
                         Pilih Dari Komputer / Galeri
                       </button>
                     </div>
@@ -1268,14 +1269,14 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="material-symbols-outlined text-[#006c4d] text-[20px]" title="Valid">check_circle</span>
+                          <Icon className="material-symbols-outlined text-[#006c4d] text-[20px]" title="Valid">check_circle</Icon>
                           <button
                             type="button"
                             onClick={() => setFormPhoto(null)}
                             aria-label="Hapus Foto"
                             className="w-8 h-8 rounded-full flex items-center justify-center text-[#717974] hover:text-[#ba1a1a] hover:bg-red-50 transition-colors"
                           >
-                            <span className="material-symbols-outlined text-[18px]">delete</span>
+                            <Icon className="material-symbols-outlined text-[18px]">delete</Icon>
                           </button>
                         </div>
                       </div>
@@ -1294,7 +1295,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                       </input>
                       <div className="flex flex-col">
                         <span className="text-sm font-bold text-[#00251b] flex items-center gap-1.5">
-                          <span className="material-symbols-outlined text-[#006c4d] text-[18px]">shield</span>
+                          <Icon className="material-symbols-outlined text-[#006c4d] text-[18px]">shield</Icon>
                           Kirim Pengaduan Sebagai Anonim &amp; Rahasia
                         </span>
                         <span className="text-xs text-[#404945] mt-0.5 leading-relaxed">
@@ -1307,7 +1308,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                   {/* Submit Action Bar */}
                   <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-[#e3f1e9]">
                     <div className="text-xs text-[#717974] flex items-center gap-1">
-                      <span className="material-symbols-outlined text-[16px] text-[#006c4d]">lock</span>
+                      <Icon className="material-symbols-outlined text-[16px] text-[#006c4d]">lock</Icon>
                       Data terenkripsi SSL 256-bit standar BSSN
                     </div>
                     <div className="flex items-center gap-3 w-full sm:w-auto">
@@ -1319,7 +1320,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                         }}
                         className="flex-1 sm:flex-initial h-11 px-5 rounded-xl bg-[#e3f1e9] hover:bg-[#ddece3] text-[#00251b] text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                       >
-                        <span className="material-symbols-outlined text-[18px]">drafts</span>
+                        <Icon className="material-symbols-outlined text-[18px]">drafts</Icon>
                         Simpan Draf
                       </button>
                       {!currentUser ? (
@@ -1328,7 +1329,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                           onClick={onOpenLogin}
                           className="flex-1 sm:flex-initial h-11 px-6 rounded-xl bg-[#006c4d] hover:bg-[#005139] text-white text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer active:scale-98"
                         >
-                          <span className="material-symbols-outlined text-[18px]">lock</span>
+                          <Icon className="material-symbols-outlined text-[18px]">lock</Icon>
                           <span>Masuk untuk Melapor</span>
                         </button>
                       ) : (
@@ -1336,7 +1337,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                           type="submit"
                           className="flex-1 sm:flex-initial h-11 px-6 rounded-xl bg-[#083c2e] hover:bg-[#00251b] text-white text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer active:scale-98"
                         >
-                          <span className="material-symbols-outlined text-[18px]">send</span>
+                          <Icon className="material-symbols-outlined text-[18px]">send</Icon>
                           <span>Kirim Laporan Resmi</span>
                         </button>
                       )}
@@ -1354,7 +1355,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
               {/* Card 1: Panduan Singkat */}
               <div className="bg-white rounded-2xl shadow-sm border border-[#ddece3] p-6 flex flex-col gap-4">
                 <div className="flex items-center gap-2 text-[#00251b]">
-                  <span className="material-symbols-outlined text-[#006c4d] text-[24px]">verified_user</span>
+                  <Icon className="material-symbols-outlined text-[#006c4d] text-[24px]">verified_user</Icon>
                   <h3 className="font-bold text-base font-display">Panduan Pelaporan Cepat</h3>
                 </div>
                 <p className="text-xs text-[#404945]">
@@ -1362,24 +1363,24 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                 </p>
                 <ul className="flex flex-col gap-2.5 text-xs text-[#121e19]">
                   <li className="flex items-start gap-2">
-                    <span className="material-symbols-outlined text-[#006c4d] text-[18px] shrink-0 mt-0.5">check_circle</span>
+                    <Icon className="material-symbols-outlined text-[#006c4d] text-[18px] shrink-0 mt-0.5">check_circle</Icon>
                     <span><strong>Informasi Faktual:</strong> Uraikan kronologi nyata tanpa prasangka.</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="material-symbols-outlined text-[#006c4d] text-[18px] shrink-0 mt-0.5">check_circle</span>
+                    <Icon className="material-symbols-outlined text-[#006c4d] text-[18px] shrink-0 mt-0.5">check_circle</Icon>
                     <span><strong>Lokasi Akurat:</strong> Sertakan nama jalan &amp; patokan wilayah Sidoarjo.</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="material-symbols-outlined text-[#006c4d] text-[18px] shrink-0 mt-0.5">check_circle</span>
+                    <Icon className="material-symbols-outlined text-[#006c4d] text-[18px] shrink-0 mt-0.5">check_circle</Icon>
                     <span><strong>Foto Bukti Jelas:</strong> Ambil foto pencahayaan cukup kondisi saat ini.</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="material-symbols-outlined text-[#006c4d] text-[18px] shrink-0 mt-0.5">check_circle</span>
+                    <Icon className="material-symbols-outlined text-[#006c4d] text-[18px] shrink-0 mt-0.5">check_circle</Icon>
                     <span><strong>Bahasa Santun:</strong> Gunakan bahasa Indonesia lugas dan tertib.</span>
                   </li>
                 </ul>
                 <div className="p-3 rounded-xl bg-[#e9f7ee] border border-[#88f4c6]/40 flex items-start gap-2.5">
-                  <span className="material-symbols-outlined text-[#006c4d] text-[20px] shrink-0 mt-0.5">speed</span>
+                  <Icon className="material-symbols-outlined text-[#006c4d] text-[20px] shrink-0 mt-0.5">speed</Icon>
                   <div className="text-xs">
                     <span className="font-bold text-[#006c4d] uppercase tracking-wider block">Tips Percepatan</span>
                     <p className="text-[#121e19] mt-0.5">
@@ -1392,7 +1393,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
               {/* Card 2: Saluran Darurat & Kontak Alternatif */}
               <div className="bg-white rounded-2xl shadow-sm border border-[#ddece3] p-6 flex flex-col gap-4">
                 <div className="flex items-center gap-2 text-[#ba1a1a]">
-                  <span className="material-symbols-outlined text-[24px]">contact_phone</span>
+                  <Icon className="material-symbols-outlined text-[24px]">contact_phone</Icon>
                   <h3 className="font-bold text-base text-[#00251b] font-display">Kontak Pengaduan Lainnya</h3>
                 </div>
                 <div className="flex flex-col gap-2.5">
@@ -1402,16 +1403,16 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg bg-[#ba1a1a] text-white flex items-center justify-center shrink-0">
-                        <span className="material-symbols-outlined text-[20px]">call</span>
+                        <Icon className="material-symbols-outlined text-[20px]">call</Icon>
                       </div>
                       <div className="flex flex-col">
                         <span className="text-xs font-bold text-[#00251b]">Call Center 112 Sidoarjo</span>
                         <span className="text-[11px] text-[#717974]">Bebas Pulsa • Medis, Damkar, SAR</span>
                       </div>
                     </div>
-                    <span className="material-symbols-outlined text-[#717974] group-hover:text-[#ba1a1a] transition-colors">
+                    <Icon className="material-symbols-outlined text-[#717974] group-hover:text-[#ba1a1a] transition-colors">
                       chevron_right
-                    </span>
+                    </Icon>
                   </a>
 
                   <a
@@ -1422,21 +1423,21 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg bg-[#083c2e] text-[#8af7c9] flex items-center justify-center shrink-0">
-                        <span className="material-symbols-outlined text-[20px]">chat</span>
+                        <Icon className="material-symbols-outlined text-[20px]">chat</Icon>
                       </div>
                       <div className="flex flex-col">
                         <span className="text-xs font-bold text-[#00251b]">Hotline WhatsApp SP4N</span>
                         <span className="text-[11px] text-[#717974]">Piket Pengaduan Diskominfo</span>
                       </div>
                     </div>
-                    <span className="material-symbols-outlined text-[#717974] group-hover:text-[#00251b] transition-colors">
+                    <Icon className="material-symbols-outlined text-[#717974] group-hover:text-[#00251b] transition-colors">
                       chevron_right
-                    </span>
+                    </Icon>
                   </a>
 
                   <div className="p-3 rounded-xl bg-[#e3f1e9] flex items-center justify-between">
                     <div className="flex items-center gap-2 text-xs font-semibold text-[#00251b]">
-                      <span className="material-symbols-outlined text-[#006c4d] text-[18px]">sms</span>
+                      <Icon className="material-symbols-outlined text-[#006c4d] text-[18px]">sms</Icon>
                       <span>SMS SP4N-LAPOR! Nasional</span>
                     </div>
                     <span className="text-xs font-bold text-[#006c4d] bg-white px-2 py-0.5 rounded">1708</span>
@@ -1447,7 +1448,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
               {/* Card 3: Statistik Kinerja OPD */}
               <div className="bg-[#e9f7ee] border border-[#ddece3] rounded-2xl p-5 flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-[#006c4d] text-white flex items-center justify-center shrink-0 shadow-sm">
-                  <span className="material-symbols-outlined text-[24px]">query_stats</span>
+                  <Icon className="material-symbols-outlined text-[24px]">query_stats</Icon>
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs font-bold text-[#00251b]">Rata-rata Respon: 1.8 Hari Kerja</span>
@@ -1473,9 +1474,9 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                 <div className="relative w-24 h-24 rounded-full bg-[#e3f1e9] flex items-center justify-center shadow-lg shadow-[#083c2e]/10">
                   <div className="w-20 h-20 rounded-full bg-[#88f4c6] flex items-center justify-center">
                     <div className="w-14 h-14 rounded-full bg-[#083c2e] flex items-center justify-center text-white shadow-inner">
-                      <span className="material-symbols-outlined text-[32px] text-[#8af7c9]" style={{ fontVariationSettings: "'FILL' 1" }}>
+                      <Icon className="material-symbols-outlined text-[32px] text-[#8af7c9]" style={{ fontVariationSettings: "'FILL' 1" }}>
                         verified
-                      </span>
+                      </Icon>
                     </div>
                   </div>
                 </div>
@@ -1489,11 +1490,11 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
               </p>
 
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#ddece3] text-[#00251b] text-xs font-medium shadow-xs">
-                <span className="material-symbols-outlined text-[#006c4d] text-[18px]">lock</span>
+                <Icon className="material-symbols-outlined text-[#006c4d] text-[18px]">lock</Icon>
                 <span>Terkirim Resmi ke SP4N-LAPOR! Sidoarjo</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-[#717974]"></span>
                 <span className="text-[#006c4d] font-semibold flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[16px]">shield</span> Dijamin Rahasia &amp; Terenkripsi
+                  <Icon className="material-symbols-outlined text-[16px]">shield</Icon> Dijamin Rahasia &amp; Terenkripsi
                 </span>
               </div>
             </section>
@@ -1512,7 +1513,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#ddece3]">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-xl bg-[#e3f1e9] flex items-center justify-center text-[#083c2e]">
-                        <span className="material-symbols-outlined text-[24px]">receipt_long</span>
+                        <Icon className="material-symbols-outlined text-[24px]">receipt_long</Icon>
                       </div>
                       <div className="flex flex-col">
                         <h2 className="font-bold text-base sm:text-lg text-[#00251b] font-display">
@@ -1527,7 +1528,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                       onClick={() => handleCopyTicket(selectedReport.ticketNumber)}
                       className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#e3f1e9] text-[#00251b] text-xs font-semibold hover:bg-[#88f4c6] hover:text-[#002115] transition-all cursor-pointer self-start sm:self-auto shadow-xs"
                     >
-                      <span className="material-symbols-outlined text-[16px]">content_copy</span>
+                      <Icon className="material-symbols-outlined text-[16px]">content_copy</Icon>
                       <span>Salin Nomor Tiket</span>
                     </button>
                   </div>
@@ -1571,9 +1572,9 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                         Kategori Bidang
                       </span>
                       <div className="flex items-center gap-1.5 font-semibold text-[#00251b]">
-                        <span className="material-symbols-outlined text-[#006c4d] text-[18px]">
+                        <Icon className="material-symbols-outlined text-[#006c4d] text-[18px]">
                           {selectedReport.categoryIcon}
-                        </span>
+                        </Icon>
                         <span>{selectedReport.categoryLabel}</span>
                       </div>
                     </div>
@@ -1583,7 +1584,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                         Waktu Pengiriman
                       </span>
                       <div className="flex items-center gap-1.5 font-semibold text-[#00251b]">
-                        <span className="material-symbols-outlined text-[#006c4d] text-[18px]">event_available</span>
+                        <Icon className="material-symbols-outlined text-[#006c4d] text-[18px]">event_available</Icon>
                         <span>{selectedReport.submitDate}, {selectedReport.submitTime}</span>
                       </div>
                     </div>
@@ -1593,7 +1594,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                         Lokasi Kejadian &amp; Geotag
                       </span>
                       <div className="flex items-start gap-2 text-[#00251b]">
-                        <span className="material-symbols-outlined text-[#ba1a1a] text-[18px] shrink-0 mt-0.5">location_on</span>
+                        <Icon className="material-symbols-outlined text-[#ba1a1a] text-[18px] shrink-0 mt-0.5">location_on</Icon>
                         <div className="flex flex-col">
                           <span className="font-semibold">{selectedReport.locationAddress}</span>
                           <span className="text-xs text-[#717974] font-mono mt-0.5">
@@ -1615,7 +1616,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                           </span>
                         ) : (
                           <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#e9f7ee] text-[#006c4d] flex items-center gap-1">
-                            <span className="material-symbols-outlined text-[14px]">verified</span> NIK Terverifikasi
+                            <Icon className="material-symbols-outlined text-[14px]">verified</Icon> NIK Terverifikasi
                           </span>
                         )}
                       </div>
@@ -1649,7 +1650,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                         onClick={() => setIsPhotoPreviewOpen(true)}
                         className="px-3.5 py-1.5 rounded-lg bg-white text-[#00251b] text-xs font-semibold hover:bg-[#00251b] hover:text-white transition-all shadow-xs flex items-center gap-1 shrink-0"
                       >
-                        <span className="material-symbols-outlined text-[16px]">visibility</span>
+                        <Icon className="material-symbols-outlined text-[16px]">visibility</Icon>
                         <span>Lihat Foto</span>
                       </button>
                     </div>
@@ -1660,7 +1661,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                 {/* Information Notice Box */}
                 <div className="p-4 rounded-xl bg-[#ddece3]/70 flex items-start gap-3 text-[#121e19] border border-[#c0c8c3]/40">
                   <div className="w-8 h-8 rounded-full bg-[#006c4d] text-white shrink-0 flex items-center justify-center mt-0.5">
-                    <span className="material-symbols-outlined text-[18px]">info</span>
+                    <Icon className="material-symbols-outlined text-[18px]">info</Icon>
                   </div>
                   <div className="flex flex-col gap-1 text-xs sm:text-sm">
                     <span className="font-bold text-[#00251b]">Penting Untuk Pemantauan Mandiri</span>
@@ -1702,9 +1703,9 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                               : 'bg-[#ddece3] text-[#717974]'
                           }`}
                         >
-                          <span className="material-symbols-outlined text-[16px]">
+                          <Icon className="material-symbols-outlined text-[16px]">
                             {step.completed ? 'done' : 'hourglass_empty'}
-                          </span>
+                          </Icon>
                         </div>
                         <div className={`flex flex-col p-3 rounded-xl flex-1 text-xs border ${
                           step.active
@@ -1717,7 +1718,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                           </div>
                           <p className="text-[#404945] leading-relaxed">{step.description}</p>
                           <span className="text-[11px] text-[#717974] mt-1.5 flex items-center gap-1 font-mono">
-                            <span className="material-symbols-outlined text-[14px]">schedule</span>
+                            <Icon className="material-symbols-outlined text-[14px]">schedule</Icon>
                             {step.timestamp}
                           </span>
                         </div>
@@ -1752,9 +1753,9 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                     }}
                     className="w-full h-11 px-5 rounded-xl bg-[#006c4d] hover:bg-[#005139] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer"
                   >
-                    <span className="material-symbols-outlined text-[18px]">track_changes</span>
+                    <Icon className="material-symbols-outlined text-[18px]">track_changes</Icon>
                     <span>Lacak Status &amp; Timeline Lengkap</span>
-                    <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    <Icon className="material-symbols-outlined text-[16px]">arrow_forward</Icon>
                   </button>
 
                   <button
@@ -1762,7 +1763,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                     onClick={() => window.print()}
                     className="w-full h-11 px-5 rounded-xl bg-[#e3f1e9] hover:bg-[#ddece3] text-[#00251b] font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer"
                   >
-                    <span className="material-symbols-outlined text-[#006c4d] text-[18px]">print</span>
+                    <Icon className="material-symbols-outlined text-[#006c4d] text-[18px]">print</Icon>
                     <span>Cetak Bukti Tanda Terima (PDF)</span>
                   </button>
 
@@ -1778,7 +1779,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                     }}
                     className="w-full py-2 text-center text-xs text-[#006c4d] font-semibold hover:underline flex items-center justify-center gap-1 transition-colors cursor-pointer"
                   >
-                    <span className="material-symbols-outlined text-[16px]">add_circle</span>
+                    <Icon className="material-symbols-outlined text-[16px]">add_circle</Icon>
                     <span>Buat Pengaduan Lainnya</span>
                   </button>
                 </div>
@@ -1800,7 +1801,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-[#ddece3] flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2 text-[#006c4d] mb-1">
-                  <span className="material-symbols-outlined text-[20px]">track_changes</span>
+                  <Icon className="material-symbols-outlined text-[20px]">track_changes</Icon>
                   <span className="text-xs font-bold uppercase tracking-wider">Transparansi Penanganan Publik</span>
                 </div>
                 <h2 className="text-xl sm:text-2xl font-bold text-[#00251b] font-display">
@@ -1886,7 +1887,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
               <div className="rounded-2xl bg-gradient-to-r from-[#083c2e] via-[#0d4f3e] to-[#083c2e] p-6 text-white shadow-lg flex flex-col lg:flex-row lg:items-center justify-between gap-4 border border-[#8af7c9]/20">
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 rounded-2xl bg-[#8af7c9] text-[#002115] flex items-center justify-center shrink-0 shadow-md">
-                    <span className="material-symbols-outlined text-[30px]">pending_actions</span>
+                    <Icon className="material-symbols-outlined text-[30px]">pending_actions</Icon>
                   </div>
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2 flex-wrap mb-1">
@@ -1928,7 +1929,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                   <span className="text-[11px] font-semibold text-[#717974] uppercase tracking-wider">Nomor Registrasi</span>
                   <div className="flex items-center justify-between">
                     <span className="text-base font-bold text-[#00251b] font-display">{selectedReport.ticketNumber}</span>
-                    <span className="material-symbols-outlined text-[#006c4d] text-[20px]">tag</span>
+                    <Icon className="material-symbols-outlined text-[#006c4d] text-[20px]">tag</Icon>
                   </div>
                   <span className="text-[11px] text-[#717974]">Tercatat di SP4N-LAPOR!</span>
                 </div>
@@ -1937,7 +1938,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                   <span className="text-[11px] font-semibold text-[#717974] uppercase tracking-wider">Waktu Terkirim</span>
                   <div className="flex items-center justify-between">
                     <span className="text-base font-bold text-[#00251b] font-display">{selectedReport.submitDate}</span>
-                    <span className="material-symbols-outlined text-[#006c4d] text-[20px]">calendar_today</span>
+                    <Icon className="material-symbols-outlined text-[#006c4d] text-[20px]">calendar_today</Icon>
                   </div>
                   <span className="text-[11px] text-[#717974]">Pukul {selectedReport.submitTime}</span>
                 </div>
@@ -1946,7 +1947,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                   <span className="text-[11px] font-semibold text-[#717974] uppercase tracking-wider">Instansi Penanggung Jawab</span>
                   <div className="flex items-center justify-between">
                     <span className="text-base font-bold text-[#00251b] font-display truncate">{selectedReport.categoryLabel}</span>
-                    <span className="material-symbols-outlined text-[#006c4d] text-[20px]">engineering</span>
+                    <Icon className="material-symbols-outlined text-[#006c4d] text-[20px]">engineering</Icon>
                   </div>
                   <span className="text-[11px] text-[#717974] truncate">{selectedReport.assignedOpd}</span>
                 </div>
@@ -1955,7 +1956,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                   <span className="text-[11px] font-semibold text-[#717974] uppercase tracking-wider">Tingkat Urgensi</span>
                   <div className="flex items-center justify-between">
                     <span className="text-base font-bold text-[#735c00] font-display">{selectedReport.urgency}</span>
-                    <span className="material-symbols-outlined text-[#735c00] text-[20px]">flag</span>
+                    <Icon className="material-symbols-outlined text-[#735c00] text-[20px]">flag</Icon>
                   </div>
                   <span className="text-[11px] text-[#717974]">Verifikasi teknis disetujui</span>
                 </div>
@@ -1971,7 +1972,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                   <article className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-[#ddece3] flex flex-col gap-6">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-[#ddece3]">
                       <div className="flex items-center gap-2">
-                        <span className="material-symbols-outlined text-[24px] text-[#006c4d]">timeline</span>
+                        <Icon className="material-symbols-outlined text-[24px] text-[#006c4d]">timeline</Icon>
                         <h3 className="text-lg font-bold text-[#00251b] font-display">
                           Riwayat Penanganan Laporan Terpadu
                         </h3>
@@ -2001,9 +2002,9 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                                 : 'bg-[#ddece3] text-[#717974]'
                             }`}
                           >
-                            <span className="material-symbols-outlined text-[14px] sm:text-[18px]">
+                            <Icon className="material-symbols-outlined text-[14px] sm:text-[18px]">
                               {step.completed ? 'done' : step.active ? 'autorenew' : 'radio_button_unchecked'}
-                            </span>
+                            </Icon>
                           </div>
 
                           <div className="flex flex-wrap items-center justify-between gap-2">
@@ -2029,7 +2030,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                           </p>
 
                           <div className="mt-1 flex items-center gap-1.5 text-xs text-[#717974]">
-                            <span className="material-symbols-outlined text-[16px] text-[#006c4d]">verified_user</span>
+                            <Icon className="material-symbols-outlined text-[16px] text-[#006c4d]">verified_user</Icon>
                             <span>Petugas / Otorisasi: <strong>{step.officerOrSystem}</strong></span>
                           </div>
                         </div>
@@ -2043,7 +2044,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                       <div className="flex items-center justify-between flex-wrap gap-2 pb-3 border-b border-[#ddece3]">
                         <div className="flex items-center gap-3">
                           <div className="w-10 h-10 rounded-xl bg-[#e3f1e9] flex items-center justify-center text-[#006c4d]">
-                            <span className="material-symbols-outlined text-[24px]">forum</span>
+                            <Icon className="material-symbols-outlined text-[24px]">forum</Icon>
                           </div>
                           <div>
                             <h3 className="font-bold text-base text-[#00251b] font-display">
@@ -2053,7 +2054,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                           </div>
                         </div>
                         <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-[#8af7c9] text-[#002115] text-xs font-bold">
-                          <span className="material-symbols-outlined text-[16px]">verified</span>
+                          <Icon className="material-symbols-outlined text-[16px]">verified</Icon>
                           <span>Instansi Terverifikasi</span>
                         </div>
                       </div>
@@ -2085,9 +2086,9 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                         </div>
 
                         <blockquote className="bg-white p-4 rounded-xl text-xs sm:text-sm text-[#121e19] italic shadow-xs border border-[#ddece3] relative leading-relaxed">
-                          <span className="material-symbols-outlined absolute -top-2 left-3 text-[#d8e6de] text-[32px] select-none">
+                          <Icon className="material-symbols-outlined absolute -top-2 left-3 text-[#d8e6de] text-[32px] select-none">
                             format_quote
-                          </span>
+                          </Icon>
                           <p className="relative z-10 pl-2">
                             "{selectedReport.officialResponse.message}"
                           </p>
@@ -2105,13 +2106,13 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                                 }}
                                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-[#ddece3] text-[#00251b] hover:bg-[#083c2e] hover:text-white text-xs font-semibold transition-colors"
                               >
-                                <span className="material-symbols-outlined text-[16px] text-[#ba1a1a]">picture_as_pdf</span>
+                                <Icon className="material-symbols-outlined text-[16px] text-[#ba1a1a]">picture_as_pdf</Icon>
                                 <span>{selectedReport.officialResponse.attachmentPdf}</span>
-                                <span className="material-symbols-outlined text-[14px]">download</span>
+                                <Icon className="material-symbols-outlined text-[14px]">download</Icon>
                               </a>
                             </div>
                             <span className="text-[11px] text-[#006c4d] font-semibold flex items-center gap-1">
-                              <span className="material-symbols-outlined text-[14px]">lock</span> TTE BSrE Tersertifikasi
+                              <Icon className="material-symbols-outlined text-[14px]">lock</Icon> TTE BSrE Tersertifikasi
                             </span>
                           </div>
                         )}
@@ -2123,7 +2124,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                   <article className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-[#ddece3] flex flex-col gap-4">
                     <div className="flex items-center justify-between flex-wrap gap-2 pb-3 border-b border-[#ddece3]">
                       <div className="flex items-center gap-3">
-                        <span className="material-symbols-outlined text-[24px] text-[#006c4d]">photo_library</span>
+                        <Icon className="material-symbols-outlined text-[24px] text-[#006c4d]">photo_library</Icon>
                         <div>
                           <h3 className="font-bold text-base text-[#00251b] font-display">
                             Dokumentasi Penanganan &amp; Bukti Fisik Lapangan
@@ -2144,7 +2145,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                       <div className="p-3.5 rounded-xl bg-[#e9f7ee] flex flex-col gap-2">
                         <div className="flex items-center justify-between text-xs font-semibold">
                           <span className="text-[#00251b] flex items-center gap-1.5">
-                            <span className="material-symbols-outlined text-[18px] text-[#006c4d]">camera_alt</span>
+                            <Icon className="material-symbols-outlined text-[18px] text-[#006c4d]">camera_alt</Icon>
                             Foto Aduan Warga
                           </span>
                           <span className="text-[#717974]">{selectedReport.submitDate}</span>
@@ -2171,7 +2172,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                       <div className="p-3.5 rounded-xl bg-[#e9f7ee] flex flex-col gap-2">
                         <div className="flex items-center justify-between text-xs font-semibold">
                           <span className="text-[#00251b] flex items-center gap-1.5">
-                            <span className="material-symbols-outlined text-[18px] text-[#006c4d]">task_alt</span>
+                            <Icon className="material-symbols-outlined text-[18px] text-[#006c4d]">task_alt</Icon>
                             Dokumentasi Hasil Penanganan
                           </span>
                           <span className="text-[#006c4d] font-bold">
@@ -2193,7 +2194,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                         ) : (
                           <div className="relative w-full h-48 rounded-lg bg-[#ddece3] flex flex-col items-center justify-center p-4 text-center">
                             <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-[#717974] mb-2 shadow-xs">
-                              <span className="material-symbols-outlined text-[24px]">hourglass_top</span>
+                              <Icon className="material-symbols-outlined text-[24px]">hourglass_top</Icon>
                             </div>
                             <span className="font-semibold text-xs text-[#00251b]">Menunggu Tahap Akhir</span>
                             <p className="text-[11px] text-[#717974] mt-1 max-w-xs">
@@ -2221,7 +2222,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                   <section className="bg-white rounded-2xl p-6 shadow-sm border border-[#ddece3] flex flex-col gap-4">
                     <div className="flex items-center justify-between">
                       <h3 className="font-bold text-base text-[#00251b] font-display">Informasi Laporan</h3>
-                      <span className="material-symbols-outlined text-[20px] text-[#006c4d]">info</span>
+                      <Icon className="material-symbols-outlined text-[20px] text-[#006c4d]">info</Icon>
                     </div>
 
                     <div className="flex flex-col gap-3 text-xs sm:text-sm">
@@ -2234,7 +2235,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                             onClick={() => handleCopyTicket(selectedReport.ticketNumber)}
                             className="text-[#006c4d] hover:text-[#00251b] flex items-center gap-1 font-semibold text-xs"
                           >
-                            <span className="material-symbols-outlined text-[16px]">content_copy</span>
+                            <Icon className="material-symbols-outlined text-[16px]">content_copy</Icon>
                             Salin
                           </button>
                         </div>
@@ -2253,7 +2254,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                       <div className="flex flex-col gap-0.5">
                         <span className="text-[11px] text-[#717974]">Tingkat Urgensi</span>
                         <span className="font-semibold text-[#735c00] flex items-center gap-1">
-                          <span className="material-symbols-outlined text-[16px]">flag</span>
+                          <Icon className="material-symbols-outlined text-[16px]">flag</Icon>
                           {selectedReport.urgency} ({selectedReport.slaTarget})
                         </span>
                       </div>
@@ -2272,7 +2273,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                   <section className="bg-white rounded-2xl p-6 shadow-sm border border-[#ddece3] flex flex-col gap-3">
                     <div className="flex items-center justify-between">
                       <h3 className="font-bold text-base text-[#00251b] font-display">Titik Lokasi Terlapor</h3>
-                      <span className="material-symbols-outlined text-[20px] text-[#006c4d]">location_on</span>
+                      <Icon className="material-symbols-outlined text-[20px] text-[#006c4d]">location_on</Icon>
                     </div>
 
                     <div className="flex flex-col gap-1 text-xs">
@@ -2295,7 +2296,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                       <div className="relative flex items-center justify-center">
                         <div className="w-12 h-12 rounded-full bg-[#8af7c9]/40 animate-ping absolute"></div>
                         <div className="w-10 h-10 rounded-full bg-[#083c2e] text-[#8af7c9] flex items-center justify-center shadow-lg relative z-10 border border-white/20">
-                          <span className="material-symbols-outlined text-[22px]">push_pin</span>
+                          <Icon className="material-symbols-outlined text-[22px]">push_pin</Icon>
                         </div>
                       </div>
 
@@ -2313,7 +2314,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                       rel="noopener noreferrer"
                       className="w-full py-2.5 rounded-xl bg-[#e3f1e9] text-[#00251b] hover:bg-[#88f4c6] text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                     >
-                      <span className="material-symbols-outlined text-[16px] text-[#006c4d]">map</span>
+                      <Icon className="material-symbols-outlined text-[16px] text-[#006c4d]">map</Icon>
                       <span>Buka di Peta Navigasi</span>
                     </a>
                   </section>
@@ -2325,7 +2326,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                       onClick={() => window.print()}
                       className="w-full py-3 px-4 rounded-xl bg-white hover:bg-[#e9f7ee] text-[#00251b] border border-[#ddece3] text-xs font-bold flex items-center justify-center gap-2 shadow-xs transition-colors cursor-pointer"
                     >
-                      <span className="material-symbols-outlined text-[#006c4d] text-[18px]">print</span>
+                      <Icon className="material-symbols-outlined text-[#006c4d] text-[18px]">print</Icon>
                       <span>Cetak Lembar Tiket Pengaduan</span>
                     </button>
 
@@ -2337,7 +2338,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                       }}
                       className="w-full py-3 px-4 rounded-xl bg-[#083c2e] hover:bg-[#00251b] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
                     >
-                      <span className="material-symbols-outlined text-[18px]">add_circle</span>
+                      <Icon className="material-symbols-outlined text-[18px]">add_circle</Icon>
                       <span>Laporkan Kendala Lainnya</span>
                     </button>
                   </section>
@@ -2407,7 +2408,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
 
                       {/* Category & Title */}
                       <div className="flex items-center gap-1.5 text-[#006c4d] text-xs font-semibold mb-1">
-                        <span className="material-symbols-outlined text-[16px]">{item.categoryIcon}</span>
+                        <Icon className="material-symbols-outlined text-[16px]">{item.categoryIcon}</Icon>
                         <span>{item.categoryLabel}</span>
                       </div>
                       <h4 className="font-bold text-sm text-[#00251b] font-display line-clamp-2 mb-3">
@@ -2417,11 +2418,11 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                       {/* Metadata */}
                       <div className="flex flex-col gap-1 text-xs text-[#404945] mb-4">
                         <div className="flex items-center gap-1.5">
-                          <span className="material-symbols-outlined text-[15px] text-[#717974]">calendar_today</span>
+                          <Icon className="material-symbols-outlined text-[15px] text-[#717974]">calendar_today</Icon>
                           <span>{item.submitDate}, {item.submitTime}</span>
                         </div>
                         <div className="flex items-center gap-1.5">
-                          <span className="material-symbols-outlined text-[15px] text-[#717974]">location_on</span>
+                          <Icon className="material-symbols-outlined text-[15px] text-[#717974]">location_on</Icon>
                           <span className="truncate">{item.locationAddress}</span>
                         </div>
                       </div>
@@ -2450,7 +2451,7 @@ export const LaporanPage: React.FC<LaporanPageProps> = ({
                         className="w-full h-10 rounded-xl bg-white hover:bg-[#e9f7ee] text-[#00251b] text-xs font-bold transition-colors flex items-center justify-center gap-1 border border-[#ddece3] shadow-xs"
                       >
                         <span>Lihat Detail &amp; Riwayat</span>
-                        <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+                        <Icon className="material-symbols-outlined text-[16px]">arrow_forward</Icon>
                       </button>
                     </div>
                   </article>

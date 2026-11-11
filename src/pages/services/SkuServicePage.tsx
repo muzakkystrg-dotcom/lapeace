@@ -1,3 +1,4 @@
+import { Icon } from '../../components/common/Icon';
 import React from 'react';
 
 export interface SkuServicePageProps {
@@ -28,20 +29,20 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
               onClick={onBack}
               className="hover:text-secondary transition-colors flex items-center gap-1 font-semibold text-secondary"
             >
-              <span className="material-symbols-outlined text-[18px]">arrow_back</span>
+              <Icon className="material-symbols-outlined text-[18px]">arrow_back</Icon>
               <span>Kembali ke Direktori Layanan</span>
             </button>
-            <span className="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+            <Icon className="material-symbols-outlined text-[14px] text-outline">chevron_right</Icon>
             <a href="#beranda" className="hover:text-secondary transition-colors">Beranda</a>
-            <span className="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+            <Icon className="material-symbols-outlined text-[14px] text-outline">chevron_right</Icon>
             <button onClick={onBack} className="hover:text-secondary transition-colors">
               Direktori Layanan Publik
             </button>
-            <span className="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+            <Icon className="material-symbols-outlined text-[14px] text-outline">chevron_right</Icon>
             <span className="text-on-surface font-semibold">Surat Keterangan Usaha (SIPRAJA)</span>
           </nav>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-surface-container text-primary font-label-md text-xs font-semibold">
-            <span className="material-symbols-outlined text-[16px] text-secondary">verified</span>
+            <Icon className="material-symbols-outlined text-[16px] text-secondary">verified</Icon>
             <span>Layanan Resmi Terakreditasi ISO 9001:2015</span>
           </div>
         </div>
@@ -122,7 +123,7 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div className="p-4 rounded-xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex items-start gap-3">
                   <div className="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary shrink-0 mt-0.5">
-                    <span className="material-symbols-outlined text-[20px]">badge</span>
+                    <Icon className="material-symbols-outlined text-[20px]">badge</Icon>
                   </div>
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2">
@@ -137,7 +138,7 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
 
                 <div className="p-4 rounded-xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex items-start gap-3">
                   <div className="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary shrink-0 mt-0.5">
-                    <span className="material-symbols-outlined text-[20px]">storefront</span>
+                    <Icon className="material-symbols-outlined text-[20px]">storefront</Icon>
                   </div>
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2">
@@ -152,7 +153,7 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
 
                 <div className="p-4 rounded-xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex items-start gap-3">
                   <div className="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary shrink-0 mt-0.5">
-                    <span className="material-symbols-outlined text-[20px]">mark_email_read</span>
+                    <Icon className="material-symbols-outlined text-[20px]">mark_email_read</Icon>
                   </div>
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2">
@@ -167,7 +168,7 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
 
                 <div className="p-4 rounded-xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex items-start gap-3">
                   <div className="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary shrink-0 mt-0.5">
-                    <span className="material-symbols-outlined text-[20px]">description</span>
+                    <Icon className="material-symbols-outlined text-[20px]">description</Icon>
                   </div>
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2">
@@ -196,7 +197,7 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
                     <div>
                       <div className="flex items-center justify-between mb-2">
                         <span className="w-6 h-6 rounded-full bg-primary text-on-primary text-xs font-bold flex items-center justify-center">1</span>
-                        <span className="material-symbols-outlined text-outline text-[18px]">login</span>
+                        <Icon className="material-symbols-outlined text-outline text-[18px]">login</Icon>
                       </div>
                       <h3 className="font-title-md text-sm text-on-surface font-bold">Akses Akun</h3>
                       <p className="font-body-sm text-xs text-on-surface-variant mt-1 leading-relaxed">
@@ -209,7 +210,7 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
                     <div>
                       <div className="flex items-center justify-between mb-2">
                         <span className="w-6 h-6 rounded-full bg-primary text-on-primary text-xs font-bold flex items-center justify-center">2</span>
-                        <span className="material-symbols-outlined text-outline text-[18px]">edit_note</span>
+                        <Icon className="material-symbols-outlined text-outline text-[18px]">edit_note</Icon>
                       </div>
                       <h3 className="font-title-md text-sm text-on-surface font-bold">Input Data Usaha</h3>
                       <p className="font-body-sm text-xs text-on-surface-variant mt-1 leading-relaxed">
@@ -222,7 +223,7 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
                     <div>
                       <div className="flex items-center justify-between mb-2">
                         <span className="w-6 h-6 rounded-full bg-primary text-on-primary text-xs font-bold flex items-center justify-center">3</span>
-                        <span className="material-symbols-outlined text-outline text-[18px]">verified</span>
+                        <Icon className="material-symbols-outlined text-outline text-[18px]">verified</Icon>
                       </div>
                       <h3 className="font-title-md text-sm text-on-surface font-bold">Validasi Desa</h3>
                       <p className="font-body-sm text-xs text-on-surface-variant mt-1 leading-relaxed">
@@ -235,7 +236,7 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
                     <div>
                       <div className="flex items-center justify-between mb-2">
                         <span className="w-6 h-6 rounded-full bg-secondary text-white text-xs font-bold flex items-center justify-center">4</span>
-                        <span className="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                        <Icon className="material-symbols-outlined text-secondary text-[18px]">check_circle</Icon>
                       </div>
                       <h3 className="font-title-md text-sm text-on-surface font-bold">Terbit &amp; Unduh</h3>
                       <p className="font-body-sm text-xs text-on-surface-variant mt-1 leading-relaxed">
@@ -251,7 +252,7 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="p-5 rounded-xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex items-start gap-3">
                 <div className="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary shrink-0">
-                  <span className="material-symbols-outlined text-[24px]">print</span>
+                  <Icon className="material-symbols-outlined text-[24px]">print</Icon>
                 </div>
                 <div className="flex flex-col">
                   <div className="flex items-center gap-2">
@@ -267,7 +268,7 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
               <div className="p-5 rounded-xl bg-primary-container text-on-primary flex items-center justify-between gap-3 shadow-sm">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-surface-container-lowest/10 flex items-center justify-center text-secondary-fixed shrink-0">
-                    <span className="material-symbols-outlined text-[24px]">hub</span>
+                    <Icon className="material-symbols-outlined text-[24px]">hub</Icon>
                   </div>
                   <div className="flex flex-col">
                     <h3 className="font-title-md text-sm font-bold text-on-primary leading-tight">
@@ -283,7 +284,7 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
                   href="#layanan/nib"
                 >
                   <span>Panduan</span>
-                  <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
+                  <Icon className="material-symbols-outlined text-[14px]">arrow_forward</Icon>
                 </a>
               </div>
             </div>
@@ -297,7 +298,7 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="p-5 rounded-xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex flex-col gap-2">
                   <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-secondary text-[20px]">help</span>
+                    <Icon className="material-symbols-outlined text-secondary text-[20px]">help</Icon>
                     <h3 className="font-title-md text-sm text-on-surface font-semibold">Apakah butuh stempel basah?</h3>
                   </div>
                   <p className="font-body-sm text-xs text-on-surface-variant leading-relaxed pl-7">
@@ -306,7 +307,7 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
                 </div>
                 <div className="p-5 rounded-xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex flex-col gap-2">
                   <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-secondary text-[20px]">help</span>
+                    <Icon className="material-symbols-outlined text-secondary text-[20px]">help</Icon>
                     <h3 className="font-title-md text-sm text-on-surface font-semibold">Berapa masa berlaku SKU?</h3>
                   </div>
                   <p className="font-body-sm text-xs text-on-surface-variant leading-relaxed pl-7">
@@ -323,7 +324,7 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
             <div className="p-6 rounded-2xl bg-surface-container-lowest border border-surface-container-high/80 shadow-md flex flex-col gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-primary">
-                  <span className="material-symbols-outlined text-[24px]">assignment_turned_in</span>
+                  <Icon className="material-symbols-outlined text-[24px]">assignment_turned_in</Icon>
                 </div>
                 <div>
                   <h3 className="font-title-md text-base font-bold text-on-surface">Mulai Pengajuan SKU</h3>
@@ -342,25 +343,25 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
                   onClick={handleApplyClick}
                 >
                   <span>Mulai Pengajuan Online</span>
-                  <span className="material-symbols-outlined text-[18px]">open_in_new</span>
+                  <Icon className="material-symbols-outlined text-[18px]">open_in_new</Icon>
                 </a>
                 <button
                   onClick={onBack}
                   className="w-full py-2.5 px-4 rounded-xl bg-surface-container text-primary font-label-lg text-xs sm:text-sm hover:bg-surface-container-high transition-colors flex items-center justify-center gap-1.5 font-semibold text-center"
                 >
-                  <span className="material-symbols-outlined text-[16px]">arrow_back</span>
+                  <Icon className="material-symbols-outlined text-[16px]">arrow_back</Icon>
                   <span>Kembali ke Direktori Layanan</span>
                 </button>
                 <a
                   className="w-full py-2 px-3 text-center text-xs text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center gap-1"
                   href="#template-sku"
                 >
-                  <span className="material-symbols-outlined text-[16px]">download_for_offline</span>
+                  <Icon className="material-symbols-outlined text-[16px]">download_for_offline</Icon>
                   <span>Unduh Template Pengantar (PDF)</span>
                 </a>
               </div>
               <div className="pt-2 border-t border-surface-container flex items-center gap-2 font-label-md text-[11px] text-on-surface-variant">
-                <span className="material-symbols-outlined text-secondary text-[16px]">verified_user</span>
+                <Icon className="material-symbols-outlined text-secondary text-[16px]">verified_user</Icon>
                 <span>Terintegrasi TTE BSrE BSSN &amp; Kemendagri</span>
               </div>
             </div>
@@ -415,18 +416,18 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
                 >
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center">
-                      <span className="material-symbols-outlined text-[18px]">chat</span>
+                      <Icon className="material-symbols-outlined text-[18px]">chat</Icon>
                     </div>
                     <div>
                       <div className="font-label-md text-xs font-bold text-on-surface">WhatsApp Helpdesk</div>
                       <div className="font-body-sm text-[11px] text-on-surface-variant">0812-3456-7890 (Respon Cepat)</div>
                     </div>
                   </div>
-                  <span className="material-symbols-outlined text-outline text-[18px]">chevron_right</span>
+                  <Icon className="material-symbols-outlined text-outline text-[18px]">chevron_right</Icon>
                 </a>
                 <div className="p-3 rounded-xl bg-surface-container-low flex items-start gap-2.5 border border-surface-container-high/40">
                   <div className="w-8 h-8 rounded-full bg-surface-container-highest text-primary flex items-center justify-center shrink-0">
-                    <span className="material-symbols-outlined text-[18px]">pin_drop</span>
+                    <Icon className="material-symbols-outlined text-[18px]">pin_drop</Icon>
                   </div>
                   <div>
                     <div className="font-label-md text-xs font-bold text-on-surface">Loket SIPRAJA Mall Pelayanan Publik</div>

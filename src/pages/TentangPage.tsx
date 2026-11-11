@@ -1,3 +1,4 @@
+import { Icon } from '../components/common/Icon';
 import React, { useState } from 'react';
 
 export interface TentangPageProps {
@@ -270,7 +271,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
               onClick={() => handleNavClick('beranda')}
               className="hover:text-[#006c4d] flex items-center gap-1 transition-colors cursor-pointer"
             >
-              <span className="material-symbols-outlined text-[16px]">home</span>
+              <Icon className="material-symbols-outlined text-[16px]">home</Icon>
               <span>Beranda</span>
             </button>
             <span className="text-[#c0c8c3]">/</span>
@@ -281,7 +282,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
           <div className="mt-6 sm:mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8 flex flex-col gap-3">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ffe087]/50 text-[#4f3e00] w-fit shadow-xs border border-[#cfa700]/30">
-                <span className="material-symbols-outlined text-[16px] text-[#735c00]">verified</span>
+                <Icon className="material-symbols-outlined text-[16px] text-[#735c00]">verified</Icon>
                 <span className="text-xs font-bold uppercase tracking-wider">
                   Profil &amp; Transformasi Tata Kelola Pemerintahan
                 </span>
@@ -301,7 +302,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
             <div className="lg:col-span-4 flex justify-center lg:justify-end">
               <div className="relative w-full max-w-xs bg-white p-6 sm:p-7 rounded-2xl shadow-md text-center flex flex-col items-center border border-[#ddece3]">
                 <div className="w-16 h-16 rounded-2xl bg-[#083c2e] text-[#ffe087] flex items-center justify-center shadow-inner mb-3">
-                  <span className="material-symbols-outlined text-[36px]">account_balance</span>
+                  <Icon className="material-symbols-outlined text-[36px]">account_balance</Icon>
                 </div>
                 <span className="font-display text-lg font-bold text-[#00251b]">Republik Indonesia</span>
                 <span className="text-sm text-[#404945] font-semibold">Pemerintah Kabupaten Sidoarjo</span>
@@ -322,7 +323,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-xs uppercase tracking-wider text-[#404945] font-bold">{item.label}</span>
                   <div className={`w-9 h-9 rounded-xl ${item.iconBg} flex items-center justify-center`}>
-                    <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
+                    <Icon className="material-symbols-outlined text-[20px]">{item.icon}</Icon>
                   </div>
                 </div>
                 <div>
@@ -371,7 +372,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
               </p>
             </div>
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#e3f1e9] text-[#00251b] rounded-xl text-xs sm:text-sm font-semibold self-start md:self-auto border border-[#c0c8c3]/40">
-              <span className="material-symbols-outlined text-[#006c4d] text-[18px]">verified_user</span>
+              <Icon className="material-symbols-outlined text-[#006c4d] text-[18px]">verified_user</Icon>
               <span>Target RPJMD Terakselerasi</span>
             </div>
           </div>
@@ -379,7 +380,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
           {/* Main Vision Highlight Box */}
           <div className="bg-[#083c2e] text-white p-6 sm:p-8 lg:p-10 rounded-2xl shadow-md mb-8 sm:mb-10 relative overflow-hidden">
             <div className="absolute -right-10 -bottom-10 opacity-10 text-white select-none pointer-events-none">
-              <span className="material-symbols-outlined text-[180px] sm:text-[220px]">flag_circle</span>
+              <Icon className="material-symbols-outlined text-[180px] sm:text-[220px]">flag_circle</Icon>
             </div>
             <div className="relative z-10 flex flex-col gap-3">
               <span className="text-xs sm:text-sm text-[#ffe087] font-bold uppercase tracking-widest">
@@ -407,7 +408,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
                   className="p-5 sm:p-6 rounded-2xl bg-[#e9f7ee] hover:bg-[#e3f1e9] transition-colors flex gap-4 border border-[#ddece3]"
                 >
                   <div className={`w-12 h-12 rounded-xl ${pilar.iconBg} flex-shrink-0 flex items-center justify-center shadow-sm`}>
-                    <span className="material-symbols-outlined text-[26px]">{pilar.icon}</span>
+                    <Icon className="material-symbols-outlined text-[26px]">{pilar.icon}</Icon>
                   </div>
                   <div className="flex flex-col gap-1">
                     <div className="flex items-center gap-2">
@@ -447,7 +448,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
               <div>
                 <div className="flex items-center gap-3 mb-4">
                   <div className={`w-12 h-12 rounded-xl ${opd.iconBg} flex items-center justify-center flex-shrink-0 shadow-xs`}>
-                    <span className="material-symbols-outlined text-[26px]">{opd.icon}</span>
+                    <Icon className="material-symbols-outlined text-[26px]">{opd.icon}</Icon>
                   </div>
                   <div>
                     <span className="text-xs text-[#006c4d] font-bold uppercase tracking-wide">{opd.category}</span>
@@ -461,7 +462,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
 
               <div className="mt-5 pt-3 border-t border-[#ddece3] flex items-center text-[#006c4d] text-xs sm:text-sm font-bold">
                 <span>{opd.role}</span>
-                <span className="material-symbols-outlined text-[16px] ml-1">chevron_right</span>
+                <Icon className="material-symbols-outlined text-[16px] ml-1">chevron_right</Icon>
               </div>
             </div>
           ))}
@@ -510,7 +511,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
                 className="bg-white p-5 rounded-xl flex items-start gap-3 shadow-xs border border-[#ddece3] hover:border-[#006c4d]/40 transition-colors"
               >
                 <div className="w-10 h-10 rounded-lg bg-[#e3f1e9] flex items-center justify-center text-[#00251b] flex-shrink-0 mt-0.5">
-                  <span className="material-symbols-outlined text-[22px]">{item.icon}</span>
+                  <Icon className="material-symbols-outlined text-[22px]">{item.icon}</Icon>
                 </div>
                 <div>
                   <span className="text-xs text-[#006c4d] font-bold">{item.tag}</span>
@@ -529,7 +530,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div className="max-w-xl flex flex-col gap-2">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#8af7c9] text-xs font-bold uppercase w-fit">
-                <span className="material-symbols-outlined text-[16px]">shield</span>
+                <Icon className="material-symbols-outlined text-[16px]">shield</Icon>
                 <span>Standar Ketahanan Siber Maksimal</span>
               </div>
               <h2 className="font-display text-2xl sm:text-3xl font-bold text-white">
@@ -548,9 +549,9 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
                   key={idx}
                   className="bg-white/10 p-4 rounded-2xl flex flex-col items-center text-center border border-white/10"
                 >
-                  <span className={`material-symbols-outlined ${badge.iconColor} text-[32px] sm:text-[36px] mb-2`}>
+                  <Icon className={`material-symbols-outlined ${badge.iconColor} text-[32px] sm:text-[36px] mb-2`}>
                     {badge.icon}
-                  </span>
+                  </Icon>
                   <span className="text-xs sm:text-sm font-bold text-white">{badge.title}</span>
                   <span className="text-[11px] text-[#77a794] mt-1">{badge.subtitle}</span>
                 </div>
@@ -580,7 +581,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
             {/* Kantor Diskominfo */}
             <div className="bg-white p-5 sm:p-6 rounded-2xl shadow-sm flex items-start gap-4 border border-[#ddece3]">
               <div className="w-12 h-12 rounded-xl bg-[#083c2e] text-white flex items-center justify-center flex-shrink-0">
-                <span className="material-symbols-outlined text-[24px]">apartment</span>
+                <Icon className="material-symbols-outlined text-[24px]">apartment</Icon>
               </div>
               <div className="flex flex-col">
                 <span className="text-xs text-[#006c4d] font-bold uppercase">Kantor Pengelola Sistem</span>
@@ -595,7 +596,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
             {/* Pelayanan Tatap Muka MPP */}
             <div className="bg-white p-5 sm:p-6 rounded-2xl shadow-sm flex items-start gap-4 border border-[#ddece3]">
               <div className="w-12 h-12 rounded-xl bg-[#88f4c6]/40 text-[#006c4d] flex items-center justify-center flex-shrink-0">
-                <span className="material-symbols-outlined text-[24px]">counter_1</span>
+                <Icon className="material-symbols-outlined text-[24px]">counter_1</Icon>
               </div>
               <div className="flex flex-col">
                 <span className="text-xs text-[#006c4d] font-bold uppercase">Loket Tatap Muka Terpadu</span>
@@ -613,7 +614,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-white p-4 rounded-2xl shadow-sm flex items-center gap-3 border border-[#ddece3]">
                 <div className="w-11 h-11 rounded-xl bg-[#ffdad6] text-[#93000a] flex items-center justify-center flex-shrink-0">
-                  <span className="material-symbols-outlined text-[24px]">phone_in_talk</span>
+                  <Icon className="material-symbols-outlined text-[24px]">phone_in_talk</Icon>
                 </div>
                 <div>
                   <span className="block text-[11px] uppercase font-bold text-[#404945]">Hotline 24 Jam Bebas Pulsa</span>
@@ -625,7 +626,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
 
               <div className="bg-white p-4 rounded-2xl shadow-sm flex items-center gap-3 border border-[#ddece3]">
                 <div className="w-11 h-11 rounded-xl bg-[#88f4c6]/40 text-[#006c4d] flex items-center justify-center flex-shrink-0">
-                  <span className="material-symbols-outlined text-[24px]">chat</span>
+                  <Icon className="material-symbols-outlined text-[24px]">chat</Icon>
                 </div>
                 <div>
                   <span className="block text-[11px] uppercase font-bold text-[#404945]">WhatsApp Respon Cepat</span>
@@ -638,7 +639,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
 
             <div className="bg-white p-4 rounded-2xl shadow-sm flex items-center gap-3 border border-[#ddece3]">
               <div className="w-10 h-10 rounded-xl bg-[#e3f1e9] flex items-center justify-center text-[#00251b] flex-shrink-0">
-                <span className="material-symbols-outlined text-[22px]">alternate_email</span>
+                <Icon className="material-symbols-outlined text-[22px]">alternate_email</Icon>
               </div>
               <div className="truncate">
                 <span className="block text-[11px] uppercase font-bold text-[#404945]">Surat Elektronik Resmi</span>
@@ -654,7 +655,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
             <div className="bg-white p-5 rounded-2xl shadow-sm flex-1 flex flex-col justify-between border border-[#ddece3]">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-[#006c4d] text-[20px]">pin_drop</span>
+                  <Icon className="material-symbols-outlined text-[#006c4d] text-[20px]">pin_drop</Icon>
                   <span className="font-display text-base font-bold text-[#00251b]">Peta Lokasi Kantor Layanan</span>
                 </div>
                 <a
@@ -664,7 +665,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
                   target="_blank"
                 >
                   <span>Buka Google Maps</span>
-                  <span className="material-symbols-outlined text-[16px]">open_in_new</span>
+                  <Icon className="material-symbols-outlined text-[16px]">open_in_new</Icon>
                 </a>
               </div>
 
@@ -677,7 +678,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
               >
                 <div className="bg-white/95 backdrop-blur-sm p-3.5 rounded-xl shadow-md max-w-sm border border-[#ddece3]">
                   <div className="flex items-center gap-1.5 text-[#00251b] font-bold text-xs sm:text-sm">
-                    <span className="material-symbols-outlined text-[#006c4d] text-[18px]">domain</span>
+                    <Icon className="material-symbols-outlined text-[#006c4d] text-[18px]">domain</Icon>
                     <span>Sekretariat SITAPAK &amp; MPP</span>
                   </div>
                   <p className="text-[12px] text-[#404945] mt-0.5 leading-snug">
@@ -688,7 +689,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
 
               <div className="mt-4 p-3 bg-[#e9f7ee] rounded-xl flex items-center justify-between border border-[#ddece3]">
                 <div className="flex items-center gap-2 text-[#404945] text-xs sm:text-sm">
-                  <span className="material-symbols-outlined text-[18px] text-[#006c4d]">accessible</span>
+                  <Icon className="material-symbols-outlined text-[18px] text-[#006c4d]">accessible</Icon>
                   <span>Akses ramah disabilitas, parkir gratis luas, ruang laktasi, &amp; internet publik cepat.</span>
                 </div>
               </div>
@@ -720,18 +721,17 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
                 >
                   <div className="flex items-center justify-between gap-3">
                     <h4 className="font-display text-sm sm:text-base text-[#00251b] font-bold flex items-center gap-2.5">
-                      <span className="material-symbols-outlined text-[#006c4d] text-[20px] flex-shrink-0">
+                      <Icon className="material-symbols-outlined text-[#006c4d] text-[20px] flex-shrink-0">
                         help_outline
-                      </span>
+                      </Icon>
                       <span>{item.q}</span>
                     </h4>
-                    <span
-                      className={`material-symbols-outlined text-[#00251b] text-[20px] transition-transform duration-300 flex-shrink-0 ${
+                    <Icon className={`material-symbols-outlined text-[#00251b] text-[20px] transition-transform duration-300 flex-shrink-0 ${
                         isOpen ? 'rotate-180' : 'rotate-0'
                       }`}
                     >
                       expand_more
-                    </span>
+                    </Icon>
                   </div>
 
                   {isOpen && (

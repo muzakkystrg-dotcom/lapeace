@@ -1,3 +1,4 @@
+import { Icon } from '../../components/common/Icon';
 import React from 'react';
 
 export interface FaskesServicePageProps {
@@ -28,16 +29,16 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
               onClick={onBack}
               className="hover:text-secondary transition-colors flex items-center gap-1 font-semibold text-secondary"
             >
-              <span className="material-symbols-outlined text-[18px]">arrow_back</span>
+              <Icon className="material-symbols-outlined text-[18px]">arrow_back</Icon>
               <span>Kembali ke Direktori Layanan</span>
             </button>
-            <span className="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+            <Icon className="material-symbols-outlined text-[14px] text-outline">chevron_right</Icon>
             <a href="#beranda" className="hover:text-secondary transition-colors">Beranda</a>
-            <span className="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+            <Icon className="material-symbols-outlined text-[14px] text-outline">chevron_right</Icon>
             <button onClick={onBack} className="hover:text-secondary transition-colors">
               Direktori Layanan Publik
             </button>
-            <span className="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+            <Icon className="material-symbols-outlined text-[14px] text-outline">chevron_right</Icon>
             <span className="text-primary font-semibold">Antrean Faskes &amp; RSUD Sidoarjo</span>
           </nav>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container/40 text-on-secondary-container font-label-md text-xs font-semibold">
@@ -63,7 +64,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
               </span>
             </div>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container/40 text-on-secondary-container font-label-md text-xs font-semibold">
-              <span className="material-symbols-outlined text-[16px] text-secondary">verified</span>
+              <Icon className="material-symbols-outlined text-[16px] text-secondary">verified</Icon>
               31 Puskesmas &amp; 2 RSUD
             </span>
           </div>
@@ -82,7 +83,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
             <div className="lg:col-span-4 rounded-xl bg-primary-container text-on-primary p-5 flex flex-col justify-between gap-3 relative overflow-hidden shadow-sm">
               <div className="flex items-start gap-3">
                 <div className="w-10 h-10 rounded-lg bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center shrink-0">
-                  <span className="material-symbols-outlined text-[24px]">verified_user</span>
+                  <Icon className="material-symbols-outlined text-[24px]">verified_user</Icon>
                 </div>
                 <div className="flex flex-col">
                   <span className="font-label-md text-[11px] text-tertiary-fixed font-bold tracking-wider">
@@ -97,7 +98,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
                 Tersertifikasi Keamanan Data Rekam Medis Elektronik sesuai standar UU Perlindungan Data Pribadi (UU PDP) &amp; standar Ditjen Yankes Kemenkes RI.
               </p>
               <div className="flex items-center gap-2 pt-2 border-t border-primary-fixed-dim/20 text-[11px] font-label-md text-secondary-fixed">
-                <span className="material-symbols-outlined text-[16px]">lock</span>
+                <Icon className="material-symbols-outlined text-[16px]">lock</Icon>
                 <span>Enkripsi TLS 1.3 End-to-End</span>
               </div>
             </div>
@@ -110,7 +111,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
             <div className="flex items-center justify-between">
               <span className="font-label-md text-xs font-semibold text-on-surface-variant">Tarif Retribusi / Biaya</span>
               <span className="w-8 h-8 rounded-lg bg-secondary-container/40 text-secondary flex items-center justify-center">
-                <span className="material-symbols-outlined text-[20px]">payments</span>
+                <Icon className="material-symbols-outlined text-[20px]">payments</Icon>
               </span>
             </div>
             <div className="flex flex-col">
@@ -123,7 +124,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
             <div className="flex items-center justify-between">
               <span className="font-label-md text-xs font-semibold text-on-surface-variant">Standar SLA Waktu</span>
               <span className="w-8 h-8 rounded-lg bg-secondary-container/40 text-secondary flex items-center justify-center">
-                <span className="material-symbols-outlined text-[20px]">timer</span>
+                <Icon className="material-symbols-outlined text-[20px]">timer</Icon>
               </span>
             </div>
             <div className="flex flex-col">
@@ -136,7 +137,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
             <div className="flex items-center justify-between">
               <span className="font-label-md text-xs font-semibold text-on-surface-variant">Kanal Pengurusan</span>
               <span className="w-8 h-8 rounded-lg bg-secondary-container/40 text-secondary flex items-center justify-center">
-                <span className="material-symbols-outlined text-[20px]">devices</span>
+                <Icon className="material-symbols-outlined text-[20px]">devices</Icon>
               </span>
             </div>
             <div className="flex flex-col">
@@ -149,7 +150,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
             <div className="flex items-center justify-between">
               <span className="font-label-md text-xs font-semibold text-on-surface-variant">Instansi Pembina</span>
               <span className="w-8 h-8 rounded-lg bg-secondary-container/40 text-secondary flex items-center justify-center">
-                <span className="material-symbols-outlined text-[20px]">local_hospital</span>
+                <Icon className="material-symbols-outlined text-[20px]">local_hospital</Icon>
               </span>
             </div>
             <div className="flex flex-col">
@@ -168,7 +169,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
               <div className="flex items-center justify-between flex-wrap gap-2">
                 <div className="flex items-center gap-3">
                   <span className="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center">
-                    <span className="material-symbols-outlined text-[22px]">assignment</span>
+                    <Icon className="material-symbols-outlined text-[22px]">assignment</Icon>
                   </span>
                   <div>
                     <h2 className="font-title-md text-lg sm:text-xl text-primary font-bold">
@@ -198,7 +199,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
                     </p>
                   </div>
                   <div className="pt-2 border-t border-surface-container flex items-center gap-1.5 text-secondary font-label-md text-xs font-semibold">
-                    <span className="material-symbols-outlined text-[16px]">check_circle</span>
+                    <Icon className="material-symbols-outlined text-[16px]">check_circle</Icon>
                     <span>Terhubung SIPD &amp; SIAK</span>
                   </div>
                 </div>
@@ -217,7 +218,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
                     </p>
                   </div>
                   <div className="pt-2 border-t border-surface-container flex items-center gap-1.5 text-secondary font-label-md text-xs font-semibold">
-                    <span className="material-symbols-outlined text-[16px]">verified</span>
+                    <Icon className="material-symbols-outlined text-[16px]">verified</Icon>
                     <span>Terverifikasi BPJS PCare</span>
                   </div>
                 </div>
@@ -236,7 +237,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
                     </p>
                   </div>
                   <div className="pt-2 border-t border-surface-container flex items-center gap-1.5 text-on-surface-variant font-label-md text-xs">
-                    <span className="material-symbols-outlined text-[16px]">child_care</span>
+                    <Icon className="material-symbols-outlined text-[16px]">child_care</Icon>
                     <span>Pemeriksaan Ibu &amp; Bayi</span>
                   </div>
                 </div>
@@ -255,7 +256,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
                     </p>
                   </div>
                   <div className="pt-2 border-t border-surface-container flex items-center gap-1.5 text-secondary font-label-md text-xs font-semibold">
-                    <span className="material-symbols-outlined text-[16px]">sync_alt</span>
+                    <Icon className="material-symbols-outlined text-[16px]">sync_alt</Icon>
                     <span>Integrasi Sisrute Kemenkes</span>
                   </div>
                 </div>
@@ -266,7 +267,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
             <div className="rounded-2xl bg-surface-container-lowest p-6 sm:p-7 shadow-sm border border-surface-container-high/60 flex flex-col gap-6">
               <div className="flex items-center gap-3">
                 <span className="w-10 h-10 rounded-xl bg-secondary text-white flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[22px]">format_list_numbered</span>
+                  <Icon className="material-symbols-outlined text-[22px]">format_list_numbered</Icon>
                 </span>
                 <div>
                   <h2 className="font-title-md text-lg sm:text-xl text-primary font-bold">
@@ -283,7 +284,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
                     <span className="px-2.5 py-0.5 rounded-md bg-primary-container text-white font-label-md text-xs font-bold">
                       Langkah 01
                     </span>
-                    <span className="material-symbols-outlined text-secondary text-[22px]">apartment</span>
+                    <Icon className="material-symbols-outlined text-secondary text-[22px]">apartment</Icon>
                   </div>
                   <h3 className="font-title-md text-base text-primary font-bold">Pilih Faskes &amp; Poli</h3>
                   <p className="font-body-sm text-xs text-on-surface-variant leading-relaxed">
@@ -296,7 +297,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
                     <span className="px-2.5 py-0.5 rounded-md bg-primary-container text-white font-label-md text-xs font-bold">
                       Langkah 02
                     </span>
-                    <span className="material-symbols-outlined text-secondary text-[22px]">calendar_month</span>
+                    <Icon className="material-symbols-outlined text-secondary text-[22px]">calendar_month</Icon>
                   </div>
                   <h3 className="font-title-md text-base text-primary font-bold">Tentukan Jadwal &amp; Dokter</h3>
                   <p className="font-body-sm text-xs text-on-surface-variant leading-relaxed">
@@ -309,7 +310,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
                     <span className="px-2.5 py-0.5 rounded-md bg-primary-container text-white font-label-md text-xs font-bold">
                       Langkah 03
                     </span>
-                    <span className="material-symbols-outlined text-secondary text-[22px]">qr_code_2</span>
+                    <Icon className="material-symbols-outlined text-secondary text-[22px]">qr_code_2</Icon>
                   </div>
                   <h3 className="font-title-md text-base text-primary font-bold">Dapatkan QR-Code E-Tiket</h3>
                   <p className="font-body-sm text-xs text-on-surface-variant leading-relaxed">
@@ -322,7 +323,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
                     <span className="px-2.5 py-0.5 rounded-md bg-primary-container text-white font-label-md text-xs font-bold">
                       Langkah 04
                     </span>
-                    <span className="material-symbols-outlined text-secondary text-[22px]">contactless</span>
+                    <Icon className="material-symbols-outlined text-secondary text-[22px]">contactless</Icon>
                   </div>
                   <h3 className="font-title-md text-base text-primary font-bold">Datang &amp; Scan di Mesin Mandiri</h3>
                   <p className="font-body-sm text-xs text-on-surface-variant leading-relaxed">
@@ -336,7 +337,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
             <div className="rounded-2xl bg-error text-on-error p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-md">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-white text-error flex items-center justify-center shrink-0 shadow">
-                  <span className="material-symbols-outlined text-[30px]">emergency</span>
+                  <Icon className="material-symbols-outlined text-[30px]">emergency</Icon>
                 </div>
                 <div className="flex flex-col">
                   <span className="font-title-md text-base sm:text-lg font-bold">
@@ -351,7 +352,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
                 className="px-4 py-2.5 rounded-xl bg-white text-error font-label-lg text-sm font-bold hover:bg-surface-container-low transition-colors shadow-sm flex items-center gap-1.5 shrink-0"
                 href="tel:112"
               >
-                <span className="material-symbols-outlined text-[18px]">call</span>
+                <Icon className="material-symbols-outlined text-[18px]">call</Icon>
                 <span>Hubungi 112</span>
               </a>
             </div>
@@ -365,7 +366,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
                     <span className="px-2.5 py-1 rounded-full bg-secondary-container/40 text-on-secondary-container font-label-md text-xs font-semibold">
                       Update Real-Time 15 Menit
                     </span>
-                    <span className="material-symbols-outlined text-secondary text-[24px]">bed</span>
+                    <Icon className="material-symbols-outlined text-secondary text-[24px]">bed</Icon>
                   </div>
                   <h3 className="font-title-md text-base font-bold text-primary">
                     Pantau Bed Rawat Inap (BOR) RSUD
@@ -388,7 +389,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
                   type="button"
                 >
                   <span>Buka Dasbor Bed RSUD Sidoarjo</span>
-                  <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+                  <Icon className="material-symbols-outlined text-[16px]">arrow_forward</Icon>
                 </button>
               </div>
 
@@ -399,7 +400,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
                     <span className="px-2.5 py-1 rounded-full bg-tertiary-fixed/40 text-on-tertiary-fixed font-label-md text-xs font-semibold">
                       Satu Sehat Mobile Sync
                     </span>
-                    <span className="material-symbols-outlined text-tertiary text-[24px]">health_and_safety</span>
+                    <Icon className="material-symbols-outlined text-tertiary text-[24px]">health_and_safety</Icon>
                   </div>
                   <h3 className="font-title-md text-base font-bold text-primary">
                     Skrining Kesehatan Mandiri Warga
@@ -410,7 +411,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
                 </div>
                 <div className="rounded-xl bg-surface-container-low p-3.5 flex items-center gap-3 border border-surface-container-high/40">
                   <span className="w-8 h-8 rounded-lg bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold">
-                    <span className="material-symbols-outlined text-[18px]">ecg_heart</span>
+                    <Icon className="material-symbols-outlined text-[18px]">ecg_heart</Icon>
                   </span>
                   <div className="flex flex-col">
                     <span className="font-label-md text-xs text-primary font-bold">Pemeriksaan Berkala 6 Bulan</span>
@@ -422,7 +423,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
                   type="button"
                 >
                   <span>Mulai Skrining Kesehatan Mandiri</span>
-                  <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+                  <Icon className="material-symbols-outlined text-[16px]">arrow_forward</Icon>
                 </button>
               </div>
             </div>
@@ -431,7 +432,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
             <div className="rounded-2xl bg-surface-container-lowest p-6 sm:p-7 shadow-sm border border-surface-container-high/60 flex flex-col gap-4">
               <div className="flex items-center gap-2">
                 <span className="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[22px]">quiz</span>
+                  <Icon className="material-symbols-outlined text-[22px]">quiz</Icon>
                 </span>
                 <div>
                   <h2 className="font-title-md text-lg sm:text-xl text-primary font-bold">
@@ -445,7 +446,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
               <div className="flex flex-col gap-3">
                 <div className="rounded-xl bg-surface-container-low p-4 flex flex-col gap-1 border border-surface-container-high/40">
                   <div className="flex items-start gap-2.5">
-                    <span className="material-symbols-outlined text-secondary text-[22px] mt-0.5">help</span>
+                    <Icon className="material-symbols-outlined text-secondary text-[22px] mt-0.5">help</Icon>
                     <div className="flex flex-col gap-1">
                       <h3 className="font-title-md text-sm font-bold text-primary">
                         Apakah warga luar domisili Sidoarjo bisa mendaftar antrean Puskesmas online melalui portal ini?
@@ -459,7 +460,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
 
                 <div className="rounded-xl bg-surface-container-low p-4 flex flex-col gap-1 border border-surface-container-high/40">
                   <div className="flex items-start gap-2.5">
-                    <span className="material-symbols-outlined text-secondary text-[22px] mt-0.5">help</span>
+                    <Icon className="material-symbols-outlined text-secondary text-[22px] mt-0.5">help</Icon>
                     <div className="flex flex-col gap-1">
                       <h3 className="font-title-md text-sm font-bold text-primary">
                         Kapan batas waktu pembatalan atau pergantian jadwal periksa jika berhalangan hadir?
@@ -494,7 +495,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
                   type="button"
                   onClick={handleApplyClick}
                 >
-                  <span className="material-symbols-outlined text-[20px]">how_to_reg</span>
+                  <Icon className="material-symbols-outlined text-[20px]">how_to_reg</Icon>
                   <span>Mulai Pengajuan Online</span>
                 </button>
                 <button
@@ -502,19 +503,19 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
                   className="w-full py-2.5 px-4 rounded-xl bg-surface-container text-primary font-label-lg text-xs sm:text-sm font-semibold hover:bg-surface-container-high transition-colors flex items-center justify-center gap-1.5"
                   type="button"
                 >
-                  <span className="material-symbols-outlined text-[16px]">arrow_back</span>
+                  <Icon className="material-symbols-outlined text-[16px]">arrow_back</Icon>
                   <span>Kembali ke Direktori Layanan</span>
                 </button>
                 <button
                   className="w-full py-2.5 px-4 rounded-xl bg-surface-container-low text-on-surface font-label-lg text-xs font-semibold hover:bg-surface-container transition-colors flex items-center justify-center gap-2 border border-surface-container-high/40"
                   type="button"
                 >
-                  <span className="material-symbols-outlined text-[18px]">bed</span>
+                  <Icon className="material-symbols-outlined text-[18px]">bed</Icon>
                   <span>Cek Ketersediaan Bed RSUD (Live)</span>
                 </button>
               </div>
               <div className="pt-2 pl-2 flex items-center gap-2 text-on-surface-variant font-label-md text-[11px] border-t border-surface-container">
-                <span className="material-symbols-outlined text-[16px] text-tertiary">security</span>
+                <Icon className="material-symbols-outlined text-[16px] text-tertiary">security</Icon>
                 <span>Terintegrasi BPJS PCare &amp; Satu Sehat Kemenkes</span>
               </div>
             </div>
@@ -534,20 +535,20 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
                 <div className="p-3 rounded-xl bg-surface-container-low flex items-center justify-between border border-surface-container-high/40">
                   <div className="flex items-center gap-2.5">
                     <span className="w-9 h-9 rounded-lg bg-surface-container-lowest text-primary flex items-center justify-center shadow-xs">
-                      <span className="material-symbols-outlined text-[20px]">groups</span>
+                      <Icon className="material-symbols-outlined text-[20px]">groups</Icon>
                     </span>
                     <div className="flex flex-col">
                       <span className="font-body-sm text-[11px] text-on-surface-variant">Pasien Terlayani</span>
                       <span className="font-stat-numeral text-base font-bold text-primary">42.850 Pasien</span>
                     </div>
                   </div>
-                  <span className="material-symbols-outlined text-secondary text-[18px]">trending_up</span>
+                  <Icon className="material-symbols-outlined text-secondary text-[18px]">trending_up</Icon>
                 </div>
 
                 <div className="p-3 rounded-xl bg-surface-container-low flex items-center justify-between border border-surface-container-high/40">
                   <div className="flex items-center gap-2.5">
                     <span className="w-9 h-9 rounded-lg bg-surface-container-lowest text-tertiary flex items-center justify-center shadow-xs">
-                      <span className="material-symbols-outlined text-[20px]">thumb_up</span>
+                      <Icon className="material-symbols-outlined text-[20px]">thumb_up</Icon>
                     </span>
                     <div className="flex flex-col">
                       <span className="font-body-sm text-[11px] text-on-surface-variant">Tingkat Kepuasan (IKM)</span>
@@ -562,14 +563,14 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
                 <div className="p-3 rounded-xl bg-surface-container-low flex items-center justify-between border border-surface-container-high/40">
                   <div className="flex items-center gap-2.5">
                     <span className="w-9 h-9 rounded-lg bg-surface-container-lowest text-secondary flex items-center justify-center shadow-xs">
-                      <span className="material-symbols-outlined text-[20px]">pace</span>
+                      <Icon className="material-symbols-outlined text-[20px]">pace</Icon>
                     </span>
                     <div className="flex flex-col">
                       <span className="font-body-sm text-[11px] text-on-surface-variant">Rata-rata Waktu Tunggu</span>
                       <span className="font-stat-numeral text-base font-bold text-primary">12 Menit</span>
                     </div>
                   </div>
-                  <span className="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <Icon className="material-symbols-outlined text-secondary text-[18px]">check_circle</Icon>
                 </div>
               </div>
             </div>
@@ -578,7 +579,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
             <div className="rounded-2xl bg-surface-container-lowest p-6 shadow-sm border border-surface-container-high/80 flex flex-col gap-3">
               <div className="flex items-center gap-2.5">
                 <span className="w-9 h-9 rounded-lg bg-primary-container text-secondary-fixed flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[20px]">support_agent</span>
+                  <Icon className="material-symbols-outlined text-[20px]">support_agent</Icon>
                 </span>
                 <div className="flex flex-col">
                   <h3 className="font-title-md text-base font-bold text-primary">Pusat Bantuan Dinkes</h3>
@@ -601,14 +602,14 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
               </div>
               <div className="flex flex-col gap-2 pt-1 text-xs">
                 <div className="flex items-start gap-2 text-on-surface-variant">
-                  <span className="material-symbols-outlined text-primary text-[18px] mt-0.5 shrink-0">domain</span>
+                  <Icon className="material-symbols-outlined text-primary text-[18px] mt-0.5 shrink-0">domain</Icon>
                   <div>
                     <strong className="text-on-surface font-semibold">Dinas Kesehatan Sidoarjo</strong>
                     <p className="text-[11px]">Jl. Mayjend Sungkono No. 46, Pucang</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-2 text-on-surface-variant">
-                  <span className="material-symbols-outlined text-primary text-[18px] mt-0.5 shrink-0">storefront</span>
+                  <Icon className="material-symbols-outlined text-primary text-[18px] mt-0.5 shrink-0">storefront</Icon>
                   <div>
                     <strong className="text-on-surface font-semibold">Mall Pelayanan Publik (MPP)</strong>
                     <p className="text-[11px]">Loket 17-18 Dinkes Sidoarjo, Jl. Lingkar Timur</p>

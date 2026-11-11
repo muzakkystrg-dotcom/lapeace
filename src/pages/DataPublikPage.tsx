@@ -1,3 +1,4 @@
+import { Icon } from '../components/common/Icon';
 import React, { useState, useMemo } from 'react';
 
 // --- DATA TYPES & MOCK INTERFACES ---
@@ -268,7 +269,7 @@ export const DataPublikPage: React.FC = () => {
       {/* Toast Alert Feedback */}
       {toastMessage && (
         <div className="fixed top-24 right-4 sm:right-8 z-50 max-w-md bg-[#00251b] text-white p-4 rounded-xl shadow-2xl border border-[#8af7c9]/40 flex items-start gap-3 animate-in fade-in slide-in-from-top-4 duration-200">
-          <span className="material-symbols-outlined text-[#8af7c9] text-[22px] shrink-0 mt-0.5">check_circle</span>
+          <Icon className="material-symbols-outlined text-[#8af7c9] text-[22px] shrink-0 mt-0.5">check_circle</Icon>
           <div className="text-xs sm:text-sm font-medium leading-relaxed">
             {toastMessage}
           </div>
@@ -285,17 +286,17 @@ export const DataPublikPage: React.FC = () => {
           <div className="flex items-center justify-between flex-wrap gap-2">
             <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-[#404945]">
               <a className="hover:text-[#00251b] transition-colors flex items-center gap-1" href="#beranda">
-                <span className="material-symbols-outlined text-[16px]">home</span>
+                <Icon className="material-symbols-outlined text-[16px]">home</Icon>
                 <span>Beranda</span>
               </a>
-              <span className="material-symbols-outlined text-[14px] text-[#717974]">chevron_right</span>
+              <Icon className="material-symbols-outlined text-[14px] text-[#717974]">chevron_right</Icon>
               <span className="px-2.5 py-1 rounded-full bg-[#8af7c9] text-[#002115] font-semibold flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#006c4d]"></span>
                 Data Publik &amp; Transparansi
               </span>
             </nav>
             <div className="flex items-center gap-2 text-[#404945] text-xs font-medium">
-              <span className="material-symbols-outlined text-[16px] text-[#006c4d]">verified_user</span>
+              <Icon className="material-symbols-outlined text-[16px] text-[#006c4d]">verified_user</Icon>
               <span className="hidden sm:inline">Satu Data Indonesia v2.4 Compliant</span>
               <span className="text-[#717974] hidden sm:inline">•</span>
               <span className="font-semibold text-[#00251b]">Katalog Resmi Pemkab Sidoarjo</span>
@@ -306,7 +307,7 @@ export const DataPublikPage: React.FC = () => {
           <div className="p-6 sm:p-8 rounded-2xl bg-white shadow-sm border border-[#ddece3] flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div className="space-y-2 max-w-3xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#006c4d]/10 text-[#006c4d] text-xs font-bold tracking-wide">
-                <span className="material-symbols-outlined text-[16px]">hub</span>
+                <Icon className="material-symbols-outlined text-[16px]">hub</Icon>
                 PORTAL SATU DATA &amp; KETERBUKAAN INFORMASI PUBLIK (KIP)
               </div>
               <h1 className="font-['Plus_Jakarta_Sans',sans-serif] text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#00251b] tracking-tight">
@@ -322,9 +323,9 @@ export const DataPublikPage: React.FC = () => {
               
               {/* Live Search Bar */}
               <div className="relative flex-1 sm:w-64">
-                <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[#717974] text-[20px]">
+                <Icon className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[#717974] text-[20px]">
                   search
-                </span>
+                </Icon>
                 <input
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -338,7 +339,7 @@ export const DataPublikPage: React.FC = () => {
                     className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#717974] hover:text-[#00251b]"
                     title="Hapus pencarian"
                   >
-                    <span className="material-symbols-outlined text-[16px]">close</span>
+                    <Icon className="material-symbols-outlined text-[16px]">close</Icon>
                   </button>
                 )}
               </div>
@@ -355,9 +356,9 @@ export const DataPublikPage: React.FC = () => {
                   <option value="2025">Tahun Anggaran 2025</option>
                   <option value="2024">Tahun Anggaran 2024</option>
                 </select>
-                <span className="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#404945] text-[18px]">
+                <Icon className="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#404945] text-[18px]">
                   expand_more
-                </span>
+                </Icon>
               </div>
 
               {/* Download Executive PDF */}
@@ -366,7 +367,7 @@ export const DataPublikPage: React.FC = () => {
                 className="h-11 px-4 rounded-xl bg-[#006c4d] text-white text-sm font-semibold flex items-center justify-center gap-2 hover:bg-[#005139] active:scale-95 transition-all shadow-sm shrink-0"
                 type="button"
               >
-                <span className="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+                <Icon className="material-symbols-outlined text-[18px]">picture_as_pdf</Icon>
                 <span>Unduh Rekap (PDF)</span>
               </button>
             </div>
@@ -386,7 +387,7 @@ export const DataPublikPage: React.FC = () => {
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-[#404945]">Total APBD Sidoarjo {selectedYear}</span>
                 <span className="p-1.5 rounded-lg bg-[#ffe087] text-[#231a00] flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+                  <Icon className="material-symbols-outlined text-[18px]">account_balance_wallet</Icon>
                 </span>
               </div>
               <div className="font-['Plus_Jakarta_Sans',sans-serif] text-2xl sm:text-3xl font-extrabold text-[#00251b] tracking-tight">
@@ -400,7 +401,7 @@ export const DataPublikPage: React.FC = () => {
               <span className="px-2.5 py-0.5 rounded-full bg-[#8af7c9] text-[#002115] text-xs font-bold">
                 Dana Pembangunan
               </span>
-              <span className="material-symbols-outlined text-[18px] text-[#006c4d]">trending_up</span>
+              <Icon className="material-symbols-outlined text-[18px] text-[#006c4d]">trending_up</Icon>
             </div>
           </div>
 
@@ -410,7 +411,7 @@ export const DataPublikPage: React.FC = () => {
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-[#404945]">Jumlah Penduduk</span>
                 <span className="p-1.5 rounded-lg bg-[#88f4c6] text-[#007151] flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[18px]">groups</span>
+                  <Icon className="material-symbols-outlined text-[18px]">groups</Icon>
                 </span>
               </div>
               <div className="font-['Plus_Jakarta_Sans',sans-serif] text-2xl sm:text-3xl font-extrabold text-[#00251b] tracking-tight">
@@ -424,7 +425,7 @@ export const DataPublikPage: React.FC = () => {
               <span className="px-2.5 py-0.5 rounded-full bg-[#ddece3] text-[#404945] text-xs font-bold">
                 18 Kec. / 349 Desa
               </span>
-              <span className="material-symbols-outlined text-[18px] text-[#404945]">location_city</span>
+              <Icon className="material-symbols-outlined text-[18px] text-[#404945]">location_city</Icon>
             </div>
           </div>
 
@@ -434,7 +435,7 @@ export const DataPublikPage: React.FC = () => {
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-[#404945]">Indeks Pembangunan Manusia</span>
                 <span className="p-1.5 rounded-lg bg-[#bbedd9] text-[#002117] flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[18px]">award_star</span>
+                  <Icon className="material-symbols-outlined text-[18px]">award_star</Icon>
                 </span>
               </div>
               <div className="font-['Plus_Jakarta_Sans',sans-serif] text-2xl sm:text-3xl font-extrabold text-[#00251b] tracking-tight">
@@ -448,7 +449,7 @@ export const DataPublikPage: React.FC = () => {
               <span className="px-2.5 py-0.5 rounded-full bg-[#8af7c9] text-[#002115] text-xs font-bold">
                 Pendidikan &amp; Kesehatan
               </span>
-              <span className="material-symbols-outlined text-[18px] text-[#006c4d]">trending_up</span>
+              <Icon className="material-symbols-outlined text-[18px] text-[#006c4d]">trending_up</Icon>
             </div>
           </div>
 
@@ -458,7 +459,7 @@ export const DataPublikPage: React.FC = () => {
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-[#404945]">Keterbukaan Informasi (KIP)</span>
                 <span className="p-1.5 rounded-lg bg-[#ffe087] text-[#231a00] flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[18px]">verified</span>
+                  <Icon className="material-symbols-outlined text-[18px]">verified</Icon>
                 </span>
               </div>
               <div className="font-['Plus_Jakarta_Sans',sans-serif] text-2xl sm:text-3xl font-extrabold text-[#00251b] tracking-tight">
@@ -472,7 +473,7 @@ export const DataPublikPage: React.FC = () => {
               <span className="px-2.5 py-0.5 rounded-full bg-[#ffe087] text-[#231a00] text-xs font-bold">
                 Peringkat 1 Jatim
               </span>
-              <span className="material-symbols-outlined text-[18px] text-[#735c00]">workspace_premium</span>
+              <Icon className="material-symbols-outlined text-[18px] text-[#735c00]">workspace_premium</Icon>
             </div>
           </div>
 
@@ -482,7 +483,7 @@ export const DataPublikPage: React.FC = () => {
         <div className="max-w-[1440px] mx-auto mt-4 p-4 rounded-xl bg-[#083c2e] text-white flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg bg-[#8af7c9] text-[#002115] flex items-center justify-center shrink-0">
-              <span className="material-symbols-outlined text-[24px]">account_balance</span>
+              <Icon className="material-symbols-outlined text-[24px]">account_balance</Icon>
             </div>
             <div>
               <div className="text-xs font-bold tracking-wider uppercase text-[#8af7c9]">Keseimbangan Struktur Fiskal APBD 2026</div>
@@ -519,7 +520,7 @@ export const DataPublikPage: React.FC = () => {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 pb-1">
             <div>
               <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#8af7c9] text-[#002115] text-xs font-bold uppercase mb-1">
-                <span className="material-symbols-outlined text-[15px]">payments</span>
+                <Icon className="material-symbols-outlined text-[15px]">payments</Icon>
                 Transparansi Keuangan
               </div>
               <h2 className="font-['Plus_Jakarta_Sans',sans-serif] text-xl sm:text-2xl font-bold text-[#00251b]">
@@ -542,7 +543,7 @@ export const DataPublikPage: React.FC = () => {
                       : 'text-[#404945] hover:text-[#00251b]'
                   }`}
                 >
-                  <span className="material-symbols-outlined text-[16px]">bar_chart</span>
+                  <Icon className="material-symbols-outlined text-[16px]">bar_chart</Icon>
                   <span>Visual Grafik</span>
                 </button>
                 <button
@@ -554,7 +555,7 @@ export const DataPublikPage: React.FC = () => {
                       : 'text-[#404945] hover:text-[#00251b]'
                   }`}
                 >
-                  <span className="material-symbols-outlined text-[16px]">table_chart</span>
+                  <Icon className="material-symbols-outlined text-[16px]">table_chart</Icon>
                   <span>Tabel Detail</span>
                 </button>
               </div>
@@ -786,7 +787,7 @@ export const DataPublikPage: React.FC = () => {
 
               {/* Citizen-Friendly Explainer Note */}
               <div className="p-4 rounded-xl bg-[#e3f1e9] flex items-start gap-3 text-[#00251b]">
-                <span className="material-symbols-outlined text-[24px] text-[#735c00] shrink-0">lightbulb</span>
+                <Icon className="material-symbols-outlined text-[24px] text-[#735c00] shrink-0">lightbulb</Icon>
                 <div className="text-xs sm:text-sm leading-relaxed">
                   <strong className="font-bold">Fakta Ramah Warga:</strong> Dari setiap <strong>Rp 1.000</strong> dana pajak dan APBD Sidoarjo yang dihimpun, sebanyak <strong>Rp 248</strong> dialokasikan langsung untuk pendidikan putra-putri daerah dan <strong>Rp 215</strong> digunakan untuk memuluskan jalan beton tanpa lubang.
                 </div>
@@ -815,7 +816,7 @@ export const DataPublikPage: React.FC = () => {
                       Rp 2,65 T
                     </p>
                     <div className="flex items-center gap-1 text-[11px] sm:text-xs text-[#006c4d] font-bold">
-                      <span className="material-symbols-outlined text-[14px]">pie_chart</span>
+                      <Icon className="material-symbols-outlined text-[14px]">pie_chart</Icon>
                       <span>50,2% (Mandiri)</span>
                     </div>
                     <p className="text-[11px] text-[#717974] pt-1">
@@ -831,7 +832,7 @@ export const DataPublikPage: React.FC = () => {
                       Rp 2,63 T
                     </p>
                     <div className="flex items-center gap-1 text-[11px] sm:text-xs text-[#735c00] font-bold">
-                      <span className="material-symbols-outlined text-[14px]">account_balance</span>
+                      <Icon className="material-symbols-outlined text-[14px]">account_balance</Icon>
                       <span>49,8% (Transfer)</span>
                     </div>
                     <p className="text-[11px] text-[#717974] pt-1">
@@ -867,10 +868,10 @@ export const DataPublikPage: React.FC = () => {
                     className="p-3 rounded-xl bg-[#e3f1e9] hover:bg-[#ddece3] active:scale-[0.99] transition-all flex items-center justify-between text-[#00251b] text-xs sm:text-sm font-semibold cursor-pointer text-left"
                   >
                     <span className="flex items-center gap-2">
-                      <span className="material-symbols-outlined text-[20px] text-[#006c4d]">map</span>
+                      <Icon className="material-symbols-outlined text-[20px] text-[#006c4d]">map</Icon>
                       Lihat Alokasi Dana per 18 Kecamatan
                     </span>
-                    <span className="material-symbols-outlined text-[18px]">chevron_right</span>
+                    <Icon className="material-symbols-outlined text-[18px]">chevron_right</Icon>
                   </button>
 
                   <button
@@ -879,10 +880,10 @@ export const DataPublikPage: React.FC = () => {
                     className="p-3 rounded-xl bg-[#e3f1e9] hover:bg-[#ddece3] active:scale-[0.99] transition-all flex items-center justify-between text-[#00251b] text-xs sm:text-sm font-semibold cursor-pointer text-left"
                   >
                     <span className="flex items-center gap-2">
-                      <span className="material-symbols-outlined text-[20px] text-[#006c4d]">construction</span>
+                      <Icon className="material-symbols-outlined text-[20px] text-[#006c4d]">construction</Icon>
                       Daftar 25 Proyek Strategis Daerah 2026
                     </span>
-                    <span className="material-symbols-outlined text-[18px]">chevron_right</span>
+                    <Icon className="material-symbols-outlined text-[18px]">chevron_right</Icon>
                   </button>
                 </div>
 
@@ -894,7 +895,7 @@ export const DataPublikPage: React.FC = () => {
                     className="text-xs sm:text-sm text-[#006c4d] hover:text-[#005139] transition-colors inline-flex items-center gap-1 font-bold cursor-pointer"
                   >
                     <span>Pelajari Rincian Lengkap Buku Perda APBD {selectedYear}</span>
-                    <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                    <Icon className="material-symbols-outlined text-[18px]">arrow_forward</Icon>
                   </button>
                 </div>
 
@@ -917,7 +918,7 @@ export const DataPublikPage: React.FC = () => {
               <div className="flex items-start justify-between">
                 <div>
                   <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#8af7c9] text-[#002115] text-xs font-semibold mb-1">
-                    <span className="material-symbols-outlined text-[15px]">badge</span>
+                    <Icon className="material-symbols-outlined text-[15px]">badge</Icon>
                     Data Terverifikasi Disdukcapil
                   </div>
                   <h3 className="font-['Plus_Jakarta_Sans',sans-serif] text-base sm:text-lg font-bold text-[#00251b]">
@@ -1008,7 +1009,7 @@ export const DataPublikPage: React.FC = () => {
 
             <div className="pt-2 border-t border-[#e3f1e9] flex items-center justify-between text-xs text-[#404945]">
               <span className="flex items-center gap-1">
-                <span className="material-symbols-outlined text-[16px] text-[#006c4d]">sync</span>
+                <Icon className="material-symbols-outlined text-[16px] text-[#006c4d]">sync</Icon>
                 Sinkronisasi Plavon Dukcapil Sidoarjo
               </span>
               <button
@@ -1020,7 +1021,7 @@ export const DataPublikPage: React.FC = () => {
                 className="text-[#006c4d] hover:text-[#005139] font-bold flex items-center gap-0.5"
               >
                 <span>Buka Data Sensus</span>
-                <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
+                <Icon className="material-symbols-outlined text-[14px]">arrow_forward</Icon>
               </button>
             </div>
           </div>
@@ -1031,7 +1032,7 @@ export const DataPublikPage: React.FC = () => {
               <div className="flex items-start justify-between">
                 <div>
                   <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#8af7c9] text-[#002115] text-xs font-semibold mb-1">
-                    <span className="material-symbols-outlined text-[15px]">speed</span>
+                    <Icon className="material-symbols-outlined text-[15px]">speed</Icon>
                     Capaian SPM &amp; Indikator Makro
                   </div>
                   <h3 className="font-['Plus_Jakarta_Sans',sans-serif] text-base sm:text-lg font-bold text-[#00251b]">
@@ -1039,7 +1040,7 @@ export const DataPublikPage: React.FC = () => {
                   </h3>
                   <p className="text-xs text-[#404945]">Capaian riil 4 pilar pelayanan publik dasar Kabupaten Sidoarjo</p>
                 </div>
-                <span className="material-symbols-outlined text-[#006c4d] text-[24px]">verified</span>
+                <Icon className="material-symbols-outlined text-[#006c4d] text-[24px]">verified</Icon>
               </div>
 
               {/* 4 Critical Metrics Progress Indicators */}
@@ -1049,7 +1050,7 @@ export const DataPublikPage: React.FC = () => {
                 <div className="space-y-1">
                   <div className="flex items-center justify-between">
                     <span className="text-xs sm:text-sm text-[#00251b] font-semibold flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[18px] text-[#006c4d]">health_and_safety</span>
+                      <Icon className="material-symbols-outlined text-[18px] text-[#006c4d]">health_and_safety</Icon>
                       Universal Health Coverage (Jaminan BPJS Warga)
                     </span>
                     <span className="text-xs sm:text-sm text-[#006c4d] font-extrabold">99,1%</span>
@@ -1067,7 +1068,7 @@ export const DataPublikPage: React.FC = () => {
                 <div className="space-y-1">
                   <div className="flex items-center justify-between">
                     <span className="text-xs sm:text-sm text-[#00251b] font-semibold flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[18px] text-[#00251b]">road</span>
+                      <Icon className="material-symbols-outlined text-[18px] text-[#00251b]">road</Icon>
                       Kemantapan Jalan Kabupaten (Betonisasi)
                     </span>
                     <span className="text-xs sm:text-sm text-[#00251b] font-extrabold">91,2%</span>
@@ -1085,7 +1086,7 @@ export const DataPublikPage: React.FC = () => {
                 <div className="space-y-1">
                   <div className="flex items-center justify-between">
                     <span className="text-xs sm:text-sm text-[#00251b] font-semibold flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[18px] text-[#006c4d]">water_drop</span>
+                      <Icon className="material-symbols-outlined text-[18px] text-[#006c4d]">water_drop</Icon>
                       Akses Air Minum Bersih Perpipaan (PDAM)
                     </span>
                     <span className="text-xs sm:text-sm text-[#006c4d] font-extrabold">89,4%</span>
@@ -1103,7 +1104,7 @@ export const DataPublikPage: React.FC = () => {
                 <div className="space-y-1">
                   <div className="flex items-center justify-between">
                     <span className="text-xs sm:text-sm text-[#00251b] font-semibold flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[18px] text-[#735c00]">recycling</span>
+                      <Icon className="material-symbols-outlined text-[18px] text-[#735c00]">recycling</Icon>
                       Pengelolaan Sampah Terpadu (TPST &amp; RDF)
                     </span>
                     <span className="text-xs sm:text-sm text-[#735c00] font-extrabold">82,5%</span>
@@ -1122,7 +1123,7 @@ export const DataPublikPage: React.FC = () => {
 
             <div className="pt-2 border-t border-[#e3f1e9] flex items-center justify-between text-xs text-[#404945]">
               <span className="flex items-center gap-1">
-                <span className="material-symbols-outlined text-[16px] text-[#006c4d]">update</span>
+                <Icon className="material-symbols-outlined text-[16px] text-[#006c4d]">update</Icon>
                 Laporan Kinerja Instansi Pemerintah (LKjIP)
               </span>
               <button
@@ -1148,7 +1149,7 @@ export const DataPublikPage: React.FC = () => {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
             <div>
               <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#8af7c9] text-[#002115] text-xs font-bold uppercase mb-1">
-                <span className="material-symbols-outlined text-[15px]">database</span>
+                <Icon className="material-symbols-outlined text-[15px]">database</Icon>
                 Open Data Resmi
               </div>
               <h2 className="font-['Plus_Jakarta_Sans',sans-serif] text-xl sm:text-2xl font-bold text-[#00251b]">
@@ -1166,12 +1167,12 @@ export const DataPublikPage: React.FC = () => {
                 onClick={() => setApiModalOpen(true)}
                 className="px-3.5 py-2 rounded-xl bg-[#e3f1e9] text-[#00251b] hover:bg-[#ddece3] text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
               >
-                <span className="material-symbols-outlined text-[18px] text-[#006c4d]">api</span>
+                <Icon className="material-symbols-outlined text-[18px] text-[#006c4d]">api</Icon>
                 <span>API Developer</span>
               </button>
 
               <div className="flex items-center gap-1 text-xs text-[#404945]">
-                <span className="material-symbols-outlined text-[16px] text-[#006c4d]">download</span>
+                <Icon className="material-symbols-outlined text-[16px] text-[#006c4d]">download</Icon>
                 <span className="hidden sm:inline">Lisensi: Open Government License (OGL-ID)</span>
               </div>
             </div>
@@ -1246,7 +1247,7 @@ export const DataPublikPage: React.FC = () => {
                       className="h-10 px-3.5 rounded-xl bg-white text-[#00251b] text-xs sm:text-sm font-semibold hover:bg-[#d8e6de] transition-colors flex items-center gap-1.5 shadow-xs border border-[#ddece3]"
                       type="button"
                     >
-                      <span className="material-symbols-outlined text-[18px]">visibility</span>
+                      <Icon className="material-symbols-outlined text-[18px]">visibility</Icon>
                       <span>Pratinjau</span>
                     </button>
                     
@@ -1255,7 +1256,7 @@ export const DataPublikPage: React.FC = () => {
                       className="h-10 px-4 rounded-xl bg-[#006c4d] text-white text-xs sm:text-sm font-semibold hover:bg-[#005139] active:scale-95 transition-all flex items-center gap-1.5 shadow-sm"
                       type="button"
                     >
-                      <span className="material-symbols-outlined text-[18px]">file_download</span>
+                      <Icon className="material-symbols-outlined text-[18px]">file_download</Icon>
                       <span>Unduh {item.formats[0]}</span>
                     </button>
                   </div>
@@ -1263,7 +1264,7 @@ export const DataPublikPage: React.FC = () => {
               ))
             ) : (
               <div className="text-center py-12 px-4 rounded-xl bg-[#e9f7ee] border border-dashed border-[#ddece3]">
-                <span className="material-symbols-outlined text-4xl text-[#717974] mb-2">search_off</span>
+                <Icon className="material-symbols-outlined text-4xl text-[#717974] mb-2">search_off</Icon>
                 <p className="text-sm font-bold text-[#00251b]">Tidak ditemukan dataset yang cocok</p>
                 <p className="text-xs text-[#404945] mt-1">Coba kata kunci lain atau ubah kategori filter.</p>
                 <button
@@ -1283,7 +1284,7 @@ export const DataPublikPage: React.FC = () => {
           <div className="p-6 rounded-2xl bg-[#083c2e] text-white flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[#8af7c9] text-[24px]">contact_support</span>
+                <Icon className="material-symbols-outlined text-[#8af7c9] text-[24px]">contact_support</Icon>
                 <h4 className="font-['Plus_Jakarta_Sans',sans-serif] text-base sm:text-lg text-white font-bold">
                   Membutuhkan Permohonan Informasi Khusus?
                 </h4>
@@ -1298,7 +1299,7 @@ export const DataPublikPage: React.FC = () => {
               type="button"
             >
               <span>Ajukan Permohonan PPID</span>
-              <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+              <Icon className="material-symbols-outlined text-[18px]">arrow_forward</Icon>
             </button>
           </div>
 
@@ -1326,7 +1327,7 @@ export const DataPublikPage: React.FC = () => {
             <div className="p-6 rounded-2xl bg-white shadow-sm border border-[#ddece3] space-y-4 flex flex-col justify-between">
               <div className="space-y-2">
                 <div className="w-10 h-10 rounded-xl bg-[#e3f1e9] flex items-center justify-center text-[#00251b]">
-                  <span className="material-symbols-outlined text-[22px]">menu_book</span>
+                  <Icon className="material-symbols-outlined text-[22px]">menu_book</Icon>
                 </div>
                 <h4 className="font-['Plus_Jakarta_Sans',sans-serif] text-sm sm:text-base text-[#00251b] font-bold">
                   Bagaimana cara membaca data APBD?
@@ -1341,14 +1342,14 @@ export const DataPublikPage: React.FC = () => {
                 className="text-xs text-[#006c4d] hover:text-[#005139] font-bold flex items-center gap-1 cursor-pointer pt-2"
               >
                 <span>Baca Glosarium Keuangan Daerah</span>
-                <span className="material-symbols-outlined text-[16px]">chevron_right</span>
+                <Icon className="material-symbols-outlined text-[16px]">chevron_right</Icon>
               </button>
             </div>
 
             <div className="p-6 rounded-2xl bg-white shadow-sm border border-[#ddece3] space-y-4 flex flex-col justify-between">
               <div className="space-y-2">
                 <div className="w-10 h-10 rounded-xl bg-[#e3f1e9] flex items-center justify-center text-[#006c4d]">
-                  <span className="material-symbols-outlined text-[22px]">gavel</span>
+                  <Icon className="material-symbols-outlined text-[22px]">gavel</Icon>
                 </div>
                 <h4 className="font-['Plus_Jakarta_Sans',sans-serif] text-sm sm:text-base text-[#00251b] font-bold">
                   Apakah data di portal ini resmi dan legal?
@@ -1363,14 +1364,14 @@ export const DataPublikPage: React.FC = () => {
                 className="text-xs text-[#006c4d] hover:text-[#005139] font-bold flex items-center gap-1 cursor-pointer pt-2"
               >
                 <span>Lihat Regulasi Satu Data Sidoarjo</span>
-                <span className="material-symbols-outlined text-[16px]">chevron_right</span>
+                <Icon className="material-symbols-outlined text-[16px]">chevron_right</Icon>
               </button>
             </div>
 
             <div className="p-6 rounded-2xl bg-white shadow-sm border border-[#ddece3] space-y-4 flex flex-col justify-between">
               <div className="space-y-2">
                 <div className="w-10 h-10 rounded-xl bg-[#e3f1e9] flex items-center justify-center text-[#735c00]">
-                  <span className="material-symbols-outlined text-[22px]">live_help</span>
+                  <Icon className="material-symbols-outlined text-[22px]">live_help</Icon>
                 </div>
                 <h4 className="font-['Plus_Jakarta_Sans',sans-serif] text-sm sm:text-base text-[#00251b] font-bold">
                   Bagaimana cara mengajukan data yang belum ada?
@@ -1385,7 +1386,7 @@ export const DataPublikPage: React.FC = () => {
                 className="text-xs text-[#006c4d] hover:text-[#005139] font-bold flex items-center gap-1 cursor-pointer pt-2"
               >
                 <span>Alur Standar Layanan PPID</span>
-                <span className="material-symbols-outlined text-[16px]">chevron_right</span>
+                <Icon className="material-symbols-outlined text-[16px]">chevron_right</Icon>
               </button>
             </div>
 
@@ -1394,7 +1395,7 @@ export const DataPublikPage: React.FC = () => {
           {/* Sync Banner Footer Note */}
           <div className="p-4 rounded-2xl bg-[#e3f1e9] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#404945] border border-[#ddece3]">
             <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-[#006c4d] text-[20px]">cloud_sync</span>
+              <Icon className="material-symbols-outlined text-[#006c4d] text-[20px]">cloud_sync</Icon>
               <span>
                 Data terintegrasi otomatis dengan <strong>SIMDA Keuangan BPKAD</strong>, <strong>SIPD Kemendagri</strong>, &amp; <strong>Portal Satu Data Indonesia</strong>
               </span>
@@ -1431,7 +1432,7 @@ export const DataPublikPage: React.FC = () => {
                 onClick={() => setPreviewDataset(null)}
                 className="w-8 h-8 rounded-full bg-[#ddece3] hover:bg-[#d8e6de] flex items-center justify-center text-[#121e19] transition-colors"
               >
-                <span className="material-symbols-outlined text-[20px]">close</span>
+                <Icon className="material-symbols-outlined text-[20px]">close</Icon>
               </button>
             </div>
 
@@ -1513,7 +1514,7 @@ export const DataPublikPage: React.FC = () => {
                     }}
                     className="px-4 py-2 rounded-xl bg-[#006c4d] text-white text-xs font-semibold hover:bg-[#005139] flex items-center gap-1 shadow-xs"
                   >
-                    <span className="material-symbols-outlined text-[16px]">download</span>
+                    <Icon className="material-symbols-outlined text-[16px]">download</Icon>
                     <span>Unduh {fmt}</span>
                   </button>
                 ))}
@@ -1533,7 +1534,7 @@ export const DataPublikPage: React.FC = () => {
             
             <div className="p-5 border-b border-[#ddece3] flex items-center justify-between bg-[#083c2e] text-white">
               <div className="flex items-center gap-2.5">
-                <span className="material-symbols-outlined text-[#8af7c9] text-[24px]">api</span>
+                <Icon className="material-symbols-outlined text-[#8af7c9] text-[24px]">api</Icon>
                 <div>
                   <h3 className="font-['Plus_Jakarta_Sans',sans-serif] text-base sm:text-lg font-bold">
                     SITAPAK Open Data REST API v1
@@ -1545,7 +1546,7 @@ export const DataPublikPage: React.FC = () => {
                 onClick={() => setApiModalOpen(false)}
                 className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white"
               >
-                <span className="material-symbols-outlined text-[20px]">close</span>
+                <Icon className="material-symbols-outlined text-[20px]">close</Icon>
               </button>
             </div>
 
@@ -1562,7 +1563,7 @@ export const DataPublikPage: React.FC = () => {
                     className="text-white hover:text-[#8af7c9]"
                     title="Salin URL"
                   >
-                    <span className="material-symbols-outlined text-[16px]">content_copy</span>
+                    <Icon className="material-symbols-outlined text-[16px]">content_copy</Icon>
                   </button>
                 </div>
               </div>
@@ -1623,7 +1624,7 @@ export const DataPublikPage: React.FC = () => {
             
             <div className="p-5 border-b border-[#ddece3] flex items-center justify-between bg-[#effdf4]">
               <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[#006c4d] text-[22px]">assignment</span>
+                <Icon className="material-symbols-outlined text-[#006c4d] text-[22px]">assignment</Icon>
                 <div>
                   <h3 className="font-['Plus_Jakarta_Sans',sans-serif] text-base sm:text-lg font-bold text-[#00251b]">
                     Formulir Permohonan Informasi Publik PPID
@@ -1635,7 +1636,7 @@ export const DataPublikPage: React.FC = () => {
                 onClick={() => setPpidModalOpen(false)}
                 className="w-8 h-8 rounded-full bg-[#ddece3] hover:bg-[#d8e6de] flex items-center justify-center text-[#121e19]"
               >
-                <span className="material-symbols-outlined text-[20px]">close</span>
+                <Icon className="material-symbols-outlined text-[20px]">close</Icon>
               </button>
             </div>
 
@@ -1735,12 +1736,12 @@ export const DataPublikPage: React.FC = () => {
                 >
                   {ppidSubmitted ? (
                     <>
-                      <span className="material-symbols-outlined text-[16px] animate-spin">refresh</span>
+                      <Icon className="material-symbols-outlined text-[16px] animate-spin">refresh</Icon>
                       <span>Mengirim...</span>
                     </>
                   ) : (
                     <>
-                      <span className="material-symbols-outlined text-[16px]">send</span>
+                      <Icon className="material-symbols-outlined text-[16px]">send</Icon>
                       <span>Kirim Permohonan</span>
                     </>
                   )}
@@ -1761,7 +1762,7 @@ export const DataPublikPage: React.FC = () => {
             
             <div className="p-5 border-b border-[#ddece3] flex items-center justify-between bg-[#effdf4]">
               <div className="flex items-center gap-2.5">
-                <span className="material-symbols-outlined text-[#006c4d] text-[24px]">map</span>
+                <Icon className="material-symbols-outlined text-[#006c4d] text-[24px]">map</Icon>
                 <div>
                   <h3 className="font-['Plus_Jakarta_Sans',sans-serif] text-base sm:text-lg font-bold text-[#00251b]">
                     Alokasi Dana Pembangunan 18 Kecamatan Sidoarjo 2026
@@ -1773,7 +1774,7 @@ export const DataPublikPage: React.FC = () => {
                 onClick={() => setKecamatanModalOpen(false)}
                 className="w-8 h-8 rounded-full bg-[#ddece3] hover:bg-[#d8e6de] flex items-center justify-center text-[#121e19]"
               >
-                <span className="material-symbols-outlined text-[20px]">close</span>
+                <Icon className="material-symbols-outlined text-[20px]">close</Icon>
               </button>
             </div>
 
@@ -1829,7 +1830,7 @@ export const DataPublikPage: React.FC = () => {
             
             <div className="p-5 border-b border-[#ddece3] flex items-center justify-between bg-[#effdf4]">
               <div className="flex items-center gap-2.5">
-                <span className="material-symbols-outlined text-[#006c4d] text-[24px]">construction</span>
+                <Icon className="material-symbols-outlined text-[#006c4d] text-[24px]">construction</Icon>
                 <div>
                   <h3 className="font-['Plus_Jakarta_Sans',sans-serif] text-base sm:text-lg font-bold text-[#00251b]">
                     Daftar Proyek Strategis Daerah Kabupaten Sidoarjo 2026
@@ -1841,7 +1842,7 @@ export const DataPublikPage: React.FC = () => {
                 onClick={() => setProjectModalOpen(false)}
                 className="w-8 h-8 rounded-full bg-[#ddece3] hover:bg-[#d8e6de] flex items-center justify-center text-[#121e19]"
               >
-                <span className="material-symbols-outlined text-[20px]">close</span>
+                <Icon className="material-symbols-outlined text-[20px]">close</Icon>
               </button>
             </div>
 

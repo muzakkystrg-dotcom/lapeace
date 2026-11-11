@@ -1,3 +1,4 @@
+import { Icon } from '../../components/common/Icon';
 import React from 'react';
 
 export interface KtpServicePageProps {
@@ -28,20 +29,20 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
               onClick={onBack}
               className="hover:text-secondary transition-colors flex items-center gap-1 font-semibold text-secondary"
             >
-              <span className="material-symbols-outlined text-[18px]">arrow_back</span>
+              <Icon className="material-symbols-outlined text-[18px]">arrow_back</Icon>
               <span>Kembali ke Direktori Layanan</span>
             </button>
-            <span className="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+            <Icon className="material-symbols-outlined text-[14px] text-outline">chevron_right</Icon>
             <a href="#beranda" className="hover:text-primary transition-colors">Beranda</a>
-            <span className="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+            <Icon className="material-symbols-outlined text-[14px] text-outline">chevron_right</Icon>
             <button onClick={onBack} className="hover:text-primary transition-colors">
               Layanan Publik
             </button>
-            <span className="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+            <Icon className="material-symbols-outlined text-[14px] text-outline">chevron_right</Icon>
             <span className="text-primary font-semibold">Perekaman &amp; Cetak KTP-el</span>
           </nav>
           <div className="hidden md:flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
-            <span className="material-symbols-outlined text-[16px] text-secondary">verified</span>
+            <Icon className="material-symbols-outlined text-[16px] text-secondary">verified</Icon>
             <span>Layanan Resmi Terakreditasi ISO 9001:2015</span>
           </div>
         </div>
@@ -117,20 +118,20 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
                   {/* Card 1: Pemula */}
                   <div className="p-5 rounded-xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex flex-col gap-3">
                     <div className="flex items-center gap-2 text-primary">
-                      <span className="material-symbols-outlined text-[22px] text-secondary">badge</span>
+                      <Icon className="material-symbols-outlined text-[22px] text-secondary">badge</Icon>
                       <span className="font-title-md text-base font-bold">Pencetakan Pemula (17+)</span>
                     </div>
                     <ul className="flex flex-col gap-2 font-body-sm text-xs sm:text-sm text-on-surface-variant">
                       <li className="flex items-center gap-2">
-                        <span className="material-symbols-outlined text-[16px] text-secondary shrink-0">check_circle</span>
+                        <Icon className="material-symbols-outlined text-[16px] text-secondary shrink-0">check_circle</Icon>
                         <span>KK Barcode TTE aktif</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="material-symbols-outlined text-[16px] text-secondary shrink-0">check_circle</span>
+                        <Icon className="material-symbols-outlined text-[16px] text-secondary shrink-0">check_circle</Icon>
                         <span>Bukti rekam biometrik</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="material-symbols-outlined text-[16px] text-secondary shrink-0">check_circle</span>
+                        <Icon className="material-symbols-outlined text-[16px] text-secondary shrink-0">check_circle</Icon>
                         <span>Ijazah / Akta Kelahiran</span>
                       </li>
                     </ul>
@@ -139,20 +140,20 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
                   {/* Card 2: Hilang / Rusak */}
                   <div className="p-5 rounded-xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex flex-col gap-3">
                     <div className="flex items-center gap-2 text-primary">
-                      <span className="material-symbols-outlined text-[22px] text-secondary">credit_card_off</span>
+                      <Icon className="material-symbols-outlined text-[22px] text-secondary">credit_card_off</Icon>
                       <span className="font-title-md text-base font-bold">KTP Hilang / Rusak</span>
                     </div>
                     <ul className="flex flex-col gap-2 font-body-sm text-xs sm:text-sm text-on-surface-variant">
                       <li className="flex items-center gap-2">
-                        <span className="material-symbols-outlined text-[16px] text-secondary shrink-0">check_circle</span>
+                        <Icon className="material-symbols-outlined text-[16px] text-secondary shrink-0">check_circle</Icon>
                         <span>Surat Kehilangan Polsek (bila hilang)</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="material-symbols-outlined text-[16px] text-secondary shrink-0">check_circle</span>
+                        <Icon className="material-symbols-outlined text-[16px] text-secondary shrink-0">check_circle</Icon>
                         <span>Fisik KTP lama (bila rusak)</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="material-symbols-outlined text-[16px] text-secondary shrink-0">check_circle</span>
+                        <Icon className="material-symbols-outlined text-[16px] text-secondary shrink-0">check_circle</Icon>
                         <span>KK domisili Sidoarjo</span>
                       </li>
                     </ul>
@@ -161,20 +162,20 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
                   {/* Card 3: Perubahan Data */}
                   <div className="p-5 rounded-xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex flex-col gap-3">
                     <div className="flex items-center gap-2 text-primary">
-                      <span className="material-symbols-outlined text-[22px] text-secondary">manage_accounts</span>
+                      <Icon className="material-symbols-outlined text-[22px] text-secondary">manage_accounts</Icon>
                       <span className="font-title-md text-base font-bold">Perubahan Data</span>
                     </div>
                     <ul className="flex flex-col gap-2 font-body-sm text-xs sm:text-sm text-on-surface-variant">
                       <li className="flex items-center gap-2">
-                        <span className="material-symbols-outlined text-[16px] text-secondary shrink-0">check_circle</span>
+                        <Icon className="material-symbols-outlined text-[16px] text-secondary shrink-0">check_circle</Icon>
                         <span>KK pembaruan terkini</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="material-symbols-outlined text-[16px] text-secondary shrink-0">check_circle</span>
+                        <Icon className="material-symbols-outlined text-[16px] text-secondary shrink-0">check_circle</Icon>
                         <span>Fisik KTP-el lama</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="material-symbols-outlined text-[16px] text-secondary shrink-0">check_circle</span>
+                        <Icon className="material-symbols-outlined text-[16px] text-secondary shrink-0">check_circle</Icon>
                         <span>Buku Nikah / Ijazah pendukung</span>
                       </li>
                     </ul>
@@ -184,7 +185,7 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
                   <div className="p-5 rounded-xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex flex-col justify-between gap-3">
                     <div className="flex flex-col gap-1">
                       <div className="flex items-center gap-2 text-primary">
-                        <span className="material-symbols-outlined text-[22px] text-secondary">description</span>
+                        <Icon className="material-symbols-outlined text-[22px] text-secondary">description</Icon>
                         <span className="font-title-md text-base font-bold">Formulir F-1.02</span>
                       </div>
                       <p className="font-body-sm text-xs sm:text-sm text-on-surface-variant leading-relaxed">
@@ -195,7 +196,7 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
                       className="inline-flex items-center gap-1.5 font-label-md text-xs sm:text-sm text-secondary hover:underline font-bold"
                       href="#unduh-form"
                     >
-                      <span className="material-symbols-outlined text-[18px]">download</span>
+                      <Icon className="material-symbols-outlined text-[18px]">download</Icon>
                       <span>Unduh Blanko Resmi (PDF)</span>
                     </a>
                   </div>
@@ -216,7 +217,7 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
                       <span className="w-8 h-8 rounded-lg bg-primary-container text-secondary-fixed flex items-center justify-center font-bold text-sm">
                         1
                       </span>
-                      <span className="material-symbols-outlined text-[20px] text-secondary">login</span>
+                      <Icon className="material-symbols-outlined text-[20px] text-secondary">login</Icon>
                     </div>
                     <div>
                       <h3 className="font-title-md text-sm font-bold text-primary leading-tight mb-1">Masuk Plavon</h3>
@@ -230,7 +231,7 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
                       <span className="w-8 h-8 rounded-lg bg-primary-container text-secondary-fixed flex items-center justify-center font-bold text-sm">
                         2
                       </span>
-                      <span className="material-symbols-outlined text-[20px] text-secondary">fact_check</span>
+                      <Icon className="material-symbols-outlined text-[20px] text-secondary">fact_check</Icon>
                     </div>
                     <div>
                       <h3 className="font-title-md text-sm font-bold text-primary leading-tight mb-1">Verifikasi Online</h3>
@@ -244,7 +245,7 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
                       <span className="w-8 h-8 rounded-lg bg-primary-container text-secondary-fixed flex items-center justify-center font-bold text-sm">
                         3
                       </span>
-                      <span className="material-symbols-outlined text-[20px] text-secondary">print</span>
+                      <Icon className="material-symbols-outlined text-[20px] text-secondary">print</Icon>
                     </div>
                     <div>
                       <h3 className="font-title-md text-sm font-bold text-primary leading-tight mb-1">Pencetakan Fisik</h3>
@@ -258,7 +259,7 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
                       <span className="w-8 h-8 rounded-lg bg-secondary text-white flex items-center justify-center font-bold text-sm">
                         4
                       </span>
-                      <span className="material-symbols-outlined text-[20px] text-secondary">pin_drop</span>
+                      <Icon className="material-symbols-outlined text-[20px] text-secondary">pin_drop</Icon>
                     </div>
                     <div>
                       <h3 className="font-title-md text-sm font-bold text-primary leading-tight mb-1">Ambil / Pos</h3>
@@ -319,7 +320,7 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
               <div className="p-5 rounded-2xl bg-primary-container text-on-primary flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-md">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-xl bg-surface-container-lowest/10 flex items-center justify-center text-secondary-fixed shrink-0">
-                    <span className="material-symbols-outlined text-[26px]">smartphone</span>
+                    <Icon className="material-symbols-outlined text-[26px]">smartphone</Icon>
                   </div>
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2">
@@ -340,7 +341,7 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
                   rel="noopener noreferrer"
                 >
                   <span>Aktivasi IKD</span>
-                  <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+                  <Icon className="material-symbols-outlined text-[16px]">arrow_forward</Icon>
                 </a>
               </div>
             </div>
@@ -367,25 +368,25 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
                     onClick={handleApplyClick}
                   >
                     <span>Mulai Pengajuan Online</span>
-                    <span className="material-symbols-outlined text-[18px]">open_in_new</span>
+                    <Icon className="material-symbols-outlined text-[18px]">open_in_new</Icon>
                   </a>
                   <button
                     onClick={onBack}
                     className="w-full py-2.5 px-4 rounded-xl bg-surface-container hover:bg-surface-container-high text-primary font-label-lg text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center gap-1.5"
                   >
-                    <span className="material-symbols-outlined text-[16px]">arrow_back</span>
+                    <Icon className="material-symbols-outlined text-[16px]">arrow_back</Icon>
                     <span>Kembali ke Direktori Layanan</span>
                   </button>
                   <a
                     className="w-full py-2 px-3 text-center text-xs text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center gap-1"
                     href="#unduh-form"
                   >
-                    <span className="material-symbols-outlined text-[16px]">download</span>
+                    <Icon className="material-symbols-outlined text-[16px]">download</Icon>
                     <span>Unduh Formulir F-1.02 (PDF)</span>
                   </a>
                 </div>
                 <div className="p-3 rounded-lg bg-surface-container-low flex items-center gap-2.5 border border-surface-container-high/40">
-                  <span className="material-symbols-outlined text-secondary text-[20px] shrink-0">verified_user</span>
+                  <Icon className="material-symbols-outlined text-secondary text-[20px] shrink-0">verified_user</Icon>
                   <span className="font-body-sm text-[11px] text-on-surface-variant leading-tight">
                     Terintegrasi aman dengan Ditjen Kependudukan Kemendagri RI.
                   </span>
@@ -447,17 +448,17 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
                     rel="noopener noreferrer"
                   >
                     <div className="flex items-center gap-2.5">
-                      <span className="material-symbols-outlined text-secondary text-[22px]">chat</span>
+                      <Icon className="material-symbols-outlined text-secondary text-[22px]">chat</Icon>
                       <div>
                         <div className="font-label-md text-xs font-bold text-primary">WhatsApp Dukcapil</div>
                         <div className="font-body-sm text-[11px] text-on-surface-variant">0811-3118-118</div>
                       </div>
                     </div>
-                    <span className="material-symbols-outlined text-on-surface-variant text-[16px]">chevron_right</span>
+                    <Icon className="material-symbols-outlined text-on-surface-variant text-[16px]">chevron_right</Icon>
                   </a>
                   <div className="p-3 rounded-xl bg-surface-container flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
-                      <span className="material-symbols-outlined text-secondary text-[22px]">support_agent</span>
+                      <Icon className="material-symbols-outlined text-secondary text-[22px]">support_agent</Icon>
                       <div>
                         <div className="font-label-md text-xs font-bold text-primary">Loket Informasi MPP</div>
                         <div className="font-body-sm text-[11px] text-on-surface-variant">Gedung MPP Lantai 1 Buduran</div>
@@ -483,7 +484,7 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="p-5 rounded-xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex flex-col gap-2">
               <div className="flex items-center gap-2 text-primary">
-                <span className="material-symbols-outlined text-secondary text-[20px]">verified</span>
+                <Icon className="material-symbols-outlined text-secondary text-[20px]">verified</Icon>
                 <h3 className="font-title-md text-base font-semibold text-primary">Masa Berlaku KTP-el Seumur Hidup</h3>
               </div>
               <p className="font-body-md text-sm text-on-surface-variant leading-relaxed">
@@ -492,7 +493,7 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
             </div>
             <div className="p-5 rounded-xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex flex-col gap-2">
               <div className="flex items-center gap-2 text-primary">
-                <span className="material-symbols-outlined text-secondary text-[20px]">payments</span>
+                <Icon className="material-symbols-outlined text-secondary text-[20px]">payments</Icon>
                 <h3 className="font-title-md text-base font-semibold text-primary">Bebas Biaya Retribusi (Rp 0 &amp; Anti Pungli)</h3>
               </div>
               <p className="font-body-md text-sm text-on-surface-variant leading-relaxed">

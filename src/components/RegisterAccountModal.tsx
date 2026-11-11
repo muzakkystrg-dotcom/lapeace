@@ -1,3 +1,4 @@
+import { Icon } from './common/Icon';
 import React, { useState } from 'react';
 import { X, UserPlus, LogIn, ShieldCheck, CheckCircle2, User, Phone, Mail, MapPin } from 'lucide-react';
 import { CitizenAccount } from '../types/portal';
@@ -236,7 +237,7 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
                 <div className="p-3.5 rounded-xl bg-[#e9f7ee] border border-[#88f4c6] flex flex-col gap-2">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-[#00251b] flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[16px] text-[#006c4d]">badge</span>
+                      <Icon className="material-symbols-outlined text-[16px] text-[#006c4d]">badge</Icon>
                       Pilihan Akun Demo (1-Klik):
                     </span>
                     <span className="text-[10px] bg-[#88f4c6]/60 text-[#00251b] px-2 py-0.5 rounded font-bold">Terverifikasi</span>
@@ -394,7 +395,7 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
               {/* Error Feedback */}
               {errorMessage && (
                 <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs flex items-center gap-2">
-                  <span className="material-symbols-outlined text-[18px] text-red-600">error</span>
+                  <Icon className="material-symbols-outlined text-[18px] text-red-600">error</Icon>
                   <span>{errorMessage}</span>
                 </div>
               )}
