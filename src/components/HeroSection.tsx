@@ -1,7 +1,6 @@
 import React from 'react';
 import { ArrowRight, Search, ShieldCheck, Users, Star, CheckCircle2 } from 'lucide-react';
-import heroWebp from '../assets/images/sidoarjo_civic_center.webp';
-import heroJpg from '../assets/images/sidoarjo_civic_center_1793361616866.jpg';
+import heroImg from '../assets/images/Dashboard_Sidoarjo.jpeg';
 
 interface HeroSectionProps {
   onExploreServices: () => void;
@@ -84,24 +83,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               
               {/* Civic Hall Image (Optimized LCP WebP + Responsive Picture) */}
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-200">
-                <picture>
-                  <source srcSet={heroWebp} type="image/webp" />
-                  <img
-                    src={heroJpg}
-                    width={800}
-                    height={597}
-                    loading="eager"
-                    fetchPriority="high"
-                    decoding="async"
-                    alt="Kantor Bupati & Kompleks Pelayanan Terpadu Kabupaten Sidoarjo"
-                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
-                    onError={(e) => {
-                      // Fallback visual if image fails
-                      const target = e.currentTarget;
-                      target.style.display = 'none';
-                    }}
-                  />
-                </picture>
+                <img
+                  src={heroImg}
+                  width={800}
+                  height={597}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  alt="Dashboard Layanan Terpadu Kabupaten Sidoarjo"
+                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
+                  onError={(e) => {
+                    // Fallback visual if image fails
+                    const target = e.currentTarget;
+                    target.style.display = 'none';
+                  }}
+                />
                 
                 {/* Fallback pattern overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 pointer-events-none" />

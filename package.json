@@ -9,6 +9,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
+    "monitor": "node monitor/server.js",
     "lint": "tsc --noEmit",
     "build:backend": "nest build",
     "start:backend": "nest start",

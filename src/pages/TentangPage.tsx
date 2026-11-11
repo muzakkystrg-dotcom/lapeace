@@ -1,5 +1,8 @@
 import { Icon } from '../components/common/Icon';
 import React, { useState } from 'react';
+import kantorPemkabImg from '../assets/images/Kantor_pemerintah.jpeg';
+import mppImg from '../assets/images/MPP.jpeg';
+import diskominfoImg from '../assets/images/DiskominfoFix.jpg';
 
 export interface TentangPageProps {
   onNavigateSection?: (sectionId: string) => void;
@@ -62,22 +65,19 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
     {
       category: 'Sentra Pemerintahan',
       title: 'Kantor Pusat Pemkab Sidoarjo',
-      image:
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuA5XlXEzSWJc4CWT5w9NxVGWiuN7clvN3l2M9fgVFiR8W9w9Je8itCd9Wtwx2cs-3CXw-HdLkc8QAX9njB6w7576FOi-LLtJkwsVmHUxdLEYAeT2Aqq5qsafJGEUkZl-KkABv_ZW6NZVJ8peUVNemBoYdzkcBMr9kZUtwmClt-jDH76mjT-D-8yA9Mlkb7Og2zMoLTLG3M1wCDOnJqEyGYv1HB55vnd4Jl65jA8bghU',
+      image: kantorPemkabImg,
       alt: 'Gedung Sekretariat Pemerintah Kabupaten Sidoarjo dengan arsitektur modern berpadu ornamen khas Jawa Timur',
     },
     {
       category: 'Akses Langsung Warga',
       title: 'Sentra Mall Pelayanan Publik (MPP)',
-      image:
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuBQcfqqPwIe5IlHQ08emATnV9zjI03hAajbm5HQN1CWEkixwe9-_9pZoWfqu0zZE7i1v1l0XjpqHKrqceaVUvF0MIl4DCoqcSK0JZx1otKkeNSH0I7cyP4suzk4wyrlFS_FuCDr6OhCdnllzcfKYdmIKy2xlHpn8TTvBLzeDLZ1RGdOx2Np4wWV--KSPHjMzWy8XQ6EGaxEYB_PgPA1K9RQq3tH8tuC-gG0okN4sH2g',
+      image: mppImg,
       alt: 'Gedung Mall Pelayanan Publik MPP Kabupaten Sidoarjo dengan aula pelayanan digital modern',
     },
     {
       category: 'Infrastruktur SPBE',
       title: 'Pusat Komando & Delta-CSIRT',
-      image:
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuCma7YmGygWQHpfA2rBoXuRMpJEj-ItorI6EpGoRDy6j2g-gbO_b0kOMlv7P620kpA5IzEkxQkFPUVIReFBOORlKMLKIPJVf7wcQjclKcjJi9GM1jTtA3kYMZqHqHRY6esMH1llTTZQj61lnH8Sc_rPRdV8hY2Pnu6s_EybRDowC3ypeJqfNttmAgmIUzR42s31pk2KUGpe0UOrhEj7rmOzxTw4Ti2cbk8uO2hhwFXz',
+      image: diskominfoImg,
       alt: 'Pusat Komando dan Pemantauan Delta Data Center Diskominfo Sidoarjo',
     },
   ];
