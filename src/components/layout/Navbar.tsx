@@ -130,27 +130,30 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-[#083c2e]/95 backdrop-blur-md shadow-md border-b border-[#00251b]">
-      <div className="h-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="h-20 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
         
         {/* Left: Brand Lockup */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 min-w-0 pr-1">
           <a
             href="#beranda"
             onClick={(e) => {
               e.preventDefault();
               handleNavClick('beranda');
             }}
-            className="flex items-center gap-3 group select-none focus:outline-none focus:ring-2 focus:ring-[#8af7c9] rounded-xl"
+            className="flex items-center gap-2.5 sm:gap-3 group select-none focus:outline-none focus:ring-2 focus:ring-[#8af7c9] rounded-xl min-w-0"
           >
-            <div className="w-10 h-10 rounded-xl bg-[#8af7c9] flex items-center justify-center text-[#002115] shadow-sm group-hover:scale-105 transition-transform">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#8af7c9] flex items-center justify-center text-[#002115] shadow-sm group-hover:scale-105 transition-transform shrink-0">
               <Landmark className="w-5 h-5 text-[#002115]" />
             </div>
-            <div className="flex flex-col">
-              <span className="font-display font-bold text-lg text-white leading-tight tracking-tight">
+            <div className="flex flex-col min-w-0">
+              <span className="font-display font-bold text-base sm:text-lg text-white leading-tight tracking-tight truncate">
                 SITAPAK Sidoarjo
               </span>
-              <span className="text-xs text-[#bbedd9] leading-tight">
+              <span className="text-[11px] text-[#bbedd9] leading-tight hidden sm:block truncate">
                 Portal Terpadu &amp; Transparansi Pemkab
+              </span>
+              <span className="text-[10px] text-[#bbedd9] leading-tight sm:hidden truncate">
+                Kabupaten Sidoarjo
               </span>
             </div>
           </a>
@@ -187,10 +190,10 @@ export const Navbar: React.FC<NavbarProps> = ({
         </nav>
 
         {/* Right: Actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
           {/* LOGGED IN STATE */}
           {currentUser !== null ? (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1.5 sm:gap-3">
               {/* Notifications Button */}
               <div className="relative" ref={notificationRef}>
                 <button
@@ -210,7 +213,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                 {/* Notifications Dropdown */}
                 {notificationOpen && (
-                  <div className="absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-[#083c2e] border border-[#6edaae]/30 shadow-2xl p-4 text-white z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                  <div className="fixed left-3 right-3 top-[76px] max-w-md mx-auto sm:absolute sm:left-auto sm:right-0 sm:top-auto sm:mt-2 sm:w-96 sm:max-w-none rounded-2xl bg-[#083c2e] border border-[#6edaae]/30 shadow-2xl p-4 text-white z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                     <div className="flex items-center justify-between pb-3 border-b border-emerald-800/60 mb-3">
                       <div className="flex items-center gap-2">
                         <Bell className="w-4 h-4 text-[#8af7c9]" />
@@ -265,11 +268,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onClick={() => {
                     window.location.hash = '#admin';
                   }}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-extrabold text-xs shadow-md transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#8af7c9]"
+                  className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-extrabold text-xs shadow-md transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#8af7c9]"
                 >
                   <Shield className="w-3.5 h-3.5 text-slate-950" />
-                  <span className="hidden sm:inline">Portal Admin</span>
-                  <span className="sm:hidden">Admin</span>
+                  <span>Portal Admin</span>
                 </button>
               )}
 
@@ -281,12 +283,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                   aria-haspopup="true"
                   aria-label={`Menu profil ${userName}`}
                   onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                  className="flex items-center gap-3 pl-2 py-1 pr-3 rounded-full bg-[#083c2e] border border-[#6edaae]/30 shadow-sm cursor-pointer hover:bg-[#00251b] focus:outline-none focus:ring-2 focus:ring-[#8af7c9] transition-all select-none text-left"
+                  className="flex items-center gap-1.5 sm:gap-3 p-1 sm:pl-2 sm:py-1 sm:pr-3 rounded-full bg-[#083c2e] border border-[#6edaae]/30 shadow-sm cursor-pointer hover:bg-[#00251b] focus:outline-none focus:ring-2 focus:ring-[#8af7c9] transition-all select-none text-left"
                 >
-                  <div className="w-9 h-9 rounded-full bg-[#8af7c9] text-[#002115] font-bold font-display flex items-center justify-center text-[14px] shadow-sm relative shrink-0">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#8af7c9] text-[#002115] font-bold font-display flex items-center justify-center text-xs sm:text-[14px] shadow-sm relative shrink-0">
                     <span>{userInitials}</span>
-                    <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-[#006c4d] text-white flex items-center justify-center text-[10px] ring-1 ring-[#083c2e]">
-                      <Check className="w-2.5 h-2.5 text-white" />
+                    <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-[#006c4d] text-white flex items-center justify-center text-[8px] sm:text-[10px] ring-1 ring-[#083c2e]">
+                      <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-white" />
                     </span>
                   </div>
                   <div className="hidden sm:flex flex-col text-left">
@@ -301,7 +303,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     </span>
                   </div>
                   <ChevronDown
-                    className={`w-4 h-4 text-[#bbedd9] transition-transform duration-200 ${
+                    className={`w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#bbedd9] transition-transform duration-200 ${
                       userDropdownOpen ? 'rotate-180' : ''
                     }`}
                   />
@@ -309,7 +311,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                 {/* User Dropdown Menu */}
                 {userDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-[#083c2e] border border-[#6edaae]/30 shadow-2xl p-2 text-white z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                  <div className="absolute right-0 mt-2 w-64 max-w-[calc(100vw-1.5rem)] rounded-2xl bg-[#083c2e] border border-[#6edaae]/30 shadow-2xl p-2 text-white z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                     <div className="p-3 border-b border-emerald-800/60 mb-1">
                       <div className="text-xs font-bold text-white font-display truncate" title={userName}>{userName}</div>
                       <div className="text-[11px] text-[#8af7c9] flex items-center gap-1 mt-0.5">
