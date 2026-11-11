@@ -35,7 +35,7 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
     return this.db;
   }
 
-  // --- CITIZENS (PDP COMPLIANT, MASKED & KEYSET PAGINATED) ---
+  // Citizens repository with PDP masking and keyset pagination
   getCitizens(limit = 20, cursor?: number) {
     const safeLimit = Math.min(Math.max(1, Number(limit) || 20), 100);
     let rows: any[];
@@ -127,7 +127,7 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
     return { id: result.lastInsertRowid, nikMasked, fullName: data.fullName, email: data.email, kecamatan: data.kecamatan, kelurahan: data.kelurahan };
   }
 
-  // --- SERVICES DIRECTORY ---
+  // Services directory
   getServices() {
     return this.db.prepare('SELECT * FROM services ORDER BY popularity_score DESC').all();
   }
@@ -136,7 +136,7 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
     return this.db.prepare('SELECT * FROM services WHERE id = ?').get(id);
   }
 
-  // --- SERVICE REQUESTS & SINGLE-WINDOW TRACKING ---
+  // Service requests and single-window tracking
   getServiceRequests() {
     return this.db.prepare('SELECT * FROM service_requests ORDER BY created_at DESC').all();
   }
@@ -177,13 +177,13 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
   getUnifiedTracking(code: string) {
     const clean = code.trim().toUpperCase();
 
-    // 1. Cek di permohonan berkas layanan (KTP, SKU, NIB, dll)
+    // Cek di permohonan berkas layanan (KTP, SKU, NIB, dll)
     const serviceReq = this.getServiceRequestByTrackingNumber(clean);
     if (serviceReq) {
       return { type: 'service_request', data: serviceReq };
     }
 
-    // 2. Cek di laporan pengaduan warga (Call 112 / SP4N-LAPOR!)
+    // Cek di laporan pengaduan warga (Call 112 / SP4N-LAPOR!)
     const report = this.getReportByTicket(clean);
     if (report) {
       return {
@@ -212,7 +212,7 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
     return null;
   }
 
-  // --- HEALTHCARE & HOSPITAL BEDS ---
+  // Healthcare units and hospital bed inventory
   getHealthcareUnits() {
     return this.db.prepare('SELECT * FROM healthcare_units WHERE is_active = 1 ORDER BY type ASC, name ASC').all();
   }
@@ -235,7 +235,7 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
     `).all();
   }
 
-  // --- CITIZEN REPORTS (KEYSET PAGINATED & HIGH ENTROPY TICKET) ---
+  // Citizen reports with keyset pagination and high-entropy tickets
   getReports(limit = 20, cursor?: number) {
     const safeLimit = Math.min(Math.max(1, Number(limit) || 20), 100);
     let rows: any[];
@@ -347,7 +347,7 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
     return { id: reportId, ticketNumber, ...data };
   }
 
-  // --- AUDIT TRAIL LOGGING (CRYPTOGRAPHIC HASH CHAIN) ---
+  // Audit trail logging with cryptographic hash chain
   getAuditLogs(limit = 50) {
     return this.db.prepare(`
       SELECT * FROM audit_trail_logs
@@ -395,7 +395,7 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
     }
   }
 
-  // --- BUDGET & OPEN DATA ---
+  // Budget and open data
   getBudgetMetrics(year = 2026) {
     return this.db.prepare('SELECT * FROM budget_metrics WHERE fiscal_year = ? ORDER BY allocated_rupiah DESC').all(year);
   }

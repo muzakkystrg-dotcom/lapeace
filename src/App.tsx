@@ -57,7 +57,6 @@ const defaultStitchCitizen: CitizenAccount = {
 };
 
 export default function App() {
-  // Hash Routing state
   const [currentHash, setCurrentHash] = useState<string>(() => {
     return window.location.hash || '#beranda';
   });
@@ -89,7 +88,6 @@ export default function App() {
   const [isBudgetModalOpen, setIsBudgetModalOpen] = useState(false);
   const [isGuideModalOpen, setIsGuideModalOpen] = useState(false);
 
-  // Search state
   const [searchQuery, setSearchQuery] = useState('');
   const [searchCategory, setSearchCategory] = useState<ServiceCategory>('semua');
   const [filteredServices, setFilteredServices] = useState<ServiceItem[] | undefined>(undefined);
@@ -282,12 +280,12 @@ export default function App() {
       <main className="flex-1 pt-20">
         <Suspense fallback={<RouteSkeleton />}>
           {(() => {
-            // Page 1: Data Publik & Transparansi Anggaran
+            // Halaman Data Publik & Transparansi Anggaran
             if (currentHash === '#data-publik' || currentHash === '#transparansi') {
               return <DataPublikPage />;
             }
 
-            // Page 2: Direktori Layanan Publik
+            // Direktori Layanan Publik
             if (currentHash === '#layanan') {
               return (
                 <LayananPage
@@ -316,7 +314,7 @@ export default function App() {
               );
             }
 
-            // Detail Layanan 1: KTP-el Disdukcapil
+            // Layanan KTP-el Disdukcapil
             if (currentHash === '#layanan/ktp' || currentHash === '#layanan-ktp') {
               return (
                 <KtpServicePage
@@ -331,7 +329,7 @@ export default function App() {
               );
             }
 
-            // Detail Layanan 2: NIB OSS DPMPTSP
+            // Layanan NIB OSS DPMPTSP
             if (currentHash === '#layanan/nib' || currentHash === '#layanan-nib') {
               return (
                 <NibServicePage
@@ -346,7 +344,7 @@ export default function App() {
               );
             }
 
-            // Detail Layanan 3: SKU SIPRAJA
+            // Layanan SKU SIPRAJA
             if (currentHash === '#layanan/sku' || currentHash === '#layanan-sku') {
               return (
                 <SkuServicePage
@@ -361,7 +359,7 @@ export default function App() {
               );
             }
 
-            // Detail Layanan 4: Antrean Faskes RSUD & Puskesmas
+            // Layanan Antrean Faskes RSUD & Puskesmas
             if (currentHash === '#layanan/faskes' || currentHash === '#layanan-faskes') {
               return (
                 <FaskesServicePage
@@ -376,7 +374,7 @@ export default function App() {
               );
             }
 
-            // Detail Layanan 5: DTKS Bansos Dinsos
+            // Layanan DTKS Bansos Dinsos
             if (currentHash === '#layanan/dtks' || currentHash === '#layanan-dtks') {
               return (
                 <DtksServicePage
@@ -391,7 +389,7 @@ export default function App() {
               );
             }
 
-            // Page 3: Laporan Warga & Aspirasi Call 112 / SP4N
+            // Laporan Warga & Aspirasi Call 112 / SP4N
             if (currentHash === '#laporan' || currentHash === '#lapor') {
               return (
                 <LaporanPage
@@ -411,7 +409,7 @@ export default function App() {
               );
             }
 
-            // Page 4: Tentang Kami & Regulasi SPBE
+            // Tentang Kami & Regulasi SPBE
             if (currentHash === '#tentang') {
               return (
                 <TentangPage

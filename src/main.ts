@@ -6,7 +6,7 @@ import type { Request, Response, NextFunction } from 'express';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // 1. Hardened Security Headers Middleware (OWASP Standard)
+  // Hardened security headers middleware (OWASP standard)
   app.use((req: Request, res: Response, next: NextFunction) => {
     res.setHeader('X-Frame-Options', 'DENY');
     res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -26,7 +26,7 @@ async function bootstrap() {
     next();
   });
 
-  // 2. Strict CORS Configuration
+  // Strict CORS configuration
   app.enableCors({
     origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
       // Izinkan akses dari domain lokal dev atau domain resmi pemkab & VPS demo
@@ -44,7 +44,7 @@ async function bootstrap() {
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
   });
 
-  // 3. Global Security Sanitizer Exception Filter
+  // Global security sanitizer exception filter
   app.useGlobalFilters(new GlobalSecurityExceptionFilter());
 
   const port = process.env.PORT ?? 3000;

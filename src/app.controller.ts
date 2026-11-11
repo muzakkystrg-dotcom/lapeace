@@ -40,13 +40,13 @@ export class AppController {
     };
   }
 
-  // --- CACHE TELEMETRY & STATS ---
+  // Cache telemetry and stats endpoints
   @Get('cache/stats')
   getCacheStats() {
     return this.cache.getStats();
   }
 
-  // --- UNIFIED SINGLE-WINDOW TRACKING (Powers TrackDocModal) ---
+  // Unified single-window tracking for service requests and reports
   @Get('tracking/:ticket')
   getTracking(@Param('ticket') ticket: string) {
     const record = this.db.getUnifiedTracking(ticket);
@@ -56,7 +56,7 @@ export class AppController {
     return record;
   }
 
-  // --- CITIZENS (RESTRICTED TO OPERATORS & ADMINS ONLY - UU PDP COMPLIANCE & KEYSET PAGINATION) ---
+  // Restricted to operators and admins (UU PDP compliance)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin_pemkab', 'operator_opd')
   @Get('citizens')
@@ -66,7 +66,7 @@ export class AppController {
     return this.db.getCitizens(l, c);
   }
 
-  // --- INDIVIDUAL CITIZEN (OWNERSHIP BOUND / ANTI-IDOR) ---
+  // Individual citizen profile
   @UseGuards(JwtAuthGuard)
   @Get('citizens/:nik')
   getCitizen(@Param('nik') nik: string, @Req() req: any) {
@@ -85,7 +85,7 @@ export class AppController {
     return citizen;
   }
 
-  // --- SERVICES DIRECTORY (PUBLIC - CACHED 1 HOUR) ---
+  // Public services directory (cached 1 hour)
   @Get('services')
   async getServices(@Res({ passthrough: true }) res?: any) {
     return this.cache.wrap('services:all', 3600, () => this.db.getServices(), res);
@@ -107,7 +107,7 @@ export class AppController {
     );
   }
 
-  // --- HEALTHCARE & HOSPITAL BEDS (PUBLIC READ - CACHED 2 MINUTES) ---
+  // Healthcare beds availability (cached 2 minutes)
   @Get('faskes')
   async getHealthcareUnits(@Res({ passthrough: true }) res?: any) {
     return this.cache.wrap('faskes:units', 120, () => this.db.getHealthcareUnits(), res);
@@ -123,7 +123,7 @@ export class AppController {
     return this.db.getFaskesAppointments();
   }
 
-  // --- CITIZEN REPORTS (CALL 112 & SP4N-LAPOR! - KEYSET PAGINATION + CACHE) ---
+  // Citizen reports endpoints with keyset pagination
   @Get('reports')
   async getReports(
     @Query('limit') limit?: string,
@@ -153,7 +153,7 @@ export class AppController {
     return result;
   }
 
-  // --- AUDIT TRAIL LOGS (RESTRICTED TO ADMIN) ---
+  // Immutable audit trail logs (admin only)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin_pemkab')
   @Get('audit-logs')
@@ -161,7 +161,7 @@ export class AppController {
     return this.db.getAuditLogs();
   }
 
-  // --- BUDGET & TRANSPARENCY (PUBLIC - CACHED 5 MINUTES) ---
+  // Budget transparency data (cached 5 minutes)
   @Get('budget')
   async getBudget(@Res({ passthrough: true }) res?: any) {
     return this.cache.wrap(
@@ -176,7 +176,7 @@ export class AppController {
     );
   }
 
-  // --- OPEN DATA (PUBLIC - CACHED 30 MINUTES) ---
+  // Open data catalog (cached 30 minutes)
   @Get('datasets')
   async getDatasets(@Res({ passthrough: true }) res?: any) {
     return this.cache.wrap('datasets:all', 1800, () => this.db.getOpenDatasets(), res);

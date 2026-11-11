@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #00251b;
-  --color-primary-container: #083c2e;
+  --color-primary: #083C2E;
+  --color-primary-container: #05241B;
   --color-on-primary: #ffffff;
-  --color-on-primary-container: #77a794;
+  --color-on-primary-container: #bbedd9;
   --color-primary-fixed: #bbedd9;
   --color-primary-fixed-dim: #a0d1bd;
   --color-on-primary-fixed: #002117;
   --color-on-primary-fixed-variant: #204f40;
 
-  --color-secondary: #006c4d;
-  --color-secondary-container: #88f4c6;
+  --color-secondary: #038D66;
+  --color-secondary-container: #d1fae5;
   --color-secondary-fixed: #8af7c9;
   --color-secondary-fixed-dim: #6edaae;
   --color-on-secondary: #ffffff;
-  --color-on-secondary-container: #007151;
+  --color-on-secondary-container: #065f46;
   --color-on-secondary-fixed: #002115;
   --color-on-secondary-fixed-variant: #005139;
 
@@ -26,28 +26,28 @@
   --color-on-tertiary: #ffffff;
   --color-on-tertiary-container: #4f3e00;
 
-  --color-surface: #effdf4;
-  --color-surface-dim: #cfddd5;
-  --color-surface-bright: #effdf4;
-  --color-surface-container: #e3f1e9;
-  --color-surface-container-high: #ddece3;
-  --color-surface-container-low: #e9f7ee;
+  --color-surface: #F8FAF9;
+  --color-surface-dim: #e2e8f0;
+  --color-surface-bright: #ffffff;
+  --color-surface-container: #f1f5f9;
+  --color-surface-container-high: #e2e8f0;
+  --color-surface-container-low: #f8fafc;
   --color-surface-container-lowest: #ffffff;
-  --color-surface-container-highest: #d8e6de;
-  --color-surface-variant: #d8e6de;
-  --color-on-surface: #121e19;
-  --color-on-surface-variant: #404945;
+  --color-surface-container-highest: #cbd5e1;
+  --color-surface-variant: #f1f5f9;
+  --color-on-surface: #15211C;
+  --color-on-surface-variant: #5A6862;
 
-  --color-background: #effdf4;
-  --color-on-background: #121e19;
+  --color-background: #F8FAF9;
+  --color-on-background: #15211C;
 
   --color-error: #ba1a1a;
   --color-error-container: #ffdad6;
   --color-on-error: #ffffff;
   --color-on-error-container: #93000a;
 
-  --color-outline: #717974;
-  --color-outline-variant: #c0c8c3;
+  --color-outline: #94a3b8;
+  --color-outline-variant: #e2e8f0;
 
   --spacing-gutter: 1.5rem;
   --spacing-gutter-mobile: 1rem;
@@ -108,9 +108,7 @@ h1, h2, h3, h4, h5, h6, .font-display {
   animation-play-state: paused;
 }
 
-/* ==============================================================================
-   MATERIAL DESIGN 3 & STITCH TYPOGRAPHY UTILITIES (STANDAR SPBE SIDOARJO)
-   ============================================================================== */
+/* Material Design 3 & Stitch typography utilities */
 @utility font-label-md {
   font-family: 'Inter', sans-serif;
   font-size: 0.75rem;

@@ -30,7 +30,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
       value: '100%',
       title: 'Terintegrasi Total',
       desc: '32 OPD & 18 Kecamatan se-Kabupaten Sidoarjo dalam satu basis data terpadu.',
-      iconBg: 'bg-[#88f4c6]/40 text-[#006c4d]',
+      iconBg: 'bg-[#88f4c6]/40 text-[#038D66]',
     },
     {
       label: 'Transparansi Publik',
@@ -54,7 +54,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
       value: '11x WTP',
       title: 'Opini BPK Berturut',
       desc: 'Pengelolaan keuangan daerah yang taat asas, presisi, dan nihil temuan material.',
-      iconBg: 'bg-[#88f4c6]/40 text-[#006c4d]',
+      iconBg: 'bg-[#88f4c6]/40 text-[#038D66]',
     },
   ];
 
@@ -96,7 +96,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
       pilar: 'Pilar Efisiensi',
       title: 'Respon Cepat Terukur (SLA Tinggi)',
       icon: 'timer',
-      iconBg: 'bg-[#006c4d] text-white',
+      iconBg: 'bg-[#038D66] text-white',
       desc: 'Standar pelayanan ketat dengan jaminan tanggapan pengaduan maksimal 2x24 jam kerja, disokong kesiapsiagaan Call Center 112 bebas pulsa yang beroperasi tanpa henti sepanjang 365 hari.',
     },
     {
@@ -104,7 +104,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
       pilar: 'Pilar Keterpaduan',
       title: 'Aksesibilitas Tanpa Batas (Single Window)',
       icon: 'all_inclusive',
-      iconBg: 'bg-[#006c4d] text-white',
+      iconBg: 'bg-[#038D66] text-white',
       desc: 'Layanan publik inklusif yang dapat diakses 24 jam sehari, 7 hari seminggu melalui portal daring terpadu maupun gerai Sentra Mall Pelayanan Publik (MPP) secara setara bagi semua lapisan masyarakat.',
     },
     {
@@ -139,7 +139,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
       role: 'Otoritas Data Warga',
       name: 'Disdukcapil Sidoarjo',
       icon: 'badge',
-      iconBg: 'bg-[#88f4c6]/40 text-[#006c4d]',
+      iconBg: 'bg-[#88f4c6]/40 text-[#038D66]',
       desc: 'Integrasi Identitas Kependudukan Digital (IKD) dan ekosistem administrasi kependudukan cepat melalui keterhubungan langsung dengan modul Plavon Dukcapil Sidoarjo.',
     },
     {
@@ -163,7 +163,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
       role: 'Pengawas Integritas Publik',
       name: 'Inspektorat Daerah Sidoarjo',
       icon: 'gavel',
-      iconBg: 'bg-[#88f4c6]/40 text-[#006c4d]',
+      iconBg: 'bg-[#88f4c6]/40 text-[#038D66]',
       desc: 'Pengawasan independen kepatuhan ASN, penanganan Whistleblowing System (WBS), audit reguler, dan penjagaan zona integritas bebas korupsi di lingkungan Pemkab Sidoarjo.',
     },
   ];
@@ -258,24 +258,29 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
   ];
 
   return (
-    <div className="w-full bg-[#effdf4] min-h-screen text-[#121e19]">
-      {/* Top Ambient Canvas & Hero Banner */}
-      <section className="relative w-full bg-[#e9f7ee] overflow-hidden pb-10 sm:pb-12 border-b border-[#ddece3]">
-        <div className="absolute -top-32 -right-24 w-96 h-96 rounded-full bg-[#8af7c9]/30 blur-3xl pointer-events-none"></div>
-        <div className="absolute top-1/2 -left-20 w-80 h-80 rounded-full bg-[#bbedd9]/25 blur-2xl pointer-events-none"></div>
+    <div className="w-full bg-[#F8FAF9] min-h-screen text-[#15211C]">
+      {/* Top Ambient Canvas & Hero Banner (Aligned with Beranda Style) */}
+      <section className="relative pt-6 pb-14 overflow-hidden bg-gradient-to-b from-[#F2FAF6] to-[#F8FAF9] border-b border-slate-200/80">
+        <div 
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: `radial-gradient(#083C2E 1px, transparent 1px)`,
+            backgroundSize: '24px 24px',
+          }}
+        />
 
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Breadcrumb Navigation */}
-          <nav aria-label="Jalur Navigasi" className="flex items-center gap-2 py-2 text-[#404945] text-xs sm:text-sm font-semibold">
+          <nav aria-label="Jalur Navigasi" className="flex items-center gap-2 text-slate-500 text-xs sm:text-sm font-medium">
             <button
               onClick={() => handleNavClick('beranda')}
-              className="hover:text-[#006c4d] flex items-center gap-1 transition-colors cursor-pointer"
+              className="hover:text-[#038D66] flex items-center gap-1 transition-colors cursor-pointer"
             >
-              <Icon className="material-symbols-outlined text-[16px]">home</Icon>
+              <Icon className="text-[16px]">home</Icon>
               <span>Beranda</span>
             </button>
-            <span className="text-[#c0c8c3]">/</span>
-            <span className="text-[#00251b] font-bold">Tentang Kami</span>
+            <Icon className="text-[14px] text-slate-400">chevron_right</Icon>
+            <span className="text-[#038D66] font-semibold">Tentang Kami</span>
           </nav>
 
           {/* Main Civic Header Block */}
@@ -288,11 +293,11 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
                 </span>
               </div>
 
-              <h1 className="font-display text-3xl sm:text-4xl lg:text-[44px] lg:leading-[52px] text-[#00251b] font-extrabold tracking-tight">
+              <h1 className="font-display text-3xl sm:text-4xl lg:text-[44px] lg:leading-[52px] text-[#15211C] font-extrabold tracking-tight">
                 Mewujudkan Pemerintahan Digital yang Terbuka, Melayani, dan Berintegritas
               </h1>
 
-              <p className="text-base sm:text-lg text-[#404945] max-w-3xl leading-relaxed">
+              <p className="text-base sm:text-lg text-[#5A6862] max-w-3xl leading-relaxed">
                 SITAPAK adalah pintu tunggal ekosistem pelayanan publik dan transparansi anggaran Kabupaten Sidoarjo,
                 menghubungkan aspirasi 2,08 juta warga dengan 32 dinas teknis secara terukur dan akuntabel.
               </p>
@@ -300,15 +305,15 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
 
             {/* Official Seal / Visual Emblem Card */}
             <div className="lg:col-span-4 flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-xs bg-white p-6 sm:p-7 rounded-2xl shadow-md text-center flex flex-col items-center border border-[#ddece3]">
+              <div className="relative w-full max-w-xs bg-white p-6 sm:p-7 rounded-2xl shadow-md text-center flex flex-col items-center border border-slate-200/90">
                 <div className="w-16 h-16 rounded-2xl bg-[#083c2e] text-[#ffe087] flex items-center justify-center shadow-inner mb-3">
                   <Icon className="material-symbols-outlined text-[36px]">account_balance</Icon>
                 </div>
-                <span className="font-display text-lg font-bold text-[#00251b]">Republik Indonesia</span>
-                <span className="text-sm text-[#404945] font-semibold">Pemerintah Kabupaten Sidoarjo</span>
+                <span className="font-display text-lg font-bold text-[#15211C]">Republik Indonesia</span>
+                <span className="text-sm text-[#5A6862] font-semibold">Pemerintah Kabupaten Sidoarjo</span>
                 <div className="w-12 h-1 bg-[#cfa700] rounded-full my-3"></div>
-                <span className="text-xs text-[#006c4d] font-bold tracking-wider uppercase">SITAPAK SOVEREIGN CIVIC</span>
-                <span className="text-[12px] text-[#404945]/80 mt-1">Platform Terpadu SPBE &amp; Akuntabilitas</span>
+                <span className="text-xs text-[#038D66] font-bold tracking-wider uppercase">SITAPAK SOVEREIGN CIVIC</span>
+                <span className="text-[12px] text-[#5A6862]/80 mt-1">Platform Terpadu SPBE &amp; Akuntabilitas</span>
               </div>
             </div>
           </div>
@@ -318,18 +323,18 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
             {performanceStats.map((item, idx) => (
               <div
                 key={idx}
-                className="bg-white p-5 sm:p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between border border-[#ddece3]/80"
+                className="bg-white p-5 sm:p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between border border-slate-200/90"
               >
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs uppercase tracking-wider text-[#404945] font-bold">{item.label}</span>
+                  <span className="text-xs uppercase tracking-wider text-[#5A6862] font-bold">{item.label}</span>
                   <div className={`w-9 h-9 rounded-xl ${item.iconBg} flex items-center justify-center`}>
                     <Icon className="material-symbols-outlined text-[20px]">{item.icon}</Icon>
                   </div>
                 </div>
                 <div>
-                  <div className="font-display text-3xl font-extrabold text-[#00251b] tracking-tight">{item.value}</div>
-                  <div className="font-display text-base font-bold text-[#006c4d] mt-0.5">{item.title}</div>
-                  <p className="text-xs sm:text-sm text-[#404945] mt-1 leading-snug">{item.desc}</p>
+                  <div className="font-display text-3xl font-extrabold text-[#15211C] tracking-tight">{item.value}</div>
+                  <div className="font-display text-base font-bold text-[#038D66] mt-0.5">{item.title}</div>
+                  <p className="text-xs sm:text-sm text-[#5A6862] mt-1 leading-snug">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -338,7 +343,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
       </section>
 
       {/* Visual Civic Landscape Showcase */}
-      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10 w-full">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10 w-full">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {civicPhotos.map((photo, idx) => (
             <div key={idx} className="relative h-64 rounded-2xl overflow-hidden shadow-md group border border-white/60">
@@ -357,22 +362,22 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
       </section>
 
       {/* Section: Visi & Misi Transformasi Digital 2026+ */}
-      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 w-full">
-        <div className="bg-white rounded-3xl p-6 sm:p-8 lg:p-12 shadow-sm border border-[#ddece3]">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 w-full">
+        <div className="bg-white rounded-3xl p-6 sm:p-8 lg:p-12 shadow-sm border border-slate-200/90">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 gap-4">
             <div className="flex flex-col gap-1 max-w-2xl">
-              <span className="text-xs sm:text-sm text-[#006c4d] font-bold uppercase tracking-wider">
+              <span className="text-xs sm:text-sm text-[#038D66] font-bold uppercase tracking-wider">
                 Arah Strategis &amp; Komitmen
               </span>
-              <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#00251b]">
+              <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#15211C]">
                 Visi &amp; Misi Transformasi Digital Sidoarjo 2026+
               </h2>
-              <p className="text-sm sm:text-base text-[#404945]">
+              <p className="text-sm sm:text-base text-[#5A6862]">
                 Landasan fundamental dalam merumuskan seluruh modul layanan digital terpadu demi kepuasan warga Sidoarjo.
               </p>
             </div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#e3f1e9] text-[#00251b] rounded-xl text-xs sm:text-sm font-semibold self-start md:self-auto border border-[#c0c8c3]/40">
-              <Icon className="material-symbols-outlined text-[#006c4d] text-[18px]">verified_user</Icon>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#e3f1e9] text-[#15211C] rounded-xl text-xs sm:text-sm font-semibold self-start md:self-auto border border-[#c0c8c3]/40">
+              <Icon className="material-symbols-outlined text-[#038D66] text-[18px]">verified_user</Icon>
               <span>Target RPJMD Terakselerasi</span>
             </div>
           </div>
@@ -396,8 +401,8 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
           {/* 4 Core Pillars Grid */}
           <div className="mb-4">
             <div className="mb-4 flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#006c4d]"></span>
-              <h3 className="font-display text-lg font-bold text-[#00251b] uppercase tracking-wide">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#038D66]"></span>
+              <h3 className="font-display text-lg font-bold text-[#15211C] uppercase tracking-wide">
                 4 Pilar Utama Transformasi SITAPAK
               </h3>
             </div>
@@ -405,17 +410,17 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
               {empatPilar.map((pilar, idx) => (
                 <div
                   key={idx}
-                  className="p-5 sm:p-6 rounded-2xl bg-[#e9f7ee] hover:bg-[#e3f1e9] transition-colors flex gap-4 border border-[#ddece3]"
+                  className="p-5 sm:p-6 rounded-2xl bg-[#e9f7ee] hover:bg-[#e3f1e9] transition-colors flex gap-4 border border-slate-200/90"
                 >
                   <div className={`w-12 h-12 rounded-xl ${pilar.iconBg} flex-shrink-0 flex items-center justify-center shadow-sm`}>
                     <Icon className="material-symbols-outlined text-[26px]">{pilar.icon}</Icon>
                   </div>
                   <div className="flex flex-col gap-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-[#006c4d] uppercase tracking-wider">{pilar.pilar}</span>
+                      <span className="text-xs font-bold text-[#038D66] uppercase tracking-wider">{pilar.pilar}</span>
                     </div>
-                    <h4 className="font-display text-base sm:text-lg text-[#00251b] font-bold">{pilar.title}</h4>
-                    <p className="text-xs sm:text-sm text-[#404945] leading-relaxed">{pilar.desc}</p>
+                    <h4 className="font-display text-base sm:text-lg text-[#15211C] font-bold">{pilar.title}</h4>
+                    <p className="text-xs sm:text-sm text-[#5A6862] leading-relaxed">{pilar.desc}</p>
                   </div>
                 </div>
               ))}
@@ -425,15 +430,15 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
       </section>
 
       {/* Section: Sinergi Ekosistem Pengelola (OPD Pengampu) */}
-      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
         <div className="mb-8 flex flex-col gap-1">
-          <span className="text-xs sm:text-sm text-[#006c4d] font-bold uppercase tracking-wider">
+          <span className="text-xs sm:text-sm text-[#038D66] font-bold uppercase tracking-wider">
             Tata Kelola Kolaboratif
           </span>
-          <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#00251b]">
+          <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#15211C]">
             Sinergi Ekosistem Pengelola SITAPAK
           </h2>
-          <p className="text-sm sm:text-base text-[#404945] max-w-3xl">
+          <p className="text-sm sm:text-base text-[#5A6862] max-w-3xl">
             Penyelenggaraan SITAPAK diawasi langsung oleh Bupati Sidoarjo dan dioperasikan secara sinergis oleh seluruh
             instansi teknis berwenang Pemerintah Kabupaten Sidoarjo.
           </p>
@@ -443,7 +448,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
           {ekosistemOpd.map((opd, idx) => (
             <div
               key={idx}
-              className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between border border-[#ddece3]"
+              className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between border border-slate-200/90"
             >
               <div>
                 <div className="flex items-center gap-3 mb-4">
@@ -451,16 +456,16 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
                     <Icon className="material-symbols-outlined text-[26px]">{opd.icon}</Icon>
                   </div>
                   <div>
-                    <span className="text-xs text-[#006c4d] font-bold uppercase tracking-wide">{opd.category}</span>
-                    <h3 className="font-display text-base sm:text-lg font-bold text-[#00251b] leading-snug">
+                    <span className="text-xs text-[#038D66] font-bold uppercase tracking-wide">{opd.category}</span>
+                    <h3 className="font-display text-base sm:text-lg font-bold text-[#15211C] leading-snug">
                       {opd.name}
                     </h3>
                   </div>
                 </div>
-                <p className="text-xs sm:text-sm text-[#404945] leading-relaxed">{opd.desc}</p>
+                <p className="text-xs sm:text-sm text-[#5A6862] leading-relaxed">{opd.desc}</p>
               </div>
 
-              <div className="mt-5 pt-3 border-t border-[#ddece3] flex items-center text-[#006c4d] text-xs sm:text-sm font-bold">
+              <div className="mt-5 pt-3 border-t border-slate-200/90 flex items-center text-[#038D66] text-xs sm:text-sm font-bold">
                 <span>{opd.role}</span>
                 <Icon className="material-symbols-outlined text-[16px] ml-1">chevron_right</Icon>
               </div>
@@ -489,16 +494,16 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
       </section>
 
       {/* Section: Payung Regulasi & Dasar Hukum */}
-      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 w-full">
-        <div className="bg-[#e9f7ee] rounded-3xl p-6 sm:p-8 lg:p-12 border border-[#ddece3]">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 w-full">
+        <div className="bg-[#e9f7ee] rounded-3xl p-6 sm:p-8 lg:p-12 border border-slate-200/90">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
             <div>
-              <span className="text-xs sm:text-sm text-[#006c4d] font-bold uppercase tracking-wider">Legitimasi Hukum</span>
-              <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#00251b]">
+              <span className="text-xs sm:text-sm text-[#038D66] font-bold uppercase tracking-wider">Legitimasi Hukum</span>
+              <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#15211C]">
                 Dasar Hukum &amp; Payung Regulasi
               </h2>
             </div>
-            <p className="text-xs sm:text-sm text-[#404945] max-w-md">
+            <p className="text-xs sm:text-sm text-[#5A6862] max-w-md">
               Setiap proses administrasi, keterbukaan data, dan otentikasi warga memiliki sandaran yuridis formal yang sah
               dan berkekuatan hukum tetap.
             </p>
@@ -508,15 +513,15 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
             {regulasiList.map((item, idx) => (
               <div
                 key={idx}
-                className="bg-white p-5 rounded-xl flex items-start gap-3 shadow-xs border border-[#ddece3] hover:border-[#006c4d]/40 transition-colors"
+                className="bg-white p-5 rounded-xl flex items-start gap-3 shadow-xs border border-slate-200/90 hover:border-[#006c4d]/40 transition-colors"
               >
-                <div className="w-10 h-10 rounded-lg bg-[#e3f1e9] flex items-center justify-center text-[#00251b] flex-shrink-0 mt-0.5">
+                <div className="w-10 h-10 rounded-lg bg-[#e3f1e9] flex items-center justify-center text-[#15211C] flex-shrink-0 mt-0.5">
                   <Icon className="material-symbols-outlined text-[22px]">{item.icon}</Icon>
                 </div>
                 <div>
-                  <span className="text-xs text-[#006c4d] font-bold">{item.tag}</span>
-                  <h4 className="font-display text-sm sm:text-base font-bold text-[#00251b] mt-0.5">{item.title}</h4>
-                  <p className="text-xs text-[#404945] mt-1 leading-relaxed">{item.desc}</p>
+                  <span className="text-xs text-[#038D66] font-bold">{item.tag}</span>
+                  <h4 className="font-display text-sm sm:text-base font-bold text-[#15211C] mt-0.5">{item.title}</h4>
+                  <p className="text-xs text-[#5A6862] mt-1 leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -525,7 +530,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
       </section>
 
       {/* Section: Keamanan Data & Akreditasi Resmi */}
-      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
         <div className="bg-[#083c2e] text-white rounded-3xl p-6 sm:p-8 lg:p-12 shadow-md border border-[#00251b]">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div className="max-w-xl flex flex-col gap-2">
@@ -562,15 +567,15 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
       </section>
 
       {/* Section: Hubungi & Kunjungi Sekretariat Layanan SITAPAK */}
-      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 w-full">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 w-full">
         <div className="mb-8 flex flex-col gap-1">
-          <span className="text-xs sm:text-sm text-[#006c4d] font-bold uppercase tracking-wider">
+          <span className="text-xs sm:text-sm text-[#038D66] font-bold uppercase tracking-wider">
             Pusat Bantuan &amp; Konsultasi
           </span>
-          <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#00251b]">
+          <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#15211C]">
             Hubungi &amp; Kunjungi Sekretariat SITAPAK
           </h2>
-          <p className="text-sm sm:text-base text-[#404945] max-w-2xl">
+          <p className="text-sm sm:text-base text-[#5A6862] max-w-2xl">
             Kami siap mendampingi kebutuhan layanan publik dan permohonan informasi publik secara daring maupun tatap muka.
           </p>
         </div>
@@ -579,71 +584,71 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
           {/* Office Address & Contact List */}
           <div className="lg:col-span-6 flex flex-col gap-4">
             {/* Kantor Diskominfo */}
-            <div className="bg-white p-5 sm:p-6 rounded-2xl shadow-sm flex items-start gap-4 border border-[#ddece3]">
+            <div className="bg-white p-5 sm:p-6 rounded-2xl shadow-sm flex items-start gap-4 border border-slate-200/90">
               <div className="w-12 h-12 rounded-xl bg-[#083c2e] text-white flex items-center justify-center flex-shrink-0">
                 <Icon className="material-symbols-outlined text-[24px]">apartment</Icon>
               </div>
               <div className="flex flex-col">
-                <span className="text-xs text-[#006c4d] font-bold uppercase">Kantor Pengelola Sistem</span>
-                <h3 className="font-display text-base sm:text-lg font-bold text-[#00251b]">Diskominfo Kab. Sidoarjo</h3>
-                <p className="text-xs sm:text-sm text-[#404945] mt-1">
+                <span className="text-xs text-[#038D66] font-bold uppercase">Kantor Pengelola Sistem</span>
+                <h3 className="font-display text-base sm:text-lg font-bold text-[#15211C]">Diskominfo Kab. Sidoarjo</h3>
+                <p className="text-xs sm:text-sm text-[#5A6862] mt-1">
                   Jl. Diponegoro No. 139, Kelurahan Lemahputro, Kec. Sidoarjo, Kabupaten Sidoarjo, Jawa Timur 61218
                 </p>
-                <span className="text-xs font-semibold text-[#00251b] mt-2">Senin – Jumat (07.30 - 15.30 WIB)</span>
+                <span className="text-xs font-semibold text-[#15211C] mt-2">Senin – Jumat (07.30 - 15.30 WIB)</span>
               </div>
             </div>
 
             {/* Pelayanan Tatap Muka MPP */}
-            <div className="bg-white p-5 sm:p-6 rounded-2xl shadow-sm flex items-start gap-4 border border-[#ddece3]">
-              <div className="w-12 h-12 rounded-xl bg-[#88f4c6]/40 text-[#006c4d] flex items-center justify-center flex-shrink-0">
+            <div className="bg-white p-5 sm:p-6 rounded-2xl shadow-sm flex items-start gap-4 border border-slate-200/90">
+              <div className="w-12 h-12 rounded-xl bg-[#88f4c6]/40 text-[#038D66] flex items-center justify-center flex-shrink-0">
                 <Icon className="material-symbols-outlined text-[24px]">counter_1</Icon>
               </div>
               <div className="flex flex-col">
-                <span className="text-xs text-[#006c4d] font-bold uppercase">Loket Tatap Muka Terpadu</span>
-                <h3 className="font-display text-base sm:text-lg font-bold text-[#00251b]">
+                <span className="text-xs text-[#038D66] font-bold uppercase">Loket Tatap Muka Terpadu</span>
+                <h3 className="font-display text-base sm:text-lg font-bold text-[#15211C]">
                   Sentra Mall Pelayanan Publik (MPP)
                 </h3>
-                <p className="text-xs sm:text-sm text-[#404945] mt-1">
+                <p className="text-xs sm:text-sm text-[#5A6862] mt-1">
                   Jl. Lingkar Timur, Desa Bluru Kidul, Kec. Sidoarjo, Kabupaten Sidoarjo, Jawa Timur 61233
                 </p>
-                <span className="text-xs font-semibold text-[#00251b] mt-2">Senin – Jumat (08.00 - 15.00 WIB)</span>
+                <span className="text-xs font-semibold text-[#15211C] mt-2">Senin – Jumat (08.00 - 15.00 WIB)</span>
               </div>
             </div>
 
             {/* Kanal Digital & Call 112 */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-white p-4 rounded-2xl shadow-sm flex items-center gap-3 border border-[#ddece3]">
+              <div className="bg-white p-4 rounded-2xl shadow-sm flex items-center gap-3 border border-slate-200/90">
                 <div className="w-11 h-11 rounded-xl bg-[#ffdad6] text-[#93000a] flex items-center justify-center flex-shrink-0">
                   <Icon className="material-symbols-outlined text-[24px]">phone_in_talk</Icon>
                 </div>
                 <div>
-                  <span className="block text-[11px] uppercase font-bold text-[#404945]">Hotline 24 Jam Bebas Pulsa</span>
+                  <span className="block text-[11px] uppercase font-bold text-[#5A6862]">Hotline 24 Jam Bebas Pulsa</span>
                   <span className="font-display text-xl sm:text-2xl font-extrabold text-[#ba1a1a] tracking-tight">
                     Call 112
                   </span>
                 </div>
               </div>
 
-              <div className="bg-white p-4 rounded-2xl shadow-sm flex items-center gap-3 border border-[#ddece3]">
-                <div className="w-11 h-11 rounded-xl bg-[#88f4c6]/40 text-[#006c4d] flex items-center justify-center flex-shrink-0">
+              <div className="bg-white p-4 rounded-2xl shadow-sm flex items-center gap-3 border border-slate-200/90">
+                <div className="w-11 h-11 rounded-xl bg-[#88f4c6]/40 text-[#038D66] flex items-center justify-center flex-shrink-0">
                   <Icon className="material-symbols-outlined text-[24px]">chat</Icon>
                 </div>
                 <div>
-                  <span className="block text-[11px] uppercase font-bold text-[#404945]">WhatsApp Respon Cepat</span>
-                  <span className="font-display text-base sm:text-lg font-extrabold text-[#00251b]">
+                  <span className="block text-[11px] uppercase font-bold text-[#5A6862]">WhatsApp Respon Cepat</span>
+                  <span className="font-display text-base sm:text-lg font-extrabold text-[#15211C]">
                     0811-3000-112
                   </span>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white p-4 rounded-2xl shadow-sm flex items-center gap-3 border border-[#ddece3]">
-              <div className="w-10 h-10 rounded-xl bg-[#e3f1e9] flex items-center justify-center text-[#00251b] flex-shrink-0">
+            <div className="bg-white p-4 rounded-2xl shadow-sm flex items-center gap-3 border border-slate-200/90">
+              <div className="w-10 h-10 rounded-xl bg-[#e3f1e9] flex items-center justify-center text-[#15211C] flex-shrink-0">
                 <Icon className="material-symbols-outlined text-[22px]">alternate_email</Icon>
               </div>
               <div className="truncate">
-                <span className="block text-[11px] uppercase font-bold text-[#404945]">Surat Elektronik Resmi</span>
-                <span className="text-xs sm:text-sm text-[#006c4d] font-bold">
+                <span className="block text-[11px] uppercase font-bold text-[#5A6862]">Surat Elektronik Resmi</span>
+                <span className="text-xs sm:text-sm text-[#038D66] font-bold">
                   layanan@sidoarjokab.go.id / kominfo@sidoarjokab.go.id
                 </span>
               </div>
@@ -652,14 +657,14 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
 
           {/* Static Map Section & Directions */}
           <div className="lg:col-span-6 flex flex-col h-full">
-            <div className="bg-white p-5 rounded-2xl shadow-sm flex-1 flex flex-col justify-between border border-[#ddece3]">
+            <div className="bg-white p-5 rounded-2xl shadow-sm flex-1 flex flex-col justify-between border border-slate-200/90">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <Icon className="material-symbols-outlined text-[#006c4d] text-[20px]">pin_drop</Icon>
-                  <span className="font-display text-base font-bold text-[#00251b]">Peta Lokasi Kantor Layanan</span>
+                  <Icon className="material-symbols-outlined text-[#038D66] text-[20px]">pin_drop</Icon>
+                  <span className="font-display text-base font-bold text-[#15211C]">Peta Lokasi Kantor Layanan</span>
                 </div>
                 <a
-                  className="text-xs sm:text-sm text-[#006c4d] hover:underline font-bold flex items-center gap-1"
+                  className="text-xs sm:text-sm text-[#038D66] hover:underline font-bold flex items-center gap-1"
                   href="https://maps.google.com/?q=Diskominfo+Kabupaten+Sidoarjo"
                   rel="noopener noreferrer"
                   target="_blank"
@@ -671,25 +676,25 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
 
               {/* Location Map Visual */}
               <div
-                className="w-full h-72 sm:h-80 rounded-xl overflow-hidden bg-cover bg-center shadow-inner relative flex items-end p-4 border border-[#ddece3]"
+                className="w-full h-72 sm:h-80 rounded-xl overflow-hidden bg-cover bg-center shadow-inner relative flex items-end p-4 border border-slate-200/90"
                 style={{
                   backgroundImage: `url('https://lh3.googleusercontent.com/aida-public/AB6AXuB26TSjeRHd_fe7AcFvUyIL6C__WC0PZdsQXEmNCCIPxUC3XZRvY-U7jRemdmr06X6JYlp3rgU8u_l29g-kOYLmaHoxANfRO9KLtlaGzXg6sa6tUOJAe_6naa4kXK4DpKxpGtV5T_oBmz3Z1uVioMhmfvbREnqNj7FsouqrZkWXKt3KwKuXEZ5Mmrj7aMMlshqQ3GUfqsdmOTmn015Z85DF8rZab1P4ccL_4WPbM7Ou')`,
                 }}
               >
-                <div className="bg-white/95 backdrop-blur-sm p-3.5 rounded-xl shadow-md max-w-sm border border-[#ddece3]">
-                  <div className="flex items-center gap-1.5 text-[#00251b] font-bold text-xs sm:text-sm">
-                    <Icon className="material-symbols-outlined text-[#006c4d] text-[18px]">domain</Icon>
+                <div className="bg-white/95 backdrop-blur-sm p-3.5 rounded-xl shadow-md max-w-sm border border-slate-200/90">
+                  <div className="flex items-center gap-1.5 text-[#15211C] font-bold text-xs sm:text-sm">
+                    <Icon className="material-symbols-outlined text-[#038D66] text-[18px]">domain</Icon>
                     <span>Sekretariat SITAPAK &amp; MPP</span>
                   </div>
-                  <p className="text-[12px] text-[#404945] mt-0.5 leading-snug">
+                  <p className="text-[12px] text-[#5A6862] mt-0.5 leading-snug">
                     Bersebelahan dengan Alun-alun Sidoarjo &amp; Sentra Industri UMKM Sidoarjo.
                   </p>
                 </div>
               </div>
 
-              <div className="mt-4 p-3 bg-[#e9f7ee] rounded-xl flex items-center justify-between border border-[#ddece3]">
-                <div className="flex items-center gap-2 text-[#404945] text-xs sm:text-sm">
-                  <Icon className="material-symbols-outlined text-[18px] text-[#006c4d]">accessible</Icon>
+              <div className="mt-4 p-3 bg-[#e9f7ee] rounded-xl flex items-center justify-between border border-slate-200/90">
+                <div className="flex items-center gap-2 text-[#5A6862] text-xs sm:text-sm">
+                  <Icon className="material-symbols-outlined text-[18px] text-[#038D66]">accessible</Icon>
                   <span>Akses ramah disabilitas, parkir gratis luas, ruang laktasi, &amp; internet publik cepat.</span>
                 </div>
               </div>
@@ -699,13 +704,13 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
       </section>
 
       {/* Interactive Quick FAQ / Accordion */}
-      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pb-14 sm:pb-20 w-full">
-        <div className="bg-white rounded-3xl p-6 sm:p-8 lg:p-12 shadow-sm border border-[#ddece3]">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 sm:pb-20 w-full">
+        <div className="bg-white rounded-3xl p-6 sm:p-8 lg:p-12 shadow-sm border border-slate-200/90">
           <div className="mb-6 sm:mb-8">
-            <span className="text-xs sm:text-sm text-[#006c4d] font-bold uppercase tracking-wider">
+            <span className="text-xs sm:text-sm text-[#038D66] font-bold uppercase tracking-wider">
               Informasi Tambahan
             </span>
-            <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#00251b]">
+            <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#15211C]">
               Pertanyaan Umum Terkait Tata Kelola
             </h2>
           </div>
@@ -716,17 +721,17 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
               return (
                 <div
                   key={item.id}
-                  className="rounded-xl bg-[#e9f7ee] p-4 sm:p-5 cursor-pointer transition-colors hover:bg-[#e3f1e9] border border-[#ddece3]"
+                  className="rounded-xl bg-[#e9f7ee] p-4 sm:p-5 cursor-pointer transition-colors hover:bg-[#e3f1e9] border border-slate-200/90"
                   onClick={() => toggleFaq(item.id)}
                 >
                   <div className="flex items-center justify-between gap-3">
-                    <h4 className="font-display text-sm sm:text-base text-[#00251b] font-bold flex items-center gap-2.5">
-                      <Icon className="material-symbols-outlined text-[#006c4d] text-[20px] flex-shrink-0">
+                    <h4 className="font-display text-sm sm:text-base text-[#15211C] font-bold flex items-center gap-2.5">
+                      <Icon className="material-symbols-outlined text-[#038D66] text-[20px] flex-shrink-0">
                         help_outline
                       </Icon>
                       <span>{item.q}</span>
                     </h4>
-                    <Icon className={`material-symbols-outlined text-[#00251b] text-[20px] transition-transform duration-300 flex-shrink-0 ${
+                    <Icon className={`material-symbols-outlined text-[#15211C] text-[20px] transition-transform duration-300 flex-shrink-0 ${
                         isOpen ? 'rotate-180' : 'rotate-0'
                       }`}
                     >
@@ -735,7 +740,7 @@ export const TentangPage: React.FC<TentangPageProps> = ({ onNavigateSection, onN
                   </div>
 
                   {isOpen && (
-                    <div className="mt-3 pt-3 border-t border-[#ddece3] text-[#404945] text-xs sm:text-sm leading-relaxed">
+                    <div className="mt-3 pt-3 border-t border-slate-200/90 text-[#5A6862] text-xs sm:text-sm leading-relaxed">
                       {item.a}
                     </div>
                   )}

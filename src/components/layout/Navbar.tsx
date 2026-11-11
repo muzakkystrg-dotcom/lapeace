@@ -98,7 +98,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     setMobileMenuOpen(false);
   };
 
-  // Helper for user initials
   const userName = currentUser?.fullName || 'Budi Santoso';
   const userInitials = userName
     .split(' ')
@@ -333,7 +332,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
             </div>
           ) : (
-            /* GUEST STATE (Not Logged In) */
+            /* Guest navigation */
             <div className="hidden sm:flex items-center gap-3">
               <button
                 type="button"

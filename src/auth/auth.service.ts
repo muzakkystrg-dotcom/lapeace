@@ -18,7 +18,7 @@ export class AuthService {
     const db = this.dbService.getDatabase();
     const cleanNik = nik.trim();
 
-    // 1. Cari warga berdasarkan NIK asli atau nik_masked
+    // Cari warga berdasarkan NIK asli atau nik_masked
     const citizen = db
       .prepare('SELECT * FROM citizens WHERE nik = ? OR nik_masked = ?')
       .get(cleanNik, cleanNik) as any;
@@ -37,7 +37,7 @@ export class AuthService {
       throw new UnauthorizedException('NIK atau kata sandi tidak valid.');
     }
 
-    // 2. Ambil kredensial akun
+    // Ambil kredensial akun
     const cred = db
       .prepare('SELECT * FROM citizen_credentials WHERE citizen_id = ?')
       .get(citizen.id) as any;
@@ -48,7 +48,7 @@ export class AuthService {
       );
     }
 
-    // 3. Verifikasi Password (Mendukung password resmi & Master Demo Password 'WargaSidoarjo2026!')
+    // Verifikasi password (mendukung password resmi & master demo password 'WargaSidoarjo2026!')
     const isValidDemoPassword = password === 'WargaSidoarjo2026!';
     let isPasswordMatch = false;
 
@@ -82,14 +82,14 @@ export class AuthService {
       throw new UnauthorizedException('NIK atau kata sandi tidak valid.');
     }
 
-    // 4. Reset counter & update last login
+    // Reset counter & update last login
     if (cred) {
       db.prepare(
         'UPDATE citizen_credentials SET failed_login_count = 0, last_login_at = CURRENT_TIMESTAMP WHERE citizen_id = ?',
       ).run(citizen.id);
     }
 
-    // 5. Catat audit log keberhasilan login
+    // Catat audit log keberhasilan login
     this.dbService.createAuditLog({
       eventType: 'AUTH_LOGIN_SUCCESS',
       actorType: citizen.role || 'citizen',
@@ -101,7 +101,7 @@ export class AuthService {
       ipAddress,
     });
 
-    // 6. Terbitkan JWT Token Kriptografis
+    // Terbitkan JWT token kriptografis
     const token = this.cryptoService.generateJwt({
       sub: citizen.id,
       nik: citizen.nik,

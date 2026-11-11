@@ -17,7 +17,7 @@ export class CryptoService {
     this.blindIndexKey = crypto.createHash('sha256').update(rawKey + '_blind_index_salt').digest();
   }
 
-  // --- PASSWORD HASHING (PBKDF2 SHA-512 SECURE WORK FACTOR) ---
+  // Password hashing with PBKDF2 SHA-512
   hashPassword(password: string, existingSalt?: string): { hash: string; salt: string } {
     const salt = existingSalt || crypto.randomBytes(16).toString('hex');
     const hash = crypto.pbkdf2Sync(password, salt, 100000, 32, 'sha512').toString('hex');
@@ -33,7 +33,7 @@ export class CryptoService {
     return crypto.timingSafeEqual(bufferA, bufferB);
   }
 
-  // --- AES-256-GCM ENCRYPTION AT REST (PDP COMPLIANCE) ---
+  // AES-256-GCM encryption at rest (PDP compliance)
   encrypt(plaintext: string): string {
     if (!plaintext) return '';
     const iv = crypto.randomBytes(12); // Standard 96-bit IV for GCM
@@ -66,12 +66,12 @@ export class CryptoService {
     return decrypted;
   }
 
-  // --- BLIND INDEXING (HMAC-SHA256 SEARCHABLE CIPHERTEXT) ---
+  // Blind indexing with HMAC-SHA256 searchable ciphertext
   generateBlindIndex(value: string): string {
     return crypto.createHmac('sha256', this.blindIndexKey).update(value.trim()).digest('hex');
   }
 
-  // --- JWT GENERATION & VERIFICATION (HMAC-SHA256) ---
+  // JWT generation and verification (HMAC-SHA256)
   generateJwt(payload: Record<string, any>, expiresInSeconds = 86400): string {
     const header = { alg: 'HS256', typ: 'JWT' };
     const now = Math.floor(Date.now() / 1000);

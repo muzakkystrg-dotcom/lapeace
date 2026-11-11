@@ -1,8 +1,6 @@
 import { Icon } from '../components/common/Icon';
 import React, { useState, useMemo } from 'react';
 
-// --- DATA TYPES & MOCK INTERFACES ---
-
 export interface DatasetItem {
   id: string;
   title: string;
@@ -35,8 +33,6 @@ export interface StrategicProject {
   progres: number;
   status: 'Pengerjaan 85%' | 'Pengerjaan 65%' | 'Selesai 100%' | 'Tahap Akhir 92%';
 }
-
-// --- DATA STORE ---
 
 const datasetsData: DatasetItem[] = [
   {
@@ -200,14 +196,12 @@ const strategicProjects: StrategicProject[] = [
 ];
 
 export const DataPublikPage: React.FC = () => {
-  // State variables for interactive controls
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedYear, setSelectedYear] = useState('2026');
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [viewMode, setViewMode] = useState<'chart' | 'table'>('chart');
   const [budgetTab, setBudgetTab] = useState<'ringkasan' | 'pendapatan' | 'belanja' | 'pembiayaan'>('ringkasan');
   
-  // Modals & Drawers
   const [previewDataset, setPreviewDataset] = useState<DatasetItem | null>(null);
   const [apiModalOpen, setApiModalOpen] = useState(false);
   const [ppidModalOpen, setPpidModalOpen] = useState(false);
@@ -215,7 +209,6 @@ export const DataPublikPage: React.FC = () => {
   const [projectModalOpen, setProjectModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // PPID Form state
   const [ppidForm, setPpidForm] = useState({
     nama: '',
     nik: '',
@@ -264,7 +257,7 @@ export const DataPublikPage: React.FC = () => {
   };
 
   return (
-    <div className="w-full bg-[#effdf4] min-h-screen text-[#121e19] font-['Inter',sans-serif]">
+    <div className="w-full bg-[#F8FAF9] min-h-screen text-[#121e19] font-['Inter',sans-serif]">
       
       {/* Toast Alert Feedback */}
       {toastMessage && (
@@ -277,43 +270,48 @@ export const DataPublikPage: React.FC = () => {
       )}
 
       {/* ========================================================================= */}
-      {/* 1. BREADCRUMBS & EXECUTIVE HEADER                                         */}
+      {/* 1. BREADCRUMBS & EXECUTIVE HEADER (Beranda Style)                         */}
       {/* ========================================================================= */}
-      <section className="w-full px-4 sm:px-6 lg:px-8 py-6 bg-[#effdf4]">
-        <div className="max-w-[1440px] mx-auto flex flex-col gap-4">
+      <section className="relative pt-6 pb-12 overflow-hidden bg-gradient-to-b from-[#F2FAF6] to-[#F8FAF9] border-b border-slate-200/80">
+        <div 
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: `radial-gradient(#083C2E 1px, transparent 1px)`,
+            backgroundSize: '24px 24px',
+          }}
+        />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col gap-4">
           
           {/* Breadcrumb Bar */}
           <div className="flex items-center justify-between flex-wrap gap-2">
-            <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-[#404945]">
-              <a className="hover:text-[#00251b] transition-colors flex items-center gap-1" href="#beranda">
-                <Icon className="material-symbols-outlined text-[16px]">home</Icon>
+            <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs sm:text-sm text-slate-500 font-medium">
+              <a className="hover:text-[#038D66] transition-colors flex items-center gap-1" href="#beranda">
+                <Icon className="text-[16px]">home</Icon>
                 <span>Beranda</span>
               </a>
-              <Icon className="material-symbols-outlined text-[14px] text-[#717974]">chevron_right</Icon>
-              <span className="px-2.5 py-1 rounded-full bg-[#8af7c9] text-[#002115] font-semibold flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#006c4d]"></span>
+              <Icon className="text-[14px] text-slate-400">chevron_right</Icon>
+              <span className="text-[#038D66] font-semibold">
                 Data Publik &amp; Transparansi
               </span>
             </nav>
-            <div className="flex items-center gap-2 text-[#404945] text-xs font-medium">
-              <Icon className="material-symbols-outlined text-[16px] text-[#006c4d]">verified_user</Icon>
-              <span className="hidden sm:inline">Satu Data Indonesia v2.4 Compliant</span>
-              <span className="text-[#717974] hidden sm:inline">•</span>
-              <span className="font-semibold text-[#00251b]">Katalog Resmi Pemkab Sidoarjo</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100/80 border border-emerald-200/70 text-emerald-900 text-xs font-semibold">
+              <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+              <span>Satu Data Indonesia • Katalog Resmi Pemkab Sidoarjo</span>
             </div>
           </div>
 
           {/* Main Header Block with Context Actions */}
-          <div className="p-6 sm:p-8 rounded-2xl bg-white shadow-sm border border-[#ddece3] flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+          <div className="p-6 sm:p-8 rounded-2xl bg-white shadow-sm border border-slate-200/90 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div className="space-y-2 max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#006c4d]/10 text-[#006c4d] text-xs font-bold tracking-wide">
-                <Icon className="material-symbols-outlined text-[16px]">hub</Icon>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100/70 text-emerald-900 border border-emerald-200/60 text-xs font-bold tracking-wide">
+                <Icon className="text-[16px] text-[#038D66]">hub</Icon>
                 PORTAL SATU DATA &amp; KETERBUKAAN INFORMASI PUBLIK (KIP)
               </div>
-              <h1 className="font-['Plus_Jakarta_Sans',sans-serif] text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#00251b] tracking-tight">
+              <h1 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#15211C] tracking-tight">
                 Data Publik &amp; Transparansi Sidoarjo
               </h1>
-              <p className="text-sm sm:text-base text-[#404945] leading-relaxed">
+              <p className="text-sm sm:text-base text-[#5A6862] leading-relaxed">
                 Informasi anggaran daerah, demografi kependudukan, dan capaian program pembangunan disajikan secara sederhana, transparan, dan mudah dipahami seluruh warga.
               </p>
             </div>
@@ -323,23 +321,23 @@ export const DataPublikPage: React.FC = () => {
               
               {/* Live Search Bar */}
               <div className="relative flex-1 sm:w-64">
-                <Icon className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[#717974] text-[20px]">
+                <Icon className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">
                   search
                 </Icon>
                 <input
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full h-11 pl-10 pr-9 rounded-xl bg-[#e3f1e9] text-[#121e19] text-sm placeholder:text-[#717974] focus:outline-none focus:ring-2 focus:ring-[#006c4d]/30 focus:bg-[#e9f7ee] transition-all"
+                  className="w-full h-11 pl-10 pr-9 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 transition-all"
                   placeholder="Cari data, anggaran, topik..."
                   type="text"
                 />
                 {searchQuery && (
                   <button
                     onClick={() => setSearchQuery('')}
-                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#717974] hover:text-[#00251b]"
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
                     title="Hapus pencarian"
                   >
-                    <Icon className="material-symbols-outlined text-[16px]">close</Icon>
+                    <Icon className="text-[16px]">close</Icon>
                   </button>
                 )}
               </div>
@@ -350,13 +348,13 @@ export const DataPublikPage: React.FC = () => {
                   aria-label="Tahun Anggaran"
                   value={selectedYear}
                   onChange={(e) => setSelectedYear(e.target.value)}
-                  className="h-11 pl-3.5 pr-8 rounded-xl bg-[#e3f1e9] text-[#00251b] text-sm font-semibold appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#006c4d]/30"
+                  className="h-11 pl-3.5 pr-8 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-sm font-semibold appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600"
                 >
                   <option value="2026">Tahun Anggaran 2026</option>
                   <option value="2025">Tahun Anggaran 2025</option>
                   <option value="2024">Tahun Anggaran 2024</option>
                 </select>
-                <Icon className="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#404945] text-[18px]">
+                <Icon className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500 text-[18px]">
                   expand_more
                 </Icon>
               </div>
@@ -364,10 +362,10 @@ export const DataPublikPage: React.FC = () => {
               {/* Download Executive PDF */}
               <button
                 onClick={() => handleDownloadFile(`Ringkasan Eksekutif APBD Sidoarjo ${selectedYear}`, 'PDF')}
-                className="h-11 px-4 rounded-xl bg-[#006c4d] text-white text-sm font-semibold flex items-center justify-center gap-2 hover:bg-[#005139] active:scale-95 transition-all shadow-sm shrink-0"
+                className="h-11 px-4 rounded-xl bg-[#038D66] hover:bg-[#026E4F] text-white text-sm font-semibold flex items-center justify-center gap-2 active:scale-95 transition-all shadow-sm shrink-0 cursor-pointer"
                 type="button"
               >
-                <Icon className="material-symbols-outlined text-[18px]">picture_as_pdf</Icon>
+                <Icon className="text-[18px]">picture_as_pdf</Icon>
                 <span>Unduh Rekap (PDF)</span>
               </button>
             </div>
@@ -378,22 +376,22 @@ export const DataPublikPage: React.FC = () => {
       {/* ========================================================================= */}
       {/* 2. KEY CIVIC METRIC CARDS (4 Highlight Cards)                             */}
       {/* ========================================================================= */}
-      <section className="w-full px-4 sm:px-6 lg:px-8 pb-6 bg-[#effdf4]">
-        <div className="max-w-[1440px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <section className="w-full px-4 sm:px-6 lg:px-8 pb-6 bg-[#F8FAF9]">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           
           {/* Card 1: APBD */}
-          <div className="p-6 rounded-2xl bg-white shadow-sm border border-[#ddece3] flex flex-col justify-between gap-4 hover:-translate-y-0.5 transition-all duration-200">
+          <div className="p-6 rounded-2xl bg-white shadow-sm border border-slate-200 flex flex-col justify-between gap-4 hover:-translate-y-0.5 transition-all duration-200">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-[#404945]">Total APBD Sidoarjo {selectedYear}</span>
+                <span className="text-xs font-semibold text-[#5A6862]">Total APBD Sidoarjo {selectedYear}</span>
                 <span className="p-1.5 rounded-lg bg-[#ffe087] text-[#231a00] flex items-center justify-center">
                   <Icon className="material-symbols-outlined text-[18px]">account_balance_wallet</Icon>
                 </span>
               </div>
-              <div className="font-['Plus_Jakarta_Sans',sans-serif] text-2xl sm:text-3xl font-extrabold text-[#00251b] tracking-tight">
+              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#15211C] tracking-tight">
                 Rp 5,28 <span className="text-lg font-bold text-[#735c00]">Triliun</span>
               </div>
-              <p className="text-xs text-[#404945] leading-normal">
+              <p className="text-xs text-[#5A6862] leading-normal">
                 Serapan Terealisasi: <strong className="text-[#006c4d] font-bold">84,6% (Rp 4,46 T)</strong> • Sesuai Target
               </p>
             </div>
@@ -406,42 +404,42 @@ export const DataPublikPage: React.FC = () => {
           </div>
 
           {/* Card 2: Demografi */}
-          <div className="p-6 rounded-2xl bg-white shadow-sm border border-[#ddece3] flex flex-col justify-between gap-4 hover:-translate-y-0.5 transition-all duration-200">
+          <div className="p-6 rounded-2xl bg-white shadow-sm border border-slate-200 flex flex-col justify-between gap-4 hover:-translate-y-0.5 transition-all duration-200">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-[#404945]">Jumlah Penduduk</span>
+                <span className="text-xs font-semibold text-[#5A6862]">Jumlah Penduduk</span>
                 <span className="p-1.5 rounded-lg bg-[#88f4c6] text-[#007151] flex items-center justify-center">
                   <Icon className="material-symbols-outlined text-[18px]">groups</Icon>
                 </span>
               </div>
-              <div className="font-['Plus_Jakarta_Sans',sans-serif] text-2xl sm:text-3xl font-extrabold text-[#00251b] tracking-tight">
+              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#15211C] tracking-tight">
                 2,08 <span className="text-lg font-bold text-[#006c4d]">Juta Jiwa</span>
               </div>
-              <p className="text-xs text-[#404945] leading-normal">
+              <p className="text-xs text-[#5A6862] leading-normal">
                 1,05 Jt Laki-laki <span className="text-[#717974]">•</span> 1,03 Jt Perempuan
               </p>
             </div>
             <div className="pt-2 border-t border-[#e3f1e9] flex items-center justify-between">
-              <span className="px-2.5 py-0.5 rounded-full bg-[#ddece3] text-[#404945] text-xs font-bold">
+              <span className="px-2.5 py-0.5 rounded-full bg-[#ddece3] text-[#5A6862] text-xs font-bold">
                 18 Kec. / 349 Desa
               </span>
-              <Icon className="material-symbols-outlined text-[18px] text-[#404945]">location_city</Icon>
+              <Icon className="material-symbols-outlined text-[18px] text-[#5A6862]">location_city</Icon>
             </div>
           </div>
 
           {/* Card 3: IPM */}
-          <div className="p-6 rounded-2xl bg-white shadow-sm border border-[#ddece3] flex flex-col justify-between gap-4 hover:-translate-y-0.5 transition-all duration-200">
+          <div className="p-6 rounded-2xl bg-white shadow-sm border border-slate-200 flex flex-col justify-between gap-4 hover:-translate-y-0.5 transition-all duration-200">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-[#404945]">Indeks Pembangunan Manusia</span>
+                <span className="text-xs font-semibold text-[#5A6862]">Indeks Pembangunan Manusia</span>
                 <span className="p-1.5 rounded-lg bg-[#bbedd9] text-[#002117] flex items-center justify-center">
                   <Icon className="material-symbols-outlined text-[18px]">award_star</Icon>
                 </span>
               </div>
-              <div className="font-['Plus_Jakarta_Sans',sans-serif] text-2xl sm:text-3xl font-extrabold text-[#00251b] tracking-tight">
+              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#15211C] tracking-tight">
                 81,64 <span className="text-lg font-bold text-[#006c4d]">Poin</span>
               </div>
-              <p className="text-xs text-[#404945] leading-normal">
+              <p className="text-xs text-[#5A6862] leading-normal">
                 +0,58 Poin kenaikan tahunan • Sangat Tinggi
               </p>
             </div>
@@ -454,18 +452,18 @@ export const DataPublikPage: React.FC = () => {
           </div>
 
           {/* Card 4: KIP */}
-          <div className="p-6 rounded-2xl bg-white shadow-sm border border-[#ddece3] flex flex-col justify-between gap-4 hover:-translate-y-0.5 transition-all duration-200">
+          <div className="p-6 rounded-2xl bg-white shadow-sm border border-slate-200 flex flex-col justify-between gap-4 hover:-translate-y-0.5 transition-all duration-200">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-[#404945]">Keterbukaan Informasi (KIP)</span>
+                <span className="text-xs font-semibold text-[#5A6862]">Keterbukaan Informasi (KIP)</span>
                 <span className="p-1.5 rounded-lg bg-[#ffe087] text-[#231a00] flex items-center justify-center">
                   <Icon className="material-symbols-outlined text-[18px]">verified</Icon>
                 </span>
               </div>
-              <div className="font-['Plus_Jakarta_Sans',sans-serif] text-2xl sm:text-3xl font-extrabold text-[#00251b] tracking-tight">
+              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#15211C] tracking-tight">
                 96,2% <span className="text-lg font-bold text-[#735c00]">Informatif</span>
               </div>
-              <p className="text-xs text-[#404945] leading-normal">
+              <p className="text-xs text-[#5A6862] leading-normal">
                 Kepatuhan UU KIP No. 14/2008 &amp; Satu Data
               </p>
             </div>
@@ -480,10 +478,10 @@ export const DataPublikPage: React.FC = () => {
         </div>
 
         {/* METRIK REAL-TIME TRANSPARANSI ANGGARAN STRIP */}
-        <div className="max-w-[1440px] mx-auto mt-4 p-4 rounded-xl bg-[#083c2e] text-white flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto mt-4 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#083C2E] via-[#064233] to-[#04281E] border border-emerald-800/40 text-white shadow-md flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-[#8af7c9] text-[#002115] flex items-center justify-center shrink-0">
-              <Icon className="material-symbols-outlined text-[24px]">account_balance</Icon>
+            <div className="w-10 h-10 rounded-xl bg-[#8af7c9] text-[#002115] flex items-center justify-center shrink-0">
+              <Icon className="text-[24px]">account_balance</Icon>
             </div>
             <div>
               <div className="text-xs font-bold tracking-wider uppercase text-[#8af7c9]">Keseimbangan Struktur Fiskal APBD 2026</div>
@@ -502,7 +500,7 @@ export const DataPublikPage: React.FC = () => {
                 const el = document.getElementById('alokasi-anggaran');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-3 py-1 text-xs bg-white/10 hover:bg-white/20 rounded-lg text-white font-medium transition-colors"
+              className="px-3 py-1 text-xs bg-white/10 hover:bg-white/20 rounded-lg text-white font-medium transition-colors cursor-pointer"
             >
               Lihat Rincian
             </button>
@@ -513,8 +511,8 @@ export const DataPublikPage: React.FC = () => {
       {/* ========================================================================= */}
       {/* 3. SECTION: VISUALISASI ANGGARAN & APBD RAMAH WARGA                        */}
       {/* ========================================================================= */}
-      <section id="alokasi-anggaran" className="w-full px-4 sm:px-6 lg:px-8 pb-6 bg-[#effdf4]">
-        <div className="max-w-[1440px] mx-auto flex flex-col gap-4">
+      <section id="alokasi-anggaran" className="w-full px-4 sm:px-6 lg:px-8 pb-6 bg-[#F8FAF9]">
+        <div className="max-w-7xl mx-auto flex flex-col gap-4">
           
           {/* Section Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 pb-1">
@@ -523,24 +521,24 @@ export const DataPublikPage: React.FC = () => {
                 <Icon className="material-symbols-outlined text-[15px]">payments</Icon>
                 Transparansi Keuangan
               </div>
-              <h2 className="font-['Plus_Jakarta_Sans',sans-serif] text-xl sm:text-2xl font-bold text-[#00251b]">
+              <h2 className="font-display text-xl sm:text-2xl font-bold text-[#15211C]">
                 Alokasi APBD Sidoarjo {selectedYear}: Ke Mana Uang Rakyat Digunakan?
               </h2>
-              <p className="text-sm text-[#404945] max-w-3xl">
+              <p className="text-sm text-[#5A6862] max-w-3xl">
                 Penjelasan peruntukan dana pajak dan pendapatan daerah agar setiap warga dapat memantau prioritas pembangunan secara akuntabel.
               </p>
             </div>
             
             <div className="flex items-center gap-3">
               {/* Toggle Chart vs Table */}
-              <div className="flex items-center bg-white border border-[#ddece3] rounded-xl p-1 shadow-xs">
+              <div className="flex items-center bg-white border border-slate-200 rounded-xl p-1 shadow-xs">
                 <button
                   type="button"
                   onClick={() => setViewMode('chart')}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${
                     viewMode === 'chart'
                       ? 'bg-[#00251b] text-white shadow-xs'
-                      : 'text-[#404945] hover:text-[#00251b]'
+                      : 'text-[#5A6862] hover:text-[#15211C]'
                   }`}
                 >
                   <Icon className="material-symbols-outlined text-[16px]">bar_chart</Icon>
@@ -552,7 +550,7 @@ export const DataPublikPage: React.FC = () => {
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${
                     viewMode === 'table'
                       ? 'bg-[#00251b] text-white shadow-xs'
-                      : 'text-[#404945] hover:text-[#00251b]'
+                      : 'text-[#5A6862] hover:text-[#15211C]'
                   }`}
                 >
                   <Icon className="material-symbols-outlined text-[16px]">table_chart</Icon>
@@ -560,8 +558,8 @@ export const DataPublikPage: React.FC = () => {
                 </button>
               </div>
 
-              <div className="hidden sm:flex items-center gap-1.5 text-xs font-medium text-[#404945]">
-                <span className="w-2 h-2 rounded-full bg-[#006c4d]"></span>
+              <div className="hidden sm:flex items-center gap-1.5 text-xs font-medium text-[#5A6862]">
+                <span className="w-2 h-2 rounded-full bg-[#038D66]"></span>
                 <span>Audit BPK: WTP Ke-11</span>
               </div>
             </div>
@@ -571,16 +569,16 @@ export const DataPublikPage: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             
             {/* Left: Sector Allocations (7 Columns) */}
-            <div className="lg:col-span-7 p-6 rounded-2xl bg-white shadow-sm border border-[#ddece3] flex flex-col justify-between gap-6">
+            <div className="lg:col-span-7 p-6 rounded-2xl bg-white shadow-sm border border-slate-200 flex flex-col justify-between gap-6">
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h3 className="font-['Plus_Jakarta_Sans',sans-serif] text-base sm:text-lg font-bold text-[#00251b]">
+                    <h3 className="font-display text-base sm:text-lg font-bold text-[#15211C]">
                       Distribusi 6 Sektor Prioritas
                     </h3>
-                    <p className="text-xs text-[#404945]">Proporsi persentase belanja langsung dari pagu Rp 5,28 T</p>
+                    <p className="text-xs text-[#5A6862]">Proporsi persentase belanja langsung dari pagu Rp 5,28 T</p>
                   </div>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-lg bg-[#e3f1e9] text-[#404945]">
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-lg bg-[#e3f1e9] text-[#5A6862]">
                     Pagu APBD {selectedYear}
                   </span>
                 </div>
@@ -590,132 +588,132 @@ export const DataPublikPage: React.FC = () => {
                   <div className="space-y-4">
                     
                     {/* Item 1: Pendidikan */}
-                    <div className="space-y-1.5 p-3 rounded-xl hover:bg-[#effdf4]/70 transition-colors">
+                    <div className="space-y-1.5 p-3 rounded-xl hover:bg-[#F8FAF9]/70 transition-colors">
                       <div className="flex items-center justify-between text-xs sm:text-sm">
-                        <div className="flex items-center gap-2 text-[#00251b] font-semibold flex-wrap">
-                          <span className="w-2.5 h-2.5 rounded-full bg-[#006c4d]"></span>
+                        <div className="flex items-center gap-2 text-[#15211C] font-semibold flex-wrap">
+                          <span className="w-2.5 h-2.5 rounded-full bg-[#038D66]"></span>
                           <span>Pendidikan, Beasiswa &amp; Guru</span>
                           <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#8af7c9] text-[#002115] font-semibold">
                             Mandatori Min. 20% Terpenuhi
                           </span>
                         </div>
-                        <span className="text-[#00251b] font-bold">
-                          24,8% <span className="font-normal text-[#404945] text-xs">(Rp 1,31 T)</span>
+                        <span className="text-[#15211C] font-bold">
+                          24,8% <span className="font-normal text-[#5A6862] text-xs">(Rp 1,31 T)</span>
                         </span>
                       </div>
                       <div className="w-full h-3 rounded-full bg-[#e3f1e9] overflow-hidden">
-                        <div className="h-full bg-[#006c4d] rounded-full transition-all duration-700" style={{ width: '24.8%' }}></div>
+                        <div className="h-full bg-[#038D66] rounded-full transition-all duration-700" style={{ width: '24.8%' }}></div>
                       </div>
-                      <div className="flex justify-between text-xs text-[#404945]">
+                      <div className="flex justify-between text-xs text-[#5A6862]">
                         <span>Renovasi 182 Sekolah, Beasiswa 10.000 Mahasiswa &amp; BOSDA</span>
                         <span className="font-semibold text-[#006c4d]">Serapan 81,2%</span>
                       </div>
                     </div>
 
                     {/* Item 2: Infrastruktur & Jalan */}
-                    <div className="space-y-1.5 p-3 rounded-xl hover:bg-[#effdf4]/70 transition-colors">
+                    <div className="space-y-1.5 p-3 rounded-xl hover:bg-[#F8FAF9]/70 transition-colors">
                       <div className="flex items-center justify-between text-xs sm:text-sm">
-                        <div className="flex items-center gap-2 text-[#00251b] font-semibold flex-wrap">
+                        <div className="flex items-center gap-2 text-[#15211C] font-semibold flex-wrap">
                           <span className="w-2.5 h-2.5 rounded-full bg-[#083c2e]"></span>
                           <span>Infrastruktur &amp; Betonisasi Jalan</span>
-                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#ddece3] text-[#404945] font-semibold">
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#ddece3] text-[#5A6862] font-semibold">
                             Betonisasi &amp; Drainase
                           </span>
                         </div>
-                        <span className="text-[#00251b] font-bold">
-                          21,5% <span className="font-normal text-[#404945] text-xs">(Rp 1,13 T)</span>
+                        <span className="text-[#15211C] font-bold">
+                          21,5% <span className="font-normal text-[#5A6862] text-xs">(Rp 1,13 T)</span>
                         </span>
                       </div>
                       <div className="w-full h-3 rounded-full bg-[#e3f1e9] overflow-hidden">
                         <div className="h-full bg-[#083c2e] rounded-full transition-all duration-700" style={{ width: '21.5%' }}></div>
                       </div>
-                      <div className="flex justify-between text-xs text-[#404945]">
+                      <div className="flex justify-between text-xs text-[#5A6862]">
                         <span>Penyelesaian Flyover, 142 Titik Jalan Beton, Normalisasi Sungai</span>
                         <span className="font-semibold text-[#006c4d]">Serapan 74,5%</span>
                       </div>
                     </div>
 
                     {/* Item 3: Kesehatan */}
-                    <div className="space-y-1.5 p-3 rounded-xl hover:bg-[#effdf4]/70 transition-colors">
+                    <div className="space-y-1.5 p-3 rounded-xl hover:bg-[#F8FAF9]/70 transition-colors">
                       <div className="flex items-center justify-between text-xs sm:text-sm">
-                        <div className="flex items-center gap-2 text-[#00251b] font-semibold flex-wrap">
+                        <div className="flex items-center gap-2 text-[#15211C] font-semibold flex-wrap">
                           <span className="w-2.5 h-2.5 rounded-full bg-[#cfa700]"></span>
                           <span>Kesehatan &amp; Fasilitas Puskesmas</span>
                           <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#ffe087] text-[#231a00] font-semibold">
                             Universal Health Care
                           </span>
                         </div>
-                        <span className="text-[#00251b] font-bold">
-                          18,2% <span className="font-normal text-[#404945] text-xs">(Rp 960 Miliar)</span>
+                        <span className="text-[#15211C] font-bold">
+                          18,2% <span className="font-normal text-[#5A6862] text-xs">(Rp 960 Miliar)</span>
                         </span>
                       </div>
                       <div className="w-full h-3 rounded-full bg-[#e3f1e9] overflow-hidden">
                         <div className="h-full bg-[#735c00] rounded-full transition-all duration-700" style={{ width: '18.2%' }}></div>
                       </div>
-                      <div className="flex justify-between text-xs text-[#404945]">
+                      <div className="flex justify-between text-xs text-[#5A6862]">
                         <span>Subsidi BPJS PBI Sidoarjo, Revitalisasi 26 Puskesmas Pembantu</span>
                         <span className="font-semibold text-[#006c4d]">Serapan 86,0%</span>
                       </div>
                     </div>
 
                     {/* Item 4: Pelayanan Digital */}
-                    <div className="space-y-1.5 p-3 rounded-xl hover:bg-[#effdf4]/70 transition-colors">
+                    <div className="space-y-1.5 p-3 rounded-xl hover:bg-[#F8FAF9]/70 transition-colors">
                       <div className="flex items-center justify-between text-xs sm:text-sm">
-                        <div className="flex items-center gap-2 text-[#00251b] font-semibold flex-wrap">
+                        <div className="flex items-center gap-2 text-[#15211C] font-semibold flex-wrap">
                           <span className="w-2.5 h-2.5 rounded-full bg-[#88f4c6]"></span>
                           <span>Pelayanan Publik &amp; MPP Digital</span>
-                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#ddece3] text-[#404945] font-semibold">
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#ddece3] text-[#5A6862] font-semibold">
                             SITAPAK &amp; Plavon
                           </span>
                         </div>
-                        <span className="text-[#00251b] font-bold">
-                          15,4% <span className="font-normal text-[#404945] text-xs">(Rp 813 Miliar)</span>
+                        <span className="text-[#15211C] font-bold">
+                          15,4% <span className="font-normal text-[#5A6862] text-xs">(Rp 813 Miliar)</span>
                         </span>
                       </div>
                       <div className="w-full h-3 rounded-full bg-[#e3f1e9] overflow-hidden">
                         <div className="h-full bg-[#6edaae] rounded-full transition-all duration-700" style={{ width: '15.4%' }}></div>
                       </div>
-                      <div className="flex justify-between text-xs text-[#404945]">
+                      <div className="flex justify-between text-xs text-[#5A6862]">
                         <span>Sentra Layanan Kecamatan, Internet Gratis 349 Balai RW</span>
                         <span className="font-semibold text-[#006c4d]">Serapan 79,8%</span>
                       </div>
                     </div>
 
                     {/* Item 5: Ekonomi & Pangan */}
-                    <div className="space-y-1.5 p-3 rounded-xl hover:bg-[#effdf4]/70 transition-colors">
+                    <div className="space-y-1.5 p-3 rounded-xl hover:bg-[#F8FAF9]/70 transition-colors">
                       <div className="flex items-center justify-between text-xs sm:text-sm">
-                        <div className="flex items-center gap-2 text-[#00251b] font-semibold">
+                        <div className="flex items-center gap-2 text-[#15211C] font-semibold">
                           <span className="w-2.5 h-2.5 rounded-full bg-[#735c00]"></span>
                           <span>Ekonomi, UMKM &amp; Ketahanan Pangan</span>
                         </div>
-                        <span className="text-[#00251b] font-bold">
-                          11,6% <span className="font-normal text-[#404945] text-xs">(Rp 612 Miliar)</span>
+                        <span className="text-[#15211C] font-bold">
+                          11,6% <span className="font-normal text-[#5A6862] text-xs">(Rp 612 Miliar)</span>
                         </span>
                       </div>
                       <div className="w-full h-3 rounded-full bg-[#e3f1e9] overflow-hidden">
                         <div className="h-full bg-[#eec224] rounded-full transition-all duration-700" style={{ width: '11.6%' }}></div>
                       </div>
-                      <div className="flex justify-between text-xs text-[#404945]">
+                      <div className="flex justify-between text-xs text-[#5A6862]">
                         <span>Bantuan Modal Bergulir KURDA &amp; Pasar Rakyat Modern</span>
                         <span className="font-semibold text-[#006c4d]">Serapan 72,1%</span>
                       </div>
                     </div>
 
                     {/* Item 6: Perlindungan Sosial */}
-                    <div className="space-y-1.5 p-3 rounded-xl hover:bg-[#effdf4]/70 transition-colors">
+                    <div className="space-y-1.5 p-3 rounded-xl hover:bg-[#F8FAF9]/70 transition-colors">
                       <div className="flex items-center justify-between text-xs sm:text-sm">
-                        <div className="flex items-center gap-2 text-[#00251b] font-semibold">
+                        <div className="flex items-center gap-2 text-[#15211C] font-semibold">
                           <span className="w-2.5 h-2.5 rounded-full bg-[#717974]"></span>
                           <span>Perlindungan Sosial &amp; Disabilitas</span>
                         </div>
-                        <span className="text-[#00251b] font-bold">
-                          8,5% <span className="font-normal text-[#404945] text-xs">(Rp 448 Miliar)</span>
+                        <span className="text-[#15211C] font-bold">
+                          8,5% <span className="font-normal text-[#5A6862] text-xs">(Rp 448 Miliar)</span>
                         </span>
                       </div>
                       <div className="w-full h-3 rounded-full bg-[#e3f1e9] overflow-hidden">
                         <div className="h-full bg-[#717974] rounded-full transition-all duration-700" style={{ width: '8.5%' }}></div>
                       </div>
-                      <div className="flex justify-between text-xs text-[#404945]">
+                      <div className="flex justify-between text-xs text-[#5A6862]">
                         <span>Bantuan Lansia Terlantar, Kursi Roda Gratis, Program RTLH</span>
                         <span className="font-semibold text-[#006c4d]">Serapan 84,3%</span>
                       </div>
@@ -723,12 +721,11 @@ export const DataPublikPage: React.FC = () => {
 
                   </div>
                 ) : (
-                  /* View Mode: TABLE */
                   <div>
                     <p className="text-[11px] text-slate-500 mb-2 flex items-center gap-1 sm:hidden">Geser ke kanan untuk melihat rincian kolom →</p>
-                    <div className="overflow-x-auto border border-[#ddece3] rounded-xl">
+                    <div className="overflow-x-auto border border-slate-200 rounded-xl">
                       <table className="w-full text-left text-xs">
-                        <thead className="bg-[#effdf4] border-b border-[#ddece3] text-[#00251b] font-semibold">
+                        <thead className="bg-[#F8FAF9] border-b border-slate-200 text-[#15211C] font-semibold">
                           <tr>
                             <th className="p-3">Sektor Prioritas</th>
                             <th className="p-3">Pagu (Rp)</th>
@@ -737,44 +734,44 @@ export const DataPublikPage: React.FC = () => {
                             <th className="p-3">Status</th>
                           </tr>
                         </thead>
-                        <tbody className="divide-y divide-[#ddece3] text-[#404945]">
-                          <tr className="hover:bg-[#effdf4]/50">
-                            <td className="p-3 font-semibold text-[#00251b]">Pendidikan, Beasiswa &amp; Guru</td>
+                        <tbody className="divide-y divide-[#ddece3] text-[#5A6862]">
+                          <tr className="hover:bg-[#F8FAF9]/50">
+                            <td className="p-3 font-semibold text-[#15211C]">Pendidikan, Beasiswa &amp; Guru</td>
                             <td className="p-3">Rp 1,31 T</td>
                             <td className="p-3 font-bold text-[#006c4d]">24,8%</td>
                             <td className="p-3">81,2% (Rp 1,06 T)</td>
                             <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[11px] font-bold">Mandatori OK</span></td>
                           </tr>
-                          <tr className="hover:bg-[#effdf4]/50">
-                            <td className="p-3 font-semibold text-[#00251b]">Infrastruktur &amp; Betonisasi Jalan</td>
+                          <tr className="hover:bg-[#F8FAF9]/50">
+                            <td className="p-3 font-semibold text-[#15211C]">Infrastruktur &amp; Betonisasi Jalan</td>
                             <td className="p-3">Rp 1,13 T</td>
                             <td className="p-3 font-bold text-[#006c4d]">21,5%</td>
                             <td className="p-3">74,5% (Rp 845 M)</td>
                             <td className="p-3"><span className="px-2 py-0.5 rounded bg-blue-100 text-blue-800 text-[11px] font-bold">Sesuai Target</span></td>
                           </tr>
-                          <tr className="hover:bg-[#effdf4]/50">
-                            <td className="p-3 font-semibold text-[#00251b]">Kesehatan &amp; Puskesmas</td>
+                          <tr className="hover:bg-[#F8FAF9]/50">
+                            <td className="p-3 font-semibold text-[#15211C]">Kesehatan &amp; Puskesmas</td>
                             <td className="p-3">Rp 960 M</td>
                             <td className="p-3 font-bold text-[#006c4d]">18,2%</td>
                             <td className="p-3">86,0% (Rp 825 M)</td>
                             <td className="p-3"><span className="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-[11px] font-bold">UHC 99.1%</span></td>
                           </tr>
-                          <tr className="hover:bg-[#effdf4]/50">
-                            <td className="p-3 font-semibold text-[#00251b]">Pelayanan Publik &amp; MPP Digital</td>
+                          <tr className="hover:bg-[#F8FAF9]/50">
+                            <td className="p-3 font-semibold text-[#15211C]">Pelayanan Publik &amp; MPP Digital</td>
                             <td className="p-3">Rp 813 M</td>
                             <td className="p-3 font-bold text-[#006c4d]">15,4%</td>
                             <td className="p-3">79,8% (Rp 648 M)</td>
                             <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[11px] font-bold">Digitalisasi</span></td>
                           </tr>
-                          <tr className="hover:bg-[#effdf4]/50">
-                            <td className="p-3 font-semibold text-[#00251b]">Ekonomi, UMKM &amp; Pangan</td>
+                          <tr className="hover:bg-[#F8FAF9]/50">
+                            <td className="p-3 font-semibold text-[#15211C]">Ekonomi, UMKM &amp; Pangan</td>
                             <td className="p-3">Rp 612 M</td>
                             <td className="p-3 font-bold text-[#006c4d]">11,6%</td>
                             <td className="p-3">72,1% (Rp 441 M)</td>
                             <td className="p-3"><span className="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-[11px] font-bold">KURDA Aktif</span></td>
                           </tr>
-                          <tr className="hover:bg-[#effdf4]/50">
-                            <td className="p-3 font-semibold text-[#00251b]">Perlindungan Sosial &amp; Disabilitas</td>
+                          <tr className="hover:bg-[#F8FAF9]/50">
+                            <td className="p-3 font-semibold text-[#15211C]">Perlindungan Sosial &amp; Disabilitas</td>
                             <td className="p-3">Rp 448 M</td>
                             <td className="p-3 font-bold text-[#006c4d]">8,5%</td>
                             <td className="p-3">84,3% (Rp 377 M)</td>
@@ -789,7 +786,7 @@ export const DataPublikPage: React.FC = () => {
               </div>
 
               {/* Citizen-Friendly Explainer Note */}
-              <div className="p-4 rounded-xl bg-[#e3f1e9] flex items-start gap-3 text-[#00251b]">
+              <div className="p-4 rounded-xl bg-[#e3f1e9] flex items-start gap-3 text-[#15211C]">
                 <Icon className="material-symbols-outlined text-[24px] text-[#735c00] shrink-0">lightbulb</Icon>
                 <div className="text-xs sm:text-sm leading-relaxed">
                   <strong className="font-bold">Fakta Ramah Warga:</strong> Dari setiap <strong>Rp 1.000</strong> dana pajak dan APBD Sidoarjo yang dihimpun, sebanyak <strong>Rp 248</strong> dialokasikan langsung untuk pendidikan putra-putri daerah dan <strong>Rp 215</strong> digunakan untuk memuluskan jalan beton tanpa lubang.
@@ -801,21 +798,21 @@ export const DataPublikPage: React.FC = () => {
             <div className="lg:col-span-5 flex flex-col gap-4">
               
               {/* Balance Card: PAD vs Transfer */}
-              <div className="p-6 rounded-2xl bg-white shadow-sm border border-[#ddece3] flex flex-col gap-4">
+              <div className="p-6 rounded-2xl bg-white shadow-sm border border-slate-200 flex flex-col gap-4">
                 <div>
-                  <h3 className="font-['Plus_Jakarta_Sans',sans-serif] text-base sm:text-lg font-bold text-[#00251b]">
+                  <h3 className="font-display text-base sm:text-lg font-bold text-[#15211C]">
                     Asal Muasal Dana APBD Sidoarjo
                   </h3>
-                  <p className="text-xs text-[#404945]">Keseimbangan kemandirian fiskal Kabupaten Sidoarjo</p>
+                  <p className="text-xs text-[#5A6862]">Keseimbangan kemandirian fiskal Kabupaten Sidoarjo</p>
                 </div>
 
                 {/* Revenue Source Split */}
                 <div className="grid grid-cols-2 gap-3">
                   <div className="p-3 sm:p-4 rounded-xl bg-[#e3f1e9] space-y-1">
-                    <span className="text-xs text-[#404945] font-medium leading-tight block">
+                    <span className="text-xs text-[#5A6862] font-medium leading-tight block">
                       Pendapatan Asli Daerah (PAD)
                     </span>
-                    <p className="font-['Plus_Jakarta_Sans',sans-serif] text-lg sm:text-xl text-[#00251b] font-extrabold">
+                    <p className="font-display text-lg sm:text-xl text-[#15211C] font-extrabold">
                       Rp 2,65 T
                     </p>
                     <div className="flex items-center gap-1 text-[11px] sm:text-xs text-[#006c4d] font-bold">
@@ -828,10 +825,10 @@ export const DataPublikPage: React.FC = () => {
                   </div>
 
                   <div className="p-3 sm:p-4 rounded-xl bg-[#e3f1e9] space-y-1">
-                    <span className="text-xs text-[#404945] font-medium leading-tight block">
+                    <span className="text-xs text-[#5A6862] font-medium leading-tight block">
                       Transfer Pusat &amp; Pemprov
                     </span>
-                    <p className="font-['Plus_Jakarta_Sans',sans-serif] text-lg sm:text-xl text-[#00251b] font-extrabold">
+                    <p className="font-display text-lg sm:text-xl text-[#15211C] font-extrabold">
                       Rp 2,63 T
                     </p>
                     <div className="flex items-center gap-1 text-[11px] sm:text-xs text-[#735c00] font-bold">
@@ -845,19 +842,19 @@ export const DataPublikPage: React.FC = () => {
                 </div>
 
                 {/* Execution Gauge / Progress */}
-                <div className="p-4 rounded-xl bg-[#e9f7ee] space-y-2 border border-[#ddece3]">
+                <div className="p-4 rounded-xl bg-[#e9f7ee] space-y-2 border border-slate-200">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs sm:text-sm text-[#00251b] font-bold">
+                    <span className="text-xs sm:text-sm text-[#15211C] font-bold">
                       Progres Penyerapan Belanja Daerah
                     </span>
-                    <span className="font-['Plus_Jakarta_Sans',sans-serif] text-base sm:text-lg text-[#006c4d] font-extrabold">
+                    <span className="font-display text-base sm:text-lg text-[#006c4d] font-extrabold">
                       84,6%
                     </span>
                   </div>
                   <div className="w-full h-3 rounded-full bg-[#d8e6de] overflow-hidden">
-                    <div className="h-full bg-[#006c4d] rounded-full transition-all duration-700" style={{ width: '84.6%' }}></div>
+                    <div className="h-full bg-[#038D66] rounded-full transition-all duration-700" style={{ width: '84.6%' }}></div>
                   </div>
-                  <div className="flex justify-between text-xs text-[#404945]">
+                  <div className="flex justify-between text-xs text-[#5A6862]">
                     <span>Terealisasi: Rp 4,46 Triliun</span>
                     <span>Target Akhir: Rp 5,28 Triliun</span>
                   </div>
@@ -868,7 +865,7 @@ export const DataPublikPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setKecamatanModalOpen(true)}
-                    className="p-3 rounded-xl bg-[#e3f1e9] hover:bg-[#ddece3] active:scale-[0.99] transition-all flex items-center justify-between text-[#00251b] text-xs sm:text-sm font-semibold cursor-pointer text-left"
+                    className="p-3 rounded-xl bg-[#e3f1e9] hover:bg-[#ddece3] active:scale-[0.99] transition-all flex items-center justify-between text-[#15211C] text-xs sm:text-sm font-semibold cursor-pointer text-left"
                   >
                     <span className="flex items-center gap-2">
                       <Icon className="material-symbols-outlined text-[20px] text-[#006c4d]">map</Icon>
@@ -880,7 +877,7 @@ export const DataPublikPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setProjectModalOpen(true)}
-                    className="p-3 rounded-xl bg-[#e3f1e9] hover:bg-[#ddece3] active:scale-[0.99] transition-all flex items-center justify-between text-[#00251b] text-xs sm:text-sm font-semibold cursor-pointer text-left"
+                    className="p-3 rounded-xl bg-[#e3f1e9] hover:bg-[#ddece3] active:scale-[0.99] transition-all flex items-center justify-between text-[#15211C] text-xs sm:text-sm font-semibold cursor-pointer text-left"
                   >
                     <span className="flex items-center gap-2">
                       <Icon className="material-symbols-outlined text-[20px] text-[#006c4d]">construction</Icon>
@@ -912,11 +909,11 @@ export const DataPublikPage: React.FC = () => {
       {/* ========================================================================= */}
       {/* 4. SECTION: STATISTIK KEPENDUDUKAN & KINERJA INFRASTRUKTUR                 */}
       {/* ========================================================================= */}
-      <section className="w-full px-4 sm:px-6 lg:px-8 pb-6 bg-[#effdf4]">
-        <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <section className="w-full px-4 sm:px-6 lg:px-8 pb-6 bg-[#F8FAF9]">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
           
           {/* Card 1: Demografi & Ketenagakerjaan */}
-          <div className="p-6 rounded-2xl bg-white shadow-sm border border-[#ddece3] flex flex-col justify-between gap-6">
+          <div className="p-6 rounded-2xl bg-white shadow-sm border border-slate-200 flex flex-col justify-between gap-6">
             <div className="space-y-4">
               <div className="flex items-start justify-between">
                 <div>
@@ -924,26 +921,26 @@ export const DataPublikPage: React.FC = () => {
                     <Icon className="material-symbols-outlined text-[15px]">badge</Icon>
                     Data Terverifikasi Disdukcapil
                   </div>
-                  <h3 className="font-['Plus_Jakarta_Sans',sans-serif] text-base sm:text-lg font-bold text-[#00251b]">
+                  <h3 className="font-display text-base sm:text-lg font-bold text-[#15211C]">
                     Piramida &amp; Komposisi Penduduk Sidoarjo
                   </h3>
-                  <p className="text-xs text-[#404945]">Struktur usia warga Kabupaten Sidoarjo pembaruan Triwulan III</p>
+                  <p className="text-xs text-[#5A6862]">Struktur usia warga Kabupaten Sidoarjo pembaruan Triwulan III</p>
                 </div>
-                <span className="px-2.5 py-1 rounded-lg bg-[#e3f1e9] text-[#404945] text-xs font-bold">
+                <span className="px-2.5 py-1 rounded-lg bg-[#e3f1e9] text-[#5A6862] text-xs font-bold">
                   2,08 Juta
                 </span>
               </div>
 
               {/* Age Distribution Graphic Bar */}
               <div className="space-y-2">
-                <span className="text-xs font-semibold text-[#404945]">
+                <span className="text-xs font-semibold text-[#5A6862]">
                   Distribusi Kelompok Usia (Bonus Demografi Aktif)
                 </span>
                 
                 {/* Segmented Visual Bar */}
                 <div className="w-full h-8 rounded-xl overflow-hidden flex bg-[#e3f1e9] shadow-inner">
                   <div
-                    className="bg-[#006c4d] h-full flex items-center justify-center text-white text-xs font-bold px-1 transition-all"
+                    className="bg-[#038D66] h-full flex items-center justify-center text-white text-xs font-bold px-1 transition-all"
                     style={{ width: '69.2%' }}
                     title="Usia Produktif 69,2%"
                   >
@@ -968,24 +965,24 @@ export const DataPublikPage: React.FC = () => {
                 {/* Legend */}
                 <div className="grid grid-cols-3 gap-2 pt-2 text-xs">
                   <div className="flex items-center gap-1.5">
-                    <span className="w-3 h-3 rounded-sm bg-[#006c4d] shrink-0"></span>
+                    <span className="w-3 h-3 rounded-sm bg-[#038D66] shrink-0"></span>
                     <div>
-                      <p className="font-bold text-[#00251b]">15 - 64 Tahun</p>
-                      <p className="text-[11px] text-[#404945]">1,44 Juta Jiwa</p>
+                      <p className="font-bold text-[#15211C]">15 - 64 Tahun</p>
+                      <p className="text-[11px] text-[#5A6862]">1,44 Juta Jiwa</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className="w-3 h-3 rounded-sm bg-[#eec224] shrink-0"></span>
                     <div>
-                      <p className="font-bold text-[#00251b]">0 - 14 Tahun</p>
-                      <p className="text-[11px] text-[#404945]">465 Ribu Jiwa</p>
+                      <p className="font-bold text-[#15211C]">0 - 14 Tahun</p>
+                      <p className="text-[11px] text-[#5A6862]">465 Ribu Jiwa</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className="w-3 h-3 rounded-sm bg-[#717974] shrink-0"></span>
                     <div>
-                      <p className="font-bold text-[#00251b]">65+ Tahun (Lansia)</p>
-                      <p className="text-[11px] text-[#404945]">175 Ribu Jiwa</p>
+                      <p className="font-bold text-[#15211C]">65+ Tahun (Lansia)</p>
+                      <p className="text-[11px] text-[#5A6862]">175 Ribu Jiwa</p>
                     </div>
                   </div>
                 </div>
@@ -994,23 +991,23 @@ export const DataPublikPage: React.FC = () => {
               {/* Employment Summary Micro-cards */}
               <div className="grid grid-cols-2 gap-3 pt-1">
                 <div className="p-3 rounded-xl bg-[#e3f1e9] space-y-0.5">
-                  <span className="text-xs text-[#404945]">Angkatan Kerja Aktif</span>
-                  <p className="font-['Plus_Jakarta_Sans',sans-serif] text-lg font-bold text-[#00251b]">
+                  <span className="text-xs text-[#5A6862]">Angkatan Kerja Aktif</span>
+                  <p className="font-display text-lg font-bold text-[#15211C]">
                     1,12 Juta
                   </p>
                   <span className="text-[11px] text-[#006c4d] font-semibold block">Tingkat Partisipasi Kerja: 71,8%</span>
                 </div>
                 <div className="p-3 rounded-xl bg-[#e3f1e9] space-y-0.5">
-                  <span className="text-xs text-[#404945]">Kepala Keluarga (KK)</span>
-                  <p className="font-['Plus_Jakarta_Sans',sans-serif] text-lg font-bold text-[#00251b]">
+                  <span className="text-xs text-[#5A6862]">Kepala Keluarga (KK)</span>
+                  <p className="font-display text-lg font-bold text-[#15211C]">
                     672.410
                   </p>
-                  <span className="text-[11px] text-[#404945] block">Rerata 3,1 Anggota / KK</span>
+                  <span className="text-[11px] text-[#5A6862] block">Rerata 3,1 Anggota / KK</span>
                 </div>
               </div>
             </div>
 
-            <div className="pt-2 border-t border-[#e3f1e9] flex items-center justify-between text-xs text-[#404945]">
+            <div className="pt-2 border-t border-[#e3f1e9] flex items-center justify-between text-xs text-[#5A6862]">
               <span className="flex items-center gap-1">
                 <Icon className="material-symbols-outlined text-[16px] text-[#006c4d]">sync</Icon>
                 Sinkronisasi Plavon Dukcapil Sidoarjo
@@ -1030,7 +1027,7 @@ export const DataPublikPage: React.FC = () => {
           </div>
 
           {/* Card 2: Indikator Layanan & Infrastruktur */}
-          <div className="p-6 rounded-2xl bg-white shadow-sm border border-[#ddece3] flex flex-col justify-between gap-6">
+          <div className="p-6 rounded-2xl bg-white shadow-sm border border-slate-200 flex flex-col justify-between gap-6">
             <div className="space-y-4">
               <div className="flex items-start justify-between">
                 <div>
@@ -1038,10 +1035,10 @@ export const DataPublikPage: React.FC = () => {
                     <Icon className="material-symbols-outlined text-[15px]">speed</Icon>
                     Capaian SPM &amp; Indikator Makro
                   </div>
-                  <h3 className="font-['Plus_Jakarta_Sans',sans-serif] text-base sm:text-lg font-bold text-[#00251b]">
+                  <h3 className="font-display text-base sm:text-lg font-bold text-[#15211C]">
                     Kualitas Hidup &amp; Infrastruktur Warga
                   </h3>
-                  <p className="text-xs text-[#404945]">Capaian riil 4 pilar pelayanan publik dasar Kabupaten Sidoarjo</p>
+                  <p className="text-xs text-[#5A6862]">Capaian riil 4 pilar pelayanan publik dasar Kabupaten Sidoarjo</p>
                 </div>
                 <Icon className="material-symbols-outlined text-[#006c4d] text-[24px]">verified</Icon>
               </div>
@@ -1052,16 +1049,16 @@ export const DataPublikPage: React.FC = () => {
                 {/* Metric 1: UHC BPJS */}
                 <div className="space-y-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs sm:text-sm text-[#00251b] font-semibold flex items-center gap-1.5">
+                    <span className="text-xs sm:text-sm text-[#15211C] font-semibold flex items-center gap-1.5">
                       <Icon className="material-symbols-outlined text-[18px] text-[#006c4d]">health_and_safety</Icon>
                       Universal Health Coverage (Jaminan BPJS Warga)
                     </span>
                     <span className="text-xs sm:text-sm text-[#006c4d] font-extrabold">99,1%</span>
                   </div>
                   <div className="w-full h-2.5 rounded-full bg-[#e3f1e9] overflow-hidden">
-                    <div className="h-full bg-[#006c4d] rounded-full transition-all duration-700" style={{ width: '99.1%' }}></div>
+                    <div className="h-full bg-[#038D66] rounded-full transition-all duration-700" style={{ width: '99.1%' }}></div>
                   </div>
-                  <div className="flex justify-between text-xs text-[#404945]">
+                  <div className="flex justify-between text-xs text-[#5A6862]">
                     <span>Target Nasional (98%) telah terlampaui</span>
                     <span>2,06 Juta Terlindungi</span>
                   </div>
@@ -1070,16 +1067,16 @@ export const DataPublikPage: React.FC = () => {
                 {/* Metric 2: Kemantapan Jalan Beton */}
                 <div className="space-y-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs sm:text-sm text-[#00251b] font-semibold flex items-center gap-1.5">
-                      <Icon className="material-symbols-outlined text-[18px] text-[#00251b]">road</Icon>
+                    <span className="text-xs sm:text-sm text-[#15211C] font-semibold flex items-center gap-1.5">
+                      <Icon className="material-symbols-outlined text-[18px] text-[#15211C]">road</Icon>
                       Kemantapan Jalan Kabupaten (Betonisasi)
                     </span>
-                    <span className="text-xs sm:text-sm text-[#00251b] font-extrabold">91,2%</span>
+                    <span className="text-xs sm:text-sm text-[#15211C] font-extrabold">91,2%</span>
                   </div>
                   <div className="w-full h-2.5 rounded-full bg-[#e3f1e9] overflow-hidden">
                     <div className="h-full bg-[#083c2e] rounded-full transition-all duration-700" style={{ width: '91.2%' }}></div>
                   </div>
-                  <div className="flex justify-between text-xs text-[#404945]">
+                  <div className="flex justify-between text-xs text-[#5A6862]">
                     <span>142 Ruas jalan kabupaten tuntas dibeton per 2026</span>
                     <span>Total 1.054 Km Jalan Mantap</span>
                   </div>
@@ -1088,16 +1085,16 @@ export const DataPublikPage: React.FC = () => {
                 {/* Metric 3: Air Bersih Perpipaan */}
                 <div className="space-y-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs sm:text-sm text-[#00251b] font-semibold flex items-center gap-1.5">
+                    <span className="text-xs sm:text-sm text-[#15211C] font-semibold flex items-center gap-1.5">
                       <Icon className="material-symbols-outlined text-[18px] text-[#006c4d]">water_drop</Icon>
                       Akses Air Minum Bersih Perpipaan (PDAM)
                     </span>
                     <span className="text-xs sm:text-sm text-[#006c4d] font-extrabold">89,4%</span>
                   </div>
                   <div className="w-full h-2.5 rounded-full bg-[#e3f1e9] overflow-hidden">
-                    <div className="h-full bg-[#006c4d] rounded-full transition-all duration-700" style={{ width: '89.4%' }}></div>
+                    <div className="h-full bg-[#038D66] rounded-full transition-all duration-700" style={{ width: '89.4%' }}></div>
                   </div>
-                  <div className="flex justify-between text-xs text-[#404945]">
+                  <div className="flex justify-between text-xs text-[#5A6862]">
                     <span>SPAM Umbulan tahap perluasan sambungan rumah</span>
                     <span>Target 2026: 95,0%</span>
                   </div>
@@ -1106,7 +1103,7 @@ export const DataPublikPage: React.FC = () => {
                 {/* Metric 4: Pengelolaan Sampah */}
                 <div className="space-y-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs sm:text-sm text-[#00251b] font-semibold flex items-center gap-1.5">
+                    <span className="text-xs sm:text-sm text-[#15211C] font-semibold flex items-center gap-1.5">
                       <Icon className="material-symbols-outlined text-[18px] text-[#735c00]">recycling</Icon>
                       Pengelolaan Sampah Terpadu (TPST &amp; RDF)
                     </span>
@@ -1115,7 +1112,7 @@ export const DataPublikPage: React.FC = () => {
                   <div className="w-full h-2.5 rounded-full bg-[#e3f1e9] overflow-hidden">
                     <div className="h-full bg-[#735c00] rounded-full transition-all duration-700" style={{ width: '82.5%' }}></div>
                   </div>
-                  <div className="flex justify-between text-xs text-[#404945]">
+                  <div className="flex justify-between text-xs text-[#5A6862]">
                     <span>38 TPST aktif + Unit Bahan Bakar Turunan RDF Jabon</span>
                     <span>Terkelola: 1.150 Ton/Hari</span>
                   </div>
@@ -1124,7 +1121,7 @@ export const DataPublikPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="pt-2 border-t border-[#e3f1e9] flex items-center justify-between text-xs text-[#404945]">
+            <div className="pt-2 border-t border-[#e3f1e9] flex items-center justify-between text-xs text-[#5A6862]">
               <span className="flex items-center gap-1">
                 <Icon className="material-symbols-outlined text-[16px] text-[#006c4d]">update</Icon>
                 Laporan Kinerja Instansi Pemerintah (LKjIP)
@@ -1145,8 +1142,8 @@ export const DataPublikPage: React.FC = () => {
       {/* ========================================================================= */}
       {/* 5. SECTION: KATALOG DATASET TERBUKA & UNDUH DATA (OPEN DATA SIDOARJO)       */}
       {/* ========================================================================= */}
-      <section id="katalog-open-data" className="w-full px-4 sm:px-6 lg:px-8 pb-6 bg-[#effdf4]">
-        <div className="max-w-[1440px] mx-auto p-6 sm:p-8 rounded-2xl bg-white shadow-sm border border-[#ddece3] flex flex-col gap-6">
+      <section id="katalog-open-data" className="w-full px-4 sm:px-6 lg:px-8 pb-6 bg-[#F8FAF9]">
+        <div className="max-w-7xl mx-auto p-6 sm:p-8 rounded-2xl bg-white shadow-sm border border-slate-200 flex flex-col gap-6">
           
           {/* Catalog Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
@@ -1155,10 +1152,10 @@ export const DataPublikPage: React.FC = () => {
                 <Icon className="material-symbols-outlined text-[15px]">database</Icon>
                 Open Data Resmi
               </div>
-              <h2 className="font-['Plus_Jakarta_Sans',sans-serif] text-xl sm:text-2xl font-bold text-[#00251b]">
+              <h2 className="font-display text-xl sm:text-2xl font-bold text-[#15211C]">
                 Katalog Kumpulan Data Terbuka (Open Data)
               </h2>
-              <p className="text-sm text-[#404945] max-w-3xl">
+              <p className="text-sm text-[#5A6862] max-w-3xl">
                 Unduh data mentah resmi dalam format terbuka (.CSV, .XLSX, .JSON) untuk riset akademik, jurnalisme warga, dan pengawasan publik.
               </p>
             </div>
@@ -1168,13 +1165,13 @@ export const DataPublikPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setApiModalOpen(true)}
-                className="px-3.5 py-2 rounded-xl bg-[#e3f1e9] text-[#00251b] hover:bg-[#ddece3] text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="px-3.5 py-2 rounded-xl bg-[#e3f1e9] text-[#15211C] hover:bg-[#ddece3] text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
               >
                 <Icon className="material-symbols-outlined text-[18px] text-[#006c4d]">api</Icon>
                 <span>API Developer</span>
               </button>
 
-              <div className="flex items-center gap-1 text-xs text-[#404945]">
+              <div className="flex items-center gap-1 text-xs text-[#5A6862]">
                 <Icon className="material-symbols-outlined text-[16px] text-[#006c4d]">download</Icon>
                 <span className="hidden sm:inline">Lisensi: Open Government License (OGL-ID)</span>
               </div>
@@ -1198,7 +1195,7 @@ export const DataPublikPage: React.FC = () => {
                 className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold shrink-0 transition-all cursor-pointer ${
                   activeCategory === cat.id
                     ? 'bg-[#00251b] text-white shadow-xs'
-                    : 'bg-[#e3f1e9] text-[#404945] hover:text-[#00251b] hover:bg-[#ddece3]'
+                    : 'bg-[#e3f1e9] text-[#5A6862] hover:text-[#15211C] hover:bg-[#ddece3]'
                 }`}
               >
                 {cat.label}
@@ -1212,28 +1209,28 @@ export const DataPublikPage: React.FC = () => {
               filteredDatasets.map((item) => (
                 <div
                   key={item.id}
-                  className="p-4 sm:p-5 rounded-xl bg-[#e9f7ee] hover:bg-[#e3f1e9] transition-all border border-[#ddece3] flex flex-col md:flex-row md:items-center justify-between gap-4"
+                  className="p-4 sm:p-5 rounded-xl bg-[#e9f7ee] hover:bg-[#e3f1e9] transition-all border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4"
                 >
                   <div className="space-y-1.5 flex-1">
                     <div className="flex items-center gap-2 flex-wrap">
                       <span className={`px-2.5 py-0.5 rounded-md text-xs font-bold ${item.badgeColor}`}>
                         {item.categoryLabel}
                       </span>
-                      <span className="text-xs text-[#404945] font-semibold">{item.opd}</span>
+                      <span className="text-xs text-[#5A6862] font-semibold">{item.opd}</span>
                       <span className="text-[#717974]">•</span>
-                      <span className="text-xs text-[#404945]">{item.updatedAt}</span>
+                      <span className="text-xs text-[#5A6862]">{item.updatedAt}</span>
                     </div>
                     
-                    <h4 className="font-['Plus_Jakarta_Sans',sans-serif] text-sm sm:text-base text-[#00251b] font-bold">
+                    <h4 className="font-display text-sm sm:text-base text-[#15211C] font-bold">
                       {item.title}
                     </h4>
                     
-                    <p className="text-xs sm:text-sm text-[#404945] leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#5A6862] leading-relaxed">
                       {item.description}
                     </p>
                     
                     <div className="flex items-center gap-3 pt-1 text-xs text-[#717974] flex-wrap">
-                      <span className="font-mono bg-white px-2 py-0.5 rounded border border-[#ddece3] text-[#00251b] font-medium">
+                      <span className="font-mono bg-white px-2 py-0.5 rounded border border-slate-200 text-[#15211C] font-medium">
                         Format: {item.formats.join(', ')}
                       </span>
                       <span>•</span>
@@ -1247,7 +1244,7 @@ export const DataPublikPage: React.FC = () => {
                   <div className="flex items-center gap-2 shrink-0">
                     <button
                       onClick={() => setPreviewDataset(item)}
-                      className="h-10 px-3.5 rounded-xl bg-white text-[#00251b] text-xs sm:text-sm font-semibold hover:bg-[#d8e6de] transition-colors flex items-center gap-1.5 shadow-xs border border-[#ddece3]"
+                      className="h-10 px-3.5 rounded-xl bg-white text-[#15211C] text-xs sm:text-sm font-semibold hover:bg-[#d8e6de] transition-colors flex items-center gap-1.5 shadow-xs border border-slate-200"
                       type="button"
                     >
                       <Icon className="material-symbols-outlined text-[18px]">visibility</Icon>
@@ -1256,7 +1253,7 @@ export const DataPublikPage: React.FC = () => {
                     
                     <button
                       onClick={() => handleDownloadFile(item.title, item.formats[0])}
-                      className="h-10 px-4 rounded-xl bg-[#006c4d] text-white text-xs sm:text-sm font-semibold hover:bg-[#005139] active:scale-95 transition-all flex items-center gap-1.5 shadow-sm"
+                      className="h-10 px-4 rounded-xl bg-[#038D66] text-white text-xs sm:text-sm font-semibold hover:bg-[#026E4F] active:scale-95 transition-all flex items-center gap-1.5 shadow-sm"
                       type="button"
                     >
                       <Icon className="material-symbols-outlined text-[18px]">file_download</Icon>
@@ -1266,16 +1263,16 @@ export const DataPublikPage: React.FC = () => {
                 </div>
               ))
             ) : (
-              <div className="text-center py-12 px-4 rounded-xl bg-[#e9f7ee] border border-dashed border-[#ddece3]">
+              <div className="text-center py-12 px-4 rounded-xl bg-[#e9f7ee] border border-dashed border-slate-200">
                 <Icon className="material-symbols-outlined text-4xl text-[#717974] mb-2">search_off</Icon>
-                <p className="text-sm font-bold text-[#00251b]">Tidak ditemukan dataset yang cocok</p>
-                <p className="text-xs text-[#404945] mt-1">Coba kata kunci lain atau ubah kategori filter.</p>
+                <p className="text-sm font-bold text-[#15211C]">Tidak ditemukan dataset yang cocok</p>
+                <p className="text-xs text-[#5A6862] mt-1">Coba kata kunci lain atau ubah kategori filter.</p>
                 <button
                   onClick={() => {
                     setSearchQuery('');
                     setActiveCategory('all');
                   }}
-                  className="mt-3 px-4 py-2 bg-[#006c4d] text-white text-xs font-semibold rounded-lg hover:bg-[#005139]"
+                  className="mt-3 px-4 py-2 bg-[#038D66] text-white text-xs font-semibold rounded-lg hover:bg-[#026E4F]"
                 >
                   Reset Filter
                 </button>
@@ -1288,7 +1285,7 @@ export const DataPublikPage: React.FC = () => {
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <Icon className="material-symbols-outlined text-[#8af7c9] text-[24px]">contact_support</Icon>
-                <h4 className="font-['Plus_Jakarta_Sans',sans-serif] text-base sm:text-lg text-white font-bold">
+                <h4 className="font-display text-base sm:text-lg text-white font-bold">
                   Membutuhkan Permohonan Informasi Khusus?
                 </h4>
               </div>
@@ -1298,7 +1295,7 @@ export const DataPublikPage: React.FC = () => {
             </div>
             <button
               onClick={() => setPpidModalOpen(true)}
-              className="h-11 px-5 rounded-xl bg-[#006c4d] hover:bg-[#005139] text-white text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 shrink-0 shadow-md cursor-pointer active:scale-95"
+              className="h-11 px-5 rounded-xl bg-[#038D66] hover:bg-[#026E4F] text-white text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 shrink-0 shadow-md cursor-pointer active:scale-95"
               type="button"
             >
               <span>Ajukan Permohonan PPID</span>
@@ -1312,14 +1309,14 @@ export const DataPublikPage: React.FC = () => {
       {/* ========================================================================= */}
       {/* 6. CITIZEN ASSISTANCE & FAQ SECTION                                       */}
       {/* ========================================================================= */}
-      <section className="w-full px-4 sm:px-6 lg:px-8 pb-10 bg-[#effdf4]">
-        <div className="max-w-[1440px] mx-auto flex flex-col gap-6">
+      <section className="w-full px-4 sm:px-6 lg:px-8 pb-10 bg-[#F8FAF9]">
+        <div className="max-w-7xl mx-auto flex flex-col gap-6">
           
           <div className="text-center max-w-2xl mx-auto space-y-1">
-            <h3 className="font-['Plus_Jakarta_Sans',sans-serif] text-xl sm:text-2xl font-bold text-[#00251b]">
+            <h3 className="font-display text-xl sm:text-2xl font-bold text-[#15211C]">
               Panduan &amp; Tanya Jawab Transparansi
             </h3>
-            <p className="text-xs sm:text-sm text-[#404945]">
+            <p className="text-xs sm:text-sm text-[#5A6862]">
               Memahami hak warga atas keterbukaan informasi dan tata cara pemanfaatan data daerah
             </p>
           </div>
@@ -1327,15 +1324,15 @@ export const DataPublikPage: React.FC = () => {
           {/* 3 FAQ Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             
-            <div className="p-6 rounded-2xl bg-white shadow-sm border border-[#ddece3] space-y-4 flex flex-col justify-between">
+            <div className="p-6 rounded-2xl bg-white shadow-sm border border-slate-200 space-y-4 flex flex-col justify-between">
               <div className="space-y-2">
-                <div className="w-10 h-10 rounded-xl bg-[#e3f1e9] flex items-center justify-center text-[#00251b]">
+                <div className="w-10 h-10 rounded-xl bg-[#e3f1e9] flex items-center justify-center text-[#15211C]">
                   <Icon className="material-symbols-outlined text-[22px]">menu_book</Icon>
                 </div>
-                <h4 className="font-['Plus_Jakarta_Sans',sans-serif] text-sm sm:text-base text-[#00251b] font-bold">
+                <h4 className="font-display text-sm sm:text-base text-[#15211C] font-bold">
                   Bagaimana cara membaca data APBD?
                 </h4>
-                <p className="text-xs text-[#404945] leading-relaxed">
+                <p className="text-xs text-[#5A6862] leading-relaxed">
                   APBD dibagi menjadi Pendapatan (sumber dana dari pajak dan pusat) serta Belanja (pengeluaran rutin operasional &amp; proyek fisik modal). Grafik di portal ini secara otomatis merangkum angka miliaran ke dalam persentase yang mudah dicerna.
                 </p>
               </div>
@@ -1349,15 +1346,15 @@ export const DataPublikPage: React.FC = () => {
               </button>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white shadow-sm border border-[#ddece3] space-y-4 flex flex-col justify-between">
+            <div className="p-6 rounded-2xl bg-white shadow-sm border border-slate-200 space-y-4 flex flex-col justify-between">
               <div className="space-y-2">
                 <div className="w-10 h-10 rounded-xl bg-[#e3f1e9] flex items-center justify-center text-[#006c4d]">
                   <Icon className="material-symbols-outlined text-[22px]">gavel</Icon>
                 </div>
-                <h4 className="font-['Plus_Jakarta_Sans',sans-serif] text-sm sm:text-base text-[#00251b] font-bold">
+                <h4 className="font-display text-sm sm:text-base text-[#15211C] font-bold">
                   Apakah data di portal ini resmi dan legal?
                 </h4>
-                <p className="text-xs text-[#404945] leading-relaxed">
+                <p className="text-xs text-[#5A6862] leading-relaxed">
                   Ya, seluruh data yang dirilis pada portal SITAPAK telah diverifikasi oleh Wali Data (Diskominfo) dan bersumber langsung dari produsen data resmi (BPKAD, Bappeda, Dinas Terkait) dengan validitas hukum UU No. 14/2008 &amp; Perpres No. 39/2019.
                 </p>
               </div>
@@ -1371,15 +1368,15 @@ export const DataPublikPage: React.FC = () => {
               </button>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white shadow-sm border border-[#ddece3] space-y-4 flex flex-col justify-between">
+            <div className="p-6 rounded-2xl bg-white shadow-sm border border-slate-200 space-y-4 flex flex-col justify-between">
               <div className="space-y-2">
                 <div className="w-10 h-10 rounded-xl bg-[#e3f1e9] flex items-center justify-center text-[#735c00]">
                   <Icon className="material-symbols-outlined text-[22px]">live_help</Icon>
                 </div>
-                <h4 className="font-['Plus_Jakarta_Sans',sans-serif] text-sm sm:text-base text-[#00251b] font-bold">
+                <h4 className="font-display text-sm sm:text-base text-[#15211C] font-bold">
                   Bagaimana cara mengajukan data yang belum ada?
                 </h4>
-                <p className="text-xs text-[#404945] leading-relaxed">
+                <p className="text-xs text-[#5A6862] leading-relaxed">
                   Jika data yang Anda cari untuk penelitian atau keperluan kerja belum tersedia dalam format terbuka, Anda dapat mengisi formulir Permohonan Informasi Publik PPID secara daring melalui formulir verifikasi e-KTP.
                 </p>
               </div>
@@ -1396,14 +1393,14 @@ export const DataPublikPage: React.FC = () => {
           </div>
 
           {/* Sync Banner Footer Note */}
-          <div className="p-4 rounded-2xl bg-[#e3f1e9] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#404945] border border-[#ddece3]">
+          <div className="p-4 rounded-2xl bg-[#e3f1e9] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#5A6862] border border-slate-200">
             <div className="flex items-center gap-2">
               <Icon className="material-symbols-outlined text-[#006c4d] text-[20px]">cloud_sync</Icon>
               <span>
                 Data terintegrasi otomatis dengan <strong>SIMDA Keuangan BPKAD</strong>, <strong>SIPD Kemendagri</strong>, &amp; <strong>Portal Satu Data Indonesia</strong>
               </span>
             </div>
-            <div className="flex items-center gap-1 text-[#00251b] font-bold">
+            <div className="flex items-center gap-1 text-[#15211C] font-bold">
               <span>Pembaruan Terakhir: Hari ini, Pukul 08:00 WIB</span>
             </div>
           </div>
@@ -1416,18 +1413,18 @@ export const DataPublikPage: React.FC = () => {
       {/* ========================================================================= */}
       {previewDataset && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-[#ddece3] overflow-hidden">
+          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
             
             {/* Modal Header */}
-            <div className="p-5 border-b border-[#ddece3] flex items-start justify-between bg-[#effdf4]">
+            <div className="p-5 border-b border-slate-200 flex items-start justify-between bg-[#F8FAF9]">
               <div className="space-y-1 pr-6">
                 <div className="flex items-center gap-2">
                   <span className={`px-2.5 py-0.5 rounded text-xs font-bold ${previewDataset.badgeColor}`}>
                     {previewDataset.categoryLabel}
                   </span>
-                  <span className="text-xs text-[#404945] font-semibold">{previewDataset.opd}</span>
+                  <span className="text-xs text-[#5A6862] font-semibold">{previewDataset.opd}</span>
                 </div>
-                <h3 className="font-['Plus_Jakarta_Sans',sans-serif] text-lg font-bold text-[#00251b]">
+                <h3 className="font-display text-lg font-bold text-[#15211C]">
                   {previewDataset.title}
                 </h3>
               </div>
@@ -1441,20 +1438,20 @@ export const DataPublikPage: React.FC = () => {
 
             {/* Modal Body */}
             <div className="p-5 overflow-y-auto space-y-4">
-              <div className="p-3 bg-[#e9f7ee] rounded-xl text-xs text-[#404945]">
+              <div className="p-3 bg-[#e9f7ee] rounded-xl text-xs text-[#5A6862]">
                 {previewDataset.description}
               </div>
 
               <div className="space-y-2">
-                <div className="flex items-center justify-between text-xs text-[#404945]">
-                  <span className="font-semibold text-[#00251b]">Contoh 5 Baris Data Teratas (Preview Sample):</span>
+                <div className="flex items-center justify-between text-xs text-[#5A6862]">
+                  <span className="font-semibold text-[#15211C]">Contoh 5 Baris Data Teratas (Preview Sample):</span>
                   <span>Menampilkan 5 dari ratusan baris data terbuka</span>
                 </div>
 
                 <p className="text-[11px] text-slate-500 mb-2 flex items-center gap-1 sm:hidden">Geser ke kanan untuk melihat rincian kolom →</p>
-                <div className="overflow-x-auto border border-[#ddece3] rounded-xl">
+                <div className="overflow-x-auto border border-slate-200 rounded-xl">
                   <table className="w-full text-left text-xs">
-                    <thead className="bg-[#effdf4] border-b border-[#ddece3] text-[#00251b] font-semibold">
+                    <thead className="bg-[#F8FAF9] border-b border-slate-200 text-[#15211C] font-semibold">
                       <tr>
                         {previewDataset.sampleColumns.map((col, idx) => (
                           <th key={idx} className="p-3 whitespace-nowrap">{col}</th>
@@ -1463,7 +1460,7 @@ export const DataPublikPage: React.FC = () => {
                     </thead>
                     <tbody className="divide-y divide-[#ddece3]">
                       {previewDataset.sampleRows.map((row, rIdx) => (
-                        <tr key={rIdx} className="hover:bg-[#effdf4]/50">
+                        <tr key={rIdx} className="hover:bg-[#F8FAF9]/50">
                           {previewDataset.sampleColumns.map((col, cIdx) => (
                             <td key={cIdx} className="p-3 whitespace-nowrap text-[#121e19]">
                               {row[col]}
@@ -1477,18 +1474,18 @@ export const DataPublikPage: React.FC = () => {
               </div>
 
               {/* Data Dictionary / Metadata */}
-              <div className="p-3.5 rounded-xl bg-[#effdf4] border border-[#ddece3] grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+              <div className="p-3.5 rounded-xl bg-[#F8FAF9] border border-slate-200 grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
                 <div>
                   <span className="text-[#717974] block">Format Tersedia</span>
-                  <strong className="text-[#00251b]">{previewDataset.formats.join(', ')}</strong>
+                  <strong className="text-[#15211C]">{previewDataset.formats.join(', ')}</strong>
                 </div>
                 <div>
                   <span className="text-[#717974] block">Ukuran Berkas</span>
-                  <strong className="text-[#00251b]">{previewDataset.size}</strong>
+                  <strong className="text-[#15211C]">{previewDataset.size}</strong>
                 </div>
                 <div>
                   <span className="text-[#717974] block">Frekuensi Update</span>
-                  <strong className="text-[#00251b]">Berkala</strong>
+                  <strong className="text-[#15211C]">Berkala</strong>
                 </div>
                 <div>
                   <span className="text-[#717974] block">Hak Cipta / Lisensi</span>
@@ -1498,14 +1495,14 @@ export const DataPublikPage: React.FC = () => {
             </div>
 
             {/* Modal Footer */}
-            <div className="p-4 border-t border-[#ddece3] bg-[#effdf4] flex items-center justify-between flex-wrap gap-2">
-              <span className="text-xs text-[#404945]">
+            <div className="p-4 border-t border-slate-200 bg-[#F8FAF9] flex items-center justify-between flex-wrap gap-2">
+              <span className="text-xs text-[#5A6862]">
                 Dukungan format UTF-8 ramah Excel &amp; Python Pandas
               </span>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setPreviewDataset(null)}
-                  className="px-4 py-2 rounded-xl bg-white border border-[#ddece3] text-xs font-semibold text-[#404945] hover:bg-[#ddece3]"
+                  className="px-4 py-2 rounded-xl bg-white border border-slate-200 text-xs font-semibold text-[#5A6862] hover:bg-[#ddece3]"
                 >
                   Tutup
                 </button>
@@ -1516,7 +1513,7 @@ export const DataPublikPage: React.FC = () => {
                       handleDownloadFile(previewDataset.title, fmt);
                       setPreviewDataset(null);
                     }}
-                    className="px-4 py-2 rounded-xl bg-[#006c4d] text-white text-xs font-semibold hover:bg-[#005139] flex items-center gap-1 shadow-xs"
+                    className="px-4 py-2 rounded-xl bg-[#038D66] text-white text-xs font-semibold hover:bg-[#026E4F] flex items-center gap-1 shadow-xs"
                   >
                     <Icon className="material-symbols-outlined text-[16px]">download</Icon>
                     <span>Unduh {fmt}</span>
@@ -1534,13 +1531,13 @@ export const DataPublikPage: React.FC = () => {
       {/* ========================================================================= */}
       {apiModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-[#ddece3] overflow-hidden">
+          <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
             
-            <div className="p-5 border-b border-[#ddece3] flex items-center justify-between bg-[#083c2e] text-white">
+            <div className="p-5 border-b border-slate-200 flex items-center justify-between bg-[#083c2e] text-white">
               <div className="flex items-center gap-2.5">
                 <Icon className="material-symbols-outlined text-[#8af7c9] text-[24px]">api</Icon>
                 <div>
-                  <h3 className="font-['Plus_Jakarta_Sans',sans-serif] text-base sm:text-lg font-bold">
+                  <h3 className="font-display text-base sm:text-lg font-bold">
                     SITAPAK Open Data REST API v1
                   </h3>
                   <p className="text-xs text-[#a0d1bd]">Integrasi data terbuka Pemkab Sidoarjo untuk pengembang</p>
@@ -1554,9 +1551,9 @@ export const DataPublikPage: React.FC = () => {
               </button>
             </div>
 
-            <div className="p-6 overflow-y-auto space-y-4 text-xs sm:text-sm text-[#404945]">
+            <div className="p-6 overflow-y-auto space-y-4 text-xs sm:text-sm text-[#5A6862]">
               <div className="space-y-1">
-                <span className="font-bold text-[#00251b]">Base Endpoint URL</span>
+                <span className="font-bold text-[#15211C]">Base Endpoint URL</span>
                 <div className="p-3 bg-[#00251b] text-[#8af7c9] font-mono text-xs rounded-xl flex items-center justify-between">
                   <span>https://data.sidoarjokab.go.id/api/v1/datasets</span>
                   <button
@@ -1573,7 +1570,7 @@ export const DataPublikPage: React.FC = () => {
               </div>
 
               <div className="space-y-1">
-                <span className="font-bold text-[#00251b]">Contoh Permintaan cURL</span>
+                <span className="font-bold text-[#15211C]">Contoh Permintaan cURL</span>
                 <pre className="p-3.5 bg-[#00251b] text-[#effdf4] font-mono text-xs rounded-xl overflow-x-auto">
 {`curl -X GET "https://data.sidoarjokab.go.id/api/v1/datasets?category=keuangan&tahun=2026" \\
   -H "Accept: application/json" \\
@@ -1582,8 +1579,8 @@ export const DataPublikPage: React.FC = () => {
               </div>
 
               <div className="space-y-1">
-                <span className="font-bold text-[#00251b]">Format Respon JSON Standar</span>
-                <pre className="p-3.5 bg-[#effdf4] border border-[#ddece3] text-[#00251b] font-mono text-xs rounded-xl overflow-x-auto">
+                <span className="font-bold text-[#15211C]">Format Respon JSON Standar</span>
+                <pre className="p-3.5 bg-[#F8FAF9] border border-slate-200 text-[#15211C] font-mono text-xs rounded-xl overflow-x-auto">
 {`{
   "status": "success",
   "code": 200,
@@ -1600,16 +1597,16 @@ export const DataPublikPage: React.FC = () => {
                 </pre>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-[#e3f1e9] text-xs text-[#00251b] space-y-1">
+              <div className="p-3.5 rounded-xl bg-[#e3f1e9] text-xs text-[#15211C] space-y-1">
                 <strong>Kebijakan Rate Limit:</strong>
                 <p>100 request/menit untuk publik tanpa API Key. Untuk kuota riset akademik institusi, silakan hubungi Diskominfo Bidang Tata Kelola e-Government.</p>
               </div>
             </div>
 
-            <div className="p-4 border-t border-[#ddece3] bg-[#effdf4] flex justify-end">
+            <div className="p-4 border-t border-slate-200 bg-[#F8FAF9] flex justify-end">
               <button
                 onClick={() => setApiModalOpen(false)}
-                className="px-5 py-2 rounded-xl bg-[#006c4d] text-white text-xs font-semibold hover:bg-[#005139]"
+                className="px-5 py-2 rounded-xl bg-[#038D66] text-white text-xs font-semibold hover:bg-[#026E4F]"
               >
                 Tutup Dokumentasi
               </button>
@@ -1624,16 +1621,16 @@ export const DataPublikPage: React.FC = () => {
       {/* ========================================================================= */}
       {ppidModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-[#ddece3] overflow-hidden">
+          <div className="bg-white rounded-2xl max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
             
-            <div className="p-5 border-b border-[#ddece3] flex items-center justify-between bg-[#effdf4]">
+            <div className="p-5 border-b border-slate-200 flex items-center justify-between bg-[#F8FAF9]">
               <div className="flex items-center gap-2">
                 <Icon className="material-symbols-outlined text-[#006c4d] text-[22px]">assignment</Icon>
                 <div>
-                  <h3 className="font-['Plus_Jakarta_Sans',sans-serif] text-base sm:text-lg font-bold text-[#00251b]">
+                  <h3 className="font-display text-base sm:text-lg font-bold text-[#15211C]">
                     Formulir Permohonan Informasi Publik PPID
                   </h3>
-                  <p className="text-xs text-[#404945]">Berdasarkan Undang-Undang KIP No. 14 Tahun 2008</p>
+                  <p className="text-xs text-[#5A6862]">Berdasarkan Undang-Undang KIP No. 14 Tahun 2008</p>
                 </div>
               </div>
               <button
@@ -1646,20 +1643,20 @@ export const DataPublikPage: React.FC = () => {
 
             <form onSubmit={handlePpidSubmit} className="p-5 overflow-y-auto space-y-4 text-xs">
               <div>
-                <label className="block font-semibold text-[#00251b] mb-1">Nama Lengkap Pemohon</label>
+                <label className="block font-semibold text-[#15211C] mb-1">Nama Lengkap Pemohon</label>
                 <input
                   required
                   type="text"
                   value={ppidForm.nama}
                   onChange={(e) => setPpidForm({ ...ppidForm, nama: e.target.value })}
                   placeholder="Contoh: Budi Santoso"
-                  className="w-full h-10 px-3 rounded-lg border border-[#ddece3] bg-[#effdf4] focus:outline-none focus:ring-2 focus:ring-[#006c4d]/30"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-200 bg-[#F8FAF9] focus:outline-none focus:ring-2 focus:ring-[#006c4d]/30"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-semibold text-[#00251b] mb-1">Nomor Induk Kependudukan (NIK)</label>
+                  <label className="block font-semibold text-[#15211C] mb-1">Nomor Induk Kependudukan (NIK)</label>
                   <input
                     required
                     type="text"
@@ -1667,52 +1664,52 @@ export const DataPublikPage: React.FC = () => {
                     value={ppidForm.nik}
                     onChange={(e) => setPpidForm({ ...ppidForm, nik: e.target.value })}
                     placeholder="3515xxxxxxxxxxxx"
-                    className="w-full h-10 px-3 rounded-lg border border-[#ddece3] bg-[#effdf4] focus:outline-none focus:ring-2 focus:ring-[#006c4d]/30 font-mono"
+                    className="w-full h-10 px-3 rounded-lg border border-slate-200 bg-[#F8FAF9] focus:outline-none focus:ring-2 focus:ring-[#006c4d]/30 font-mono"
                   />
                 </div>
                 <div>
-                  <label className="block font-semibold text-[#00251b] mb-1">Alamat Email Aktif</label>
+                  <label className="block font-semibold text-[#15211C] mb-1">Alamat Email Aktif</label>
                   <input
                     required
                     type="email"
                     value={ppidForm.email}
                     onChange={(e) => setPpidForm({ ...ppidForm, email: e.target.value })}
                     placeholder="nama@domain.com"
-                    className="w-full h-10 px-3 rounded-lg border border-[#ddece3] bg-[#effdf4] focus:outline-none focus:ring-2 focus:ring-[#006c4d]/30"
+                    className="w-full h-10 px-3 rounded-lg border border-slate-200 bg-[#F8FAF9] focus:outline-none focus:ring-2 focus:ring-[#006c4d]/30"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block font-semibold text-[#00251b] mb-1">Rincian Informasi / Data yang Diminta</label>
+                <label className="block font-semibold text-[#15211C] mb-1">Rincian Informasi / Data yang Diminta</label>
                 <textarea
                   required
                   rows={3}
                   value={ppidForm.rincianData}
                   onChange={(e) => setPpidForm({ ...ppidForm, rincianData: e.target.value })}
                   placeholder="Jelaskan data OPD apa yang dibutuhkan, tahun anggaran, dan cakupan wilayah..."
-                  className="w-full p-3 rounded-lg border border-[#ddece3] bg-[#effdf4] focus:outline-none focus:ring-2 focus:ring-[#006c4d]/30"
+                  className="w-full p-3 rounded-lg border border-slate-200 bg-[#F8FAF9] focus:outline-none focus:ring-2 focus:ring-[#006c4d]/30"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-[#00251b] mb-1">Tujuan Penggunaan Data</label>
+                <label className="block font-semibold text-[#15211C] mb-1">Tujuan Penggunaan Data</label>
                 <input
                   required
                   type="text"
                   value={ppidForm.tujuan}
                   onChange={(e) => setPpidForm({ ...ppidForm, tujuan: e.target.value })}
                   placeholder="Contoh: Skripsi / Riset Akademik / Pengawasan Publik"
-                  className="w-full h-10 px-3 rounded-lg border border-[#ddece3] bg-[#effdf4] focus:outline-none focus:ring-2 focus:ring-[#006c4d]/30"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-200 bg-[#F8FAF9] focus:outline-none focus:ring-2 focus:ring-[#006c4d]/30"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-[#00251b] mb-1">Format Berkas yang Diinginkan</label>
+                <label className="block font-semibold text-[#15211C] mb-1">Format Berkas yang Diinginkan</label>
                 <select
                   value={ppidForm.formatDipilih}
                   onChange={(e) => setPpidForm({ ...ppidForm, formatDipilih: e.target.value })}
-                  className="w-full h-10 px-3 rounded-lg border border-[#ddece3] bg-[#effdf4] focus:outline-none"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-200 bg-[#F8FAF9] focus:outline-none"
                 >
                   <option>CSV / Excel Spreadsheet</option>
                   <option>PDF Resmi Berstempel Elektronik</option>
@@ -1721,7 +1718,7 @@ export const DataPublikPage: React.FC = () => {
                 </select>
               </div>
 
-              <div className="p-3 bg-[#e3f1e9] rounded-lg text-[11px] text-[#404945]">
+              <div className="p-3 bg-[#e3f1e9] rounded-lg text-[11px] text-[#5A6862]">
                 PPID Pemkab Sidoarjo akan memberikan tanggapan selambat-lambatnya <strong>10 hari kerja</strong> sesuai ketentuan UU KIP No. 14/2008.
               </div>
 
@@ -1729,14 +1726,14 @@ export const DataPublikPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setPpidModalOpen(false)}
-                  className="px-4 py-2 rounded-xl border border-[#ddece3] text-[#404945] font-semibold"
+                  className="px-4 py-2 rounded-xl border border-slate-200 text-[#5A6862] font-semibold"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
                   disabled={ppidSubmitted}
-                  className="px-5 py-2 rounded-xl bg-[#006c4d] hover:bg-[#005139] text-white font-bold flex items-center gap-1.5 shadow-sm"
+                  className="px-5 py-2 rounded-xl bg-[#038D66] hover:bg-[#026E4F] text-white font-bold flex items-center gap-1.5 shadow-sm"
                 >
                   {ppidSubmitted ? (
                     <>
@@ -1762,16 +1759,16 @@ export const DataPublikPage: React.FC = () => {
       {/* ========================================================================= */}
       {kecamatanModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-[#ddece3] overflow-hidden">
+          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
             
-            <div className="p-5 border-b border-[#ddece3] flex items-center justify-between bg-[#effdf4]">
+            <div className="p-5 border-b border-slate-200 flex items-center justify-between bg-[#F8FAF9]">
               <div className="flex items-center gap-2.5">
                 <Icon className="material-symbols-outlined text-[#006c4d] text-[24px]">map</Icon>
                 <div>
-                  <h3 className="font-['Plus_Jakarta_Sans',sans-serif] text-base sm:text-lg font-bold text-[#00251b]">
+                  <h3 className="font-display text-base sm:text-lg font-bold text-[#15211C]">
                     Alokasi Dana Pembangunan 18 Kecamatan Sidoarjo 2026
                   </h3>
-                  <p className="text-xs text-[#404945]">Distribusi dana pembangunan kewilayahan berbasis populasi dan kebutuhan riil</p>
+                  <p className="text-xs text-[#5A6862]">Distribusi dana pembangunan kewilayahan berbasis populasi dan kebutuhan riil</p>
                 </div>
               </div>
               <button
@@ -1784,9 +1781,9 @@ export const DataPublikPage: React.FC = () => {
 
             <div className="p-5 overflow-y-auto space-y-3">
               <p className="text-[11px] text-slate-500 mb-2 flex items-center gap-1 sm:hidden">Geser ke kanan untuk melihat rincian kolom →</p>
-              <div className="overflow-x-auto border border-[#ddece3] rounded-xl">
+              <div className="overflow-x-auto border border-slate-200 rounded-xl">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-[#effdf4] border-b border-[#ddece3] text-[#00251b] font-semibold">
+                  <thead className="bg-[#F8FAF9] border-b border-slate-200 text-[#15211C] font-semibold">
                     <tr>
                       <th className="p-3">Nama Kecamatan</th>
                       <th className="p-3">Pagu Alokasi (Rp)</th>
@@ -1795,14 +1792,14 @@ export const DataPublikPage: React.FC = () => {
                       <th className="p-3">Realisasi Fisik</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#ddece3] text-[#404945]">
+                  <tbody className="divide-y divide-[#ddece3] text-[#5A6862]">
                     {kecamatanBudgets.map((kec, i) => (
-                      <tr key={i} className="hover:bg-[#effdf4]/50">
-                        <td className="p-3 font-bold text-[#00251b] whitespace-nowrap">{kec.nama}</td>
+                      <tr key={i} className="hover:bg-[#F8FAF9]/50">
+                        <td className="p-3 font-bold text-[#15211C] whitespace-nowrap">{kec.nama}</td>
                         <td className="p-3 font-semibold text-[#006c4d] whitespace-nowrap">{kec.pagu}</td>
                         <td className="p-3 whitespace-nowrap">{kec.penduduk}</td>
                         <td className="p-3">{kec.prioritas}</td>
-                        <td className="p-3 font-bold text-[#00251b] whitespace-nowrap">{kec.progres}</td>
+                        <td className="p-3 font-bold text-[#15211C] whitespace-nowrap">{kec.progres}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -1811,13 +1808,13 @@ export const DataPublikPage: React.FC = () => {
               <p className="text-xs text-slate-500 mt-3 italic">* Catatan: Selisih pagu kecamatan sebesar Rp 673 Miliar terhadap total APBD dialokasikan untuk Dana Cadangan Daerah, BTT (Belanja Tidak Terduga) Penanggulangan Bencana, dan Belanja Markas Setda Kabupaten Sidoarjo.</p>
             </div>
 
-            <div className="p-4 border-t border-[#ddece3] bg-[#effdf4] flex items-center justify-between">
-              <span className="text-xs text-[#404945]">
+            <div className="p-4 border-t border-slate-200 bg-[#F8FAF9] flex items-center justify-between">
+              <span className="text-xs text-[#5A6862]">
                 Total pagu kewilayahan 18 kecamatan: <strong>Rp 4,51 Triliun</strong>
               </span>
               <button
                 onClick={() => setKecamatanModalOpen(false)}
-                className="px-4 py-2 rounded-xl bg-[#006c4d] text-white text-xs font-semibold hover:bg-[#005139]"
+                className="px-4 py-2 rounded-xl bg-[#038D66] text-white text-xs font-semibold hover:bg-[#026E4F]"
               >
                 Tutup
               </button>
@@ -1832,16 +1829,16 @@ export const DataPublikPage: React.FC = () => {
       {/* ========================================================================= */}
       {projectModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-[#ddece3] overflow-hidden">
+          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
             
-            <div className="p-5 border-b border-[#ddece3] flex items-center justify-between bg-[#effdf4]">
+            <div className="p-5 border-b border-slate-200 flex items-center justify-between bg-[#F8FAF9]">
               <div className="flex items-center gap-2.5">
                 <Icon className="material-symbols-outlined text-[#006c4d] text-[24px]">construction</Icon>
                 <div>
-                  <h3 className="font-['Plus_Jakarta_Sans',sans-serif] text-base sm:text-lg font-bold text-[#00251b]">
+                  <h3 className="font-display text-base sm:text-lg font-bold text-[#15211C]">
                     Daftar Proyek Strategis Daerah Kabupaten Sidoarjo 2026
                   </h3>
-                  <p className="text-xs text-[#404945]">Pengawasan berkala tender lelang, rekanan pemenang, dan progres pengerjaan</p>
+                  <p className="text-xs text-[#5A6862]">Pengawasan berkala tender lelang, rekanan pemenang, dan progres pengerjaan</p>
                 </div>
               </div>
               <button
@@ -1855,9 +1852,9 @@ export const DataPublikPage: React.FC = () => {
             <div className="p-5 overflow-y-auto space-y-3">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {strategicProjects.map((proj, idx) => (
-                  <div key={idx} className="p-4 rounded-xl bg-[#e9f7ee] border border-[#ddece3] space-y-2">
+                  <div key={idx} className="p-4 rounded-xl bg-[#e9f7ee] border border-slate-200 space-y-2">
                     <div className="flex items-start justify-between gap-2">
-                      <h4 className="font-['Plus_Jakarta_Sans',sans-serif] text-xs sm:text-sm font-bold text-[#00251b]">
+                      <h4 className="font-display text-xs sm:text-sm font-bold text-[#15211C]">
                         {proj.nama}
                       </h4>
                       <span className="px-2 py-0.5 rounded bg-[#8af7c9] text-[#002115] text-[10px] font-bold shrink-0">
@@ -1865,20 +1862,20 @@ export const DataPublikPage: React.FC = () => {
                       </span>
                     </div>
 
-                    <div className="text-xs text-[#404945] space-y-1">
-                      <div>Lokasi: <span className="font-medium text-[#00251b]">{proj.lokasi}</span></div>
+                    <div className="text-xs text-[#5A6862] space-y-1">
+                      <div>Lokasi: <span className="font-medium text-[#15211C]">{proj.lokasi}</span></div>
                       <div>Anggaran: <span className="font-bold text-[#006c4d]">{proj.anggaran}</span></div>
-                      <div>Pemenang Tender: <span className="font-medium text-[#00251b]">{proj.rekanan}</span></div>
+                      <div>Pemenang Tender: <span className="font-medium text-[#15211C]">{proj.rekanan}</span></div>
                     </div>
 
                     {/* Progress Bar */}
                     <div className="space-y-1 pt-1">
                       <div className="flex justify-between text-[11px] font-semibold">
-                        <span className="text-[#404945]">Progres Fisik</span>
+                        <span className="text-[#5A6862]">Progres Fisik</span>
                         <span className="text-[#006c4d]">{proj.progres}%</span>
                       </div>
                       <div className="w-full h-2 rounded-full bg-[#ddece3] overflow-hidden">
-                        <div className="h-full bg-[#006c4d] rounded-full" style={{ width: `${proj.progres}%` }}></div>
+                        <div className="h-full bg-[#038D66] rounded-full" style={{ width: `${proj.progres}%` }}></div>
                       </div>
                     </div>
                   </div>
@@ -1886,10 +1883,10 @@ export const DataPublikPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-4 border-t border-[#ddece3] bg-[#effdf4] flex justify-end">
+            <div className="p-4 border-t border-slate-200 bg-[#F8FAF9] flex justify-end">
               <button
                 onClick={() => setProjectModalOpen(false)}
-                className="px-4 py-2 rounded-xl bg-[#006c4d] text-white text-xs font-semibold hover:bg-[#005139]"
+                className="px-4 py-2 rounded-xl bg-[#038D66] text-white text-xs font-semibold hover:bg-[#026E4F]"
               >
                 Tutup
               </button>

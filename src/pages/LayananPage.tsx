@@ -385,42 +385,46 @@ export const LayananPage: React.FC<LayananPageProps> = ({
         </div>
       )}
 
-      {/* Top Sovereign Header / Hero Breadcrumb Band */}
-      <section className="w-full bg-primary-container text-on-primary py-8 sm:py-10 relative overflow-hidden shadow-md">
-        {/* Ambient Civic Glow Shapes */}
-        <div className="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-secondary/15 blur-3xl pointer-events-none"></div>
-        <div className="absolute left-1/3 -bottom-20 w-80 h-80 rounded-full bg-secondary-container/10 blur-2xl pointer-events-none"></div>
+      {/* Top Header / Breadcrumb Band (Aligned with Beranda Style) */}
+      <section className="relative pt-6 pb-14 overflow-hidden bg-gradient-to-b from-[#F2FAF6] to-[#F8FAF9] border-b border-slate-200/80">
+        <div 
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: `radial-gradient(#083C2E 1px, transparent 1px)`,
+            backgroundSize: '24px 24px',
+          }}
+        />
 
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col gap-4">
           {/* Breadcrumbs & Live System Status */}
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <nav aria-label="Breadcrumb" className="flex items-center gap-2 font-label-md text-xs sm:text-sm text-on-primary-container">
-              <a className="hover:text-secondary-fixed transition-colors flex items-center gap-1" href="#beranda">
-                <Icon className="material-symbols-outlined text-[16px]">home</Icon>
+            <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs sm:text-sm text-slate-500 font-medium">
+              <a className="hover:text-[#038D66] transition-colors flex items-center gap-1" href="#beranda">
+                <Icon className="text-[16px]">home</Icon>
                 <span>Beranda</span>
               </a>
-              <Icon className="material-symbols-outlined text-[14px] text-outline">chevron_right</Icon>
-              <span className="text-on-primary-container">Direktori Layanan Publik</span>
-              <Icon className="material-symbols-outlined text-[14px] text-outline">chevron_right</Icon>
-              <span className="text-secondary-fixed font-semibold">Semua Layanan</span>
+              <Icon className="text-[14px] text-slate-400">chevron_right</Icon>
+              <span className="text-slate-600">Direktori Layanan Publik</span>
+              <Icon className="text-[14px] text-slate-400">chevron_right</Icon>
+              <span className="text-[#038D66] font-semibold">Semua Layanan</span>
             </nav>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-lowest/10 backdrop-blur-sm text-secondary-fixed text-xs font-semibold">
-              <span className="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse"></span>
-              <span>Sistem Terintegrasi SPBE &amp; MPP Digital • 48 Layanan Terdaftar Aktif</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100/80 border border-emerald-200/70 text-emerald-900 text-xs font-semibold">
+              <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+              <span>Sistem Terintegrasi SPBE • 48 Layanan Terdaftar Aktif</span>
             </div>
           </div>
 
           {/* Main Headline Content */}
           <div className="max-w-4xl flex flex-col gap-2 mt-2">
             <div className="inline-flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded text-tertiary-fixed font-label-md text-[11px] tracking-wider uppercase font-bold bg-tertiary-container/30">
-                DIREKTORI LENGKAP LAYANAN PUBLIK KAB. SIDOARJO
+              <span className="px-3 py-1 rounded-full text-emerald-900 text-xs font-semibold uppercase tracking-wider bg-emerald-100/70 border border-emerald-200/60">
+                DIREKTORI RESMI PEMKAB SIDOARJO
               </span>
             </div>
-            <h1 className="font-headline-lg text-2xl sm:text-3xl lg:text-4xl text-on-primary tracking-tight font-extrabold leading-tight">
+            <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl text-[#15211C] tracking-tight font-extrabold leading-tight">
               Eksplorasi Seluruh Layanan Publik Sidoarjo
             </h1>
-            <p className="font-body-md text-sm sm:text-base text-on-primary-container/90 leading-relaxed max-w-3xl">
+            <p className="text-sm sm:text-base text-[#5A6862] leading-relaxed max-w-3xl">
               Temukan dan akses secara terpadu seluruh layanan administrasi kependudukan, perizinan berusaha, kesehatan, bantuan sosial, perpajakan, dan ketenagakerjaan dalam satu portal digital tanpa tatap muka.
             </p>
           </div>
@@ -430,14 +434,14 @@ export const LayananPage: React.FC<LayananPageProps> = ({
       {/* Main Work Surface */}
       <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-8">
         {/* Filter & Search Console (Card Surface Layer) */}
-        <section className="w-full bg-surface-container-lowest rounded-2xl shadow-md p-5 sm:p-6 lg:p-7 flex flex-col gap-4 -mt-8 sm:-mt-10 relative z-20 border border-surface-container-high/80">
+        <section className="w-full bg-white rounded-2xl shadow-lg p-5 sm:p-6 lg:p-7 flex flex-col gap-4 -mt-10 sm:-mt-12 relative z-20 border border-slate-200/90">
           {/* Search Field with Integrated Quick Action */}
           <div className="flex flex-col lg:flex-row items-stretch gap-3">
-            <div className="relative flex-1 flex items-center bg-surface-container-low rounded-xl px-4 py-3 shadow-inner border border-surface-container-high/40">
-              <Icon className="material-symbols-outlined text-secondary text-[24px] mr-3 shrink-0">search</Icon>
+            <div className="relative flex-1 flex items-center bg-slate-50/80 rounded-xl px-4 py-3 border border-slate-200 focus-within:border-emerald-600 focus-within:ring-2 focus-within:ring-emerald-600/20 transition-all">
+              <Icon className="text-slate-500 text-[22px] mr-3 shrink-0">search</Icon>
               <input
                 aria-label="Cari layanan publik"
-                className="w-full bg-transparent text-on-surface placeholder:text-outline font-body-md text-sm sm:text-base outline-none"
+                className="w-full bg-transparent text-slate-800 placeholder:text-slate-400 text-sm sm:text-base outline-none"
                 id="searchInput"
                 placeholder="Cari layanan (contoh: KTP, NIB, SIPRAJA, PBB, BPJS, Akta, Sanitasi, Beasiswa)..."
                 type="search"
@@ -447,17 +451,17 @@ export const LayananPage: React.FC<LayananPageProps> = ({
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="mr-2 text-outline hover:text-on-surface text-xs font-semibold"
+                  className="mr-2 text-slate-400 hover:text-slate-600 text-xs font-semibold cursor-pointer"
                 >
-                  <Icon className="material-symbols-outlined text-[18px]">close</Icon>
+                  <Icon className="text-[18px]">close</Icon>
                 </button>
               )}
               <button
                 onClick={handleResetFilters}
-                className="shrink-0 px-3 py-1.5 rounded-lg bg-surface-container-highest text-on-surface-variant font-label-md text-xs hover:bg-surface-variant transition-colors flex items-center gap-1 font-semibold"
+                className="shrink-0 px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 text-xs hover:bg-slate-200 transition-colors flex items-center gap-1 font-semibold cursor-pointer"
                 type="button"
               >
-                <Icon className="material-symbols-outlined text-[16px]">tune</Icon>
+                <Icon className="text-[16px]">tune</Icon>
                 <span className="hidden sm:inline">Reset</span>
               </button>
             </div>
@@ -465,7 +469,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
             {/* OPD Filter */}
             <div className="relative min-w-[220px]">
               <select
-                className="w-full h-full min-h-[48px] px-3.5 py-2.5 bg-surface-container-low text-on-surface font-label-lg text-xs sm:text-sm rounded-xl outline-none cursor-pointer appearance-none pr-10 hover:bg-surface-container transition-colors border border-surface-container-high/40"
+                className="w-full h-full min-h-[48px] px-3.5 py-2.5 bg-slate-50/80 text-slate-800 text-xs sm:text-sm font-medium rounded-xl outline-none cursor-pointer appearance-none pr-10 hover:bg-slate-100 transition-colors border border-slate-200 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20"
                 value={selectedOpd}
                 onChange={(e) => setSelectedOpd(e.target.value)}
               >
@@ -481,7 +485,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                 <option value="dinkop">Dinas Koperasi &amp; UMKM</option>
                 <option value="diskominfo">Diskominfo (Pengaduan 112)</option>
               </select>
-              <Icon className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[20px]">
+              <Icon className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none text-[20px]">
                 expand_more
               </Icon>
             </div>
@@ -489,7 +493,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
             {/* Kanal Akses Filter */}
             <div className="relative min-w-[190px]">
               <select
-                className="w-full h-full min-h-[48px] px-3.5 py-2.5 bg-surface-container-low text-on-surface font-label-lg text-xs sm:text-sm rounded-xl outline-none cursor-pointer appearance-none pr-10 hover:bg-surface-container transition-colors border border-surface-container-high/40"
+                className="w-full h-full min-h-[48px] px-3.5 py-2.5 bg-slate-50/80 text-slate-800 text-xs sm:text-sm font-medium rounded-xl outline-none cursor-pointer appearance-none pr-10 hover:bg-slate-100 transition-colors border border-slate-200 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20"
                 value={selectedChannel}
                 onChange={(e) => setSelectedChannel(e.target.value)}
               >
@@ -499,7 +503,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                 <option value="adm">Mesin ADM Mandiri</option>
                 <option value="mobile">Aplikasi Mobile / Host-to-Host</option>
               </select>
-              <Icon className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[20px]">
+              <Icon className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none text-[20px]">
                 expand_more
               </Icon>
             </div>
@@ -507,7 +511,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
             {/* Urutkan Filter */}
             <div className="relative min-w-[170px]">
               <select
-                className="w-full h-full min-h-[48px] px-3.5 py-2.5 bg-surface-container-low text-on-surface font-label-lg text-xs sm:text-sm rounded-xl outline-none cursor-pointer appearance-none pr-10 hover:bg-surface-container transition-colors border border-surface-container-high/40"
+                className="w-full h-full min-h-[48px] px-3.5 py-2.5 bg-slate-50/80 text-slate-800 text-xs sm:text-sm font-medium rounded-xl outline-none cursor-pointer appearance-none pr-10 hover:bg-slate-100 transition-colors border border-slate-200 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
               >
@@ -516,7 +520,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                 <option value="az">Nama Layanan (A - Z)</option>
                 <option value="time">Estimasi Tercepat</option>
               </select>
-              <Icon className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[20px]">
+              <Icon className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none text-[20px]">
                 sort
               </Icon>
             </div>
@@ -530,14 +534,14 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                 <button
                   key={cat.key}
                   onClick={() => setSelectedCategory(cat.key)}
-                  className={`px-4 py-2 rounded-full font-label-lg text-xs sm:text-sm shrink-0 flex items-center gap-1.5 transition-all font-semibold ${
+                  className={`px-4 py-2 rounded-full text-xs sm:text-sm shrink-0 flex items-center gap-1.5 transition-all font-semibold cursor-pointer ${
                     isActive
-                      ? 'bg-primary text-on-primary shadow-sm'
-                      : 'bg-surface-container text-on-surface hover:bg-secondary-container/40'
+                      ? 'bg-[#038D66] text-white shadow-xs'
+                      : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
                   }`}
                 >
-                  <Icon className={`material-symbols-outlined text-[18px] ${
-                      isActive ? 'text-white' : 'text-secondary'
+                  <Icon className={`text-[18px] ${
+                      isActive ? 'text-white' : 'text-[#038D66]'
                     }`}
                   >
                     {cat.icon}
@@ -552,42 +556,42 @@ export const LayananPage: React.FC<LayananPageProps> = ({
         {/* Meta Bar: Counter, Transparency Badges & View Switcher */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-1">
           <div className="flex items-center gap-3 flex-wrap">
-            <p className="font-title-md text-base sm:text-lg font-bold text-on-surface">
-              Menampilkan <span className="text-secondary">{filteredServices.length}</span> dari{' '}
-              <span className="text-primary">{directoryServicesData.length}</span> Layanan Publik Resmi Pemkab Sidoarjo
+            <p className="font-display text-base sm:text-lg font-bold text-[#15211C]">
+              Menampilkan <span className="text-[#038D66]">{filteredServices.length}</span> dari{' '}
+              <span className="text-[#15211C]">{directoryServicesData.length}</span> Layanan Publik Resmi Pemkab Sidoarjo
             </p>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary-container/30 text-on-secondary-container font-label-md text-xs font-bold">
-              <Icon className="material-symbols-outlined text-[14px] text-secondary">verified_user</Icon>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100/70 border border-emerald-200/60 text-emerald-900 text-xs font-semibold">
+              <Icon className="text-[14px] text-[#038D66]">verified_user</Icon>
               <span>Semua Layanan Bebas Pungli • 100% Transparan</span>
             </div>
           </div>
 
           {/* View Switcher */}
           <div className="flex items-center gap-2 self-end sm:self-auto">
-            <span className="font-label-md text-xs text-on-surface-variant hidden lg:inline">Tampilan:</span>
-            <div className="flex items-center p-1 bg-surface-container rounded-xl shadow-xs border border-surface-container-high/40">
+            <span className="text-xs text-slate-500 font-medium hidden lg:inline">Tampilan:</span>
+            <div className="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200">
               <button
                 onClick={() => setViewMode('grid')}
-                className={`px-3 py-1 rounded-lg flex items-center gap-1 font-label-md text-xs font-semibold transition-all ${
+                className={`px-3 py-1 rounded-lg flex items-center gap-1 text-xs font-semibold transition-all cursor-pointer ${
                   viewMode === 'grid'
-                    ? 'bg-surface-container-lowest text-primary shadow-sm'
-                    : 'text-on-surface-variant hover:text-on-surface'
+                    ? 'bg-white text-[#15211C] shadow-xs'
+                    : 'text-slate-500 hover:text-slate-900'
                 }`}
                 title="Tampilan Kartu / Grid"
               >
-                <Icon className="material-symbols-outlined text-[18px]">grid_view</Icon>
+                <Icon className="text-[18px]">grid_view</Icon>
                 <span className="hidden md:inline">Grid</span>
               </button>
               <button
                 onClick={() => setViewMode('table')}
-                className={`px-3 py-1 rounded-lg flex items-center gap-1 font-label-md text-xs font-semibold transition-all ${
+                className={`px-3 py-1 rounded-lg flex items-center gap-1 text-xs font-semibold transition-all cursor-pointer ${
                   viewMode === 'table'
-                    ? 'bg-surface-container-lowest text-primary shadow-sm'
-                    : 'text-on-surface-variant hover:text-on-surface'
+                    ? 'bg-white text-[#15211C] shadow-xs'
+                    : 'text-slate-500 hover:text-slate-900'
                 }`}
                 title="Tampilan Baris / Tabel"
               >
-                <Icon className="material-symbols-outlined text-[18px]">table_rows</Icon>
+                <Icon className="text-[18px]">table_rows</Icon>
                 <span className="hidden md:inline">Daftar</span>
               </button>
             </div>
@@ -596,107 +600,106 @@ export const LayananPage: React.FC<LayananPageProps> = ({
 
         {/* Services Directory: Grid or Table View */}
         {filteredServices.length === 0 ? (
-          <div className="bg-surface-container-lowest rounded-2xl p-12 text-center flex flex-col items-center justify-center gap-3 border border-surface-container-high">
-            <Icon className="material-symbols-outlined text-outline text-[48px]">search_off</Icon>
-            <h3 className="font-title-md text-lg font-bold text-primary">Layanan Tidak Ditemukan</h3>
-            <p className="font-body-sm text-sm text-on-surface-variant max-w-md">
+          <div className="bg-white rounded-2xl p-12 text-center flex flex-col items-center justify-center gap-3 border border-slate-200">
+            <Icon className="text-slate-400 text-[48px]">search_off</Icon>
+            <h3 className="font-display text-lg font-bold text-[#15211C]">Layanan Tidak Ditemukan</h3>
+            <p className="text-sm text-[#5A6862] max-w-md">
               Tidak ada layanan yang sesuai dengan kata kunci atau filter yang Anda pilih. Silakan gunakan kata kunci lain atau reset filter.
             </p>
             <button
               onClick={handleResetFilters}
-              className="mt-2 px-4 py-2 rounded-xl bg-secondary text-white font-label-md text-sm font-semibold hover:bg-secondary/90 transition-colors shadow-sm"
+              className="mt-2 px-4 py-2 rounded-xl bg-[#038D66] text-white text-sm font-semibold hover:bg-[#026E4F] transition-colors shadow-sm cursor-pointer"
             >
               Reset Semua Filter
             </button>
           </div>
         ) : viewMode === 'grid' ? (
-          /* 12-Card Grid */
           <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredServices.map((service) => (
               <article
                 key={service.id}
                 onClick={() => handleServiceClick(service)}
-                className="group bg-surface-container-lowest rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden border border-surface-container-high/60 cursor-pointer"
+                className="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden border border-slate-200/90 hover:border-emerald-500/80 cursor-pointer"
               >
-                <div className="absolute top-0 left-0 w-1.5 h-full bg-secondary"></div>
+                <div className="absolute top-0 left-0 w-1.5 h-full bg-[#038D66]"></div>
                 <div>
                   {/* Tags Header */}
                   <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded bg-surface-container-high text-primary font-label-md text-[11px] font-semibold">
-                      <Icon className="material-symbols-outlined text-[14px]">account_balance</Icon>
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-slate-100 text-slate-700 text-[11px] font-semibold border border-slate-200/60">
+                      <Icon className="text-[14px]">account_balance</Icon>
                       {service.opd}
                     </span>
                     <div className="flex items-center gap-1.5 flex-wrap justify-end">
                       {!service.detailRoute && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-md text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80 shadow-xs">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80 shadow-xs">
                           <ExternalLink className="w-3 h-3 text-amber-600" />
                           {['pbb', 'pbg', 'halal'].includes(service.id) ? 'Portal Eksternal' : 'Tahap Integrasi'}
                         </span>
                       )}
                       <span
-                        className={`inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-md text-[11px] font-bold ${
+                        className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold ${
                           service.badgeType === 'error'
-                            ? 'bg-error-container text-on-error-container'
+                            ? 'bg-red-50 text-red-700 border border-red-200'
                             : service.badgeType === 'warning'
-                            ? 'bg-tertiary-container/30 text-tertiary'
+                            ? 'bg-amber-50 text-amber-800 border border-amber-200'
                             : service.badgeType === 'primary'
-                            ? 'bg-surface-container-highest text-on-surface-variant'
-                            : 'bg-secondary-container/40 text-on-secondary-container'
+                            ? 'bg-slate-100 text-slate-700 border border-slate-200'
+                            : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
                         }`}
                       >
-                        <Icon className="material-symbols-outlined text-[13px]">{service.badgeIcon}</Icon>
+                        <Icon className="text-[13px]">{service.badgeIcon}</Icon>
                         {service.badge}
                       </span>
                     </div>
                   </div>
 
-                  <h3 className="font-title-md text-lg font-bold text-on-surface group-hover:text-secondary transition-colors mb-2 leading-snug">
+                  <h3 className="font-display text-lg font-bold text-[#15211C] group-hover:text-[#038D66] transition-colors mb-2 leading-snug">
                     {service.title}
                   </h3>
-                  <p className="font-body-sm text-xs sm:text-sm text-on-surface-variant leading-relaxed mb-4 line-clamp-3">
+                  <p className="text-xs sm:text-sm text-[#5A6862] leading-relaxed mb-4 line-clamp-3">
                     {service.description}
                   </p>
 
                   {/* Metrics Band */}
-                  <div className="grid grid-cols-2 gap-2 p-3 rounded-xl bg-surface-container-low mb-4 border border-surface-container-high/40">
+                  <div className="grid grid-cols-2 gap-2 p-3 rounded-xl bg-slate-50 mb-4 border border-slate-100">
                     <div>
-                      <span className="font-label-md text-[11px] text-on-surface-variant block">
+                      <span className="text-[11px] text-slate-500 block">
                         {service.metricLabel1}
                       </span>
-                      <span className="font-label-lg text-xs sm:text-sm font-bold text-on-surface">
+                      <span className="text-xs sm:text-sm font-bold text-[#15211C]">
                         {service.metricValue1}
                       </span>
                     </div>
                     <div>
-                      <span className="font-label-md text-[11px] text-on-surface-variant block">
+                      <span className="text-[11px] text-slate-500 block">
                         {service.metricLabel2}
                       </span>
-                      <span className="font-label-lg text-xs sm:text-sm font-bold text-secondary">
+                      <span className="text-xs sm:text-sm font-bold text-[#038D66]">
                         {service.metricValue2}
                       </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-2 border-t border-surface-container">
-                  <span className="font-label-md text-xs sm:text-sm font-semibold text-secondary hover:underline flex items-center gap-1">
+                <div className="flex items-center justify-between pt-3 border-t border-slate-100">
+                  <span className="text-xs sm:text-sm font-semibold text-[#038D66] group-hover:text-[#026E4F] flex items-center gap-1 transition-colors">
                     <span>{service.secondaryActionLabel}</span>
-                    <Icon className="material-symbols-outlined text-[16px]">
+                    <Icon className="text-[16px]">
                       {service.secondaryActionIcon}
                     </Icon>
                   </span>
                   {service.detailRoute ? (
                     <button
                       onClick={(e) => handleApplyClick(e, service)}
-                      className="px-3.5 py-2 rounded-xl bg-secondary text-white font-label-lg text-xs sm:text-sm hover:bg-secondary/90 transition-all font-semibold flex items-center gap-1 shadow-sm active:scale-95 cursor-pointer"
+                      className="px-3.5 py-2 rounded-xl bg-[#038D66] hover:bg-[#026E4F] text-white text-xs sm:text-sm transition-all font-semibold flex items-center gap-1 shadow-sm active:scale-95 cursor-pointer"
                     >
                       <span>{service.primaryActionLabel}</span>
-                      <Icon className="material-symbols-outlined text-[16px]">arrow_forward</Icon>
+                      <Icon className="text-[16px]">arrow_forward</Icon>
                     </button>
                   ) : (
                     <button
                       onClick={(e) => handleApplyClick(e, service)}
-                      className="px-3.5 py-2 rounded-xl bg-surface-container-high text-on-surface-variant font-label-lg text-xs sm:text-sm border border-outline-variant/40 transition-all font-semibold flex items-center gap-1.5 cursor-pointer hover:bg-surface-container"
+                      className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm border border-slate-200 transition-all font-semibold flex items-center gap-1.5 cursor-pointer"
                       title={['pbb', 'pbg', 'halal'].includes(service.id) ? 'Layanan dialihkan ke Portal Eksternal resmi' : 'Layanan sedang dalam tahap integrasi'}
                     >
                       <span>{['pbb', 'pbg', 'halal'].includes(service.id) ? 'Portal Eksternal' : 'Tahap Integrasi'}</span>
@@ -708,11 +711,10 @@ export const LayananPage: React.FC<LayananPageProps> = ({
             ))}
           </section>
         ) : (
-          /* Table / List View */
-          <div className="w-full bg-surface-container-lowest rounded-2xl shadow-sm border border-surface-container-high overflow-hidden">
+          <div className="w-full bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
-                <thead className="bg-surface-container-low text-on-surface-variant font-label-md text-xs border-b border-surface-container">
+                <thead className="bg-slate-50 text-slate-600 text-xs border-b border-slate-200">
                   <tr>
                     <th className="py-3.5 px-4 font-bold">Nama Layanan</th>
                     <th className="py-3.5 px-4 font-bold">Instansi / OPD</th>
@@ -722,15 +724,15 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                     <th className="py-3.5 px-4 font-bold text-right">Aksi</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-surface-container">
+                <tbody className="divide-y divide-slate-100">
                   {filteredServices.map((service) => (
                     <tr
                       key={service.id}
                       onClick={() => handleServiceClick(service)}
-                      className="hover:bg-surface-container-low/50 transition-colors cursor-pointer"
+                      className="hover:bg-slate-50/80 transition-colors cursor-pointer"
                     >
                       <td className="py-3.5 px-4">
-                        <div className="font-semibold text-on-surface hover:text-secondary transition-colors flex items-center gap-2">
+                        <div className="font-semibold text-[#15211C] hover:text-[#038D66] transition-colors flex items-center gap-2">
                           <span>{service.title}</span>
                           {!service.detailRoute && (
                             <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
@@ -739,39 +741,39 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                             </span>
                           )}
                         </div>
-                        <div className="text-xs text-on-surface-variant line-clamp-1">
+                        <div className="text-xs text-[#5A6862] line-clamp-1">
                           {service.description}
                         </div>
                       </td>
                       <td className="py-3.5 px-4 whitespace-nowrap">
-                        <span className="px-2 py-0.5 rounded bg-surface-container text-primary text-xs font-semibold">
+                        <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 text-xs font-semibold">
                           {service.opd}
                         </span>
                       </td>
                       <td className="py-3.5 px-4 whitespace-nowrap">
-                        <span className="text-xs text-secondary font-medium flex items-center gap-1">
-                          <Icon className="material-symbols-outlined text-[14px]">{service.badgeIcon}</Icon>
+                        <span className="text-xs text-[#038D66] font-medium flex items-center gap-1">
+                          <Icon className="text-[14px]">{service.badgeIcon}</Icon>
                           {service.badge}
                         </span>
                       </td>
-                      <td className="py-3.5 px-4 whitespace-nowrap text-xs font-semibold text-on-surface">
+                      <td className="py-3.5 px-4 whitespace-nowrap text-xs font-semibold text-[#15211C]">
                         {service.metricValue1}
                       </td>
-                      <td className="py-3.5 px-4 whitespace-nowrap text-xs font-bold text-secondary">
+                      <td className="py-3.5 px-4 whitespace-nowrap text-xs font-bold text-[#038D66]">
                         {service.metricValue2}
                       </td>
                       <td className="py-3.5 px-4 text-right whitespace-nowrap">
                         {service.detailRoute ? (
                           <button
                             onClick={(e) => handleApplyClick(e, service)}
-                            className="px-3 py-1.5 rounded-lg bg-secondary text-white font-label-md text-xs font-semibold hover:bg-secondary/90 transition-colors shadow-xs cursor-pointer"
+                            className="px-3 py-1.5 rounded-lg bg-[#038D66] hover:bg-[#026E4F] text-white text-xs font-semibold transition-colors shadow-xs cursor-pointer"
                           >
                             {service.primaryActionLabel}
                           </button>
                         ) : (
                           <button
                             onClick={(e) => handleApplyClick(e, service)}
-                            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface-variant border border-outline-variant/40 font-label-md text-xs font-semibold cursor-pointer hover:bg-surface-container"
+                            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 border border-slate-200 text-xs font-semibold cursor-pointer hover:bg-slate-200"
                             title={['pbb', 'pbg', 'halal'].includes(service.id) ? 'Layanan dialihkan ke Portal Eksternal resmi' : 'Layanan sedang dalam tahap integrasi'}
                           >
                             <span>{['pbb', 'pbg', 'halal'].includes(service.id) ? 'Portal Eksternal' : 'Tahap Integrasi'}</span>
@@ -835,74 +837,74 @@ export const LayananPage: React.FC<LayananPageProps> = ({
         {/* Panduan Akses Cepat & Bantuan Warga (Quick Support Triad) */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-2">
           {/* Feature Card 1 */}
-          <div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-surface-container-high/60 flex flex-col justify-between gap-4">
+          <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/90 hover:border-emerald-500/80 transition-all flex flex-col justify-between gap-4">
             <div className="flex items-start gap-3">
-              <div className="w-12 h-12 rounded-xl bg-secondary-container/50 text-secondary flex items-center justify-center shrink-0">
-                <Icon className="material-symbols-outlined text-[28px]">support_agent</Icon>
+              <div className="w-12 h-12 rounded-xl bg-emerald-100/70 text-[#038D66] flex items-center justify-center shrink-0">
+                <Icon className="text-[28px]">support_agent</Icon>
               </div>
               <div>
-                <h4 className="font-title-md text-base font-bold text-on-surface leading-tight mb-1">
+                <h4 className="font-display text-base font-bold text-[#15211C] leading-tight mb-1">
                   Butuh Bantuan Memilih Layanan?
                 </h4>
-                <p className="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+                <p className="text-xs text-[#5A6862] leading-relaxed">
                   Bingung dokumen yang sesuai untuk kebutuhan perizinan usaha atau KK baru Anda? Konsultasikan langsung via Live Chat Helpdesk.
                 </p>
               </div>
             </div>
             <a
-              className="inline-flex items-center gap-1.5 font-label-lg text-xs sm:text-sm font-bold text-secondary hover:text-primary transition-colors pt-2 border-t border-surface-container"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#038D66] hover:text-[#026E4F] transition-colors pt-3 border-t border-slate-100"
               href="#helpdesk"
             >
               <span>Tanya Asisten SITAPAK</span>
-              <Icon className="material-symbols-outlined text-[18px]">arrow_outward</Icon>
+              <Icon className="text-[18px]">arrow_outward</Icon>
             </a>
           </div>
 
           {/* Feature Card 2 */}
-          <div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-surface-container-high/60 flex flex-col justify-between gap-4">
+          <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/90 hover:border-emerald-500/80 transition-all flex flex-col justify-between gap-4">
             <div className="flex items-start gap-3">
-              <div className="w-12 h-12 rounded-xl bg-primary-container text-secondary-fixed flex items-center justify-center shrink-0">
-                <Icon className="material-symbols-outlined text-[28px]">accessible_forward</Icon>
+              <div className="w-12 h-12 rounded-xl bg-emerald-900 text-[#8af7c9] flex items-center justify-center shrink-0">
+                <Icon className="text-[28px]">accessible_forward</Icon>
               </div>
               <div>
-                <h4 className="font-title-md text-base font-bold text-on-surface leading-tight mb-1">
+                <h4 className="font-display text-base font-bold text-[#15211C] leading-tight mb-1">
                   Layanan Prioritas Ramah Inklusi
                 </h4>
-                <p className="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+                <p className="text-xs text-[#5A6862] leading-relaxed">
                   Program jemput bola perekaman adminduk ke rumah bagi warga lanjut usia di atas 60 tahun, penyandang disabilitas, dan warga sakit menahun.
                 </p>
               </div>
             </div>
             <a
-              className="inline-flex items-center gap-1.5 font-label-lg text-xs sm:text-sm font-bold text-secondary hover:text-primary transition-colors pt-2 border-t border-surface-container"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#038D66] hover:text-[#026E4F] transition-colors pt-3 border-t border-slate-100"
               href="#prioritas"
             >
               <span>Permohonan Jemput Bola</span>
-              <Icon className="material-symbols-outlined text-[18px]">arrow_outward</Icon>
+              <Icon className="text-[18px]">arrow_outward</Icon>
             </a>
           </div>
 
           {/* Feature Card 3 */}
-          <div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-surface-container-high/60 flex flex-col justify-between gap-4">
+          <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/90 hover:border-emerald-500/80 transition-all flex flex-col justify-between gap-4">
             <div className="flex items-start gap-3">
-              <div className="w-12 h-12 rounded-xl bg-tertiary-container/20 text-tertiary flex items-center justify-center shrink-0">
-                <Icon className="material-symbols-outlined text-[28px]">shield</Icon>
+              <div className="w-12 h-12 rounded-xl bg-amber-100/70 text-amber-800 flex items-center justify-center shrink-0">
+                <Icon className="text-[28px]">shield</Icon>
               </div>
               <div>
-                <h4 className="font-title-md text-base font-bold text-on-surface leading-tight mb-1">
+                <h4 className="font-display text-base font-bold text-[#15211C] leading-tight mb-1">
                   Kanal Bebas Pungli &amp; Saber Pungli
                 </h4>
-                <p className="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+                <p className="text-xs text-[#5A6862] leading-relaxed">
                   Seluruh penerbitan identitas dan rekomendasi bebas biaya pungli. Ada indikasi calo atau pungutan tak resmi? Laporkan secara rahasia (WBS).
                 </p>
               </div>
             </div>
             <a
-              className="inline-flex items-center gap-1.5 font-label-lg text-xs sm:text-sm font-bold text-secondary hover:text-primary transition-colors pt-2 border-t border-surface-container"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#038D66] hover:text-[#026E4F] transition-colors pt-3 border-t border-slate-100"
               href="#wbs"
             >
               <span>Lapor Whistleblowing Pemkab</span>
-              <Icon className="material-symbols-outlined text-[18px]">arrow_outward</Icon>
+              <Icon className="text-[18px]">arrow_outward</Icon>
             </a>
           </div>
         </section>

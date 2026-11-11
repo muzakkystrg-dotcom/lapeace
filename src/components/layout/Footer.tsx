@@ -27,45 +27,45 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
   };
 
   return (
-    <footer className="w-full bg-[#ddece3] text-[#121e19] shadow-[0_-1px_6px_rgba(0,0,0,0.03)] border-t border-[#c0c8c3]/40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-10">
+    <footer className="w-full bg-[#05241B] text-white border-t border-emerald-900/80 shadow-2xl">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10 mb-10 sm:mb-12">
           
           {/* Col 1 & 2: Brand, Address & Emergency Services (lg:col-span-2) */}
-          <div className="lg:col-span-2 flex flex-col gap-3">
+          <div className="lg:col-span-2 flex flex-col gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-[#006c4d]/10 flex items-center justify-center text-[#006c4d]">
-                <Landmark className="w-5 h-5 text-[#006c4d]" />
+              <div className="w-10 h-10 rounded-xl bg-[#8af7c9] flex items-center justify-center text-[#002115] shadow-sm">
+                <Landmark className="w-5 h-5 text-[#002115]" />
               </div>
-              <span className="font-display font-bold text-lg text-[#00251b]">
+              <span className="font-display font-bold text-lg text-white">
                 Pemerintah Kabupaten Sidoarjo - SITAPAK
               </span>
             </div>
             
-            <p className="text-xs sm:text-sm text-[#404945] max-w-sm leading-relaxed">
+            <p className="text-xs sm:text-sm text-emerald-100/70 max-w-sm leading-relaxed">
               Pusat Pelayanan Terpadu &amp; Call Center 112 Sidoarjo, Jl. Gubernur Suryo No. 1, Sidoarjo, Jawa Timur. Menjamin transparansi anggaran dan kepastian pelayanan publik warga Sidoarjo.
             </p>
 
-            <div className="mt-2 flex flex-col gap-1">
-              <span className="text-xs text-[#00251b] font-bold uppercase tracking-wider">
+            <div className="mt-1 flex flex-col gap-2">
+              <span className="text-xs text-[#8af7c9] font-bold uppercase tracking-wider">
                 Pusat Bantuan &amp; Tanggap Darurat
               </span>
-              <div className="flex flex-wrap items-center gap-2 mt-1">
+              <div className="flex flex-wrap items-center gap-2.5 mt-0.5">
                 <a
                   href="tel:112"
-                  className="flex items-center gap-2 bg-[#ffffff] px-3 py-1.5 rounded-lg shadow-xs border border-red-200/60 hover:bg-red-50/50 transition-colors"
+                  className="flex items-center gap-2 bg-red-950/40 hover:bg-red-900/50 px-3 py-1.5 rounded-xl shadow-xs border border-red-500/40 text-red-200 transition-colors"
                 >
-                  <PhoneCall className="w-4 h-4 text-[#ba1a1a]" />
-                  <span className="text-xs font-semibold text-[#121e19]">
+                  <PhoneCall className="w-4 h-4 text-red-400" />
+                  <span className="text-xs font-semibold">
                     112 Sidoarjo Siaga
                   </span>
                 </a>
                 <a
                   href="tel:110"
-                  className="flex items-center gap-2 bg-[#ffffff] px-3 py-1.5 rounded-lg shadow-xs border border-emerald-200/60 hover:bg-emerald-50/50 transition-colors"
+                  className="flex items-center gap-2 bg-white/10 hover:bg-white/15 px-3 py-1.5 rounded-xl shadow-xs border border-emerald-400/30 text-emerald-200 transition-colors"
                 >
-                  <Shield className="w-4 h-4 text-[#006c4d]" />
-                  <span className="text-xs font-semibold text-[#121e19]">
+                  <Shield className="w-4 h-4 text-[#8af7c9]" />
+                  <span className="text-xs font-semibold">
                     110 Polresta Sidoarjo
                   </span>
                 </a>
@@ -75,13 +75,13 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
 
           {/* Col 3: Peta Situs */}
           <div className="flex flex-col gap-3">
-            <span className="font-display font-bold text-sm sm:text-base text-[#00251b]">
+            <span className="font-display font-bold text-sm sm:text-base text-white">
               Peta Situs
             </span>
-            <ul className="flex flex-col gap-2 text-xs sm:text-sm text-[#404945]">
+            <ul className="flex flex-col gap-2.5 text-xs sm:text-sm text-emerald-100/70">
               <li>
                 <a
-                  className="hover:text-[#006c4d] transition-colors"
+                  className="hover:text-white transition-colors"
                   data-path="beranda"
                   href="#beranda"
                   onClick={(e) => handleLinkClick(e, 'beranda')}
@@ -91,7 +91,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
               </li>
               <li>
                 <a
-                  className="hover:text-[#006c4d] transition-colors"
+                  className="hover:text-white transition-colors"
                   data-path="data-terbuka"
                   href="#data-publik"
                   onClick={(e) => handleLinkClick(e, 'transparansi')}
@@ -101,7 +101,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
               </li>
               <li>
                 <a
-                  className="hover:text-[#006c4d] transition-colors"
+                  className="hover:text-white transition-colors"
                   data-path="layanan-publik"
                   href="#layanan"
                   onClick={(e) => handleLinkClick(e, 'layanan')}
@@ -111,9 +111,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
               </li>
               <li>
                 <a
-                  className="hover:text-[#006c4d] transition-colors"
+                  className="hover:text-white transition-colors"
                   data-path="lapor-aspirasi"
-                  href="#laporan-warga"
+                  href="#laporan"
                   onClick={(e) => handleLinkClick(e, 'laporan')}
                 >
                   Kanal Pengaduan SP4N
@@ -121,9 +121,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
               </li>
               <li>
                 <a
-                  className="hover:text-[#006c4d] transition-colors"
+                  className="hover:text-white transition-colors"
                   data-path="tentang-kami"
-                  href="#tentang-kami"
+                  href="#tentang"
                   onClick={(e) => handleLinkClick(e, 'tentang')}
                 >
                   Tentang &amp; Kebijakan
@@ -134,32 +134,32 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
 
           {/* Col 4: OPD Pemkab Sidoarjo */}
           <div className="flex flex-col gap-3">
-            <span className="font-display font-bold text-sm sm:text-base text-[#00251b]">
+            <span className="font-display font-bold text-sm sm:text-base text-white">
               OPD Pemkab Sidoarjo
             </span>
-            <ul className="flex flex-col gap-2 text-xs sm:text-sm text-[#404945]">
+            <ul className="flex flex-col gap-2.5 text-xs sm:text-sm text-emerald-100/70">
               <li>
-                <a className="hover:text-[#006c4d] transition-colors" href="https://diskominfo.sidoarjokab.go.id" target="_blank" rel="noreferrer">
-                  Dinas Komunikasi &amp; Informatika Sidoarjo
+                <a className="hover:text-white transition-colors" href="https://diskominfo.sidoarjokab.go.id" target="_blank" rel="noreferrer">
+                  Dinas Komunikasi &amp; Informatika
                 </a>
               </li>
               <li>
-                <a className="hover:text-[#006c4d] transition-colors" href="https://dukcapil.sidoarjokab.go.id" target="_blank" rel="noreferrer">
-                  Dinas Kependudukan &amp; Pencatatan Sipil Sidoarjo
+                <a className="hover:text-white transition-colors" href="https://dukcapil.sidoarjokab.go.id" target="_blank" rel="noreferrer">
+                  Dinas Kependudukan &amp; Catatan Sipil
                 </a>
               </li>
               <li>
-                <a className="hover:text-[#006c4d] transition-colors" href="https://bappeda.sidoarjokab.go.id" target="_blank" rel="noreferrer">
+                <a className="hover:text-white transition-colors" href="https://bappeda.sidoarjokab.go.id" target="_blank" rel="noreferrer">
                   Bappeda Kabupaten Sidoarjo
                 </a>
               </li>
               <li>
-                <a className="hover:text-[#006c4d] transition-colors" href="https://inspektorat.sidoarjokab.go.id" target="_blank" rel="noreferrer">
+                <a className="hover:text-white transition-colors" href="https://inspektorat.sidoarjokab.go.id" target="_blank" rel="noreferrer">
                   Inspektorat Kabupaten Sidoarjo
                 </a>
               </li>
               <li>
-                <a className="hover:text-[#006c4d] transition-colors" href="https://satudata.sidoarjokab.go.id" target="_blank" rel="noreferrer">
+                <a className="hover:text-white transition-colors" href="https://satudata.sidoarjokab.go.id" target="_blank" rel="noreferrer">
                   Satu Data Kabupaten Sidoarjo
                 </a>
               </li>
@@ -168,15 +168,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
 
           {/* Col 5: Langganan Pembaruan */}
           <div className="flex flex-col gap-3">
-            <span className="font-display font-bold text-sm sm:text-base text-[#00251b]">
+            <span className="font-display font-bold text-sm sm:text-base text-white">
               Langganan Pembaruan
             </span>
-            <p className="text-xs sm:text-sm text-[#404945] leading-relaxed">
+            <p className="text-xs sm:text-sm text-emerald-100/70 leading-relaxed">
               Dapatkan notifikasi resmi regulasi, keterbukaan anggaran, dan perilisan layanan publik digital.
             </p>
             <form onSubmit={handleSubscribe} className="flex flex-col gap-2 mt-1">
               <input
-                className="h-10 px-3.5 rounded-xl bg-[#ffffff] text-xs sm:text-sm text-[#121e19] placeholder:text-[#717974] focus:outline-none focus:ring-2 focus:ring-[#006c4d] shadow-[0_1px_4px_rgba(0,0,0,0.04)] border border-[#c0c8c3]/50"
+                className="h-10 px-3.5 rounded-xl bg-white/10 text-xs sm:text-sm text-white placeholder:text-emerald-200/50 focus:outline-none focus:ring-2 focus:ring-[#8af7c9] border border-white/15"
                 placeholder="Masukkan alamat email"
                 type="email"
                 value={email}
@@ -184,7 +184,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
                 required
               />
               <button
-                className="h-10 rounded-xl bg-[#006c4d] text-white text-xs sm:text-sm font-semibold hover:bg-[#005139] transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-xs active:scale-98"
+                className="h-10 rounded-xl bg-[#038D66] hover:bg-[#026E4F] text-white text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-sm active:scale-98"
                 type="submit"
               >
                 <span>{subscribed ? 'Terima Kasih!' : 'Berlangganan Data'}</span>
@@ -195,23 +195,23 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
         </div>
 
         {/* Bottom Trust & Legal Badges */}
-        <div className="pt-6 border-t border-[#c0c8c3]/40 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="pt-6 border-t border-emerald-900/60 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-3">
-            <div className="flex items-center gap-1.5 text-[#404945] text-xs bg-[#ffffff] px-2.5 py-1 rounded-md shadow-2xs border border-[#c0c8c3]/30">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#006c4d]" />
+            <div className="flex items-center gap-1.5 text-emerald-200 text-xs bg-white/10 px-2.5 py-1 rounded-lg border border-white/10">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#8af7c9]" />
               <span>Sertifikasi ISO 27001:2022</span>
             </div>
-            <div className="flex items-center gap-1.5 text-[#404945] text-xs bg-[#ffffff] px-2.5 py-1 rounded-md shadow-2xs border border-[#c0c8c3]/30">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#006c4d]" />
+            <div className="flex items-center gap-1.5 text-emerald-200 text-xs bg-white/10 px-2.5 py-1 rounded-lg border border-white/10">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#8af7c9]" />
               <span>Kepatuhan BSSN &amp; PDP</span>
             </div>
-            <div className="flex items-center gap-1.5 text-[#404945] text-xs bg-[#ffffff] px-2.5 py-1 rounded-md shadow-2xs border border-[#c0c8c3]/30">
-              <Scale className="w-3.5 h-3.5 text-[#735c00]" />
+            <div className="flex items-center gap-1.5 text-[#FFE087] text-xs bg-white/10 px-2.5 py-1 rounded-lg border border-white/10">
+              <Scale className="w-3.5 h-3.5 text-[#FFE087]" />
               <span>Undang-Undang KIP No. 14/2008</span>
             </div>
           </div>
 
-          <p className="text-xs text-[#404945] text-center md:text-right font-medium">
+          <p className="text-xs text-emerald-200/60 text-center md:text-right font-medium">
             &copy; 2026 Pemerintah Kabupaten Sidoarjo. Seluruh Hak Cipta Dilindungi.
           </p>
         </div>
