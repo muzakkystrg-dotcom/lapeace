@@ -20,10 +20,10 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
   };
 
   return (
-    <div className="w-full bg-surface text-on-surface">
+    <div className="w-full bg-[#F8FAF9] text-on-surface">
       {/* Top Breadcrumbs & Sub-Navigation */}
       <section className="w-full bg-surface-container-low py-4 border-b border-surface-container">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-3">
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant flex-wrap">
             <button
               onClick={onBack}
@@ -49,7 +49,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
       </section>
 
       {/* Main Shell */}
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10 flex flex-col gap-8">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10 flex flex-col gap-8">
         {/* Header Area with Sovereign Banner */}
         <div className="w-full rounded-2xl bg-surface-container-lowest p-6 sm:p-8 shadow-sm border border-surface-container-high/60 flex flex-col gap-4 relative overflow-hidden">
           <div className="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-secondary-fixed/30 blur-3xl pointer-events-none"></div>
@@ -476,7 +476,7 @@ export const FaskesServicePage: React.FC<FaskesServicePageProps> = ({
           </div>
 
           {/* Right Column (Sidebar - 4 Cols) */}
-          <div className="lg:col-span-4 flex flex-col gap-6 lg:sticky lg:top-24">
+          <div className="lg:col-span-4 flex flex-col gap-6 lg:sticky lg:top-22">
             {/* Card Aksi Mandiri Warga */}
             <div className="rounded-2xl bg-surface-container-lowest p-6 shadow-md border border-surface-container-high/80 flex flex-col gap-4 relative overflow-hidden">
               <div className="w-1.5 h-full bg-secondary absolute left-0 top-0"></div>

@@ -1,5 +1,6 @@
 import { Icon } from '../components/common/Icon';
 import React, { useState, useMemo } from 'react';
+import { ExternalLink } from 'lucide-react';
 
 export interface DirectoryService {
   id: string;
@@ -316,7 +317,8 @@ export const LayananPage: React.FC<LayananPageProps> = ({
 
   const handleServiceClick = (service: DirectoryService) => {
     if (!service.detailRoute) {
-      showToast(`Halaman detail untuk "${service.title}" belum tersedia di prototipe.`);
+      const statusLabel = ['pbb', 'pbg', 'halal'].includes(service.id) ? 'Portal Eksternal' : 'Tahap Integrasi';
+      showToast(`Layanan "${service.title}" dialihkan via ${statusLabel}.`);
       return;
     }
     if (onSelectService) {
@@ -329,7 +331,8 @@ export const LayananPage: React.FC<LayananPageProps> = ({
   const handleApplyClick = (e: React.MouseEvent, service: DirectoryService) => {
     e.stopPropagation();
     if (!service.detailRoute) {
-      showToast(`Layanan "${service.title}" belum tersedia di prototipe saat ini.`);
+      const statusLabel = ['pbb', 'pbg', 'halal'].includes(service.id) ? 'Portal Eksternal' : 'Tahap Integrasi';
+      showToast(`Layanan "${service.title}" dialihkan via ${statusLabel}.`);
       return;
     }
     if (onStartApplication) {
@@ -371,7 +374,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
   }, [searchQuery, selectedCategory, selectedOpd, selectedChannel, sortBy]);
 
   return (
-    <div className="w-full bg-surface min-h-[calc(100vh-5rem)] text-on-surface">
+    <div className="w-full bg-[#F8FAF9] min-h-[calc(100vh-5rem)] text-on-surface">
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed top-24 right-4 sm:right-8 z-50 max-w-md bg-[#05241B] text-white p-3.5 rounded-xl shadow-2xl border border-emerald-500/50 flex items-center gap-2.5 animate-in fade-in slide-in-from-top-4 duration-200">
@@ -388,7 +391,7 @@ export const LayananPage: React.FC<LayananPageProps> = ({
         <div className="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-secondary/15 blur-3xl pointer-events-none"></div>
         <div className="absolute left-1/3 -bottom-20 w-80 h-80 rounded-full bg-secondary-container/10 blur-2xl pointer-events-none"></div>
 
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col gap-4">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col gap-4">
           {/* Breadcrumbs & Live System Status */}
           <div className="flex flex-wrap items-center justify-between gap-3">
             <nav aria-label="Breadcrumb" className="flex items-center gap-2 font-label-md text-xs sm:text-sm text-on-primary-container">
@@ -425,9 +428,9 @@ export const LayananPage: React.FC<LayananPageProps> = ({
       </section>
 
       {/* Main Work Surface */}
-      <main className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-8">
+      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-8">
         {/* Filter & Search Console (Card Surface Layer) */}
-        <section className="w-full bg-surface-container-lowest rounded-2xl shadow-md p-5 sm:p-6 lg:p-7 flex flex-col gap-4 -mt-10 sm:-mt-12 relative z-20 border border-surface-container-high/80">
+        <section className="w-full bg-surface-container-lowest rounded-2xl shadow-md p-5 sm:p-6 lg:p-7 flex flex-col gap-4 -mt-8 sm:-mt-10 relative z-20 border border-surface-container-high/80">
           {/* Search Field with Integrated Quick Action */}
           <div className="flex flex-col lg:flex-row items-stretch gap-3">
             <div className="relative flex-1 flex items-center bg-surface-container-low rounded-xl px-4 py-3 shadow-inner border border-surface-container-high/40">
@@ -623,20 +626,28 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                       <Icon className="material-symbols-outlined text-[14px]">account_balance</Icon>
                       {service.opd}
                     </span>
-                    <span
-                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-md text-[11px] font-bold ${
-                        service.badgeType === 'error'
-                          ? 'bg-error-container text-on-error-container'
-                          : service.badgeType === 'warning'
-                          ? 'bg-tertiary-container/30 text-tertiary'
-                          : service.badgeType === 'primary'
-                          ? 'bg-surface-container-highest text-on-surface-variant'
-                          : 'bg-secondary-container/40 text-on-secondary-container'
-                      }`}
-                    >
-                      <Icon className="material-symbols-outlined text-[13px]">{service.badgeIcon}</Icon>
-                      {service.badge}
-                    </span>
+                    <div className="flex items-center gap-1.5 flex-wrap justify-end">
+                      {!service.detailRoute && (
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-md text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80 shadow-xs">
+                          <ExternalLink className="w-3 h-3 text-amber-600" />
+                          {['pbb', 'pbg', 'halal'].includes(service.id) ? 'Portal Eksternal' : 'Tahap Integrasi'}
+                        </span>
+                      )}
+                      <span
+                        className={`inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-md text-[11px] font-bold ${
+                          service.badgeType === 'error'
+                            ? 'bg-error-container text-on-error-container'
+                            : service.badgeType === 'warning'
+                            ? 'bg-tertiary-container/30 text-tertiary'
+                            : service.badgeType === 'primary'
+                            ? 'bg-surface-container-highest text-on-surface-variant'
+                            : 'bg-secondary-container/40 text-on-secondary-container'
+                        }`}
+                      >
+                        <Icon className="material-symbols-outlined text-[13px]">{service.badgeIcon}</Icon>
+                        {service.badge}
+                      </span>
+                    </div>
                   </div>
 
                   <h3 className="font-title-md text-lg font-bold text-on-surface group-hover:text-secondary transition-colors mb-2 leading-snug">
@@ -685,11 +696,11 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                   ) : (
                     <button
                       onClick={(e) => handleApplyClick(e, service)}
-                      className="px-3.5 py-2 rounded-xl bg-surface-container-high text-on-surface-variant font-label-lg text-xs sm:text-sm border border-outline-variant/40 transition-all font-semibold flex items-center gap-1 cursor-pointer hover:bg-surface-container"
-                      title="Halaman layanan ini belum tersedia di Google Stitch"
+                      className="px-3.5 py-2 rounded-xl bg-surface-container-high text-on-surface-variant font-label-lg text-xs sm:text-sm border border-outline-variant/40 transition-all font-semibold flex items-center gap-1.5 cursor-pointer hover:bg-surface-container"
+                      title={['pbb', 'pbg', 'halal'].includes(service.id) ? 'Layanan dialihkan ke Portal Eksternal resmi' : 'Layanan sedang dalam tahap integrasi'}
                     >
-                      <span>Belum Tersedia</span>
-                      <Icon className="material-symbols-outlined text-[16px]">schedule</Icon>
+                      <span>{['pbb', 'pbg', 'halal'].includes(service.id) ? 'Portal Eksternal' : 'Tahap Integrasi'}</span>
+                      <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
                     </button>
                   )}
                 </div>
@@ -719,8 +730,14 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                       className="hover:bg-surface-container-low/50 transition-colors cursor-pointer"
                     >
                       <td className="py-3.5 px-4">
-                        <div className="font-semibold text-on-surface hover:text-secondary transition-colors">
-                          {service.title}
+                        <div className="font-semibold text-on-surface hover:text-secondary transition-colors flex items-center gap-2">
+                          <span>{service.title}</span>
+                          {!service.detailRoute && (
+                            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
+                              <ExternalLink className="w-2.5 h-2.5 text-amber-600" />
+                              {['pbb', 'pbg', 'halal'].includes(service.id) ? 'Portal Eksternal' : 'Tahap Integrasi'}
+                            </span>
+                          )}
                         </div>
                         <div className="text-xs text-on-surface-variant line-clamp-1">
                           {service.description}
@@ -754,10 +771,11 @@ export const LayananPage: React.FC<LayananPageProps> = ({
                         ) : (
                           <button
                             onClick={(e) => handleApplyClick(e, service)}
-                            className="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface-variant border border-outline-variant/40 font-label-md text-xs font-semibold cursor-pointer hover:bg-surface-container"
-                            title="Halaman layanan ini belum tersedia di Google Stitch"
+                            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface-variant border border-outline-variant/40 font-label-md text-xs font-semibold cursor-pointer hover:bg-surface-container"
+                            title={['pbb', 'pbg', 'halal'].includes(service.id) ? 'Layanan dialihkan ke Portal Eksternal resmi' : 'Layanan sedang dalam tahap integrasi'}
                           >
-                            Belum Tersedia
+                            <span>{['pbb', 'pbg', 'halal'].includes(service.id) ? 'Portal Eksternal' : 'Tahap Integrasi'}</span>
+                            <ExternalLink className="w-3 h-3 text-slate-500" />
                           </button>
                         )}
                       </td>

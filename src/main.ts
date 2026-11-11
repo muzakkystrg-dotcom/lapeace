@@ -28,7 +28,7 @@ async function bootstrap() {
 
   // 2. Strict CORS Configuration
   app.enableCors({
-    origin: (origin, callback) => {
+    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
       // Izinkan akses dari domain lokal dev atau domain resmi pemkab & VPS demo
       if (
         !origin ||

@@ -117,7 +117,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     Indeks Transparansi Pemkab Sidoarjo
                   </div>
                   <div className="text-sm sm:text-base font-bold text-slate-900 font-display">
-                    96.2% <span className="text-emerald-700 font-semibold text-xs">(Sangat Baik)</span>
+                    96,2% <span className="text-emerald-700 font-semibold text-xs">(Sangat Baik)</span>
                   </div>
                 </div>
               </div>

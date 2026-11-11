@@ -156,7 +156,10 @@ export class AuthService {
       throw new BadRequestException('NIK atau alamat email sudah terdaftar dalam sistem SITAPAK.');
     }
 
-    const pwd = data.password || 'WargaSidoarjo2026!';
+    const pwd = data.password ? data.password.trim() : '';
+    if (!pwd || pwd.length < 8) {
+      throw new BadRequestException('Kata sandi wajib diisi dan minimal 8 karakter.');
+    }
     const { hash, salt } = this.cryptoService.hashPassword(pwd);
     const nikMasked = `${cleanNik.slice(0, 12)}****`;
     const nikHash = this.cryptoService.generateBlindIndex(cleanNik);

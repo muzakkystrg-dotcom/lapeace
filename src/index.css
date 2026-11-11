@@ -107,3 +107,83 @@ h1, h2, h3, h4, h5, h6, .font-display {
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
+/* ==============================================================================
+   MATERIAL DESIGN 3 & STITCH TYPOGRAPHY UTILITIES (STANDAR SPBE SIDOARJO)
+   ============================================================================== */
+@utility font-label-md {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+@utility font-label-lg {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+@utility font-body-sm {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 400;
+}
+
+@utility font-body-md {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+}
+
+@utility font-body-lg {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+}
+
+@utility font-title-md {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+}
+
+@utility font-headline-sm {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+}
+
+@utility font-headline-md {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+
+@utility font-headline-lg {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 800;
+}
+
+@utility font-stat-numeral {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+@utility text-label-md {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+}

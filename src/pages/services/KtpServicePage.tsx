@@ -20,10 +20,10 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
   };
 
   return (
-    <div className="w-full bg-surface text-on-surface">
+    <div className="w-full bg-[#F8FAF9] text-on-surface">
       {/* Sub-Navigation / Breadcrumb Bar */}
       <section className="w-full bg-surface-container-low py-4 border-b border-surface-container">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-3">
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant flex-wrap">
             <button
               onClick={onBack}
@@ -49,8 +49,8 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
       </section>
 
       {/* Editorial Headline Section */}
-      <section className="w-full bg-surface py-8 lg:py-10">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-4">
+      <section className="w-full bg-[#F8FAF9] py-8 lg:py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-4">
           <div className="flex flex-wrap items-center gap-2">
             <span className="px-2.5 py-1 rounded bg-secondary-container/40 text-on-secondary-container font-label-md text-xs font-bold uppercase tracking-wider">
               ADMINISTRASI KEPENDUDUKAN
@@ -73,8 +73,8 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
       </section>
 
       {/* Metric Facts Panel (Flat, quiet, high contrast) */}
-      <section className="w-full bg-surface">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+      <section className="w-full bg-[#F8FAF9]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-5 rounded-2xl bg-surface-container border border-surface-container-high/60 shadow-sm">
             <div className="flex flex-col gap-1 p-3">
               <span className="font-label-md text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Tarif Retribusi</span>
@@ -101,8 +101,8 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
       </section>
 
       {/* Main Structured Operational Content */}
-      <section className="w-full bg-surface pb-12">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="w-full bg-[#F8FAF9] pb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Left Column: Core Requirements & Operational Workflow (8 Cols) */}
             <div className="lg:col-span-8 flex flex-col gap-8">
@@ -347,7 +347,7 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
             </div>
 
             {/* Right Column: Action Card & Realtime Metrics Panel (4 Cols) */}
-            <div className="lg:col-span-4 flex flex-col gap-6 lg:sticky lg:top-24">
+            <div className="lg:col-span-4 flex flex-col gap-6 lg:sticky lg:top-22">
               {/* Primary Action Box */}
               <div className="p-6 rounded-2xl bg-surface-container-lowest border border-surface-container-high/80 shadow-md flex flex-col gap-4">
                 <div className="flex flex-col gap-1">
@@ -474,7 +474,7 @@ export const KtpServicePage: React.FC<KtpServicePageProps> = ({
 
       {/* Section Tanya Jawab Spesifik (FAQ KTP-el Sidoarjo) */}
       <section className="w-full bg-surface-container-low py-8 lg:py-10 border-t border-surface-container">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-6">
           <div className="flex flex-col gap-1">
             <h2 className="font-headline-md text-xl lg:text-2xl font-bold text-primary">Pertanyaan yang Sering Diajukan Warga</h2>
             <p className="font-body-md text-sm text-on-surface-variant max-w-2xl">

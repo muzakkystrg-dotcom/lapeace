@@ -39,6 +39,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   const userDropdownRef = useRef<HTMLDivElement>(null);
   const notificationRef = useRef<HTMLDivElement>(null);
@@ -62,6 +63,25 @@ export const Navbar: React.FC<NavbarProps> = ({
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  // Keyboard accessibility: Escape to close dropdowns and modal
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        if (showLogoutConfirm) {
+          setShowLogoutConfirm(false);
+        } else if (userDropdownOpen) {
+          setUserDropdownOpen(false);
+        } else if (notificationOpen) {
+          setNotificationOpen(false);
+        } else if (mobileMenuOpen) {
+          setMobileMenuOpen(false);
+        }
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [showLogoutConfirm, userDropdownOpen, notificationOpen, mobileMenuOpen]);
 
   const navItems = [
     { id: 'beranda', path: 'beranda', label: 'Beranda' },
@@ -91,7 +111,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-[#083c2e]/95 backdrop-blur-md shadow-md border-b border-[#00251b]">
-      <div className="h-20 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="h-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         
         {/* Left: Brand Lockup */}
         <div className="flex items-center gap-4">
@@ -101,7 +121,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               e.preventDefault();
               handleNavClick('beranda');
             }}
-            className="flex items-center gap-3 group select-none"
+            className="flex items-center gap-3 group select-none focus:outline-none focus:ring-2 focus:ring-[#8af7c9] rounded-xl"
           >
             <div className="w-10 h-10 rounded-xl bg-[#8af7c9] flex items-center justify-center text-[#002115] shadow-sm group-hover:scale-105 transition-transform">
               <Landmark className="w-5 h-5 text-[#002115]" />
@@ -110,7 +130,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="font-display font-bold text-lg text-white leading-tight tracking-tight">
                 SITAPAK Sidoarjo
               </span>
-              <span className="text-xs text-[#77a794] leading-tight">
+              <span className="text-xs text-[#bbedd9] leading-tight">
                 Portal Terpadu &amp; Transparansi Pemkab
               </span>
             </div>
@@ -135,10 +155,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                   e.preventDefault();
                   handleNavClick(item.id);
                 }}
-                className={`px-3.5 py-2 text-sm rounded-lg transition-colors font-medium ${
+                className={`px-3.5 py-2 text-sm rounded-lg transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-[#8af7c9] ${
                   isActive
                     ? 'bg-white/15 text-white font-bold shadow-xs'
-                    : 'text-[#77a794] hover:text-white hover:bg-white/10'
+                    : 'text-[#bbedd9] hover:text-white hover:bg-white/10'
                 }`}
               >
                 {item.label}
@@ -157,8 +177,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   type="button"
                   aria-label="Notifikasi"
+                  aria-expanded={notificationOpen}
                   onClick={() => setNotificationOpen(!notificationOpen)}
-                  className="relative p-2 rounded-xl text-[#77a794] hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                  className="relative p-2 rounded-xl text-[#bbedd9] hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#8af7c9] transition-colors cursor-pointer"
                 >
                   <Bell className="w-5 h-5 text-white" />
                   {notificationsCount > 0 && (
@@ -185,7 +206,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                       <div className="p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-emerald-900/40">
                         <div className="flex items-start justify-between gap-2">
                           <span className="font-semibold text-xs text-[#8af7c9]">Dukcapil Plavon</span>
-                          <span className="text-[10px] text-[#77a794]">10 mnt lalu</span>
+                          <span className="text-[10px] text-[#bbedd9]">10 mnt lalu</span>
                         </div>
                         <p className="text-xs text-emerald-100 mt-1">
                           Verifikasi permohonan KTP-el telah disetujui. Siap dicetak di MPP Sidoarjo.
@@ -195,7 +216,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                       <div className="p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-emerald-900/40">
                         <div className="flex items-start justify-between gap-2">
                           <span className="font-semibold text-xs text-yellow-300">Call Center 112</span>
-                          <span className="text-[10px] text-[#77a794]">1 jam lalu</span>
+                          <span className="text-[10px] text-[#bbedd9]">1 jam lalu</span>
                         </div>
                         <p className="text-xs text-emerald-100 mt-1">
                           Laporan perbaikan lampu jalan di Taman Pinang Indah telah ditugaskan ke Dishub.
@@ -209,7 +230,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                           setNotificationOpen(false);
                           if (onOpenTrackModal) onOpenTrackModal();
                         }}
-                        className="text-xs text-[#8af7c9] hover:underline font-semibold"
+                        className="text-xs text-[#8af7c9] hover:underline font-semibold focus:outline-none focus:ring-2 focus:ring-[#8af7c9] rounded-md px-2 py-1"
                       >
                         Buka Status Seluruh Layanan &rarr;
                       </button>
@@ -220,9 +241,13 @@ export const Navbar: React.FC<NavbarProps> = ({
 
               {/* User Pill Button (Google Stitch Exact) */}
               <div className="relative" ref={userDropdownRef}>
-                <div
+                <button
+                  type="button"
+                  aria-expanded={userDropdownOpen}
+                  aria-haspopup="true"
+                  aria-label={`Menu profil ${userName}`}
                   onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                  className="flex items-center gap-3 pl-2 py-1 pr-3 rounded-full bg-[#083c2e] border border-[#6edaae]/30 shadow-sm cursor-pointer hover:bg-[#00251b] transition-all select-none"
+                  className="flex items-center gap-3 pl-2 py-1 pr-3 rounded-full bg-[#083c2e] border border-[#6edaae]/30 shadow-sm cursor-pointer hover:bg-[#00251b] focus:outline-none focus:ring-2 focus:ring-[#8af7c9] transition-all select-none text-left"
                 >
                   <div className="w-9 h-9 rounded-full bg-[#8af7c9] text-[#002115] font-bold font-display flex items-center justify-center text-[14px] shadow-sm relative shrink-0">
                     <span>{userInitials}</span>
@@ -231,7 +256,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                     </span>
                   </div>
                   <div className="hidden sm:flex flex-col text-left">
-                    <span className="text-xs sm:text-sm text-white font-bold leading-tight font-display">
+                    <span
+                      className="text-xs sm:text-sm text-white font-bold leading-tight font-display max-w-[120px] sm:max-w-[160px] truncate"
+                      title={userName}
+                    >
                       {userName}
                     </span>
                     <span className="text-[11px] text-[#8af7c9] leading-tight font-medium">
@@ -239,22 +267,22 @@ export const Navbar: React.FC<NavbarProps> = ({
                     </span>
                   </div>
                   <ChevronDown
-                    className={`w-4 h-4 text-[#77a794] transition-transform duration-200 ${
+                    className={`w-4 h-4 text-[#bbedd9] transition-transform duration-200 ${
                       userDropdownOpen ? 'rotate-180' : ''
                     }`}
                   />
-                </div>
+                </button>
 
                 {/* User Dropdown Menu */}
                 {userDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-[#083c2e] border border-[#6edaae]/30 shadow-2xl p-2 text-white z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                     <div className="p-3 border-b border-emerald-800/60 mb-1">
-                      <div className="text-xs font-bold text-white font-display">{userName}</div>
+                      <div className="text-xs font-bold text-white font-display truncate" title={userName}>{userName}</div>
                       <div className="text-[11px] text-[#8af7c9] flex items-center gap-1 mt-0.5">
                         <BadgeCheck className="w-3.5 h-3.5 text-[#8af7c9]" />
                         <span>NIK: {currentUser?.nik || '351508******0002'}</span>
                       </div>
-                      <div className="text-[11px] text-[#77a794] mt-0.5">
+                      <div className="text-[11px] text-[#bbedd9] mt-0.5">
                         Kecamatan: {currentUser?.kecamatan || 'Sidoarjo Kota'}
                       </div>
                     </div>
@@ -262,11 +290,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <div className="py-1 space-y-1 text-xs">
                       {onOpenTrackModal && (
                         <button
+                          type="button"
                           onClick={() => {
                             setUserDropdownOpen(false);
                             onOpenTrackModal();
                           }}
-                          className="w-full text-left px-3 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 flex items-center gap-2.5 transition-colors cursor-pointer"
+                          className="w-full text-left px-3 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 flex items-center gap-2.5 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#8af7c9]"
                         >
                           <FileText className="w-4 h-4 text-[#8af7c9]" />
                           <span>Lacak Dokumen Saya</span>
@@ -274,11 +303,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                       )}
 
                       <button
+                        type="button"
                         onClick={() => {
                           setUserDropdownOpen(false);
                           handleNavClick('laporan');
                         }}
-                        className="w-full text-left px-3 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 flex items-center gap-2.5 transition-colors cursor-pointer"
+                        className="w-full text-left px-3 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 flex items-center gap-2.5 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#8af7c9]"
                       >
                         <Megaphone className="w-4 h-4 text-[#8af7c9]" />
                         <span>Riwayat Laporan 112</span>
@@ -287,11 +317,12 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                     <div className="pt-1.5 border-t border-emerald-800/60 mt-1">
                       <button
+                        type="button"
                         onClick={() => {
                           setUserDropdownOpen(false);
-                          if (onLogout) onLogout();
+                          setShowLogoutConfirm(true);
                         }}
-                        className="w-full text-left px-3 py-2 rounded-xl text-red-300 hover:text-white hover:bg-red-900/40 flex items-center gap-2.5 transition-colors cursor-pointer text-xs font-semibold"
+                        className="w-full text-left px-3 py-2 rounded-xl text-red-300 hover:text-white hover:bg-red-900/40 flex items-center gap-2.5 transition-colors cursor-pointer text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-red-400"
                       >
                         <LogOut className="w-4 h-4 text-red-400" />
                         <span>Keluar dari Akun</span>
@@ -308,7 +339,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 type="button"
                 data-path="masuk"
                 onClick={onOpenLogin}
-                className="text-sm px-4 py-2 rounded-xl text-white hover:bg-white/15 transition-all font-medium cursor-pointer"
+                className="text-sm px-4 py-2 rounded-xl text-white hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-white/40 transition-all font-medium cursor-pointer"
               >
                 Masuk
               </button>
@@ -316,7 +347,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 type="button"
                 data-path="daftar"
                 onClick={onOpenRegister}
-                className="text-sm px-5 py-2.5 rounded-xl bg-[#8af7c9] text-[#002115] hover:bg-[#6edaae] font-bold transition-all shadow-sm flex items-center gap-2 cursor-pointer active:scale-95"
+                className="text-sm px-5 py-2.5 rounded-xl bg-[#8af7c9] text-[#002115] hover:bg-[#6edaae] focus:outline-none focus:ring-2 focus:ring-[#8af7c9] font-bold transition-all shadow-sm flex items-center gap-2 cursor-pointer active:scale-95"
               >
                 <UserPlus className="w-4 h-4 text-[#002115]" />
                 <span>Daftar Akun Warga</span>
@@ -328,10 +359,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-xl text-[#77a794] hover:text-white hover:bg-white/10 focus:outline-none cursor-pointer"
+            className="lg:hidden p-2 rounded-xl text-[#bbedd9] hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#8af7c9] cursor-pointer"
             aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-[#77a794]" />}
+            {mobileMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-[#bbedd9]" />}
           </button>
         </div>
       </div>
@@ -346,14 +378,14 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`flex items-center justify-between w-full px-4 py-2.5 rounded-xl text-sm font-medium text-left transition-colors ${
+                  className={`flex items-center justify-between w-full px-4 py-2.5 rounded-xl text-sm font-medium text-left transition-colors focus:outline-none focus:ring-2 focus:ring-[#8af7c9] ${
                     isActive
                       ? 'bg-white/15 text-white font-bold'
-                      : 'text-[#77a794] hover:bg-white/10 hover:text-white'
+                      : 'text-[#bbedd9] hover:bg-white/10 hover:text-white'
                   }`}
                 >
                   <span>{item.label}</span>
-                  <ChevronRight className="w-4 h-4 text-[#77a794]" />
+                  <ChevronRight className="w-4 h-4 text-[#bbedd9]" />
                 </button>
               );
             })}
@@ -368,16 +400,17 @@ export const Navbar: React.FC<NavbarProps> = ({
                       {userInitials}
                     </div>
                     <div>
-                      <div className="text-xs font-bold text-white">{userName}</div>
+                      <div className="text-xs font-bold text-white max-w-[140px] truncate" title={userName}>{userName}</div>
                       <div className="text-[10px] text-[#8af7c9]">Warga Terverifikasi</div>
                     </div>
                   </div>
                   <button
+                    type="button"
                     onClick={() => {
                       setMobileMenuOpen(false);
-                      if (onLogout) onLogout();
+                      setShowLogoutConfirm(true);
                     }}
-                    className="text-xs text-red-300 hover:text-white font-semibold"
+                    className="text-xs text-red-300 hover:text-white font-semibold px-2 py-1 rounded-lg hover:bg-red-950/40 transition-colors focus:outline-none focus:ring-2 focus:ring-red-400"
                   >
                     Keluar
                   </button>
@@ -386,25 +419,81 @@ export const Navbar: React.FC<NavbarProps> = ({
             ) : (
               <div className="grid grid-cols-2 gap-2">
                 <button
+                  type="button"
                   onClick={() => {
                     setMobileMenuOpen(false);
                     if (onOpenLogin) onOpenLogin();
                   }}
-                  className="w-full text-center py-2.5 rounded-xl text-sm font-medium text-white bg-white/10 hover:bg-white/20 transition-colors"
+                  className="w-full text-center py-2.5 rounded-xl text-sm font-medium text-white bg-white/10 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/40 transition-colors"
                 >
                   Masuk
                 </button>
                 <button
+                  type="button"
                   onClick={() => {
                     setMobileMenuOpen(false);
                     if (onOpenRegister) onOpenRegister();
                   }}
-                  className="w-full text-center py-2.5 rounded-xl text-sm font-bold bg-[#8af7c9] text-[#002115] hover:bg-[#6edaae] transition-colors"
+                  className="w-full text-center py-2.5 rounded-xl text-sm font-bold bg-[#8af7c9] text-[#002115] hover:bg-[#6edaae] focus:outline-none focus:ring-2 focus:ring-[#8af7c9] transition-colors"
                 >
                   Daftar
                 </button>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Modal Konfirmasi Logout */}
+      {showLogoutConfirm && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="logout-confirm-title"
+          aria-describedby="logout-confirm-desc"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
+        >
+          <div className="bg-[#083c2e] border border-[#6edaae]/40 rounded-2xl shadow-2xl max-w-md w-full p-6 text-white animate-in zoom-in-95 duration-150">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/30 flex items-center justify-center shrink-0">
+                <LogOut className="w-6 h-6 text-red-400" />
+              </div>
+              <div className="flex-1">
+                <h3
+                  id="logout-confirm-title"
+                  className="text-lg font-bold font-display text-white"
+                >
+                  Konfirmasi Keluar Akun
+                </h3>
+                <p
+                  id="logout-confirm-desc"
+                  className="text-sm text-[#bbedd9] mt-2 leading-relaxed"
+                >
+                  Apakah Anda yakin ingin keluar dari akun warga SITAPAK? Draf pengajuan atau laporan yang belum dikirim mungkin akan hilang.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6 flex items-center justify-end gap-3 pt-4 border-t border-emerald-800/60">
+              <button
+                type="button"
+                onClick={() => setShowLogoutConfirm(false)}
+                className="px-4 py-2.5 rounded-xl text-sm font-semibold text-white hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 cursor-pointer"
+              >
+                Batal
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowLogoutConfirm(false);
+                  if (onLogout) onLogout();
+                }}
+                className="px-4 py-2.5 rounded-xl text-sm font-bold text-white bg-red-600 hover:bg-red-700 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400 flex items-center gap-2 cursor-pointer"
+              >
+                <LogOut className="w-4 h-4" />
+                <span>Ya, Keluar Akun</span>
+              </button>
+            </div>
           </div>
         </div>
       )}

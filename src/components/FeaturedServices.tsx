@@ -98,6 +98,16 @@ export const FeaturedServices: React.FC<FeaturedServicesProps> = ({
 }) => {
   const displayList = filteredServices || servicesData;
 
+  const handleServiceClick = (service: ServiceItem) => {
+    onSelectService(service);
+  };
+
+  const formatSla = (sla: string) => {
+    if (!sla) return '';
+    const clean = sla.split('(')[0].replace(' Penugasan OPD Teknis', '').trim();
+    return clean.toLowerCase().startsWith('estimasi') ? clean : `Estimasi ${clean}`;
+  };
+
   const renderIcon = (name: string) => {
     switch (name) {
       case 'Plavon':
@@ -163,8 +173,16 @@ export const FeaturedServices: React.FC<FeaturedServicesProps> = ({
             {displayList.map((service) => (
               <div
                 key={service.id}
-                onClick={() => onSelectService(service)}
-                className="bg-white rounded-2xl p-6 border border-slate-200/90 hover:border-emerald-500/80 shadow-sm hover:shadow-lg transition-all duration-200 flex flex-col justify-between cursor-pointer group hover:-translate-y-1"
+                role="button"
+                tabIndex={0}
+                onClick={() => handleServiceClick(service)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleServiceClick(service);
+                  }
+                }}
+                className="bg-white rounded-2xl p-6 border border-slate-200/90 hover:border-emerald-500/80 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all duration-200 flex flex-col justify-between cursor-pointer group hover:-translate-y-1"
               >
                 <div>
                   <div className="mb-5">
@@ -185,8 +203,8 @@ export const FeaturedServices: React.FC<FeaturedServicesProps> = ({
                     <span>{service.actionLabel.replace(' →', '')}</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </span>
-                  <span className="text-[11px] text-slate-400 font-medium">
-                    {service.sla.split(' ')[0]} SLA
+                  <span className="text-[11px] text-slate-500 font-medium">
+                    {formatSla(service.sla)}
                   </span>
                 </div>
               </div>

@@ -28,7 +28,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
 
   return (
     <footer className="w-full bg-[#ddece3] text-[#121e19] shadow-[0_-1px_6px_rgba(0,0,0,0.03)] border-t border-[#c0c8c3]/40">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-10">
           
           {/* Col 1 & 2: Brand, Address & Emergency Services (lg:col-span-2) */}
@@ -176,7 +176,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
             </p>
             <form onSubmit={handleSubscribe} className="flex flex-col gap-2 mt-1">
               <input
-                className="h-10 px-3.5 rounded-lg bg-[#ffffff] text-xs sm:text-sm text-[#121e19] placeholder:text-[#717974] focus:outline-none focus:ring-2 focus:ring-[#006c4d] shadow-[0_1px_4px_rgba(0,0,0,0.04)] border border-[#c0c8c3]/50"
+                className="h-10 px-3.5 rounded-xl bg-[#ffffff] text-xs sm:text-sm text-[#121e19] placeholder:text-[#717974] focus:outline-none focus:ring-2 focus:ring-[#006c4d] shadow-[0_1px_4px_rgba(0,0,0,0.04)] border border-[#c0c8c3]/50"
                 placeholder="Masukkan alamat email"
                 type="email"
                 value={email}
@@ -184,7 +184,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
                 required
               />
               <button
-                className="h-10 rounded-lg bg-[#006c4d] text-white text-xs sm:text-sm font-semibold hover:bg-[#005139] transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-xs active:scale-98"
+                className="h-10 rounded-xl bg-[#006c4d] text-white text-xs sm:text-sm font-semibold hover:bg-[#005139] transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-xs active:scale-98"
                 type="submit"
               >
                 <span>{subscribed ? 'Terima Kasih!' : 'Berlangganan Data'}</span>
@@ -212,7 +212,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
           </div>
 
           <p className="text-xs text-[#404945] text-center md:text-right font-medium">
-            &copy; 2025 Pemerintah Kabupaten Sidoarjo. Seluruh Hak Cipta Dilindungi.
+            &copy; 2026 Pemerintah Kabupaten Sidoarjo. Seluruh Hak Cipta Dilindungi.
           </p>
         </div>
       </div>

@@ -98,7 +98,7 @@ const datasetsData: DatasetItem[] = [
     badgeColor: 'bg-[#bbedd9] text-[#002117]',
     sampleColumns: ['Ruas Jalan', 'Kecamatan', 'Panjang (Meter)', 'Lebar (M)', 'Nilai Kontrak (Rp)', 'Status Progres'],
     sampleRows: [
-      { 'Ruas Jalan': 'Banjarkemantren - Buduran', Kecamatan: 'Buduran', 'Panjang (Meter)': '1.850', 'Lebar (M)': '7.0', 'Nilai Kontrak (Rp)': '12.450.000.000', 'Status Progres': '95% (Finishing)' },
+      { 'Ruas Jalan': 'Banjarkemantren - Buduran', Kecamatan: 'Buduran', 'Panjang (Meter)': '1.850', 'Lebar (M)': '7.0', 'Nilai Kontrak (Rp)': '12.450.000.000', 'Status Progres': '95% (Selesai)' },
       { 'Ruas Jalan': 'Krembung - Mojoruntut', Kecamatan: 'Krembung', 'Panjang (Meter)': '2.400', 'Lebar (M)': '6.5', 'Nilai Kontrak (Rp)': '15.800.000.000', 'Status Progres': '88% (Pengecoran)' },
       { 'Ruas Jalan': 'Tarik - Mindi', Kecamatan: 'Tarik / Porong', 'Panjang (Meter)': '3.100', 'Lebar (M)': '7.0', 'Nilai Kontrak (Rp)': '21.200.000.000', 'Status Progres': '78% (Struktur Lapisan)' },
       { 'Ruas Jalan': 'Gedangan - Betro', Kecamatan: 'Sedati', 'Panjang (Meter)': '1.450', 'Lebar (M)': '8.0', 'Nilai Kontrak (Rp)': '11.100.000.000', 'Status Progres': '100% (Selesai Mantap)' },
@@ -394,7 +394,7 @@ export const DataPublikPage: React.FC = () => {
                 Rp 5,28 <span className="text-lg font-bold text-[#735c00]">Triliun</span>
               </div>
               <p className="text-xs text-[#404945] leading-normal">
-                Serapan Terealisasi: <strong className="text-[#006c4d] font-bold">78,4% (Rp 4,14 T)</strong> • On-Track
+                Serapan Terealisasi: <strong className="text-[#006c4d] font-bold">84,6% (Rp 4,46 T)</strong> • Sesuai Target
               </p>
             </div>
             <div className="pt-2 border-t border-[#e3f1e9] flex items-center justify-between">
@@ -724,62 +724,65 @@ export const DataPublikPage: React.FC = () => {
                   </div>
                 ) : (
                   /* View Mode: TABLE */
-                  <div className="overflow-x-auto border border-[#ddece3] rounded-xl">
-                    <table className="w-full text-left text-xs">
-                      <thead className="bg-[#effdf4] border-b border-[#ddece3] text-[#00251b] font-semibold">
-                        <tr>
-                          <th className="p-3">Sektor Prioritas</th>
-                          <th className="p-3">Pagu (Rp)</th>
-                          <th className="p-3">Porsi</th>
-                          <th className="p-3">Serapan Riil</th>
-                          <th className="p-3">Status</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-[#ddece3] text-[#404945]">
-                        <tr className="hover:bg-[#effdf4]/50">
-                          <td className="p-3 font-semibold text-[#00251b]">Pendidikan, Beasiswa &amp; Guru</td>
-                          <td className="p-3">Rp 1,31 T</td>
-                          <td className="p-3 font-bold text-[#006c4d]">24,8%</td>
-                          <td className="p-3">81,2% (Rp 1,06 T)</td>
-                          <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[11px] font-bold">Mandatori OK</span></td>
-                        </tr>
-                        <tr className="hover:bg-[#effdf4]/50">
-                          <td className="p-3 font-semibold text-[#00251b]">Infrastruktur &amp; Betonisasi Jalan</td>
-                          <td className="p-3">Rp 1,13 T</td>
-                          <td className="p-3 font-bold text-[#006c4d]">21,5%</td>
-                          <td className="p-3">74,5% (Rp 845 M)</td>
-                          <td className="p-3"><span className="px-2 py-0.5 rounded bg-blue-100 text-blue-800 text-[11px] font-bold">On-Track</span></td>
-                        </tr>
-                        <tr className="hover:bg-[#effdf4]/50">
-                          <td className="p-3 font-semibold text-[#00251b]">Kesehatan &amp; Puskesmas</td>
-                          <td className="p-3">Rp 960 M</td>
-                          <td className="p-3 font-bold text-[#006c4d]">18,2%</td>
-                          <td className="p-3">86,0% (Rp 825 M)</td>
-                          <td className="p-3"><span className="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-[11px] font-bold">UHC 99.1%</span></td>
-                        </tr>
-                        <tr className="hover:bg-[#effdf4]/50">
-                          <td className="p-3 font-semibold text-[#00251b]">Pelayanan Publik &amp; MPP Digital</td>
-                          <td className="p-3">Rp 813 M</td>
-                          <td className="p-3 font-bold text-[#006c4d]">15,4%</td>
-                          <td className="p-3">79,8% (Rp 648 M)</td>
-                          <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[11px] font-bold">Digitalisasi</span></td>
-                        </tr>
-                        <tr className="hover:bg-[#effdf4]/50">
-                          <td className="p-3 font-semibold text-[#00251b]">Ekonomi, UMKM &amp; Pangan</td>
-                          <td className="p-3">Rp 612 M</td>
-                          <td className="p-3 font-bold text-[#006c4d]">11,6%</td>
-                          <td className="p-3">72,1% (Rp 441 M)</td>
-                          <td className="p-3"><span className="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-[11px] font-bold">KURDA Aktif</span></td>
-                        </tr>
-                        <tr className="hover:bg-[#effdf4]/50">
-                          <td className="p-3 font-semibold text-[#00251b]">Perlindungan Sosial &amp; Disabilitas</td>
-                          <td className="p-3">Rp 448 M</td>
-                          <td className="p-3 font-bold text-[#006c4d]">8,5%</td>
-                          <td className="p-3">84,3% (Rp 377 M)</td>
-                          <td className="p-3"><span className="px-2 py-0.5 rounded bg-purple-100 text-purple-800 text-[11px] font-bold">Bansos RTLH</span></td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <div>
+                    <p className="text-[11px] text-slate-500 mb-2 flex items-center gap-1 sm:hidden">Geser ke kanan untuk melihat rincian kolom →</p>
+                    <div className="overflow-x-auto border border-[#ddece3] rounded-xl">
+                      <table className="w-full text-left text-xs">
+                        <thead className="bg-[#effdf4] border-b border-[#ddece3] text-[#00251b] font-semibold">
+                          <tr>
+                            <th className="p-3">Sektor Prioritas</th>
+                            <th className="p-3">Pagu (Rp)</th>
+                            <th className="p-3">Porsi</th>
+                            <th className="p-3">Serapan Riil</th>
+                            <th className="p-3">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-[#ddece3] text-[#404945]">
+                          <tr className="hover:bg-[#effdf4]/50">
+                            <td className="p-3 font-semibold text-[#00251b]">Pendidikan, Beasiswa &amp; Guru</td>
+                            <td className="p-3">Rp 1,31 T</td>
+                            <td className="p-3 font-bold text-[#006c4d]">24,8%</td>
+                            <td className="p-3">81,2% (Rp 1,06 T)</td>
+                            <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[11px] font-bold">Mandatori OK</span></td>
+                          </tr>
+                          <tr className="hover:bg-[#effdf4]/50">
+                            <td className="p-3 font-semibold text-[#00251b]">Infrastruktur &amp; Betonisasi Jalan</td>
+                            <td className="p-3">Rp 1,13 T</td>
+                            <td className="p-3 font-bold text-[#006c4d]">21,5%</td>
+                            <td className="p-3">74,5% (Rp 845 M)</td>
+                            <td className="p-3"><span className="px-2 py-0.5 rounded bg-blue-100 text-blue-800 text-[11px] font-bold">Sesuai Target</span></td>
+                          </tr>
+                          <tr className="hover:bg-[#effdf4]/50">
+                            <td className="p-3 font-semibold text-[#00251b]">Kesehatan &amp; Puskesmas</td>
+                            <td className="p-3">Rp 960 M</td>
+                            <td className="p-3 font-bold text-[#006c4d]">18,2%</td>
+                            <td className="p-3">86,0% (Rp 825 M)</td>
+                            <td className="p-3"><span className="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-[11px] font-bold">UHC 99.1%</span></td>
+                          </tr>
+                          <tr className="hover:bg-[#effdf4]/50">
+                            <td className="p-3 font-semibold text-[#00251b]">Pelayanan Publik &amp; MPP Digital</td>
+                            <td className="p-3">Rp 813 M</td>
+                            <td className="p-3 font-bold text-[#006c4d]">15,4%</td>
+                            <td className="p-3">79,8% (Rp 648 M)</td>
+                            <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[11px] font-bold">Digitalisasi</span></td>
+                          </tr>
+                          <tr className="hover:bg-[#effdf4]/50">
+                            <td className="p-3 font-semibold text-[#00251b]">Ekonomi, UMKM &amp; Pangan</td>
+                            <td className="p-3">Rp 612 M</td>
+                            <td className="p-3 font-bold text-[#006c4d]">11,6%</td>
+                            <td className="p-3">72,1% (Rp 441 M)</td>
+                            <td className="p-3"><span className="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-[11px] font-bold">KURDA Aktif</span></td>
+                          </tr>
+                          <tr className="hover:bg-[#effdf4]/50">
+                            <td className="p-3 font-semibold text-[#00251b]">Perlindungan Sosial &amp; Disabilitas</td>
+                            <td className="p-3">Rp 448 M</td>
+                            <td className="p-3 font-bold text-[#006c4d]">8,5%</td>
+                            <td className="p-3">84,3% (Rp 377 M)</td>
+                            <td className="p-3"><span className="px-2 py-0.5 rounded bg-purple-100 text-purple-800 text-[11px] font-bold">Bansos RTLH</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 )}
 
@@ -848,14 +851,14 @@ export const DataPublikPage: React.FC = () => {
                       Progres Penyerapan Belanja Daerah
                     </span>
                     <span className="font-['Plus_Jakarta_Sans',sans-serif] text-base sm:text-lg text-[#006c4d] font-extrabold">
-                      78,4%
+                      84,6%
                     </span>
                   </div>
                   <div className="w-full h-3 rounded-full bg-[#d8e6de] overflow-hidden">
-                    <div className="h-full bg-[#006c4d] rounded-full transition-all duration-700" style={{ width: '78.4%' }}></div>
+                    <div className="h-full bg-[#006c4d] rounded-full transition-all duration-700" style={{ width: '84.6%' }}></div>
                   </div>
                   <div className="flex justify-between text-xs text-[#404945]">
-                    <span>Terealisasi: Rp 4,14 Triliun</span>
+                    <span>Terealisasi: Rp 4,46 Triliun</span>
                     <span>Target Akhir: Rp 5,28 Triliun</span>
                   </div>
                 </div>
@@ -1236,7 +1239,7 @@ export const DataPublikPage: React.FC = () => {
                       <span>•</span>
                       <span>Ukuran: {item.size}</span>
                       <span>•</span>
-                      <span>{item.downloadCount.toLocaleString('id-ID')} kali diunduh</span>
+                      <span>Unduhan: {item.downloadCount.toLocaleString('id-ID')} kali</span>
                     </div>
                   </div>
 
@@ -1448,6 +1451,7 @@ export const DataPublikPage: React.FC = () => {
                   <span>Menampilkan 5 dari ratusan baris data terbuka</span>
                 </div>
 
+                <p className="text-[11px] text-slate-500 mb-2 flex items-center gap-1 sm:hidden">Geser ke kanan untuk melihat rincian kolom →</p>
                 <div className="overflow-x-auto border border-[#ddece3] rounded-xl">
                   <table className="w-full text-left text-xs">
                     <thead className="bg-[#effdf4] border-b border-[#ddece3] text-[#00251b] font-semibold">
@@ -1779,6 +1783,7 @@ export const DataPublikPage: React.FC = () => {
             </div>
 
             <div className="p-5 overflow-y-auto space-y-3">
+              <p className="text-[11px] text-slate-500 mb-2 flex items-center gap-1 sm:hidden">Geser ke kanan untuk melihat rincian kolom →</p>
               <div className="overflow-x-auto border border-[#ddece3] rounded-xl">
                 <table className="w-full text-left text-xs">
                   <thead className="bg-[#effdf4] border-b border-[#ddece3] text-[#00251b] font-semibold">
@@ -1803,6 +1808,7 @@ export const DataPublikPage: React.FC = () => {
                   </tbody>
                 </table>
               </div>
+              <p className="text-xs text-slate-500 mt-3 italic">* Catatan: Selisih pagu kecamatan sebesar Rp 673 Miliar terhadap total APBD dialokasikan untuk Dana Cadangan Daerah, BTT (Belanja Tidak Terduga) Penanggulangan Bencana, dan Belanja Markas Setda Kabupaten Sidoarjo.</p>
             </div>
 
             <div className="p-4 border-t border-[#ddece3] bg-[#effdf4] flex items-center justify-between">

@@ -76,7 +76,7 @@ export const TransparencySection: React.FC<TransparencySectionProps> = ({
             </h2>
 
             {/* Subtitle */}
-            <p className="mt-3 text-base text-emerald-100/80 leading-relaxed">
+            <p className="mt-3 text-base text-emerald-100 leading-relaxed">
               Pantau serapan APBD Kabupaten Sidoarjo, kepatuhan OPD, dan realisasi program prioritas pembangunan daerah secara transparan.
             </p>
           </div>
@@ -93,14 +93,24 @@ export const TransparencySection: React.FC<TransparencySectionProps> = ({
           {stats.map((stat) => (
             <div
               key={stat.id}
+              role="button"
+              tabIndex={0}
               onClick={() => {
                 setSelectedMetric(stat.id === selectedMetric ? null : stat.id);
                 if (onOpenBudgetModal) onOpenBudgetModal();
               }}
-              className="bg-[#05241B]/90 hover:bg-[#05241B] rounded-2xl p-6 border border-emerald-900/80 hover:border-emerald-600/60 shadow-lg transition-all duration-200 cursor-pointer group flex flex-col justify-between"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setSelectedMetric(stat.id === selectedMetric ? null : stat.id);
+                  if (onOpenBudgetModal) onOpenBudgetModal();
+                }
+              }}
+              aria-label={`Rincian metrik ${stat.label}: ${stat.value}. ${stat.subtext}`}
+              className="bg-[#05241B]/90 hover:bg-[#05241B] rounded-2xl p-6 border border-emerald-900/80 hover:border-emerald-600/60 shadow-lg transition-all duration-200 cursor-pointer group flex flex-col justify-between focus:outline-none focus:ring-2 focus:ring-emerald-400"
             >
               <div>
-                <div className="text-xs uppercase font-medium text-emerald-300/75 tracking-wider mb-2">
+                <div className="text-xs uppercase font-medium text-emerald-200 tracking-wider mb-2">
                   {stat.label}
                 </div>
                 <div className={`font-display text-3xl sm:text-4xl font-extrabold tracking-tight mb-2 ${stat.highlightColor}`}>
@@ -108,10 +118,10 @@ export const TransparencySection: React.FC<TransparencySectionProps> = ({
                 </div>
               </div>
               <div className="pt-3 border-t border-emerald-900/60 flex items-center justify-between">
-                <span className="text-xs font-medium text-emerald-200/90">
+                <span className="text-xs font-medium text-emerald-100">
                   {stat.subtext}
                 </span>
-                <ChevronRight className="w-4 h-4 text-emerald-500/60 group-hover:text-emerald-300 group-hover:translate-x-0.5 transition-all" />
+                <ChevronRight className="w-4 h-4 text-emerald-400 group-hover:text-emerald-200 group-hover:translate-x-0.5 transition-all" />
               </div>
             </div>
           ))}
@@ -125,7 +135,7 @@ export const TransparencySection: React.FC<TransparencySectionProps> = ({
           </div>
 
           <div className="overflow-hidden whitespace-nowrap w-full flex items-center">
-            <div className="animate-marquee flex items-center gap-8 text-xs sm:text-sm text-emerald-100/90 font-medium">
+            <div className="animate-marquee flex items-center gap-8 text-xs sm:text-sm text-emerald-100 font-medium">
               {liveFeeds.map((feed, idx) => (
                 <span key={idx} className="flex items-center gap-3">
                   <span>{feed}</span>

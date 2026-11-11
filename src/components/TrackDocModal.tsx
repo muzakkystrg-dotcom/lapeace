@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Search, CheckCircle2, Clock, AlertCircle, FileText, ArrowRight, Printer } from 'lucide-react';
+import { X, Search, CheckCircle2, Clock, AlertCircle, FileText, ArrowRight, Printer, Phone } from 'lucide-react';
 import { TrackRecord } from '../types/portal';
 
 interface TrackDocModalProps {
@@ -51,6 +51,7 @@ export const TrackDocModal: React.FC<TrackDocModalProps> = ({ isOpen, onClose })
   const [notFound, setNotFound] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLiveSource, setIsLiveSource] = useState(false);
+  const [receiptFeedback, setReceiptFeedback] = useState<string | null>(null);
 
   if (!isOpen) return null;
 
@@ -183,12 +184,47 @@ export const TrackDocModal: React.FC<TrackDocModalProps> = ({ isOpen, onClose })
 
           {/* Not Found State */}
           {notFound && (
-            <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 flex items-start gap-3 text-sm">
-              <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-              <div>
-                <div className="font-bold">Nomor Berkas Tidak Ditemukan</div>
-                <div className="text-xs text-amber-800 mt-1">
-                  Pastikan kode pendaftaran yang dimasukkan sesuai dengan tanda terima pengajuan berkas di Plavon Dukcapil atau SIPRAJA.
+            <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 space-y-3 text-sm">
+              <div className="flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                <div>
+                  <div className="font-bold">Nomor Berkas Tidak Ditemukan</div>
+                  <div className="text-xs text-amber-800 mt-1">
+                    Pastikan kode pendaftaran yang dimasukkan sesuai dengan tanda terima pengajuan berkas di Plavon Dukcapil atau SIPRAJA.
+                  </div>
+                </div>
+              </div>
+
+              {/* Panduan Format Nomor Berkas & Bantuan Kontekstual */}
+              <div className="pt-3 border-t border-amber-200/80 space-y-2.5">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-amber-950">
+                  <FileText className="w-3.5 h-3.5 text-amber-700" />
+                  <span>Panduan Format Nomor Berkas:</span>
+                </div>
+                <ul className="list-disc list-inside space-y-1 text-xs text-amber-800 pl-1">
+                  <li>
+                    Layanan Kependudukan (Plavon): <span className="font-mono font-bold bg-amber-100/80 px-1.5 py-0.5 rounded">REG-SDA-YYYY-XXXXX</span> (contoh: <button type="button" className="font-mono text-emerald-800 font-semibold underline hover:text-emerald-950 cursor-pointer" onClick={() => loadSample('REG-SDA-2025-08912')}>REG-SDA-2025-08912</button>)
+                  </li>
+                  <li>
+                    Layanan Perizinan (SIPRAJA): <span className="font-mono font-bold bg-amber-100/80 px-1.5 py-0.5 rounded">SIP-YYYY-XXXXX</span> (contoh: <button type="button" className="font-mono text-emerald-800 font-semibold underline hover:text-emerald-950 cursor-pointer" onClick={() => loadSample('SIP-2025-44109')}>SIP-2025-44109</button>)
+                  </li>
+                </ul>
+
+                <div className="flex flex-wrap items-center gap-2 pt-1">
+                  <a
+                    href="tel:112"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs transition-colors shadow-xs"
+                  >
+                    <Phone className="w-3.5 h-3.5" />
+                    <span>Hubungi Call Center 112</span>
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => loadSample('REG-SDA-2025-08912')}
+                    className="px-3 py-1.5 rounded-lg bg-white border border-amber-300 text-amber-900 font-semibold text-xs hover:bg-amber-100 transition-colors cursor-pointer"
+                  >
+                    Gunakan Contoh Nomor
+                  </button>
                 </div>
               </div>
             </div>
@@ -260,7 +296,7 @@ export const TrackDocModal: React.FC<TrackDocModalProps> = ({ isOpen, onClose })
                             {step.title}
                           </h4>
                           {step.date && (
-                            <span className="text-[11px] text-slate-400 font-mono">
+                            <span className="text-[11px] text-slate-500 font-mono">
                               {step.date}
                             </span>
                           )}
@@ -277,15 +313,32 @@ export const TrackDocModal: React.FC<TrackDocModalProps> = ({ isOpen, onClose })
                 </div>
               </div>
 
+              {/* Receipt Inline Feedback */}
+              {receiptFeedback && (
+                <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center justify-between animate-in fade-in duration-150">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <span>{receiptFeedback}</span>
+                  </div>
+                  <span className="text-[10px] bg-emerald-100 text-emerald-900 font-bold px-2 py-0.5 rounded">
+                    Sukses
+                  </span>
+                </div>
+              )}
+
               {/* Footer Actions */}
               <div className="pt-3 border-t border-slate-200 flex items-center justify-between">
-                <div className="text-[11px] text-slate-400 flex items-center gap-1">
+                <div className="text-[11px] text-slate-500 flex items-center gap-1">
                   <Clock className="w-3.5 h-3.5" />
                   <span>Diperbarui otomatis: {result.lastUpdated}</span>
                 </div>
 
                 <button
-                  onClick={() => alert(`Bukti Tanda Terima Digital untuk berkas ${result.trackingNumber} berhasil dicetak/diunduh!`)}
+                  type="button"
+                  onClick={() => {
+                    setReceiptFeedback(`Bukti Tanda Terima Digital untuk berkas ${result.trackingNumber} berhasil dicetak/diunduh!`);
+                    setTimeout(() => setReceiptFeedback(null), 4000);
+                  }}
                   className="px-3.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <Printer className="w-3.5 h-3.5" />

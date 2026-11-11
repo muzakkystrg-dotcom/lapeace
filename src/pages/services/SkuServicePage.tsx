@@ -20,10 +20,10 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
   };
 
   return (
-    <div className="w-full bg-surface text-on-surface">
+    <div className="w-full bg-[#F8FAF9] text-on-surface">
       {/* Top Metadata & Breadcrumb Header */}
       <section className="w-full bg-surface-container-low py-4 border-b border-surface-container">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-3">
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant flex-wrap">
             <button
               onClick={onBack}
@@ -49,7 +49,7 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
       </section>
 
       {/* Main Container */}
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10">
         {/* Title & Executive Overview */}
         <div className="mb-8">
           <div className="flex flex-wrap items-center gap-2 mb-3">
@@ -319,7 +319,7 @@ export const SkuServicePage: React.FC<SkuServicePageProps> = ({
           </div>
 
           {/* Right Column (Operational Action Cards ~35%) */}
-          <div className="lg:col-span-4 flex flex-col gap-6 lg:sticky lg:top-24">
+          <div className="lg:col-span-4 flex flex-col gap-6 lg:sticky lg:top-22">
             {/* Primary Action Card */}
             <div className="p-6 rounded-2xl bg-surface-container-lowest border border-surface-container-high/80 shadow-md flex flex-col gap-4">
               <div className="flex items-center gap-3">

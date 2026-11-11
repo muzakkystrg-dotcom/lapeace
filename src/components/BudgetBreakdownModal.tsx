@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { X, PieChart, TrendingUp, Download, CheckCircle2, ShieldCheck, ArrowUpRight } from 'lucide-react';
 
 interface BudgetBreakdownModalProps {
@@ -7,6 +7,8 @@ interface BudgetBreakdownModalProps {
 }
 
 export const BudgetBreakdownModal: React.FC<BudgetBreakdownModalProps> = ({ isOpen, onClose }) => {
+  const [downloadSuccess, setDownloadSuccess] = useState(false);
+
   if (!isOpen) return null;
 
   const allocations = [
@@ -32,7 +34,7 @@ export const BudgetBreakdownModal: React.FC<BudgetBreakdownModalProps> = ({ isOp
                 TRANSPARANSI KEUANGAN DAERAH
               </div>
               <h3 className="font-display font-bold text-xl leading-tight">
-                Struktur Alokasi APBD Sidoarjo TA 2025
+                Struktur Alokasi APBD Sidoarjo TA 2026
               </h3>
             </div>
           </div>
@@ -59,7 +61,7 @@ export const BudgetBreakdownModal: React.FC<BudgetBreakdownModalProps> = ({ isOp
             </div>
 
             <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
-              <div className="text-xs text-slate-600 font-medium">Realisasi Serapan Berjalan</div>
+              <div className="text-xs text-slate-600 font-medium">Realisasi Berjalan TA 2026</div>
               <div className="text-2xl font-extrabold text-slate-900 font-display mt-1">84,6%</div>
               <div className="text-[11px] text-slate-500 mt-1">Target Triwulan IV: 96%</div>
             </div>
@@ -117,17 +119,35 @@ export const BudgetBreakdownModal: React.FC<BudgetBreakdownModalProps> = ({ isOp
 
         </div>
 
+        {/* Download State Notification */}
+        {downloadSuccess && (
+          <div className="mx-6 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center justify-between animate-in fade-in duration-150">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>Mengunduh Buku Laporan Ringkasan APBD Kabupaten Sidoarjo 2026 (PDF)...</span>
+            </div>
+            <span className="text-[10px] bg-emerald-100 text-emerald-900 font-bold px-2 py-0.5 rounded">
+              Sukses
+            </span>
+          </div>
+        )}
+
         {/* Footer */}
         <div className="px-6 py-4 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
           <button
+            type="button"
             onClick={onClose}
-            className="px-4 py-2 text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-800"
+            className="px-4 py-2 text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-800 cursor-pointer"
           >
             Tutup
           </button>
 
           <button
-            onClick={() => alert('Mengunduh Buku Laporan Ringkasan APBD Kabupaten Sidoarjo 2025 (PDF)...')}
+            type="button"
+            onClick={() => {
+              setDownloadSuccess(true);
+              setTimeout(() => setDownloadSuccess(false), 4000);
+            }}
             className="px-4 py-2.5 bg-[#038D66] hover:bg-[#026E4F] text-white font-semibold text-xs sm:text-sm rounded-xl transition-colors flex items-center gap-2 cursor-pointer shadow-sm"
           >
             <Download className="w-4 h-4" />

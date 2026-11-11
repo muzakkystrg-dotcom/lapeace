@@ -20,10 +20,10 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
   };
 
   return (
-    <div className="w-full bg-surface text-on-surface">
+    <div className="w-full bg-[#F8FAF9] text-on-surface">
       {/* Top Progress / Real-time Bar */}
       <div className="w-full bg-surface-container-high text-on-surface-variant py-3 px-4 sm:px-6 lg:px-8 border-b border-surface-container">
-        <div className="max-w-[1440px] mx-auto flex flex-wrap items-center justify-between gap-3 font-label-md text-xs sm:text-sm">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 font-label-md text-xs sm:text-sm">
           <div className="flex items-center gap-2 flex-wrap">
             <button
               onClick={onBack}
@@ -50,7 +50,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
       </div>
 
       {/* Main Content Wrap */}
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10">
         {/* Header Block: Title & Official Accreditation Box */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch mb-8">
           {/* Title & Context (8 Columns) */}
@@ -506,7 +506,7 @@ export const NibServicePage: React.FC<NibServicePageProps> = ({
           </div>
 
           {/* Right Column: Sidebar (4 Columns) */}
-          <aside className="lg:col-span-4 flex flex-col gap-6 lg:sticky lg:top-24">
+          <aside className="lg:col-span-4 flex flex-col gap-6 lg:sticky lg:top-22">
             {/* Sidebar Card 1: Aksi Mandiri Warga */}
             <div className="bg-surface-container-lowest rounded-2xl p-6 border border-surface-container-high/80 shadow-md flex flex-col gap-4">
               <div className="flex items-center gap-2">

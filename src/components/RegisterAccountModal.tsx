@@ -1,6 +1,6 @@
 import { Icon } from './common/Icon';
 import React, { useState } from 'react';
-import { X, UserPlus, LogIn, ShieldCheck, CheckCircle2, User, Phone, Mail, MapPin } from 'lucide-react';
+import { X, UserPlus, LogIn, ShieldCheck, CheckCircle2, User, Phone, Mail, MapPin, AlertCircle } from 'lucide-react';
 import { CitizenAccount } from '../types/portal';
 
 interface RegisterAccountModalProps {
@@ -114,6 +114,17 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage(null);
+
+    if (nik.trim().length !== 16) {
+      setErrorMessage('NIK harus terdiri dari tepat 16 digit angka.');
+      return;
+    }
+
+    if (mode === 'register' && password.trim().length < 8) {
+      setErrorMessage('Kata sandi untuk pendaftaran akun minimal 8 karakter.');
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -128,7 +139,7 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
               email: email.trim(),
               kecamatan,
               kelurahan: kelurahan.trim(),
-              password: password || 'WargaSidoarjo2026!',
+              password: password.trim(),
             };
 
       const res = await fetch(endpoint, {
@@ -267,19 +278,27 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
 
               {/* NIK Field */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                  Nomor Induk Kependudukan (NIK)
-                </label>
+                <div className="flex items-center justify-between mb-1">
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    Nomor Induk Kependudukan (NIK)
+                  </label>
+                  {nik.length > 0 && nik.length < 16 && (
+                    <span className="text-[11px] font-medium text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                      {16 - nik.length} digit lagi
+                    </span>
+                  )}
+                </div>
                 <input
                   type="text"
                   maxLength={16}
+                  minLength={16}
                   required
                   value={nik}
                   onChange={(e) => setNik(e.target.value.replace(/\D/g, ''))}
                   placeholder="3515xxxxxxxxxxxx (16 digit)"
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:border-emerald-600 focus:bg-white focus:ring-2 focus:ring-emerald-600/20 outline-none font-mono"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:border-emerald-600 focus:bg-white focus:ring-2 focus:ring-emerald-600/20 outline-none font-mono placeholder:text-slate-500"
                 />
-                <p className="text-[11px] text-slate-400 mt-1">
+                <p className="text-[11px] text-slate-500 mt-1">
                   NIK Sidoarjo digunakan untuk integrasi Plavon Dukcapil dan izin SIPRAJA.
                 </p>
               </div>
@@ -292,14 +311,14 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
                       Nama Lengkap (Sesuai KTP)
                     </label>
                     <div className="relative">
-                      <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+                      <User className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
                       <input
                         type="text"
                         required
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         placeholder="Contoh: Bagus Tri Prakoso"
-                        className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:border-emerald-600 focus:bg-white focus:ring-2 focus:ring-emerald-600/20 outline-none"
+                        className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:border-emerald-600 focus:bg-white focus:ring-2 focus:ring-emerald-600/20 outline-none placeholder:text-slate-500"
                       />
                     </div>
                   </div>
@@ -311,14 +330,14 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
                         No. WhatsApp
                       </label>
                       <div className="relative">
-                        <Phone className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+                        <Phone className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
                         <input
                           type="tel"
                           required
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           placeholder="08xxxxxxxxxx"
-                          className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:border-emerald-600 focus:bg-white focus:ring-2 focus:ring-emerald-600/20 outline-none"
+                          className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:border-emerald-600 focus:bg-white focus:ring-2 focus:ring-emerald-600/20 outline-none placeholder:text-slate-500"
                         />
                       </div>
                     </div>
@@ -328,14 +347,14 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
                         Email Aktif
                       </label>
                       <div className="relative">
-                        <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+                        <Mail className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
                         <input
                           type="email"
                           required
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="nama@email.com"
-                          className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:border-emerald-600 focus:bg-white focus:ring-2 focus:ring-emerald-600/20 outline-none"
+                          className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:border-emerald-600 focus:bg-white focus:ring-2 focus:ring-emerald-600/20 outline-none placeholder:text-slate-500"
                         />
                       </div>
                     </div>
@@ -370,7 +389,7 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
                         value={kelurahan}
                         onChange={(e) => setKelurahan(e.target.value)}
                         placeholder="Nama Desa/Kelurahan"
-                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:border-emerald-600 focus:bg-white focus:ring-2 focus:ring-emerald-600/20 outline-none"
+                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:border-emerald-600 focus:bg-white focus:ring-2 focus:ring-emerald-600/20 outline-none placeholder:text-slate-500"
                       />
                     </div>
                   </div>
@@ -388,14 +407,14 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:border-emerald-600 focus:bg-white focus:ring-2 focus:ring-emerald-600/20 outline-none"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:border-emerald-600 focus:bg-white focus:ring-2 focus:ring-emerald-600/20 outline-none placeholder:text-slate-500"
                 />
               </div>
 
               {/* Error Feedback */}
               {errorMessage && (
                 <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs flex items-center gap-2">
-                  <Icon className="material-symbols-outlined text-[18px] text-red-600">error</Icon>
+                  <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
                   <span>{errorMessage}</span>
                 </div>
               )}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Search, SlidersHorizontal, ArrowRight, TrendingUp } from 'lucide-react';
 import { ServiceCategory } from '../types/portal';
 
@@ -14,6 +14,20 @@ export const QuickSearch: React.FC<QuickSearchProps> = ({
   const [query, setQuery] = useState(initialQuery);
   const [selectedCategory, setSelectedCategory] = useState<ServiceCategory>('semua');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const categories: { id: ServiceCategory; label: string }[] = [
     { id: 'semua', label: 'Semua Kategori' },
@@ -48,18 +62,18 @@ export const QuickSearch: React.FC<QuickSearchProps> = ({
           
           {/* Text Input */}
           <div className="relative flex-1 flex items-center">
-            <Search className="absolute left-4 w-5 h-5 text-slate-400 pointer-events-none" />
+            <Search className="absolute left-4 w-5 h-5 text-slate-500 pointer-events-none" />
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Cari Layanan (SIPRAJA, Plavon Dukcapil), Dokumen APBD Sidoarjo, atau Regulasi..."
-              className="w-full pl-12 pr-4 py-3 sm:py-3.5 bg-slate-50/80 hover:bg-slate-50 focus:bg-white text-slate-800 text-sm sm:text-base rounded-xl border border-slate-200 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 outline-none transition-all placeholder:text-slate-400"
+              className="w-full pl-12 pr-4 py-3 sm:py-3.5 bg-slate-50/80 hover:bg-slate-50 focus:bg-white text-slate-800 text-sm sm:text-base rounded-xl border border-slate-200 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 outline-none transition-all placeholder:text-slate-500"
             />
           </div>
 
           {/* Category Dropdown */}
-          <div className="relative">
+          <div className="relative" ref={dropdownRef}>
             <button
               type="button"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -67,7 +81,7 @@ export const QuickSearch: React.FC<QuickSearchProps> = ({
             >
               <SlidersHorizontal className="w-4 h-4 text-emerald-700" />
               <span>{categories.find((c) => c.id === selectedCategory)?.label || 'Semua Kategori'}</span>
-              <span className="text-xs text-slate-400">▾</span>
+              <span className="text-xs text-slate-500">▾</span>
             </button>
 
             {isDropdownOpen && (

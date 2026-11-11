@@ -20,10 +20,10 @@ export const DtksServicePage: React.FC<DtksServicePageProps> = ({
   };
 
   return (
-    <div className="w-full bg-surface text-on-surface">
+    <div className="w-full bg-[#F8FAF9] text-on-surface">
       {/* Top Breadcrumbs & Kemensos Integration Pill */}
       <section className="w-full bg-surface-container-low py-4 border-b border-surface-container">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 font-label-md text-label-md text-on-surface-variant flex-wrap">
             <button
               onClick={onBack}
@@ -49,7 +49,7 @@ export const DtksServicePage: React.FC<DtksServicePageProps> = ({
       </section>
 
       {/* Main Container */}
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10 flex flex-col gap-8">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10 flex flex-col gap-8">
         {/* Header Section: Title & Subtitle */}
         <div className="bg-surface-container-lowest rounded-2xl p-6 sm:p-8 shadow-sm border border-surface-container-high/60 relative overflow-hidden">
           <div className="absolute -right-16 -top-16 w-56 h-56 rounded-full bg-primary-fixed/30 pointer-events-none blur-3xl"></div>
@@ -342,7 +342,7 @@ export const DtksServicePage: React.FC<DtksServicePageProps> = ({
           </div>
 
           {/* Secondary Right Sidebar (5 of 12) */}
-          <div className="lg:col-span-5 flex flex-col gap-6 lg:sticky lg:top-24">
+          <div className="lg:col-span-5 flex flex-col gap-6 lg:sticky lg:top-22">
             {/* Card Aksi Utama "Cek & Usulkan DTKS" */}
             <div className="bg-surface-container-lowest rounded-2xl p-6 sm:p-7 shadow-md border border-surface-container-high/80">
               <div className="flex items-center gap-3 mb-3">

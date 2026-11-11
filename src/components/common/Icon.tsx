@@ -143,6 +143,8 @@ export interface IconProps {
   children?: React.ReactNode;
   className?: string;
   size?: number | string;
+  style?: React.CSSProperties;
+  title?: string;
 }
 
 const ICON_COMPONENTS: Record<string, React.ComponentType<any>> = {
@@ -317,7 +319,7 @@ const ICON_COMPONENTS: Record<string, React.ComponentType<any>> = {
   "workspace_premium": Award,
 };
 
-export const Icon: React.FC<IconProps> = ({ name, children, className = '', size }) => {
+export const Icon: React.FC<IconProps> = ({ name, children, className = '', size, style, title }) => {
   let iconKey = (name || (typeof children === 'string' ? children : '')).trim();
   iconKey = iconKey.toLowerCase().replace(/\s+/g, '_');
   
@@ -327,6 +329,8 @@ export const Icon: React.FC<IconProps> = ({ name, children, className = '', size
   return (
     <LucideComponent
       size={size}
+      style={style}
+      title={title}
       className={`inline-block shrink-0 align-middle w-[1em] h-[1em] ${sanitizedClass}`}
     />
   );
