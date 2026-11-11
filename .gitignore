@@ -3,9 +3,20 @@
 node_modules/
 public/node_modules/
 
+# Non-NPM Package Manager Locks (Project strictly uses npm & package-lock.json)
+bun.lock
+bun.lockb
+yarn.lock
+pnpm-lock.yaml
+
 # Production Build Output
 /dist
 /build
+.vite/
+
+# Private & Personal Tooling
+anti-slop/
+monitor/
 
 # Environment Configuration & Secrets
 .env
@@ -37,12 +48,13 @@ database/*.db-shm
 stitch_export/
 
 # Audit Documents & Reports (Source Code Only in Git)
+docs/audits/
 *Audit.md
 Hasil_Audit/
 
 # Backup & Temporary Files
-monitor/probe.log
 *.backup
+*.backup.*
 *.bak
 *.swp
 *.swo
@@ -50,6 +62,8 @@ monitor/probe.log
 .tmp
 .temp
 *.tsbuildinfo
+tsconfig.build.tsbuildinfo
+.eslintcache
 
 # Test & Coverage
 /coverage
