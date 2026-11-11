@@ -1,10 +1,56 @@
 # Dependencies
 /node_modules
+node_modules/
+public/node_modules/
 
-# Build output
+# Production Build Output
 /dist
+/build
 
-# Coverage
+# Environment Configuration & Secrets
+.env
+.env.*
+.env.local
+.env.production
+!.env.example
+
+# SSL Certificates & Private Keys
+*.pem
+*.key
+*.crt
+*.cert
+
+# SQLite Databases & WAL/SHM Runtime Files
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+*.sqlite-wal
+*.sqlite-shm
+database/*.db
+database/*.db-wal
+database/*.db-shm
+
+# Design Stitches & Temporary UI Exports (Merged into React)
+stitch_export/
+
+# Audit Documents & Reports (Source Code Only in Git)
+*Audit.md
+Hasil_Audit/
+
+# Backup & Temporary Files
+*.backup
+*.bak
+*.swp
+*.swo
+*~
+.tmp
+.temp
+*.tsbuildinfo
+
+# Test & Coverage
 /coverage
 *.lcov
 
@@ -17,23 +63,9 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
-# Env
-.env
-.env.*
-!.env.example
-
-# OS / editor
+# OS & Editor
 .DS_Store
 Thumbs.db
 .idea
 .vscode/*
 !.vscode/extensions.json
-
-# Temp
-.tmp
-.temp
-*.tsbuildinfo
-
-# Dependencies
-node_modules/
-public/node_modules/

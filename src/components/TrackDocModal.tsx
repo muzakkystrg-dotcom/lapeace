@@ -49,29 +49,53 @@ export const TrackDocModal: React.FC<TrackDocModalProps> = ({ isOpen, onClose })
   const [result, setResult] = useState<TrackRecord | null>(mockTrackDatabase['REG-SDA-2025-08912']);
   const [searched, setSearched] = useState(false);
   const [notFound, setNotFound] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLiveSource, setIsLiveSource] = useState(false);
 
   if (!isOpen) return null;
+
+  const fetchTracking = async (code: string) => {
+    setIsLoading(true);
+    setSearched(true);
+    try {
+      const res = await fetch(`/api/tracking/${encodeURIComponent(code)}`);
+      if (res.ok) {
+        const json = await res.json();
+        const record = json.data || json;
+        if (record && record.trackingNumber) {
+          setResult(record);
+          setNotFound(false);
+          setIsLiveSource(true);
+          setIsLoading(false);
+          return;
+        }
+      }
+    } catch {
+      // Fallback ke mock database jika offline
+    }
+
+    if (mockTrackDatabase[code]) {
+      setResult(mockTrackDatabase[code]);
+      setNotFound(false);
+      setIsLiveSource(false);
+    } else {
+      setResult(null);
+      setNotFound(true);
+      setIsLiveSource(false);
+    }
+    setIsLoading(false);
+  };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const clean = inputCode.trim().toUpperCase();
     if (!clean) return;
-
-    setSearched(true);
-    if (mockTrackDatabase[clean]) {
-      setResult(mockTrackDatabase[clean]);
-      setNotFound(false);
-    } else {
-      setResult(null);
-      setNotFound(true);
-    }
+    fetchTracking(clean);
   };
 
   const loadSample = (code: string) => {
     setInputCode(code);
-    setResult(mockTrackDatabase[code]);
-    setNotFound(false);
-    setSearched(true);
+    fetchTracking(code);
   };
 
   return (
@@ -119,10 +143,20 @@ export const TrackDocModal: React.FC<TrackDocModalProps> = ({ isOpen, onClose })
               />
               <button
                 type="submit"
-                className="px-5 py-3 bg-[#038D66] hover:bg-[#026E4F] text-white font-semibold text-sm rounded-xl transition-colors cursor-pointer flex items-center gap-1.5 shrink-0"
+                disabled={isLoading}
+                className="px-5 py-3 bg-[#038D66] hover:bg-[#026E4F] disabled:opacity-60 text-white font-semibold text-sm rounded-xl transition-colors cursor-pointer flex items-center gap-1.5 shrink-0"
               >
-                <span>Cari</span>
-                <ArrowRight className="w-4 h-4" />
+                {isLoading ? (
+                  <>
+                    <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                    <span>Memeriksa...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Cari</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
               </button>
             </div>
 
@@ -164,6 +198,17 @@ export const TrackDocModal: React.FC<TrackDocModalProps> = ({ isOpen, onClose })
           {result && (
             <div className="space-y-5 pt-2">
               
+              {/* Data Source Indicator */}
+              {isLiveSource && (
+                <div className="flex items-center justify-between px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-200/80 text-[11px] text-emerald-800">
+                  <span className="flex items-center gap-1.5 font-medium">
+                    <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+                    Data Valid: Terhubung Langsung ke Basis Data Sentral SITAPAK
+                  </span>
+                  <span className="font-mono text-emerald-700 font-semibold">{result.trackingNumber}</span>
+                </div>
+              )}
+
               {/* Summary Header Card */}
               <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>

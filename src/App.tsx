@@ -1,21 +1,86 @@
-import React, { useState } from 'react';
-import { Navbar } from './components/Navbar';
+import React, { useState, useEffect, useMemo, Suspense, lazy } from 'react';
+import { Navbar, Footer } from './components/layout';
 import { HeroSection } from './components/HeroSection';
 import { QuickSearch } from './components/QuickSearch';
 import { FeaturedServices, servicesData } from './components/FeaturedServices';
 import { TransparencySection } from './components/TransparencySection';
 import { SingleAccountBanner } from './components/SingleAccountBanner';
-import { Footer } from './components/Footer';
-import { TrackDocModal } from './components/TrackDocModal';
-import { ServiceDetailModal } from './components/ServiceDetailModal';
-import { RegisterAccountModal } from './components/RegisterAccountModal';
-import { BudgetBreakdownModal } from './components/BudgetBreakdownModal';
-import { ServiceGuideModal } from './components/ServiceGuideModal';
 import { ServiceItem, ServiceCategory, CitizenAccount } from './types/portal';
-import { CheckCircle2, User, LogOut } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
+
+// Lazy loaded route pages (diunduh on-demand saat rute aktif)
+const DataPublikPage = lazy(() => import('./pages/DataPublikPage').then(m => ({ default: m.DataPublikPage })));
+const LayananPage = lazy(() => import('./pages/LayananPage').then(m => ({ default: m.LayananPage })));
+const LaporanPage = lazy(() => import('./pages/LaporanPage').then(m => ({ default: m.LaporanPage })));
+const TentangPage = lazy(() => import('./pages/TentangPage').then(m => ({ default: m.TentangPage })));
+
+// Lazy loaded sub-pages layanan
+const KtpServicePage = lazy(() => import('./pages/services/KtpServicePage').then(m => ({ default: m.KtpServicePage })));
+const NibServicePage = lazy(() => import('./pages/services/NibServicePage').then(m => ({ default: m.NibServicePage })));
+const SkuServicePage = lazy(() => import('./pages/services/SkuServicePage').then(m => ({ default: m.SkuServicePage })));
+const FaskesServicePage = lazy(() => import('./pages/services/FaskesServicePage').then(m => ({ default: m.FaskesServicePage })));
+const DtksServicePage = lazy(() => import('./pages/services/DtksServicePage').then(m => ({ default: m.DtksServicePage })));
+
+// Lazy loaded interactive modals (diunduh hanya saat pemicu diklik)
+const TrackDocModal = lazy(() => import('./components/TrackDocModal').then(m => ({ default: m.TrackDocModal })));
+const ServiceDetailModal = lazy(() => import('./components/ServiceDetailModal').then(m => ({ default: m.ServiceDetailModal })));
+const RegisterAccountModal = lazy(() => import('./components/RegisterAccountModal').then(m => ({ default: m.RegisterAccountModal })));
+const BudgetBreakdownModal = lazy(() => import('./components/BudgetBreakdownModal').then(m => ({ default: m.BudgetBreakdownModal })));
+const ServiceGuideModal = lazy(() => import('./components/ServiceGuideModal').then(m => ({ default: m.ServiceGuideModal })));
+
+// Smooth Skeleton loader fallback saat rute sedang dimuat
+const RouteSkeleton = () => (
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-pulse space-y-6">
+    <div className="flex items-center gap-3">
+      <div className="w-12 h-12 bg-emerald-100/60 rounded-xl"></div>
+      <div className="space-y-2 flex-1">
+        <div className="h-6 bg-slate-200 rounded-md w-1/3"></div>
+        <div className="h-3 bg-slate-100 rounded w-1/2"></div>
+      </div>
+    </div>
+    <div className="h-4 bg-slate-100 rounded w-2/3"></div>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+      <div className="h-56 bg-slate-100 rounded-2xl border border-slate-200/60"></div>
+      <div className="h-56 bg-slate-100 rounded-2xl border border-slate-200/60"></div>
+      <div className="h-56 bg-slate-100 rounded-2xl border border-slate-200/60"></div>
+    </div>
+  </div>
+);
+
+const defaultStitchCitizen: CitizenAccount = {
+  nik: '3515082104900002',
+  fullName: 'Budi Santoso',
+  email: 'budi.santoso@warga.sidoarjokab.go.id',
+  phone: '081234567890',
+  kecamatan: 'Sidoarjo Kota',
+  kelurahan: 'Sidokumpul',
+};
 
 export default function App() {
-  const [activeNav, setActiveNav] = useState('beranda');
+  // Hash Routing state
+  const [currentHash, setCurrentHash] = useState<string>(() => {
+    return window.location.hash || '#beranda';
+  });
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash || '#beranda';
+      setCurrentHash(hash);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const activeNav = useMemo(() => {
+    if (currentHash === '#data-publik' || currentHash === '#transparansi') return 'transparansi';
+    if (currentHash.startsWith('#layanan')) return 'layanan';
+    if (currentHash === '#laporan' || currentHash === '#lapor') return 'laporan';
+    if (currentHash === '#tentang') return 'tentang';
+    return 'beranda';
+  }, [currentHash]);
+
   const [isTrackModalOpen, setIsTrackModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
   const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
@@ -30,15 +95,79 @@ export default function App() {
   const [filteredServices, setFilteredServices] = useState<ServiceItem[] | undefined>(undefined);
   const [searchActive, setSearchActive] = useState(false);
 
-  // Logged-in citizen simulation
-  const [currentUser, setCurrentUser] = useState<CitizenAccount | null>(null);
+  // Citizen session with server-validated JWT token & cache
+  const [currentUser, setCurrentUser] = useState<CitizenAccount | null>(() => {
+    try {
+      const cached = localStorage.getItem('sitapak_citizen_session');
+      if (cached) {
+        return JSON.parse(cached) as CitizenAccount;
+      }
+    } catch (e) {
+      console.warn('Gagal membaca sesi warga dari localStorage:', e);
+    }
+    return null;
+  });
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  // Verifikasi keabsahan sesi token ke server backend SITAPAK
+  useEffect(() => {
+    const token = sessionStorage.getItem('sitapak_auth_token');
+    if (token) {
+      fetch('/api/auth/me', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => {
+          if (res.ok) return res.json();
+          throw new Error('Sesi kedaluwarsa');
+        })
+        .then((data) => {
+          if (data && data.citizen) {
+            setCurrentUser(data.citizen);
+            localStorage.setItem('sitapak_citizen_session', JSON.stringify(data.citizen));
+          }
+        })
+        .catch(() => {
+          // Token tidak valid atau kedaluwarsa, bersihkan sesi
+          sessionStorage.removeItem('sitapak_auth_token');
+          localStorage.removeItem('sitapak_citizen_session');
+          setCurrentUser(null);
+        });
+    }
+  }, []);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
     setTimeout(() => {
       setToastMessage(null);
     }, 4000);
+  };
+
+  const handleLoginSuccess = (account: CitizenAccount) => {
+    setCurrentUser(account);
+    try {
+      localStorage.setItem('sitapak_citizen_session', JSON.stringify(account));
+    } catch (e) {
+      console.warn('Gagal menyimpan sesi warga ke localStorage:', e);
+    }
+    showToast(`Selamat datang di SITAPAK Sidoarjo, ${account.fullName}!`);
+  };
+
+  const handleLogout = () => {
+    const token = sessionStorage.getItem('sitapak_auth_token');
+    if (token) {
+      fetch('/api/auth/logout', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+      }).catch(() => {});
+    }
+    setCurrentUser(null);
+    try {
+      sessionStorage.removeItem('sitapak_auth_token');
+      localStorage.removeItem('sitapak_citizen_session');
+    } catch (e) {
+      console.warn('Gagal menghapus sesi warga dari storage:', e);
+    }
+    showToast('Anda telah keluar dari sesi akun warga.');
   };
 
   const handleSearch = (query: string, category: ServiceCategory) => {
@@ -67,36 +196,49 @@ export default function App() {
 
     setFilteredServices(results);
 
-    // Smooth scroll to services if query provided
-    const servicesEl = document.getElementById('layanan');
-    if (servicesEl) {
-      servicesEl.scrollIntoView({ behavior: 'smooth' });
+    // If on another page, navigate to layanan or scroll
+    if (currentHash !== '#beranda') {
+      window.location.hash = '#layanan';
+    } else {
+      const servicesEl = document.getElementById('layanan');
+      if (servicesEl) {
+        servicesEl.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
   const handleNavigateSection = (sectionId: string) => {
-    setActiveNav(sectionId);
     if (sectionId === 'beranda') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (sectionId === 'transparansi') {
-      const el = document.getElementById('transparansi');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      window.location.hash = '#beranda';
+    } else if (sectionId === 'transparansi' || sectionId === 'data-publik') {
+      window.location.hash = '#data-publik';
     } else if (sectionId === 'layanan') {
-      const el = document.getElementById('layanan');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      window.location.hash = '#layanan';
     } else if (sectionId === 'laporan') {
-      const lapor = servicesData.find((s) => s.id === 'lapor112');
-      if (lapor) {
-        setSelectedService(lapor);
-        setIsServiceModalOpen(true);
-      }
+      window.location.hash = '#laporan';
     } else if (sectionId === 'tentang') {
-      const el = document.getElementById('transparansi');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      window.location.hash = '#tentang';
+    } else {
+      window.location.hash = `#${sectionId}`;
     }
   };
 
   const handleStartApplication = (service: ServiceItem) => {
+    if (service.id === 'lapor112') {
+      setIsServiceModalOpen(false);
+      window.location.hash = '#laporan';
+      return;
+    }
+    if (service.id === 'plavon') {
+      setIsServiceModalOpen(false);
+      window.location.hash = '#layanan/ktp';
+      return;
+    }
+    if (service.id === 'sipraja') {
+      setIsServiceModalOpen(false);
+      window.location.hash = '#layanan/sku';
+      return;
+    }
     if (!currentUser) {
       setAccountMode('register');
       setIsAccountModalOpen(true);
@@ -109,7 +251,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F8FAF9] text-[#15211C]">
-      
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed top-24 right-4 sm:right-8 z-50 max-w-md bg-[#05241B] text-white p-4 rounded-xl shadow-2xl border border-emerald-500/50 flex items-start gap-3 animate-in fade-in slide-in-from-top-4 duration-200">
@@ -120,33 +261,11 @@ export default function App() {
         </div>
       )}
 
-      {/* User Login Pill Bar if authenticated */}
-      {currentUser && (
-        <div className="bg-[#05241B] text-emerald-100 text-xs py-2 px-4 border-b border-emerald-900/60 flex items-center justify-between">
-          <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              <span>
-                Akun Terverifikasi: <strong>{currentUser.fullName}</strong> (NIK: {currentUser.nik.slice(0, 6)}******{currentUser.nik.slice(-4)}) • Kecamatan {currentUser.kecamatan}
-              </span>
-            </div>
-            <button
-              onClick={() => {
-                setCurrentUser(null);
-                showToast('Anda telah keluar dari sesi akun warga.');
-              }}
-              className="text-emerald-300 hover:text-white flex items-center gap-1 cursor-pointer font-medium"
-            >
-              <LogOut className="w-3.5 h-3.5" />
-              <span>Keluar</span>
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* 1. Header / Navbar */}
+      {/* 1. Header / Navbar (Google Stitch Exact) */}
       <Navbar
+        currentUser={currentUser}
         activeNav={activeNav}
+        notificationsCount={2}
         onNavigateSection={handleNavigateSection}
         onOpenLogin={() => {
           setAccountMode('login');
@@ -156,86 +275,254 @@ export default function App() {
           setAccountMode('register');
           setIsAccountModalOpen(true);
         }}
+        onLogout={handleLogout}
+        onOpenTrackModal={() => setIsTrackModalOpen(true)}
       />
 
-      <main className="flex-1">
-        {/* 2. Hero Section */}
-        <HeroSection
-          onExploreServices={() => {
-            const el = document.getElementById('layanan');
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
-          }}
-          onOpenTrackModal={() => setIsTrackModalOpen(true)}
-        />
+      <main className="flex-1 pt-20">
+        <Suspense fallback={<RouteSkeleton />}>
+          {(() => {
+            // Page 1: Data Publik & Transparansi Anggaran
+            if (currentHash === '#data-publik' || currentHash === '#transparansi') {
+              return <DataPublikPage />;
+            }
 
-        {/* 3. Quick Search Bar */}
-        <QuickSearch onSearch={handleSearch} initialQuery={searchQuery} />
+            // Page 2: Direktori Layanan Publik
+            if (currentHash === '#layanan') {
+              return (
+                <LayananPage
+                  onSelectService={(serviceId) => {
+                    window.location.hash = `#layanan/${serviceId}`;
+                  }}
+                  onStartApplication={(service) => {
+                    if (service.detailRoute) {
+                      window.location.hash = service.detailRoute;
+                    } else {
+                      handleStartApplication({
+                        id: service.id,
+                        title: service.title,
+                        description: service.description,
+                        category: 'kependudukan',
+                        iconName: 'Plavon',
+                        actionLabel: service.primaryActionLabel,
+                        opd: service.opd,
+                        sla: service.metricValue1,
+                        requirements: [],
+                        features: [],
+                      });
+                    }
+                  }}
+                />
+              );
+            }
 
-        {/* 4. Featured Services */}
-        <FeaturedServices
-          filteredServices={filteredServices}
-          searchActive={searchActive}
-          onSelectService={(service) => {
-            setSelectedService(service);
-            setIsServiceModalOpen(true);
-          }}
-        />
+            // Detail Layanan 1: KTP-el Disdukcapil
+            if (currentHash === '#layanan/ktp' || currentHash === '#layanan-ktp') {
+              return (
+                <KtpServicePage
+                  onBack={() => {
+                    window.location.hash = '#layanan';
+                  }}
+                  onApply={() => {
+                    setIsTrackModalOpen(true);
+                    showToast('Membuka Formulir Antrean Online KTP-el Disdukcapil Sidoarjo.');
+                  }}
+                />
+              );
+            }
 
-        {/* 5. Transparency & Budget Section */}
-        <TransparencySection
-          onOpenBudgetModal={() => setIsBudgetModalOpen(true)}
-        />
+            // Detail Layanan 2: NIB OSS DPMPTSP
+            if (currentHash === '#layanan/nib' || currentHash === '#layanan-nib') {
+              return (
+                <NibServicePage
+                  onBack={() => {
+                    window.location.hash = '#layanan';
+                  }}
+                  onApply={() => {
+                    setIsTrackModalOpen(true);
+                    showToast('Membuka Integrasi OSS-RBA DPMPTSP Sidoarjo.');
+                  }}
+                />
+              );
+            }
 
-        {/* 6. Single Account Citizen Banner */}
-        <SingleAccountBanner
-          onOpenRegister={() => {
-            setAccountMode('register');
-            setIsAccountModalOpen(true);
-          }}
-          onOpenGuide={() => setIsGuideModalOpen(true)}
-        />
+            // Detail Layanan 3: SKU SIPRAJA
+            if (currentHash === '#layanan/sku' || currentHash === '#layanan-sku') {
+              return (
+                <SkuServicePage
+                  onBack={() => {
+                    window.location.hash = '#layanan';
+                  }}
+                  onApply={() => {
+                    setIsTrackModalOpen(true);
+                    showToast('Membuka Pengajuan Surat Keterangan Usaha SIPRAJA Sidoarjo.');
+                  }}
+                />
+              );
+            }
+
+            // Detail Layanan 4: Antrean Faskes RSUD & Puskesmas
+            if (currentHash === '#layanan/faskes' || currentHash === '#layanan-faskes') {
+              return (
+                <FaskesServicePage
+                  onBack={() => {
+                    window.location.hash = '#layanan';
+                  }}
+                  onApply={() => {
+                    setIsTrackModalOpen(true);
+                    showToast('Membuka Sistem Reservasi Antrean Puskesmas & RSUD Sidoarjo.');
+                  }}
+                />
+              );
+            }
+
+            // Detail Layanan 5: DTKS Bansos Dinsos
+            if (currentHash === '#layanan/dtks' || currentHash === '#layanan-dtks') {
+              return (
+                <DtksServicePage
+                  onBack={() => {
+                    window.location.hash = '#layanan';
+                  }}
+                  onApply={() => {
+                    setIsTrackModalOpen(true);
+                    showToast('Membuka Pengecekan NIK & Usulan Bansos DTKS Dinsos Sidoarjo.');
+                  }}
+                />
+              );
+            }
+
+            // Page 3: Laporan Warga & Aspirasi Call 112 / SP4N
+            if (currentHash === '#laporan' || currentHash === '#lapor') {
+              return (
+                <LaporanPage
+                  currentUser={currentUser}
+                  onOpenLogin={() => {
+                    setAccountMode('login');
+                    setIsAccountModalOpen(true);
+                  }}
+                  onOpenRegister={() => {
+                    setAccountMode('register');
+                    setIsAccountModalOpen(true);
+                  }}
+                  onNavigateHome={() => {
+                    window.location.hash = '#beranda';
+                  }}
+                />
+              );
+            }
+
+            // Page 4: Tentang Kami & Regulasi SPBE
+            if (currentHash === '#tentang') {
+              return (
+                <TentangPage
+                  onNavigateHome={() => {
+                    window.location.hash = '#beranda';
+                  }}
+                />
+              );
+            }
+
+            // Default: Beranda (Home Portal)
+            return (
+              <>
+                {/* 2. Hero Section */}
+                <HeroSection
+                  onExploreServices={() => {
+                    window.location.hash = '#layanan';
+                  }}
+                  onOpenTrackModal={() => setIsTrackModalOpen(true)}
+                />
+
+                {/* 3. Quick Search Bar */}
+                <QuickSearch onSearch={handleSearch} initialQuery={searchQuery} />
+
+                {/* 4. Featured Services */}
+                <FeaturedServices
+                  filteredServices={filteredServices}
+                  searchActive={searchActive}
+                  onSelectService={(service) => {
+                    if (service.id === 'plavon') {
+                      window.location.hash = '#layanan/ktp';
+                    } else if (service.id === 'sipraja') {
+                      window.location.hash = '#layanan/sku';
+                    } else if (service.id === 'lapor112') {
+                      window.location.hash = '#laporan';
+                    } else {
+                      setSelectedService(service);
+                      setIsServiceModalOpen(true);
+                    }
+                  }}
+                />
+
+                {/* 5. Transparency & Budget Section */}
+                <TransparencySection
+                  onOpenBudgetModal={() => {
+                    window.location.hash = '#data-publik';
+                  }}
+                />
+
+                {/* 6. Single Account Citizen Banner */}
+                <SingleAccountBanner
+                  onOpenRegister={() => {
+                    setAccountMode('register');
+                    setIsAccountModalOpen(true);
+                  }}
+                  onOpenGuide={() => setIsGuideModalOpen(true)}
+                />
+              </>
+            );
+          })()}
+        </Suspense>
       </main>
 
       {/* 7. Official Civic Footer */}
       <Footer onNavigateSection={handleNavigateSection} />
 
-      {/* Interactive Modals */}
-      <TrackDocModal
-        isOpen={isTrackModalOpen}
-        onClose={() => setIsTrackModalOpen(false)}
-      />
+      {/* Interactive Modals (Loaded on-demand) */}
+      <Suspense fallback={null}>
+        {isTrackModalOpen && (
+          <TrackDocModal
+            isOpen={isTrackModalOpen}
+            onClose={() => setIsTrackModalOpen(false)}
+          />
+        )}
 
-      <ServiceDetailModal
-        service={selectedService}
-        isOpen={isServiceModalOpen}
-        onClose={() => setIsServiceModalOpen(false)}
-        onStartApplication={handleStartApplication}
-      />
+        {isServiceModalOpen && (
+          <ServiceDetailModal
+            service={selectedService}
+            isOpen={isServiceModalOpen}
+            onClose={() => setIsServiceModalOpen(false)}
+            onStartApplication={handleStartApplication}
+          />
+        )}
 
-      <RegisterAccountModal
-        isOpen={isAccountModalOpen}
-        onClose={() => setIsAccountModalOpen(false)}
-        initialMode={accountMode}
-        onSuccess={(account) => {
-          setCurrentUser(account);
-          showToast(`Selamat datang di SITAPAK Sidoarjo, ${account.fullName}!`);
-        }}
-      />
+        {isAccountModalOpen && (
+          <RegisterAccountModal
+            isOpen={isAccountModalOpen}
+            onClose={() => setIsAccountModalOpen(false)}
+            initialMode={accountMode}
+            onSuccess={handleLoginSuccess}
+          />
+        )}
 
-      <BudgetBreakdownModal
-        isOpen={isBudgetModalOpen}
-        onClose={() => setIsBudgetModalOpen(false)}
-      />
+        {isBudgetModalOpen && (
+          <BudgetBreakdownModal
+            isOpen={isBudgetModalOpen}
+            onClose={() => setIsBudgetModalOpen(false)}
+          />
+        )}
 
-      <ServiceGuideModal
-        isOpen={isGuideModalOpen}
-        onClose={() => setIsGuideModalOpen(false)}
-        onOpenRegister={() => {
-          setAccountMode('register');
-          setIsAccountModalOpen(true);
-        }}
-      />
-
+        {isGuideModalOpen && (
+          <ServiceGuideModal
+            isOpen={isGuideModalOpen}
+            onClose={() => setIsGuideModalOpen(false)}
+            onOpenRegister={() => {
+              setAccountMode('register');
+              setIsAccountModalOpen(true);
+            }}
+          />
+        )}
+      </Suspense>
     </div>
   );
 }

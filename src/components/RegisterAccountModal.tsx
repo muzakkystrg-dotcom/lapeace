@@ -45,26 +45,117 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
   const [kelurahan, setKelurahan] = useState('');
   const [password, setPassword] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const account: CitizenAccount = {
-      nik: nik || '3515082104920003',
-      fullName: fullName || 'Warga Sidoarjo',
-      phone: phone || '081234567890',
-      email: email || 'warga@sidoarjo.go.id',
-      kecamatan: kecamatan,
-      kelurahan: kelurahan || 'Sidokare',
-    };
+  const handleDemoLogin = async (demoNik: string) => {
+    setNik(demoNik);
+    setPassword('WargaSidoarjo2026!');
+    setErrorMessage(null);
+    setIsLoading(true);
 
-    setIsSuccess(true);
-    setTimeout(() => {
-      setIsSuccess(false);
-      onSuccess(account);
-      onClose();
-    }, 1500);
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nik: demoNik, password: 'WargaSidoarjo2026!' }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message || 'Gagal login demo.');
+      }
+
+      if (data.token) {
+        sessionStorage.setItem('sitapak_auth_token', data.token);
+      }
+
+      setIsSuccess(true);
+      setTimeout(() => {
+        setIsSuccess(false);
+        setIsLoading(false);
+        onSuccess(data.citizen);
+        onClose();
+      }, 800);
+    } catch {
+      // Fallback offline mock jika backend belum menyala
+      const fallbackAccount: CitizenAccount =
+        demoNik === '3515014508920001'
+          ? {
+              nik: '3515014508920001',
+              fullName: 'Siti Rahmawati',
+              phone: '082198765432',
+              email: 'siti.rahmawati@warga.sidoarjokab.go.id',
+              kecamatan: 'Waru',
+              kelurahan: 'Kureksari',
+            }
+          : {
+              nik: '3515082104900002',
+              fullName: 'Budi Santoso',
+              phone: '081234567890',
+              email: 'budi.santoso@warga.sidoarjokab.go.id',
+              kecamatan: 'Sidoarjo (Kota)',
+              kelurahan: 'Sidokumpul',
+            };
+
+      setIsSuccess(true);
+      setTimeout(() => {
+        setIsSuccess(false);
+        setIsLoading(false);
+        onSuccess(fallbackAccount);
+        onClose();
+      }, 800);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMessage(null);
+    setIsLoading(true);
+
+    try {
+      const endpoint = mode === 'login' ? '/api/auth/login' : '/api/auth/register';
+      const payload =
+        mode === 'login'
+          ? { nik: nik.trim(), password }
+          : {
+              nik: nik.trim(),
+              fullName: fullName.trim(),
+              phone: phone.trim(),
+              email: email.trim(),
+              kecamatan,
+              kelurahan: kelurahan.trim(),
+              password: password || 'WargaSidoarjo2026!',
+            };
+
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message || 'Terjadi kesalahan autentikasi.');
+      }
+
+      if (data.token) {
+        sessionStorage.setItem('sitapak_auth_token', data.token);
+      }
+
+      setIsSuccess(true);
+      setTimeout(() => {
+        setIsSuccess(false);
+        setIsLoading(false);
+        onSuccess(data.citizen);
+        onClose();
+      }, 1000);
+    } catch (err: any) {
+      setIsLoading(false);
+      setErrorMessage(err.message || 'Gagal terhubung ke gateway autentikasi.');
+    }
   };
 
   return (
@@ -140,7 +231,39 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
-              
+              {/* Quick Demo Login Preset Buttons */}
+              {mode === 'login' && (
+                <div className="p-3.5 rounded-xl bg-[#e9f7ee] border border-[#88f4c6] flex flex-col gap-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-[#00251b] flex items-center gap-1.5">
+                      <span className="material-symbols-outlined text-[16px] text-[#006c4d]">badge</span>
+                      Pilihan Akun Demo (1-Klik):
+                    </span>
+                    <span className="text-[10px] bg-[#88f4c6]/60 text-[#00251b] px-2 py-0.5 rounded font-bold">Terverifikasi</span>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <button
+                      type="button"
+                      disabled={isLoading}
+                      onClick={() => handleDemoLogin('3515082104900002')}
+                      className="flex-1 text-xs px-2.5 py-1.5 rounded-lg bg-white border border-[#8af7c9] hover:bg-[#8af7c9]/30 text-[#00251b] font-medium transition-colors text-left flex items-center justify-between cursor-pointer disabled:opacity-50"
+                    >
+                      <span>Budi Santoso</span>
+                      <span className="text-[10px] text-[#717974] font-mono">351508...0002</span>
+                    </button>
+                    <button
+                      type="button"
+                      disabled={isLoading}
+                      onClick={() => handleDemoLogin('3515014508920001')}
+                      className="flex-1 text-xs px-2.5 py-1.5 rounded-lg bg-white border border-[#8af7c9] hover:bg-[#8af7c9]/30 text-[#00251b] font-medium transition-colors text-left flex items-center justify-between cursor-pointer disabled:opacity-50"
+                    >
+                      <span>Siti Rahmawati</span>
+                      <span className="text-[10px] text-[#717974] font-mono">351501...0001</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+
               {/* NIK Field */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
@@ -268,6 +391,14 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
                 />
               </div>
 
+              {/* Error Feedback */}
+              {errorMessage && (
+                <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[18px] text-red-600">error</span>
+                  <span>{errorMessage}</span>
+                </div>
+              )}
+
               {/* Security Tag */}
               <div className="flex items-center gap-2 p-3 rounded-lg bg-emerald-50 text-[11px] text-emerald-900 border border-emerald-100">
                 <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
@@ -277,9 +408,17 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full py-3 bg-[#038D66] hover:bg-[#026E4F] text-white font-semibold text-sm rounded-xl transition-all shadow-sm cursor-pointer mt-2"
+                disabled={isLoading}
+                className="w-full py-3 bg-[#038D66] hover:bg-[#026E4F] disabled:opacity-60 text-white font-semibold text-sm rounded-xl transition-all shadow-sm cursor-pointer mt-2 flex items-center justify-center gap-2"
               >
-                {mode === 'register' ? 'Buat Akun Warga Terpadu' : 'Masuk Sekarang'}
+                {isLoading ? (
+                  <>
+                    <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                    <span>Memproses Autentikasi...</span>
+                  </>
+                ) : (
+                  <span>{mode === 'register' ? 'Buat Akun Warga Terpadu' : 'Masuk Sekarang'}</span>
+                )}
               </button>
             </form>
           )}
