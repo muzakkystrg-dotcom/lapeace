@@ -29,8 +29,11 @@ async function bootstrap() {
   // 2. Strict CORS Configuration
   app.enableCors({
     origin: (origin, callback) => {
-      // Izinkan akses dari domain lokal dev atau domain resmi pemkab
-      if (!origin || /^(http:\/\/localhost:\d+|https:\/\/([a-z0-9-]+\.)*sidoarjokab\.go\.id)$/.test(origin)) {
+      // Izinkan akses dari domain lokal dev atau domain resmi pemkab & VPS demo
+      if (
+        !origin ||
+        /^(http:\/\/localhost:\d+|https?:\/\/([a-z0-9-]+\.)*(sidoarjokab\.go\.id|founduslab\.my\.id))$/.test(origin)
+      ) {
         callback(null, true);
       } else {
         callback(new Error('Akses diblokir oleh kebijakan keamanan CORS SITAPAK.'));
