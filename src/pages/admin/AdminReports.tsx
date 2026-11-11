@@ -106,54 +106,25 @@ export const AdminReports: React.FC = () => {
 
       if (res.ok) {
         const data = await res.json();
-        setReports(data);
-      } else {
-        throw new Error('Gagal mengambil laporan');
+        if (Array.isArray(data) && data.length > 0) {
+          setReports(data);
+          return;
+        }
       }
-    } catch {
-      // Fallback data
-      setReports([
-        {
-          id: 1,
-          ticket_number: 'LAPOR-2025-8F3A9C',
-          title: 'Jalan Berlubang di Jl. Pahlawan Dekat SDN Sidokumpul',
-          category: 'infrastruktur',
-          category_label: 'Jalan & Jembatan',
-          description: 'Terdapat lubang berdiameter 60cm cukup dalam yang sering menyebabkan pengendara roda dua tergelincir saat hujan.',
-          kecamatan: 'Sidoarjo (Kota)',
-          kelurahan: 'Sidokumpul',
-          location_address: 'Jl. Pahlawan No. 42 depan SDN Sidokumpul',
-          reporter_name: 'Bagus Tri Prakoso',
-          is_anonymous: 0,
-          status: 'Penanganan Lapangan',
-          progress_percent: 75,
-          assigned_opd: 'Dinas PU Bina Marga & Sumber Daya Air Sidoarjo',
-          sla_target: '3x24 Jam Kerja',
-          official_response: 'Tim satgas jalan berlubang sudah dijadwalkan melakukan patching aspal dingin siang ini.',
-          created_at: '2026-11-08 09:15:00',
-          updated_at: '2026-11-09 14:20:00',
-        },
-        {
-          id: 2,
-          ticket_number: 'LAPOR-2025-4K2P7D',
-          title: 'Lampu Penerangan Jalan Umum (PJU) Padam di Sepanjang Jl. Kolonel Sugiono Waru',
-          category: 'pju',
-          category_label: 'PJU & Rambu',
-          description: 'Sebanyak 4 titik tiang PJU padam sejak 3 hari lalu membuat jalanan gelap dan rawan kriminalitas malam.',
-          kecamatan: 'Waru',
-          kelurahan: 'Kureksari',
-          location_address: 'Jl. Kolonel Sugiono perbatasan flyover Waru',
-          reporter_name: 'Siti Rahmawati',
-          is_anonymous: 0,
-          status: 'Selesai',
-          progress_percent: 100,
-          assigned_opd: 'Dinas Perhubungan Kabupaten Sidoarjo',
-          sla_target: '2x24 Jam Kerja',
-          official_response: 'Petugas Dishub Sidoarjo telah mengganti trafo dan bohlam LED 90 watt. Lampu menyala normal kembali.',
-          created_at: '2026-11-07 18:30:00',
-          updated_at: '2026-11-08 21:00:00',
-        },
-      ]);
+
+      // Fallback cerdas: Panggil /api/reports langsung ke database backend
+      const pubRes = await fetch('/api/reports?limit=100');
+      if (pubRes.ok) {
+        const pubJson = await pubRes.json();
+        const list = Array.isArray(pubJson) ? pubJson : (pubJson.data || []);
+        if (list.length > 0) {
+          setReports(list);
+          return;
+        }
+      }
+      throw new Error('Gagal mengambil laporan');
+    } catch (err) {
+      console.warn('Admin fetch reports warning:', err);
     } finally {
       setIsLoading(false);
     }
