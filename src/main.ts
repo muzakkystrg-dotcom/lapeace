@@ -48,7 +48,7 @@ async function bootstrap() {
   app.useGlobalFilters(new GlobalSecurityExceptionFilter());
 
   const port = process.env.PORT ?? 3000;
-  await app.listen(port);
+  await app.listen(port, '127.0.0.1');
   console.log(`[SECURITY HARDENED] SITAPAK Gateway aktif pada port ${port}`);
 }
 

@@ -4,14 +4,41 @@ import * as crypto from 'node:crypto';
 @Injectable()
 export class CryptoService {
   // Master keys from environment variable or secure defaults
-  private readonly jwtSecret: string =
-    process.env.SITAPAK_JWT_SECRET || 'sitapak_sidoarjo_super_secret_jwt_key_2026_delta_csirt';
+  private readonly jwtSecret: string;
   private readonly encKey: Buffer;
   private readonly blindIndexKey: Buffer;
 
   constructor() {
+    const leakedJwtSecret = 'sitapak_sidoarjo_super_secret_jwt_key_2026_delta_csirt';
+    const jwtSecretEnv = process.env.SITAPAK_JWT_SECRET || process.env.JWT_SECRET;
+
+    if (process.env.NODE_ENV === 'production') {
+      if (!jwtSecretEnv || jwtSecretEnv === leakedJwtSecret) {
+        throw new Error('FATAL: Leaked default SITAPAK_JWT_SECRET cannot be used in production.');
+      }
+      this.jwtSecret = jwtSecretEnv;
+    } else {
+      if (!jwtSecretEnv) {
+        console.warn(
+          '[SECURITY WARNING] Neither SITAPAK_JWT_SECRET nor JWT_SECRET is configured. Using test fallback key for development/testing environment only.',
+        );
+        this.jwtSecret = leakedJwtSecret;
+      } else {
+        this.jwtSecret = jwtSecretEnv;
+      }
+    }
+
     const rawKey =
-      process.env.SITAPAK_PII_ENCRYPTION_KEY || 'sidoarjo_sitapak_aes_256_master_key_32bytes!!';
+      process.env.SITAPAK_PII_ENCRYPTION_KEY ||
+      process.env.CIPHER_KEY_HEX ||
+      'sidoarjo_sitapak_aes_256_master_key_32bytes!!';
+
+    if (!process.env.SITAPAK_PII_ENCRYPTION_KEY && !process.env.CIPHER_KEY_HEX && process.env.NODE_ENV !== 'production') {
+      console.warn(
+        '[SECURITY WARNING] Neither SITAPAK_PII_ENCRYPTION_KEY nor CIPHER_KEY_HEX is configured. Using test fallback encryption key for development/testing environment only.',
+      );
+    }
+
     // Pastikan tepat 32 bytes (256-bit) untuk AES-256-GCM
     this.encKey = crypto.createHash('sha256').update(rawKey).digest();
     this.blindIndexKey = crypto.createHash('sha256').update(rawKey + '_blind_index_salt').digest();

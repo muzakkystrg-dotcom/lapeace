@@ -520,7 +520,7 @@ export default function App() {
                   onOpenTrack={() => setIsTrackModalOpen(true)}
                   onNavigateReports={() => {
                     window.location.hash = '#laporan-warga';
-                    setActiveSection('laporan');
+                    handleNavigateSection('laporan');
                   }}
                 />
               </>

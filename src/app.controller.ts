@@ -165,7 +165,7 @@ export class AppController {
 
   // Immutable audit trail logs (admin & operator)
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin_pemkab', 'operator_opd', 'warga')
+  @Roles('admin_pemkab', 'operator_opd')
   @Get('audit-logs')
   getAuditLogs(@Query('limit') limit?: string) {
     const l = limit ? parseInt(limit, 10) : 50;
@@ -178,7 +178,7 @@ export class AppController {
 
   // 1. Executive Analytics & KPI Summary
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin_pemkab', 'operator_opd', 'warga')
+  @Roles('admin_pemkab', 'operator_opd')
   @Get('admin/analytics')
   getAdminAnalytics() {
     return this.db.getAdminAnalytics();
@@ -186,7 +186,7 @@ export class AppController {
 
   // 2. Citizen Reports Management
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin_pemkab', 'operator_opd', 'warga')
+  @Roles('admin_pemkab', 'operator_opd')
   @Get('admin/reports')
   getAdminReports(
     @Query('status') status?: string,
@@ -197,7 +197,7 @@ export class AppController {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin_pemkab', 'operator_opd', 'warga')
+  @Roles('admin_pemkab', 'operator_opd')
   @Patch('admin/reports/:id/status')
   updateReportStatus(
     @Param('id') id: string,
@@ -219,7 +219,7 @@ export class AppController {
 
   // 3. Service Requests Management
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin_pemkab', 'operator_opd', 'warga')
+  @Roles('admin_pemkab', 'operator_opd')
   @Get('admin/service-requests')
   getAdminServiceRequests(
     @Query('status') status?: string,
@@ -230,7 +230,7 @@ export class AppController {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin_pemkab', 'operator_opd', 'warga')
+  @Roles('admin_pemkab', 'operator_opd')
   @Patch('admin/service-requests/:id/status')
   updateServiceRequestStatus(
     @Param('id') id: string,
@@ -251,7 +251,7 @@ export class AppController {
 
   // 4. Citizens & Single Account Management
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin_pemkab', 'operator_opd', 'warga')
+  @Roles('admin_pemkab')
   @Patch('admin/citizens/:id/verify')
   verifyCitizen(
     @Param('id') id: string,
@@ -267,7 +267,7 @@ export class AppController {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin_pemkab', 'operator_opd', 'warga')
+  @Roles('admin_pemkab')
   @Patch('admin/citizens/:id/unlock')
   unlockCitizenAccount(
     @Param('id') id: string,
@@ -282,7 +282,7 @@ export class AppController {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin_pemkab', 'operator_opd', 'warga')
+  @Roles('admin_pemkab')
   @Patch('admin/citizens/:id/role')
   updateCitizenRole(
     @Param('id') id: string,
@@ -299,7 +299,7 @@ export class AppController {
 
   // 5. Healthcare & Bed Inventory Management
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin_pemkab', 'operator_opd', 'warga')
+  @Roles('admin_pemkab', 'operator_opd')
   @Patch('admin/faskes/beds/:id')
   updateHospitalBed(
     @Param('id') id: string,

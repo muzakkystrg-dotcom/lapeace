@@ -1,4 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { Reflector } from '@nestjs/core';
+import { ForbiddenException } from '@nestjs/common';
 import { AppController } from './app.controller.js';
 import { DatabaseService } from './database/database.service.js';
 import { CryptoService } from './common/crypto.service.js';
@@ -7,6 +9,7 @@ import { AuthController } from './auth/auth.controller.js';
 import { AuthService } from './auth/auth.service.js';
 import { JwtAuthGuard } from './auth/jwt-auth.guard.js';
 import { RolesGuard } from './auth/roles.guard.js';
+import { ROLES_KEY } from './auth/roles.decorator.js';
 
 describe('AppController & AuthController', () => {
   let appController: AppController;
@@ -153,7 +156,7 @@ describe('AppController & AuthController', () => {
       const list = appController.getAdminReports();
       expect(list.length).toBe(1);
 
-      const updated = appController.updateReportStatus('1', { status: 'Penanganan Lapangan' }, { user: { fullName: 'Admin Test' } });
+      const updated: any = appController.updateReportStatus('1', { status: 'Penanganan Lapangan' }, { user: { fullName: 'Admin Test' } });
       expect(updated.status).toBe('Penanganan Lapangan');
     });
 
@@ -163,6 +166,85 @@ describe('AppController & AuthController', () => {
 
       const unlockRes = appController.unlockCitizenAccount('1', { user: { fullName: 'Admin Test' } });
       expect(unlockRes.success).toBe(true);
+    });
+  });
+
+  describe('RBAC access control metadata & guards', () => {
+    const reflector = new Reflector();
+
+    it('should assign admin_pemkab ONLY for critical privilege actions', () => {
+      expect(reflector.get<string[]>(ROLES_KEY, appController.updateCitizenRole)).toEqual(['admin_pemkab']);
+      expect(reflector.get<string[]>(ROLES_KEY, appController.verifyCitizen)).toEqual(['admin_pemkab']);
+      expect(reflector.get<string[]>(ROLES_KEY, appController.unlockCitizenAccount)).toEqual(['admin_pemkab']);
+    });
+
+    it('should assign admin_pemkab and operator_opd for administrative & operational endpoints', () => {
+      expect(reflector.get<string[]>(ROLES_KEY, appController.getCitizens)).toEqual(['admin_pemkab', 'operator_opd']);
+      expect(reflector.get<string[]>(ROLES_KEY, appController.getAuditLogs)).toEqual(['admin_pemkab', 'operator_opd']);
+      expect(reflector.get<string[]>(ROLES_KEY, appController.getAdminAnalytics)).toEqual(['admin_pemkab', 'operator_opd']);
+      expect(reflector.get<string[]>(ROLES_KEY, appController.getAdminReports)).toEqual(['admin_pemkab', 'operator_opd']);
+      expect(reflector.get<string[]>(ROLES_KEY, appController.updateReportStatus)).toEqual(['admin_pemkab', 'operator_opd']);
+      expect(reflector.get<string[]>(ROLES_KEY, appController.getAdminServiceRequests)).toEqual(['admin_pemkab', 'operator_opd']);
+      expect(reflector.get<string[]>(ROLES_KEY, appController.updateServiceRequestStatus)).toEqual(['admin_pemkab', 'operator_opd']);
+      expect(reflector.get<string[]>(ROLES_KEY, appController.updateHospitalBed)).toEqual(['admin_pemkab', 'operator_opd']);
+    });
+
+    it('should ensure warga is not present on any admin or operational endpoints', () => {
+      const adminEndpoints = [
+        appController.getCitizens,
+        appController.getAuditLogs,
+        appController.getAdminAnalytics,
+        appController.getAdminReports,
+        appController.updateReportStatus,
+        appController.getAdminServiceRequests,
+        appController.updateServiceRequestStatus,
+        appController.verifyCitizen,
+        appController.unlockCitizenAccount,
+        appController.updateCitizenRole,
+        appController.updateHospitalBed,
+      ];
+
+      for (const endpoint of adminEndpoints) {
+        const roles = reflector.get<string[]>(ROLES_KEY, endpoint);
+        expect(roles).toBeDefined();
+        expect(roles).not.toContain('warga');
+      }
+    });
+
+    it('should strictly enforce RBAC via RolesGuard preventing privilege escalation', () => {
+      const rolesGuard = new RolesGuard(reflector);
+      const mockContext = (handler: any, role: string) =>
+        ({
+          getHandler: () => handler,
+          getClass: () => AppController,
+          switchToHttp: () => ({
+            getRequest: () => ({ user: { role } }),
+          }),
+        }) as any;
+
+      // Warga must be rejected from administrative endpoints
+      expect(() => rolesGuard.canActivate(mockContext(appController.updateCitizenRole, 'warga'))).toThrow(ForbiddenException);
+      expect(() => rolesGuard.canActivate(mockContext(appController.verifyCitizen, 'warga'))).toThrow(ForbiddenException);
+      expect(() => rolesGuard.canActivate(mockContext(appController.unlockCitizenAccount, 'warga'))).toThrow(ForbiddenException);
+      expect(() => rolesGuard.canActivate(mockContext(appController.getAuditLogs, 'warga'))).toThrow(ForbiddenException);
+      expect(() => rolesGuard.canActivate(mockContext(appController.getAdminReports, 'warga'))).toThrow(ForbiddenException);
+      expect(() => rolesGuard.canActivate(mockContext(appController.updateHospitalBed, 'warga'))).toThrow(ForbiddenException);
+
+      // Operator OPD must be rejected from critical admin actions
+      expect(() => rolesGuard.canActivate(mockContext(appController.updateCitizenRole, 'operator_opd'))).toThrow(ForbiddenException);
+      expect(() => rolesGuard.canActivate(mockContext(appController.verifyCitizen, 'operator_opd'))).toThrow(ForbiddenException);
+      expect(() => rolesGuard.canActivate(mockContext(appController.unlockCitizenAccount, 'operator_opd'))).toThrow(ForbiddenException);
+
+      // Operator OPD has access to operational endpoints
+      expect(rolesGuard.canActivate(mockContext(appController.getAdminReports, 'operator_opd'))).toBe(true);
+      expect(rolesGuard.canActivate(mockContext(appController.getAuditLogs, 'operator_opd'))).toBe(true);
+      expect(rolesGuard.canActivate(mockContext(appController.updateHospitalBed, 'operator_opd'))).toBe(true);
+
+      // Admin Pemkab has full access
+      expect(rolesGuard.canActivate(mockContext(appController.updateCitizenRole, 'admin_pemkab'))).toBe(true);
+      expect(rolesGuard.canActivate(mockContext(appController.verifyCitizen, 'admin_pemkab'))).toBe(true);
+      expect(rolesGuard.canActivate(mockContext(appController.unlockCitizenAccount, 'admin_pemkab'))).toBe(true);
+      expect(rolesGuard.canActivate(mockContext(appController.getAdminReports, 'admin_pemkab'))).toBe(true);
     });
   });
 });

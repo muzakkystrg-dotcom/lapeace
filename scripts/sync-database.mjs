@@ -1,42 +1,92 @@
 import { DatabaseSync } from 'node:sqlite';
 import path from 'node:path';
+import crypto from 'node:crypto';
 
 const DB_PATH = path.resolve('database/sitapak.db');
 const db = new DatabaseSync(DB_PATH);
 
 console.log('--- SINKRONISASI DATABASE SITAPAK SIDOARJO ---');
 
-// 1. Pastikan Akun Admin Pemkab & Operator OPD Terdaftar
+// Helper pembuatan hash password PBKDF2-SHA512
+function hashPassword(pwd, salt) {
+  return crypto.pbkdf2Sync(pwd, salt, 100000, 32, 'sha512').toString('hex');
+}
+
+// 1. Pastikan Akun Admin Pemkab & Operator OPD Terdaftar dan Kredensial Terbarui (PBKDF2-SHA512)
+const adminSalt = '330af7c1d0f5';
+const adminHash = hashPassword('AdminSidoarjo2026!', adminSalt);
+
 const adminUser = db.prepare('SELECT id FROM citizens WHERE nik = ?').get('3515000000000001');
+let adminId = adminUser ? adminUser.id : null;
 if (!adminUser) {
   console.log('Menambahkan akun Admin Pemkab (3515000000000001)...');
   const resAdmin = db.prepare(`
     INSERT INTO citizens (nik_hash, nik_masked, nik, full_name, email, phone, kecamatan, kelurahan, address, is_verified, role)
     VALUES ('f7c3bc1d808e04732adf679965ccc34ca7ae3441', '351500000000****', '3515000000000001', 'Bambang Haryo Pratama, S.STP', 'admin.pemkab@sidoarjokab.go.id', '081122334455', 'Sidoarjo (Kota)', 'Sidokumpul', 'Gedung Setda Pemkab Sidoarjo, Jl. Gubernur Suryo No. 1', 1, 'admin_pemkab')
   `).run();
-  const adminId = Number(resAdmin.lastInsertRowid);
-  db.prepare(`
-    INSERT INTO citizen_credentials (citizen_id, password_hash, salt, last_login_at, failed_login_count, is_locked)
-    VALUES (?, '407992a855b17d2a86570df87982a48d087342f3287401df911ab8de4ec0fbac', '330af7c1d0f5', '2026-11-11 18:00:00', 0, 0)
-  `).run(adminId);
+  adminId = Number(resAdmin.lastInsertRowid);
 } else {
   console.log('Akun Admin Pemkab sudah ada.');
 }
 
+db.prepare(`
+  INSERT INTO citizen_credentials (citizen_id, password_hash, salt, last_login_at, failed_login_count, is_locked)
+  VALUES (?, ?, ?, '2026-11-11 18:00:00', 0, 0)
+  ON CONFLICT(citizen_id) DO UPDATE SET
+    password_hash = excluded.password_hash,
+    salt = excluded.salt,
+    failed_login_count = 0,
+    is_locked = 0
+`).run(adminId, adminHash, adminSalt);
+
 const operatorUser = db.prepare('SELECT id FROM citizens WHERE nik = ?').get('3515000000000002');
+let opId = operatorUser ? operatorUser.id : null;
 if (!operatorUser) {
   console.log('Menambahkan akun Operator OPD (3515000000000002)...');
   const resOp = db.prepare(`
     INSERT INTO citizens (nik_hash, nik_masked, nik, full_name, email, phone, kecamatan, kelurahan, address, is_verified, role)
     VALUES ('b6589fc6ab0dc82cf12099d1c2d40ab994e8410c', '351500000000****', '3515000000000002', 'Dewi Lestari, S.Kom', 'operator.dispendukcapil@sidoarjokab.go.id', '081133445566', 'Sidoarjo (Kota)', 'Sidokare', 'Kantor Disdukcapil Sidoarjo, Jl. Sultan Agung No. 34', 1, 'operator_opd')
   `).run();
-  const opId = Number(resOp.lastInsertRowid);
-  db.prepare(`
-    INSERT INTO citizen_credentials (citizen_id, password_hash, salt, last_login_at, failed_login_count, is_locked)
-    VALUES (?, '407992a855b17d2a86570df87982a48d087342f3287401df911ab8de4ec0fbac', '330af7c1d0f5', '2026-11-11 18:00:00', 0, 0)
-  `).run(opId);
+  opId = Number(resOp.lastInsertRowid);
 } else {
   console.log('Akun Operator OPD sudah ada.');
+}
+
+db.prepare(`
+  INSERT INTO citizen_credentials (citizen_id, password_hash, salt, last_login_at, failed_login_count, is_locked)
+  VALUES (?, ?, ?, '2026-11-11 18:00:00', 0, 0)
+  ON CONFLICT(citizen_id) DO UPDATE SET
+    password_hash = excluded.password_hash,
+    salt = excluded.salt,
+    failed_login_count = 0,
+    is_locked = 0
+`).run(opId, adminHash, adminSalt);
+
+// 1b. Perbarui kredensial demo warga (WargaSidoarjo2026!) dengan PBKDF2-SHA512
+const demoCitizenSalts = {
+  1: 'c18d9f02a4b8',
+  2: 'f3e7a1b9c204',
+  3: 'd9c0e2a4f611',
+  4: 'a8b7c6d5e4f3',
+  5: 'b1c2d3e4f5a6',
+  6: '7a8b9c0d1e2f',
+};
+
+for (const [idStr, salt] of Object.entries(demoCitizenSalts)) {
+  const citizenId = Number(idStr);
+  const citizen = db.prepare('SELECT id FROM citizens WHERE id = ?').get(citizenId);
+  if (citizen) {
+    const wargaHash = hashPassword('WargaSidoarjo2026!', salt);
+    db.prepare(`
+      INSERT INTO citizen_credentials (citizen_id, password_hash, salt, last_login_at, failed_login_count, is_locked)
+      VALUES (?, ?, ?, '2026-11-10 08:30:00', 0, 0)
+      ON CONFLICT(citizen_id) DO UPDATE SET
+        password_hash = excluded.password_hash,
+        salt = excluded.salt,
+        failed_login_count = 0,
+        is_locked = 0
+    `).run(citizenId, wargaHash, salt);
+  }
 }
 
 // 2. Tambahkan 4 Laporan Baku ke Database jika belum ada

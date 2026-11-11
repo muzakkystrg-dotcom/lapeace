@@ -42,32 +42,28 @@ export class AuthService {
       .prepare('SELECT * FROM citizen_credentials WHERE citizen_id = ?')
       .get(citizen.id) as any;
 
-    if (cred && cred.is_locked) {
+    if (!cred || !cred.password_hash || !cred.salt) {
+      throw new UnauthorizedException('Kredensial akun belum diatur.');
+    }
+
+    if (cred.is_locked) {
       throw new UnauthorizedException(
         'Akun Anda terkunci sementara karena beberapa kali percobaan login gagal. Hubungi Diskominfo Sidoarjo.',
       );
     }
 
-    // Verifikasi password (mendukung password resmi & master demo password 'WargaSidoarjo2026!' dan 'AdminSidoarjo2026!')
-    const isValidDemoPassword =
-      password === 'WargaSidoarjo2026!' || password === 'AdminSidoarjo2026!';
-    let isPasswordMatch = false;
-
-    if (cred && cred.password_hash && cred.salt) {
-      isPasswordMatch =
-        this.cryptoService.verifyPassword(password || '', cred.password_hash, cred.salt) ||
-        isValidDemoPassword;
-    } else {
-      isPasswordMatch = isValidDemoPassword;
-    }
+    // Verifikasi password secara ketat dengan PBKDF2 SHA-512
+    const isPasswordMatch = this.cryptoService.verifyPassword(
+      password || '',
+      cred.password_hash,
+      cred.salt,
+    );
 
     if (!isPasswordMatch) {
-      if (cred) {
-        const newCount = (cred.failed_login_count || 0) + 1;
-        const isLock = newCount >= 5 ? 1 : 0;
-        db.prepare('UPDATE citizen_credentials SET failed_login_count = ?, is_locked = ? WHERE citizen_id = ?')
-          .run(newCount, isLock, citizen.id);
-      }
+      const newCount = (cred.failed_login_count || 0) + 1;
+      const isLock = newCount >= 5 ? 1 : 0;
+      db.prepare('UPDATE citizen_credentials SET failed_login_count = ?, is_locked = ? WHERE citizen_id = ?')
+        .run(newCount, isLock, citizen.id);
 
       this.dbService.createAuditLog({
         eventType: 'AUTH_LOGIN_FAILED',
@@ -84,11 +80,9 @@ export class AuthService {
     }
 
     // Reset counter & update last login
-    if (cred) {
-      db.prepare(
-        'UPDATE citizen_credentials SET failed_login_count = 0, last_login_at = CURRENT_TIMESTAMP WHERE citizen_id = ?',
-      ).run(citizen.id);
-    }
+    db.prepare(
+      'UPDATE citizen_credentials SET failed_login_count = 0, last_login_at = CURRENT_TIMESTAMP WHERE citizen_id = ?',
+    ).run(citizen.id);
 
     // Catat audit log keberhasilan login
     this.dbService.createAuditLog({

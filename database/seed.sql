@@ -34,16 +34,16 @@ INSERT OR REPLACE INTO citizens (id, nik_hash, nik_masked, nik, full_name, email
 (7, 'f7c3bc1d808e04732adf679965ccc34ca7ae3441', '351500000000****', '3515000000000001', 'Bambang Haryo Pratama, S.STP', 'admin.pemkab@sidoarjokab.go.id', '081122334455', 'Sidoarjo (Kota)', 'Sidokumpul', 'Gedung Setda Pemkab Sidoarjo, Jl. Gubernur Suryo No. 1', 1, 'admin_pemkab'),
 (8, 'b6589fc6ab0dc82cf12099d1c2d40ab994e8410c', '351500000000****', '3515000000000002', 'Dewi Lestari, S.Kom', 'operator.dispendukcapil@sidoarjokab.go.id', '081133445566', 'Sidoarjo (Kota)', 'Sidokare', 'Kantor Disdukcapil Sidoarjo, Jl. Sultan Agung No. 34', 1, 'operator_opd');
 
--- Kredensial Hashed Password (salt + sha256 mock hash untuk keamanan sandi)
+-- Kredensial Hashed Password (PBKDF2-SHA512 100.000 iterasi)
 INSERT OR REPLACE INTO citizen_credentials (id, citizen_id, password_hash, salt, last_login_at, failed_login_count, is_locked) VALUES
-(1, 1, '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'c18d9f02a4b8', '2026-11-10 08:30:00', 0, 0),
-(2, 2, '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'f3e7a1b9c204', '2026-10-30 09:10:00', 0, 0),
-(3, 3, '4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a', 'd9c0e2a4f611', '2026-10-30 07:12:00', 0, 0),
-(4, 4, 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'a8b7c6d5e4f3', '2026-11-01 11:20:00', 0, 0),
-(5, 5, '2c5a71146777080a91176b5c32750da7b233a75a74e54e488d05e0c5f49e4933', 'b1c2d3e4f5a6', '2026-11-02 14:00:00', 0, 0),
-(6, 6, '1b4f0e9851971998e732078544c61836cb8e064906f368297b98d249d4791336', '7a8b9c0d1e2f', '2026-11-05 16:45:00', 0, 0),
-(7, 7, '407992a855b17d2a86570df87982a48d087342f3287401df911ab8de4ec0fbac', '330af7c1d0f5', '2026-11-11 18:00:00', 0, 0),
-(8, 8, '407992a855b17d2a86570df87982a48d087342f3287401df911ab8de4ec0fbac', '330af7c1d0f5', '2026-11-11 18:00:00', 0, 0);
+(1, 1, '314f4e617b7c9b03dbea5c7c999c34a285b195af59c186a6a99b40f86505b391', 'c18d9f02a4b8', '2026-11-10 08:30:00', 0, 0),
+(2, 2, '597cdd461630d1c346e12f56e06f2c97bdbf5a47d5126f7b1407abb1d7e339db', 'f3e7a1b9c204', '2026-10-30 09:10:00', 0, 0),
+(3, 3, '62a9a0bf442bf1c46fd227d0fd3f7fb0fcaef4fa8e297347b299dce4a9533805', 'd9c0e2a4f611', '2026-10-30 07:12:00', 0, 0),
+(4, 4, 'eb79aac170d35e1410e0a2ac76b9ad4592102c86fd053d6c3b6cfd5a4c3b682b', 'a8b7c6d5e4f3', '2026-11-01 11:20:00', 0, 0),
+(5, 5, '5d793435926fd551c4d0975304c21297bc87ff9a5d2fe48514e4dc7412bfb42d', 'b1c2d3e4f5a6', '2026-11-02 14:00:00', 0, 0),
+(6, 6, 'f3de2913621e88b979b0c82abb8af02637fc23b8b1b606042a5167c606999662', '7a8b9c0d1e2f', '2026-11-05 16:45:00', 0, 0),
+(7, 7, 'b2fa2a53221c5adb6c494ba63ed72a238ac52915f13a88fe42c6cc4bd950a850', '330af7c1d0f5', '2026-11-11 18:00:00', 0, 0),
+(8, 8, 'b2fa2a53221c5adb6c494ba63ed72a238ac52915f13a88fe42c6cc4bd950a850', '330af7c1d0f5', '2026-11-11 18:00:00', 0, 0);
 
 -- ------------------------------------------------------------
 -- 3. KATALOG LAYANAN PUBLIK (12 Layanan SITAPAK)
