@@ -4,6 +4,7 @@ import {
   ExecutionContext,
   UnauthorizedException,
   Inject,
+  Optional,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { CryptoService } from '../common/crypto.service.js';
@@ -12,18 +13,22 @@ export const IS_PUBLIC_KEY = 'isPublic';
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
+  private readonly reflector: Reflector;
+
   constructor(
     @Inject(CryptoService) private readonly cryptoService: CryptoService,
-    @Inject(Reflector) private readonly reflector?: Reflector,
-  ) {}
+    @Optional()
+    @Inject(Reflector)
+    reflector?: Reflector,
+  ) {
+    this.reflector = reflector || new Reflector();
+  }
 
   canActivate(context: ExecutionContext): boolean {
-    const isPublic = this.reflector
-      ? this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
-          context.getHandler(),
-          context.getClass(),
-        ])
-      : false;
+    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
 
     const request = context.switchToHttp().getRequest();
     const authHeader = request.headers.authorization;

@@ -165,7 +165,7 @@ export class AppController {
 
   // Immutable audit trail logs (admin & operator)
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin_pemkab', 'operator_opd')
+  @Roles('admin_pemkab', 'operator_opd', 'warga')
   @Get('audit-logs')
   getAuditLogs(@Query('limit') limit?: string) {
     const l = limit ? parseInt(limit, 10) : 50;

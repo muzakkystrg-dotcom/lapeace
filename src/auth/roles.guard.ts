@@ -3,13 +3,23 @@ import {
   CanActivate,
   ExecutionContext,
   ForbiddenException,
+  Inject,
+  Optional,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { ROLES_KEY } from './roles.decorator.js';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
-  constructor(private readonly reflector: Reflector) {}
+  private readonly reflector: Reflector;
+
+  constructor(
+    @Optional()
+    @Inject(Reflector)
+    reflector?: Reflector,
+  ) {
+    this.reflector = reflector || new Reflector();
+  }
 
   canActivate(context: ExecutionContext): boolean {
     const requiredRoles = this.reflector.getAllAndOverride<string[]>(ROLES_KEY, [
@@ -33,3 +43,4 @@ export class RolesGuard implements CanActivate {
     return true;
   }
 }
+
