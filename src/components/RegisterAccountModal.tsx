@@ -205,42 +205,44 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-xs overflow-y-auto">
-      <div className="bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-emerald-900/10 overflow-hidden relative my-8 animate-in fade-in zoom-in-95 duration-150">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/60 backdrop-blur-xs">
+      <div className="bg-white w-full max-w-lg max-h-[calc(100dvh-1.5rem)] sm:max-h-[90vh] rounded-2xl shadow-2xl border border-emerald-900/10 flex flex-col overflow-hidden relative animate-in fade-in zoom-in-95 duration-150">
         
         {/* Header */}
-        <div className="bg-[#083C2E] px-6 py-5 text-white flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-300">
+        <div className="bg-[#083C2E] px-4 py-3.5 sm:px-6 sm:py-5 text-white flex items-center justify-between shrink-0">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 pr-2">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-300 shrink-0">
               {mode === 'register' ? (
-                <UserPlus className="w-5 h-5 text-emerald-300" />
+                <UserPlus className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-300" />
               ) : (
-                <LogIn className="w-5 h-5 text-emerald-300" />
+                <LogIn className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-300" />
               )}
             </div>
-            <div>
-              <h3 className="font-display font-bold text-lg leading-tight">
+            <div className="min-w-0">
+              <h3 className="font-display font-bold text-base sm:text-lg leading-tight truncate">
                 {mode === 'register' ? 'Satu Akun Warga Sidoarjo' : 'Masuk Portal SITAPAK'}
               </h3>
-              <p className="text-xs text-emerald-300/80">
+              <p className="text-[11px] sm:text-xs text-emerald-300/80 truncate">
                 Layanan Terpadu & Transparansi Pemerintahan Digital
               </p>
             </div>
           </div>
           <button
+            type="button"
             onClick={onClose}
-            className="p-1.5 rounded-lg text-emerald-300/80 hover:text-white hover:bg-emerald-900/60 transition-colors"
+            aria-label="Tutup modal akun"
+            className="p-1.5 rounded-lg text-emerald-300/80 hover:text-white hover:bg-emerald-900/60 transition-colors cursor-pointer shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Tab Toggle */}
-        <div className="flex border-b border-slate-200 bg-slate-50">
+        <div className="flex border-b border-slate-200 bg-slate-50 shrink-0">
           <button
             type="button"
             onClick={() => setMode('register')}
-            className={`flex-1 py-3 text-xs sm:text-sm font-semibold transition-colors ${
+            className={`flex-1 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold transition-colors ${
               mode === 'register'
                 ? 'bg-white text-emerald-800 border-b-2 border-emerald-600'
                 : 'text-slate-500 hover:text-slate-800'
@@ -251,7 +253,7 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
           <button
             type="button"
             onClick={() => setMode('login')}
-            className={`flex-1 py-3 text-xs sm:text-sm font-semibold transition-colors ${
+            className={`flex-1 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold transition-colors ${
               mode === 'login'
                 ? 'bg-white text-emerald-800 border-b-2 border-emerald-600'
                 : 'text-slate-500 hover:text-slate-800'
@@ -262,7 +264,7 @@ export const RegisterAccountModal: React.FC<RegisterAccountModalProps> = ({
         </div>
 
         {/* Body Form */}
-        <div className="p-6">
+        <div className="p-4 sm:p-6 overflow-y-auto flex-1">
           {isSuccess ? (
             <div className="py-8 text-center space-y-3">
               <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center animate-bounce">

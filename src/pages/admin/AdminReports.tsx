@@ -386,28 +386,30 @@ export const AdminReports: React.FC = () => {
 
       {/* Modal / Drawer for Report Handling */}
       {isModalOpen && selectedReport && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-150">
-          <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200">
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 animate-in fade-in duration-150">
+          <div className="bg-white rounded-2xl sm:rounded-3xl max-w-2xl w-full max-h-[calc(100dvh-1.5rem)] sm:max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
             {/* Modal Header */}
-            <div className="p-6 bg-slate-900 text-white flex items-center justify-between rounded-t-3xl">
-              <div>
-                <span className="text-xs font-mono font-bold text-emerald-400">
+            <div className="p-4 sm:p-6 bg-slate-900 text-white flex items-center justify-between shrink-0">
+              <div className="min-w-0 pr-2">
+                <span className="text-xs font-mono font-bold text-emerald-400 block truncate">
                   {selectedReport.ticket_number}
                 </span>
-                <h3 className="text-lg font-bold font-display mt-0.5 text-white">
+                <h3 className="text-base sm:text-lg font-bold font-display mt-0.5 text-white truncate">
                   Tindak Lanjut & Verifikasi Aduan
                 </h3>
               </div>
               <button
+                type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-400 hover:text-white transition-colors cursor-pointer"
+                aria-label="Tutup modal aduan"
+                className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-400 hover:text-white transition-colors cursor-pointer shrink-0"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             {/* Modal Body */}
-            <div className="p-6 space-y-6">
+            <div className="p-4 sm:p-6 space-y-6 overflow-y-auto flex-1">
               {/* Report Information Box */}
               <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
                 <div className="flex items-start justify-between gap-4">

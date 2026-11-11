@@ -350,26 +350,28 @@ export const AdminFaskes: React.FC = () => {
 
       {/* Modal Edit Bed Capacity */}
       {isModalOpen && selectedBed && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-150">
-          <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-slate-200">
-            <div className="p-5 bg-slate-900 text-white flex items-center justify-between rounded-t-3xl">
-              <div>
-                <span className="text-xs font-mono font-bold text-rose-400">
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 animate-in fade-in duration-150">
+          <div className="bg-white rounded-2xl sm:rounded-3xl max-w-md w-full max-h-[calc(100dvh-1.5rem)] sm:max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+            <div className="p-4 sm:p-5 bg-slate-900 text-white flex items-center justify-between shrink-0">
+              <div className="min-w-0 pr-2">
+                <span className="text-xs font-mono font-bold text-rose-400 block truncate">
                   {selectedBed.faskes_name}
                 </span>
-                <h3 className="text-base font-bold font-display mt-0.5 text-white">
+                <h3 className="text-sm sm:text-base font-bold font-display mt-0.5 text-white truncate">
                   Update Ketersediaan Ranjang
                 </h3>
               </div>
               <button
+                type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-400 hover:text-white transition-colors cursor-pointer"
+                aria-label="Tutup modal ranjang"
+                className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-400 hover:text-white transition-colors cursor-pointer shrink-0"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <form onSubmit={handleSaveBed} className="p-6 space-y-4">
+            <form onSubmit={handleSaveBed} className="p-4 sm:p-6 space-y-4 overflow-y-auto flex-1">
               {actionSuccess && (
                 <div className="p-3 bg-emerald-50 border border-emerald-300 rounded-xl text-xs font-semibold text-emerald-800 flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600" />

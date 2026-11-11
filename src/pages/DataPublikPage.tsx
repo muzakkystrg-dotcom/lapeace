@@ -1412,8 +1412,8 @@ export const DataPublikPage: React.FC = () => {
       {/* MODAL 1: PRATINJAU DATASET                                               */}
       {/* ========================================================================= */}
       {previewDataset && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-3 sm:p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[calc(100dvh-1.5rem)] sm:max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
             
             {/* Modal Header */}
             <div className="p-5 border-b border-slate-200 flex items-start justify-between bg-[#F8FAF9]">
@@ -1530,8 +1530,8 @@ export const DataPublikPage: React.FC = () => {
       {/* MODAL 2: DEVELOPER OPEN DATA API INFO                                     */}
       {/* ========================================================================= */}
       {apiModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-3 sm:p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[calc(100dvh-1.5rem)] sm:max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
             
             <div className="p-5 border-b border-slate-200 flex items-center justify-between bg-[#083c2e] text-white">
               <div className="flex items-center gap-2.5">
@@ -1620,8 +1620,8 @@ export const DataPublikPage: React.FC = () => {
       {/* MODAL 3: PENGAJUAN PERMOHONAN INFORMASI PPID                              */}
       {/* ========================================================================= */}
       {ppidModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-3 sm:p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl max-w-xl w-full max-h-[calc(100dvh-1.5rem)] sm:max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
             
             <div className="p-5 border-b border-slate-200 flex items-center justify-between bg-[#F8FAF9]">
               <div className="flex items-center gap-2">
@@ -1758,8 +1758,8 @@ export const DataPublikPage: React.FC = () => {
       {/* MODAL 4: ALOKASI DANA PER 18 KECAMATAN                                    */}
       {/* ========================================================================= */}
       {kecamatanModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-3 sm:p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[calc(100dvh-1.5rem)] sm:max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
             
             <div className="p-5 border-b border-slate-200 flex items-center justify-between bg-[#F8FAF9]">
               <div className="flex items-center gap-2.5">
@@ -1828,8 +1828,8 @@ export const DataPublikPage: React.FC = () => {
       {/* MODAL 5: DAFTAR 25 PROYEK STRATEGIS DAERAH 2026                            */}
       {/* ========================================================================= */}
       {projectModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-3 sm:p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[calc(100dvh-1.5rem)] sm:max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
             
             <div className="p-5 border-b border-slate-200 flex items-center justify-between bg-[#F8FAF9]">
               <div className="flex items-center gap-2.5">

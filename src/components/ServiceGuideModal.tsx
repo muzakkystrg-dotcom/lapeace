@@ -36,34 +36,36 @@ export const ServiceGuideModal: React.FC<ServiceGuideModalProps> = ({
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-xs overflow-y-auto">
-      <div className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl border border-emerald-900/10 overflow-hidden relative my-8 animate-in fade-in zoom-in-95 duration-150">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/60 backdrop-blur-xs">
+      <div className="bg-white w-full max-w-2xl max-h-[calc(100dvh-1.5rem)] sm:max-h-[90vh] rounded-2xl shadow-2xl border border-emerald-900/10 flex flex-col overflow-hidden relative animate-in fade-in zoom-in-95 duration-150">
         
         {/* Header */}
-        <div className="bg-[#083C2E] px-6 py-5 text-white flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-300">
-              <BookOpen className="w-5 h-5 text-emerald-300" />
+        <div className="bg-[#083C2E] px-4 py-3.5 sm:px-6 sm:py-5 text-white flex items-center justify-between shrink-0">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 pr-2">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-300 shrink-0">
+              <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-300" />
             </div>
-            <div>
-              <div className="text-[11px] font-semibold text-emerald-300 uppercase tracking-wider">
+            <div className="min-w-0">
+              <div className="text-[10px] sm:text-[11px] font-semibold text-emerald-300 uppercase tracking-wider truncate">
                 PANDUAN WARGA
               </div>
-              <h3 className="font-display font-bold text-xl leading-tight">
+              <h3 className="font-display font-bold text-base sm:text-xl leading-tight truncate">
                 Tata Cara Akses Satu Akun Warga SITAPAK
               </h3>
             </div>
           </div>
           <button
+            type="button"
             onClick={onClose}
-            className="p-1.5 rounded-lg text-emerald-300/80 hover:text-white hover:bg-emerald-900/60 transition-colors"
+            aria-label="Tutup modal panduan"
+            className="p-1.5 rounded-lg text-emerald-300/80 hover:text-white hover:bg-emerald-900/60 transition-colors cursor-pointer shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Content */}
-        <div className="p-6 space-y-6">
+        <div className="p-4 sm:p-6 space-y-6 overflow-y-auto flex-1">
           <p className="text-slate-600 text-sm leading-relaxed">
             SITAPAK menyatukan seluruh kanal birokrasi Kabupaten Sidoarjo sehingga warga tidak perlu lagi mengantre dari pagi atau berpindah-pindah aplikasi.
           </p>
