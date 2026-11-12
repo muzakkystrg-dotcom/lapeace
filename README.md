@@ -46,9 +46,6 @@ Pelayanan publik dan administrasi kependudukan di tingkat daerah kerap menghadap
 - **Perbandingan Pagu vs Realisasi**: Keterbukaan alokasi anggaran pada sektor-sektor prioritas (Infrastruktur, Pendidikan, Kesehatan, dan Layanan Publik).
 - **Statistik Layanan Daerah**: Informasi sebaran partisipasi warga dan rekapitulasi penyelesaian laporan per kecamatan.
 
-### 4. 🤖 Asisten Virtual Cerdas (Google Gemini AI)
-- Asisten interaktif 24/7 yang siap memandu warga memahami alur birokrasi, memeriksa kelengkapan berkas persyaratan, dan memberikan rekomendasi layanan yang tepat.
-
 ---
 
 ## 🛠️ Ringkasan Teknologi
