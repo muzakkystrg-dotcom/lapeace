@@ -10,7 +10,7 @@
   [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 
   <p align="center">
-    Inovasi portal pelayanan publik satu pintu dan keterbukaan informasi daerah Kabupaten Sidoarjo yang terintegrasi dengan kecerdasan buatan (Gemini AI), dirancang untuk mempermudah birokrasi, mempercepat penanganan aspirasi, dan menyajikan transparansi anggaran daerah secara interaktif.
+    Inovasi portal pelayanan publik satu pintu dan keterbukaan informasi daerah Kabupaten Sidoarjo, dirancang untuk mempermudah birokrasi, mempercepat penanganan aspirasi, dan menyajikan transparansi anggaran daerah secara interaktif.
   </p>
 </div>
 

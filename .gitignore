@@ -17,6 +17,7 @@ pnpm-lock.yaml
 # Private & Personal Tooling
 anti-slop/
 monitor/
+AGENTS.md
 
 # Environment Configuration & Secrets
 .env
