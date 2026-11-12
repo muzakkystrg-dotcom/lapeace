@@ -25,26 +25,26 @@ export class SecurityValidationPipe implements PipeTransform {
     // 1. Recursive payload sanitization (Anti-XSS & Prototype Pollution)
     const sanitized = sanitizePayload(value);
 
-    // 2. Metatype DTO validation
-    const { metatype } = metadata;
-    if (!metatype) {
-      return sanitized;
-    }
+    // 2. Metatype & Structural Schema Validation
+    const { metatype, type } = metadata;
+    const isBody = type === 'body' || type === undefined;
 
-    if (metatype === CreateReportDto) {
-      this.validateCreateReport(sanitized);
-    } else if (metatype === LoginDto) {
-      this.validateLogin(sanitized);
-    } else if (metatype === RegisterCitizenDto) {
-      this.validateRegister(sanitized);
-    } else if (metatype === UpdateReportStatusDto) {
-      this.validateUpdateReportStatus(sanitized);
-    } else if (metatype === UpdateCitizenRoleDto) {
-      this.validateUpdateCitizenRole(sanitized);
-    } else if (metatype === VerifyCitizenDto) {
-      this.validateVerifyCitizen(sanitized);
-    } else if (metatype === UpdateHospitalBedDto) {
-      this.validateUpdateHospitalBed(sanitized);
+    if (isBody && sanitized && typeof sanitized === 'object') {
+      if (metatype === CreateReportDto || sanitized.title !== undefined || sanitized.category !== undefined) {
+        this.validateCreateReport(sanitized);
+      } else if (metatype === LoginDto || (sanitized.nik !== undefined && sanitized.password !== undefined && sanitized.fullName === undefined)) {
+        this.validateLogin(sanitized);
+      } else if (metatype === RegisterCitizenDto || (sanitized.nik !== undefined && sanitized.fullName !== undefined)) {
+        this.validateRegister(sanitized);
+      } else if (metatype === UpdateReportStatusDto || (sanitized.status !== undefined && (sanitized.progressPercent !== undefined || sanitized.officerNotes !== undefined))) {
+        this.validateUpdateReportStatus(sanitized);
+      } else if (metatype === UpdateCitizenRoleDto || (sanitized.role !== undefined && sanitized.nik === undefined)) {
+        this.validateUpdateCitizenRole(sanitized);
+      } else if (metatype === VerifyCitizenDto || sanitized.isVerified !== undefined) {
+        this.validateVerifyCitizen(sanitized);
+      } else if (metatype === UpdateHospitalBedDto || sanitized.available !== undefined || sanitized.availableBeds !== undefined) {
+        this.validateUpdateHospitalBed(sanitized);
+      }
     }
 
     return sanitized;
