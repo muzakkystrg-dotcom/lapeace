@@ -46,6 +46,7 @@ database/*.db-shm
 
 # Design Stitches & Temporary UI Exports (Merged into React)
 stitch_export/
+untukreadme/
 
 # Audit Documents & Reports (Source Code Only in Git)
 docs/audits/

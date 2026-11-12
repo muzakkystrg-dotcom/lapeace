@@ -291,15 +291,16 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
     ticketNumber?: string;
     title: string;
     category: string;
-    categoryLabel: string;
+    categoryLabel?: string;
     description: string;
     kecamatan: string;
-    kelurahan: string;
-    locationAddress: string;
+    kelurahan?: string;
+    locationAddress?: string;
+    address?: string;
     coordinates?: string;
     reporterName?: string;
     citizenId?: number;
-    isAnonymous?: boolean;
+    isAnonymous?: boolean | number;
     assignedOpd?: string;
     photoUrl?: string;
   }) {
