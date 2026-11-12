@@ -329,7 +329,7 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
       data.categoryLabel || data.category || null,
       data.description,
       data.kecamatan,
-      data.kelurahan || null,
+      data.kelurahan || data.kecamatan || 'Pusat Kecamatan',
       data.locationAddress || data.address || null,
       data.coordinates || null,
       data.photoUrl || null,
