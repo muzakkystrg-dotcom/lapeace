@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module.js';
 import { GlobalSecurityExceptionFilter } from './common/http-exception.filter.js';
+import { SecurityValidationPipe } from './common/validation.pipe.js';
 import type { Request, Response, NextFunction } from 'express';
 
 async function bootstrap() {
@@ -43,6 +44,9 @@ async function bootstrap() {
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
   });
+
+  // Global security validation & input sanitization pipe (OWASP A03 / Anti-XSS)
+  app.useGlobalPipes(new SecurityValidationPipe());
 
   // Global security sanitizer exception filter
   app.useGlobalFilters(new GlobalSecurityExceptionFilter());

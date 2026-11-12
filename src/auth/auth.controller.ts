@@ -13,6 +13,7 @@ import {
 import type { Request, Response } from 'express';
 import { AuthService } from './auth.service.js';
 import { JwtAuthGuard } from './jwt-auth.guard.js';
+import { LoginDto, RegisterCitizenDto } from '../common/dto.js';
 
 @Controller('api/auth')
 export class AuthController {
@@ -20,7 +21,7 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  login(@Body() body: any, @Req() req: Request, @Res({ passthrough: true }) res: Response) {
+  login(@Body() body: LoginDto, @Req() req: Request, @Res({ passthrough: true }) res: Response) {
     const ip = (req.headers['x-forwarded-for'] as string) || req.socket.remoteAddress || '127.0.0.1';
     const result = this.authService.login(body.nik || '', body.password || '', ip);
 
@@ -37,7 +38,7 @@ export class AuthController {
   }
 
   @Post('register')
-  register(@Body() body: any, @Res({ passthrough: true }) res: Response) {
+  register(@Body() body: RegisterCitizenDto, @Res({ passthrough: true }) res: Response) {
     const result = this.authService.register(body);
 
     res.cookie('sitapak_token', result.token, {

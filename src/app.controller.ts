@@ -19,6 +19,13 @@ import { CacheService } from './common/cache.service.js';
 import { JwtAuthGuard } from './auth/jwt-auth.guard.js';
 import { RolesGuard } from './auth/roles.guard.js';
 import { Roles } from './auth/roles.decorator.js';
+import {
+  CreateReportDto,
+  UpdateReportStatusDto,
+  VerifyCitizenDto,
+  UpdateCitizenRoleDto,
+  UpdateHospitalBedDto,
+} from './common/dto.js';
 
 @Controller('api')
 export class AppController {
@@ -148,7 +155,7 @@ export class AppController {
   }
 
   @Post('reports')
-  async createReport(@Body() body: any, @Req() req: any) {
+  async createReport(@Body() body: CreateReportDto, @Req() req: any) {
     let citizenId = body.citizenId ? Number(body.citizenId) : undefined;
     if (!citizenId && req?.headers?.authorization?.startsWith('Bearer ')) {
       const token = req.headers.authorization.substring(7);
@@ -201,7 +208,7 @@ export class AppController {
   @Patch('admin/reports/:id/status')
   updateReportStatus(
     @Param('id') id: string,
-    @Body() body: any,
+    @Body() body: UpdateReportStatusDto,
     @Req() req: any,
   ) {
     const user = req.user;
@@ -255,7 +262,7 @@ export class AppController {
   @Patch('admin/citizens/:id/verify')
   verifyCitizen(
     @Param('id') id: string,
-    @Body() body: { isVerified: boolean },
+    @Body() body: VerifyCitizenDto,
     @Req() req: any,
   ) {
     const user = req.user;
@@ -286,7 +293,7 @@ export class AppController {
   @Patch('admin/citizens/:id/role')
   updateCitizenRole(
     @Param('id') id: string,
-    @Body() body: { role: string },
+    @Body() body: UpdateCitizenRoleDto,
     @Req() req: any,
   ) {
     const user = req.user;

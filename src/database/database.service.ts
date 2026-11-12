@@ -3,6 +3,7 @@ import { DatabaseSync } from 'node:sqlite';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
 import * as crypto from 'node:crypto';
+import { escapeSqlLike } from '../common/sanitizer.js';
 
 @Injectable()
 export class DatabaseService implements OnModuleInit, OnModuleDestroy {
@@ -505,8 +506,9 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
       params.push(filters.category);
     }
     if (filters.search) {
-      query += ' AND (ticket_number LIKE ? OR title LIKE ? OR description LIKE ? OR reporter_name LIKE ? OR kecamatan LIKE ?)';
-      const s = `%${filters.search}%`;
+      query +=
+        " AND (ticket_number LIKE ? ESCAPE '/' OR title LIKE ? ESCAPE '/' OR description LIKE ? ESCAPE '/' OR reporter_name LIKE ? ESCAPE '/' OR kecamatan LIKE ? ESCAPE '/')";
+      const s = `%${escapeSqlLike(filters.search.trim())}%`;
       params.push(s, s, s, s, s);
     }
     query += ' ORDER BY id DESC';
@@ -590,8 +592,9 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
       params.push(filters.serviceId);
     }
     if (filters.search) {
-      query += ' AND (tracking_number LIKE ? OR applicant_name LIKE ? OR service_name LIKE ? OR current_opd LIKE ?)';
-      const s = `%${filters.search}%`;
+      query +=
+        " AND (tracking_number LIKE ? ESCAPE '/' OR applicant_name LIKE ? ESCAPE '/' OR service_name LIKE ? ESCAPE '/' OR current_opd LIKE ? ESCAPE '/')";
+      const s = `%${escapeSqlLike(filters.search.trim())}%`;
       params.push(s, s, s, s);
     }
     query += ' ORDER BY id DESC';
