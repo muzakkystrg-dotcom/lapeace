@@ -52,7 +52,6 @@ Pelayanan publik dan administrasi kependudukan di tingkat daerah kerap menghadap
 - **Frontend**: React 19, Vite, Tailwind CSS v4, Motion, Lucide Icons
 - **Backend**: NestJS 12, TypeScript
 - **Data & Cache**: SQLite High-Concurrency Storage, In-Memory TTL Cache
-- **Kecerdasan Buatan**: Google Gemini API (`@google/genai`)
 
 ---
 
